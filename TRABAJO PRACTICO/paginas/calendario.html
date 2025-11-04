@@ -8,7 +8,7 @@
     <!-- Link a CSS  -->
     <link rel="stylesheet" href="../styles/header_footer.css">
     <link rel="stylesheet" href="../styles/calendariostyle.css">
-     <link rel="icon" type="image/png" href="../img/favicon.ico">
+    <link rel="icon" type="image/png" href="../img/favicon.ico">
     <!-- Link a animate.css -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
@@ -16,11 +16,12 @@
 </head>
 
 <body>
-        <!-- Encabezado -->
+    <!-- Encabezado -->
     <header class="main-header">
         <section class="logo">
-            <a href="../index.html"> <img src="../img/logoPagBlanco.png" alt="Logo de la plataforma" class="logo-desktop"></a>
-        
+            <a href="../index.html"> <img src="../img/logoPagBlanco.png" alt="Logo de la plataforma"
+                    class="logo-desktop"></a>
+
             <a href="../index.html"> <img src="../img/iconoBlancoLogoCelu.png" alt="Logo móvil" class="logo-mobile"></a>
         </section>
         <!-- Barra de Navegación -->
@@ -45,106 +46,107 @@
 
         <!-- Barra de búsqueda -->
         <section class="search-bar">
-  <form action="" method="get" onchange="this.action=this.curso.value">
-    <select name="curso" required>
-      <option value="">Seleccioná un curso</option>
-      <option value="./detalleDelCurso/detalleCursoFrontend.html">Programación Front-End</option>
-      <option value="./detalleDelCurso/detalleCursoBackend.html">Programación Back-End</option>
-      <option value="./detalleDelCurso/detalleCursoCiberseguridad.html">Ciberseguridad</option>
-      <option value="./detalleDelCurso/detalleCursoInglesAvanzado.html">Inglés Avanzado</option>
-      <option value="./detalleDelCurso/detalleCursoMarketingDigital.html">Marketing Digital</option>
-      <option value="./detalleDelCurso/detalleCursoFinanzasPersonales.html">Finanzas Personales</option>
-    </select>
-    <button type="submit" class="search-button">
-      <img src="../img/lupa.png" alt="Buscar">
-    </button>
-  </form>
-</section>
+            <form action="" method="get" onchange="this.action=this.curso.value">
+                <select name="curso" required>
+                    <option value="">Seleccioná un curso</option>
+                    <option value="./detalleDelCurso/detalleCursoFrontend.html">Programación Front-End</option>
+                    <option value="./detalleDelCurso/detalleCursoBackend.html">Programación Back-End</option>
+                    <option value="./detalleDelCurso/detalleCursoCiberseguridad.html">Ciberseguridad</option>
+                    <option value="./detalleDelCurso/detalleCursoInglesAvanzado.html">Inglés Avanzado</option>
+                    <option value="./detalleDelCurso/detalleCursoMarketingDigital.html">Marketing Digital</option>
+                    <option value="./detalleDelCurso/detalleCursoFinanzasPersonales.html">Finanzas Personales</option>
+                </select>
+                <button type="submit" class="search-button">
+                    <img src="../img/lupa.png" alt="Buscar">
+                </button>
+            </form>
+        </section>
 
         <section class="user-actions">
-             <a href="../paginas/inicioSesion.html"> 
-         <button class="login-button"> 
-            <img src="../img/logo-fondo-transparente.png" alt="Imagen de logo iniciar sesion" class="logo-iniciarSesion-Responsive"> 
-                Iniciar Sesión </button></a>
-                
+            <a href="../paginas/inicioSesion.html">
+                <button class="login-button">
+                    <img src="../img/logo-fondo-transparente.png" alt="Imagen de logo iniciar sesion"
+                        class="logo-iniciarSesion-Responsive">
+                    Iniciar Sesión </button></a>
+
             <a href="../paginas/registrarse.html"><button class="signup-button">Registrarse</button></a>
 
 
-        <input type="checkbox" name="Carro" id="Carro" value="Carro" checked />
-           <!-- icono carrito -->
+            <input type="checkbox" name="Carro" id="Carro" value="Carro" checked />
+            <!-- icono carrito -->
 
-        <article class="carrito">   
-            <label for="Carro" >
-            <img src="../img/carrito.png" alt="Carrito de compra" class="carrito_icono">
-            </label>
-             <span class="cart-count">3</span>
-
-            </article>
-
-         <!-- Menu Desplegable Carrito -->       
-           <section class="caja_carrito"> 
-
-            <article class="producto1_carrito">
-                <img src="../img/ingles.jpg" class="Imagen_agregar_carrito">
-                <h3>Curso: Ingles avanzado</h3>
-                <h4>Precio : 120.000$</h4>
-
-                <section class="expandir_borrar">
-                <a href="../paginas/detalleDelCurso/detalleCursoInglesAvanzado.html">
-                <img src="../Imagenes/icono_flechas_expandiendo.webp">
-                </a>
-
-                <img src="../Imagenes/icono_basura.png">
-                </section>
-
-            </article>   
-
-            <article class="producto2_carrito">
-
-                <img src="../img/backend.jpg" class="Imagen_agregar_carrito">
-                <h3>Curso: Programación Back-end</h3>
-                <h4>Precio : 250.000$</h4>
-                
-                <section class="expandir_borrar">
-
-                <a href="../paginas/detalleDelCurso/detalleCursoBackend.html">
-                <img src="../Imagenes/icono_flechas_expandiendo.webp">
-                </a>
-                <img src="../Imagenes/icono_basura.png">
-                </section>
+            <article class="carrito">
+                <label for="Carro">
+                    <img src="../img/carrito.png" alt="Carrito de compra" class="carrito_icono">
+                </label>
+                <span class="cart-count">3</span>
 
             </article>
 
-            <article class="producto3_carrito">
+            <!-- Menu Desplegable Carrito -->
+            <section class="caja_carrito">
 
-                <img src="../Imagenes/gift_card.png " class="Imagen_agregar_carrito">
-                <h3>Regalo. Gift Card</h3>
-                <h4>Precio : 400.000$</h4>
-                
-                <section class="expandir_borrar">
-                <a href="../Imagenes/gift_card.png " target="_blank">
-                <img src="../Imagenes/icono_flechas_expandiendo.webp">
-                </a>
+                <article class="producto1_carrito">
+                    <img src="../img/ingles.jpg" class="Imagen_agregar_carrito">
+                    <h3>Curso: Ingles avanzado</h3>
+                    <h4>Precio : 120.000$</h4>
 
-               
-                <img src="../Imagenes/icono_basura.png">
+                    <section class="expandir_borrar">
+                        <a href="../paginas/detalleDelCurso/detalleCursoInglesAvanzado.html">
+                            <img src="../Imagenes/icono_flechas_expandiendo.webp">
+                        </a>
 
-                </section>
+                        <img src="../Imagenes/icono_basura.png">
+                    </section>
 
-            </article>
+                </article>
 
-            <article class="confirmar_carrito">
-            <h4>Total a pagar : 770.000$ </h4>
-            <a href="../paginas/inicioSesionPago.html"> 
-                <button>Continuar con la compra</button>
-            </a>
-            </article>
+                <article class="producto2_carrito">
 
-           </section>
+                    <img src="../img/backend.jpg" class="Imagen_agregar_carrito">
+                    <h3>Curso: Programación Back-end</h3>
+                    <h4>Precio : 250.000$</h4>
+
+                    <section class="expandir_borrar">
+
+                        <a href="../paginas/detalleDelCurso/detalleCursoBackend.html">
+                            <img src="../Imagenes/icono_flechas_expandiendo.webp">
+                        </a>
+                        <img src="../Imagenes/icono_basura.png">
+                    </section>
+
+                </article>
+
+                <article class="producto3_carrito">
+
+                    <img src="../Imagenes/gift_card.png " class="Imagen_agregar_carrito">
+                    <h3>Regalo. Gift Card</h3>
+                    <h4>Precio : 400.000$</h4>
+
+                    <section class="expandir_borrar">
+                        <a href="../Imagenes/gift_card.png " target="_blank">
+                            <img src="../Imagenes/icono_flechas_expandiendo.webp">
+                        </a>
+
+
+                        <img src="../Imagenes/icono_basura.png">
+
+                    </section>
+
+                </article>
+
+                <article class="confirmar_carrito">
+                    <h4>Total a pagar : 770.000$ </h4>
+                    <a href="../paginas/inicioSesionPago.html">
+                        <button>Continuar con la compra</button>
+                    </a>
+                </article>
+
+            </section>
         </section>
-
-
     </header>
+
+
 
     <section class="container-tittle">
         <h1>Enterate nuestros proximos cursos..</h1>
@@ -152,99 +154,27 @@
 
 
     <main class="calendar-container">
-     
 
-           <section class="calendar-header">
-            <span class="boton-link-ocultar"></span>
-            <h2 class="titulo-mes-anio">Octubre 2025
-            </h2>
-            <a href="./calendarioNoviembre.html" class="boton-link">→</a>
+        <section class="calendar-header">
+            <button class="boton-link js-boton-link-atras">←</button>
+            <h2 class="titulo-mes-anio js-titulo"> Octubre </h2>
+            <button class="boton-link js-boton-link-siguiente">→</button>
         </section>
 
 
         <!-- DE LUNES A DOMINGOS -->
         <section class="calendar-daysOfWeek">
+            <article class="diaSemana">Dom</article>
             <article class="diaSemana">Lun</article>
             <article class="diaSemana">Mar</article>
             <article class="diaSemana">Mié</article>
             <article class="diaSemana">Jue</article>
             <article class="diaSemana">Vie</article>
             <article class="diaSemana">Sáb</article>
-            <article class="diaSemana">Dom</article>
         </section>
 
-        <!-- NUMEROS DEL 1 AL 31 -->
-
-        <section class="calendar-numbers">
-            <article class="dia"></article>
-            <article class="dia"></article>
-            <article class="dia diaValido">1</article>
-            <article class="dia diaValido">2</article>
-            <article class="dia diaValido">3</article>
-            <article class="dia diaValido">4</article>
-            <article class="dia diaValido">5</article>
-            <article class="dia diaValido">6</article>
-            <article class="dia diaValido">7</article>
-            <!-- DIA ACTUAL -REENTREGA MARCA EL "HOY" -->
-            <article class="dia diaValido dia-actual ">8</article>
-            <article class="dia diaValido">9</article>
-            <article class="dia diaValido">10</article>
-            <article class="dia diaValido">11</article>
-            <article class="dia diaValido">12</article>
-
-            <article class="dia diaValido dia-curso">13
-                <a href="./detalleDelCurso/detalleCursoFinanzasPersonales.html" class="link-ACurso"
-                    title="Finanzas Personales">
-                    <span class="dia-curso-ocultar">Finanzas Personales</span>
-                </a>
-            </article>
-            <article class="dia diaValido">14</article>
-
-            <article class="dia diaValido dia-curso">15
-                <a href="./detalleDelCurso/detalleCursoFrontend.html" class="link-ACurso">
-                    <span class="dia-curso-ocultar">Programacion Front-End</span>
-                </a>
-                <a href="./detalleDelCurso/detalleCursoCiberseguridad.html" class="link-ACurso">
-                    <span class="dia-curso-ocultar">Ciberseguridad</span>
-                </a>
-            </article>
-            <article class="dia diaValido">16</article>
-            <article class="dia diaValido">17</article>
-            <article class="dia diaValido">18</article>
-            <article class="dia diaValido">19</article>
-
-            <article class="dia diaValido dia-curso">21
-                <a href="./detalleDelCurso/detalleCursoInglesAvanzado.html" class="link-ACurso">
-                    <span class="dia-curso-ocultar">Curso de Inglés Avanzado</span>
-                </a>
-            </article>
-            <article class="dia diaValido">22</article>
-
-            <article class="dia diaValido dia-curso">23
-            </article>
-            <article class="dia diaValido">24</article>
-            <article class="dia diaValido">25</article>
-            <article class="dia diaValido">26</article>
-
-            <article class="dia diaValido dia-curso">27
-            </article>
-            <article class="dia diaValido">28</article>
-
-            <article class="dia diaValido dia-curso">29
-                <a href="./detalleDelCurso/detalleCursoMarketingDigital.html" class="link-ACurso">
-                    <span class="dia-curso-ocultar">Marketing Digital</span>
-                </a>
-                 <a href="./detalleDelCurso/detalleCursoBackend.html" class="link-ACurso">
-                    <span class="dia-curso-ocultar">Programacion Back-End</span>
-                </a>
-            </article>
-            <article class="dia diaValido">30</article>
-            <article class="dia diaValido">31</article>
-            <article class="dia"></article>
-            <article class="dia"></article>
-            <article class="dia"></article>
-          
-        </section>
+        <!-- DIAS - NUMEROS DEL 1 AL 31 -->
+        <section class="calendar-numbers js-calendar-numbers"> </section>
 
     </main>
 
@@ -287,6 +217,11 @@
             </nav>
         </section>
     </footer>
+
+
+
+
+    <script type="module" src="../Javascript/JavaScript.js"></script>
 </body>
 
 </html>

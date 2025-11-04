@@ -41,25 +41,24 @@ body {
   
 }
 .boton-link {
-  text-align: center;
   width: 3em;
   height: 3em;
-  line-height: 3em;
-  background-color: #9575CD;
+  /* line-height: 3em; */
+  background-color:inherit;
   border-radius: 24px;
   text-decoration: none;
   color: white;
+  font-size:1.2em;
+  font-weight:900;
+  border:none;
 
-}
-.boton-link-ocultar {
-  color:#A58AD9;
-  background-color: #A58AD9;
 }
 
 .boton-link:hover {
   background-color: #AB7DEB;
   border-bottom: 2px solid #7E57C2;
 }
+
 /* lunes a Domingo */
 .diaSemana {
   background-color: #D1C4E9;
