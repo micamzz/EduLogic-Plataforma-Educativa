@@ -6,12 +6,12 @@
 }
 
 .container-contacto {
-
     margin: 2em;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     gap: 3em;
+
 }
 
 .container-contacto h2 {
@@ -21,11 +21,17 @@
 }
 
 .container-contacto form {
-    background-color: #EDE7F6;
     padding: 2em;
     gap: 0.8em;
     width: 50%;
-    border-radius: 23px;
+     text-align: center; 
+  max-width: 43.75em;
+  margin: 2em auto;
+  padding: 2em;
+  background-color: #fdfdfd;
+  border-radius: 0.625em;
+  box-shadow: 0 0 0.625em rgba(0, 0, 0, 0.1);
+  border-top: 6px solid #9575CD;
 
 
 }
@@ -88,10 +94,18 @@
 }
 
 .container-dondeEstamos {
-    background-color: #EDE7F6;
-    width: 50%;
-    padding: 2em;
-    border-radius: 23px;
+    /* /* background-color: #EDE7F6; */
+    /* width: 50%; */
+    /* padding: 2em; */
+    border-radius: 23px; 
+     /* text-align: center; */
+  max-width: 43.75em;
+  margin: 2em auto;
+  padding: 2em;
+  background-color: #fdfdfd;
+  border-radius: 0.625em;
+  box-shadow: 0 0 0.625em rgba(0, 0, 0, 0.1);
+  border-top: 6px solid #9575CD;
 }
 
 .datos-dondeEstamos {
