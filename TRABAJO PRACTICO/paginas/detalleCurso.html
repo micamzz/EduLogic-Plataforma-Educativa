@@ -1,22 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calendario</title>
+    <title>Programación Back-End</title>
     <!-- Link a CSS  -->
+    <link rel="stylesheet" href="../styles/detalleCurso.css">
     <link rel="stylesheet" href="../styles/header_footer.css">
-    <link rel="stylesheet" href="../styles/calendariostyle.css">
-    <link rel="icon" type="image/png" href="../img/favicon.ico">
-    <!-- Link a animate.css -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-
-
+     <link rel="icon" type="image/png" href="../../img/favicon.ico">
 </head>
-
 <body>
-    <!-- Encabezado -->
+      <!-- Encabezado -->
     <header class="main-header">
         <section class="logo">
             <a href="../index.html"> <img src="../img/logoPagBlanco.png" alt="Logo de la plataforma"
@@ -38,7 +32,7 @@
                 <li><a href="../paginas/giftCard.html" class="nav-link">GiftCard</a></li>
                 <li><a href="../paginas/cursos.html" class="nav-link">Cursos</a></li>
                 <li><a href="../paginas/inscripcionCurso.html" class="nav-link">Inscripción</a></li>
-                <!-- <li><a href="../paginas/calendario.html" class="nav-link"> Proximos </a></li> -->
+                <li><a href="../paginas/calendario.html" class="nav-link"> Proximos </a></li>
                 <li><a href="../paginas/perfil.html" class="nav-link">Mi Perfil</a></li>
 
             </ul>
@@ -145,40 +139,22 @@
             </section>
         </section>
     </header>
+   <main>
 
-    <section class="container-tittle">
-        <h1>Enterate nuestros proximos cursos..</h1>
-    </section>
+   <!--  SE RELLENA CON JS -->
+ <section id="js-curso-detalle"></section>
 
+    <!-- Links a otros cursos -->
+    <aside class="carousel">
+        <h2 class="carousel-titulo">También te puede interesar</h2>
+       
+        <!--  SE RELLENA CON EL JS -->
+        <div id="js-cursos-relacionados" class="courses-carousel"></div>
+    </aside>
 
-    <main class="calendar-container" id="js-calendario">
+ </main>
 
-        <section class="calendar-header">
-            <button class="boton-link js-boton-link-atras">←</button>
-            <h2 class="titulo-mes-anio js-titulo"> Octubre </h2>
-            <button class="boton-link js-boton-link-siguiente">→</button>
-        </section>
-
-
-        <!-- DE LUNES A DOMINGOS -->
-        <section class="calendar-daysOfWeek">
-            <article class="diaSemana">Dom</article>
-            <article class="diaSemana">Lun</article>
-            <article class="diaSemana">Mar</article>
-            <article class="diaSemana">Mié</article>
-            <article class="diaSemana">Jue</article>
-            <article class="diaSemana">Vie</article>
-            <article class="diaSemana">Sáb</article>
-        </section>
-
-        <!-- DIAS - NUMEROS DEL 1 AL 31 -->
-        <section class="calendar-numbers js-calendar-numbers"> </section>
-
-    </main>
-
-
-
-    <!-- Footer -->
+     <!-- Footer -->
     <footer class="container-footer">
         <section class="datos-equipo">
             <ul>
@@ -214,9 +190,9 @@
                 </a>
             </nav>
         </section>
+
     </footer>
-     <!--  JS PRINCIPAL -->
+  <!--  JS PRINCIPAL -->
     <script type="module" src="../JavaScript.js"></script>
 </body>
-
 </html>
