@@ -32,23 +32,24 @@
                 <li><a href="../cursos.html" class="nav-link">Cursos</a></li>
                 <li><a href="../inscripcionCurso.html" class="nav-link">Inscripción</a></li>
                 <li><a href="../calendario.html" class="nav-link"> Proximos </a></li>
-                <li><a href="../perfil.html" class="nav-link">Mi Perfil</a></li>
+                <li><a href="../perfil.html"class="nav-link perfil-link" style="display: none;">Mi Perfil</a></li>
 
             </ul>
         </nav>
 
         <!-- Barra de búsqueda -->
         <section class="search-bar">
-  <form action="" method="get" onchange="this.action=this.curso.value">
-    <select name="curso" required>
-      <option value="">Seleccioná un curso</option>
-      <option value="./detalleCursoFrontend.html">Programación Front-End</option>
-      <option value="./detalleCursoBackend.html">Programación Back-End</option>
-      <option value="./detalleCursoCiberseguridad.html">Ciberseguridad</option>
-      <option value="./detalleCursoInglesAvanzado.html">Inglés Avanzado</option>
-      <option value="./detalleCursoMarketingDigital.html">Marketing Digital</option>
-      <option value="./detalleCursoFinanzasPersonales.html">Finanzas Personales</option>
-    </select>
+  <form id="search-form">
+    <input list="cursos-list" name="curso-buscado" id="curso-input" placeholder="Buscar curso..."> 
+    
+    <datalist id="cursos-list">
+      <option value="Programación Front-End" data-url="./paginas/detalleDelCurso/detalleCursoFrontend.html"></option>
+      <option value="Programación Back-End" data-url="./paginas/detalleDelCurso/detalleCursoBackend.html"></option>
+      <option value="Ciberseguridad" data-url="./paginas/detalleDelCurso/detalleCursoCiberseguridad.html"></option>
+      <option value="Inglés Avanzado" data-url="./paginas/detalleDelCurso/detalleCursoInglesAvanzado.html"></option>
+      <option value="Marketing Digital" data-url="./paginas/detalleDelCurso/detalleCursoMarketingDigital.html"></option>
+      <option value="Finanzas Personales" data-url="./paginas/detalleDelCurso/detalleCursoFinanzasPersonales.html"></option>
+    </datalist>
     <button type="submit" class="search-button">
       <img src="../../img/lupa.png" alt="Buscar">
     </button>
@@ -388,5 +389,6 @@
         </section>
 
     </footer>
+    <script type="module" src="../../JavaScript.js"></script>
 </body>
 </html>

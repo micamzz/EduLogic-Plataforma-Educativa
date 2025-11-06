@@ -40,107 +40,94 @@
     </nav>
     
      <section class="search-bar">
-  <form action="" method="get" onchange="this.action=this.curso.value">
-    <select name="curso" required>
-      <option value="">Seleccioná un curso</option>
-      <option value="./detalleDelCurso/detalleCursoFrontend.html">Programación Front-End</option>
-      <option value="./detalleDelCurso/detalleCursoBackend.html">Programación Back-End</option>
-      <option value="./detalleDelCurso/detalleCursoCiberseguridad.html">Ciberseguridad</option>
-      <option value="./detalleDelCurso/detalleCursoInglesAvanzado.html">Inglés Avanzado</option>
-      <option value="./detalleDelCurso/detalleCursoMarketingDigital.html">Marketing Digital</option>
-      <option value="./detalleDelCurso/detalleCursoFinanzasPersonales.html">Finanzas Personales</option>
-    </select>
+  <form id="search-form">
+    <input list="cursos-list" name="curso-buscado" id="curso-input" placeholder="Buscar curso..."> 
+    
+    <datalist id="cursos-list">
+      <option value="Programación Front-End" data-url="./paginas/detalleDelCurso/detalleCursoFrontend.html"></option>
+      <option value="Programación Back-End" data-url="./paginas/detalleDelCurso/detalleCursoBackend.html"></option>
+      <option value="Ciberseguridad" data-url="./paginas/detalleDelCurso/detalleCursoCiberseguridad.html"></option>
+      <option value="Inglés Avanzado" data-url="./paginas/detalleDelCurso/detalleCursoInglesAvanzado.html"></option>
+      <option value="Marketing Digital" data-url="./paginas/detalleDelCurso/detalleCursoMarketingDigital.html"></option>
+      <option value="Finanzas Personales" data-url="./paginas/detalleDelCurso/detalleCursoFinanzasPersonales.html"></option>
+    </datalist>
     <button type="submit" class="search-button">
       <img src="../img/lupa.png" alt="Buscar">
     </button>
   </form>
 </section>
 
-
   </header>
 
   <!--perfil-->
   <main class="container-perfil">
-    <section class="section-perfil">
-      <div class="perfil-encabezado">
-        <img src="../img/fotoPerfil.jpg" alt="Foto de perfil" class="foto-perfil">
-        <h1>Mi Perfil</h1>
-      </div>
+      <section class="section-perfil">
+      <section class="perfil-encabezado">
+        <img src="../img/fotoPerfil.jpg" alt="Foto de perfil del usuario" class="foto-perfil">
+        <h1 id="nombre-usuario">Mi Perfil</h1> 
+      </section>
 
-      <form class="form-perfil">
+      <form id="perfil-form" class="form-perfil">
 
-        <label>
-          <span>Nombre completo</span>
-          <input type="text" value="Ana Sofía Flores" class="caja-input bloqueado" readonly>
+        <label for="perfil-nombre">
+          <span>Nombre</span>
+          <input type="text" id="perfil-nombre" name="nombre" class="caja-input" required>
         </label>
 
-        <label>
+        <label for="perfil-apellido">
+          <span>Apellido</span>
+          <input type="text" id="perfil-apellido" name="apellido" class="caja-input" required>
+        </label>
+        
+        <label for="perfil-dni">
           <span>DNI</span>
-          <input type="text" value="38.759.021" class="caja-input bloqueado" readonly>
+          <input type="text" id="perfil-dni" name="dni" class="caja-input bloqueado" readonly>
         </label>
 
-        <label>
+        <label for="perfil-email">
           <span>Correo personal</span>
-          <input type="email" value="anasofia.fp@gmail.com" class="caja-input">
+          <input type="email" id="perfil-email" name="email" class="caja-input" required>
         </label>
 
-        <label>
+        <label for="perfil-telefono">
           <span>Teléfono</span>
-          <input type="text" value="22 3456 7890" class="caja-input">
+          <input type="tel" id="perfil-telefono" name="telefono" class="caja-input">
         </label>
-
-        <label>
+        
+        <label for="perfil-direccion">
           <span>Dirección</span>
-          <input type="text" value="Avenida Ficticia 1234" class="caja-input">
+          <input type="text" id="perfil-direccion" name="direccion" class="caja-input">
         </label>
 
-        <label>
+        <label for="perfil-localidad">
           <span>Localidad</span>
-          <input type="text" value="San Fernando" class="caja-input">
+          <input type="text" id="perfil-localidad" name="localidad" class="caja-input">
         </label>
 
-        <label>
+        <label for="perfil-provincia">
           <span>Provincia</span>
-          <input type="text" value="Buenos Aires" class="caja-input">
+          <input type="text" id="perfil-provincia" name="provincia" class="caja-input">
         </label>
 
-        <label>
+        <label for="perfil-postal">
           <span>Código postal</span>
-          <input type="text" value="1646" class="caja-input">
+          <input type="text" id="perfil-postal" name="codigo_postal" class="caja-input">
         </label>
 
-        <label>
+        <label for="perfil-pais">
           <span>País</span>
-          <input type="text" value="Argentina" class="caja-input">
+          <input type="text" id="perfil-pais" name="pais" class="caja-input">
         </label>
 
-        <div class="botones-container">
-          <a href="#popup-guardar" class="boton-enviar">Guardar cambios</a>
-          <a href="#popup-cerrar" class="boton-enviar">Cerrar sesión</a>
-        </div>
 
-        <!-- Pop-up de confirmación -->
-        <div id="popup-cerrar" class="popup-confirmacion">
-          <div class="popup-contenido">
-            <h3>✅ ¡Sesión cerrada correctamente!</h3>
-            <p>Serás redirigido al inicio.</p>
-
-            <a href="../index.html" class="boton-enviar">Ir al inicio</a>
-
-          </div>
-        </div>
-
-        <div id="popup-guardar" class="popup-confirmacion">
-          <div class="popup-contenido">
-            <h3>✅ ¡Sus cambios han sido guardados correctamente!</h3>
-            
-
-            <a href="#" class="boton-enviar">Cerrar</a>
-
-          </div>
+        <div class="botones-container" style="grid-column: span 2;">
+          <button type="submit" class="boton-enviar">Guardar Cambios</button>
+          <button type="button" class="boton-enviar" id="logout-button">Cerrar Sesión</button>
         </div>
       </form>
-    </section>
+      </section>
+       
+    
   </main>
 
   <!--footer-->
@@ -185,6 +172,7 @@
 
   </footer>
 
+   <script type="module" src="../JavaScript.js"></script>
 </body>
 
 </html>

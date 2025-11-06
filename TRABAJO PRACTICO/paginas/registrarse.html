@@ -19,10 +19,19 @@
             </nav>
             <h1 class="titulo-crearCuenta">Crear una cuenta</h1>
 
-            <form action="./inicioSesion.html" method="get" class="form-iniciarSesion">
+            <form id="registro-form" action="#" method="post" class="form-iniciarSesion">
 
                 <label>
-                    <input type="text" name="nombre" placeholder="Nombre completo" class="caja-input-CC" required>
+                    <input type="text" name="nombre" placeholder="Nombre" class="caja-input-CC" required>
+                </label>
+
+                
+                <label>
+                    <input type="text" name="apellido" placeholder="Apellido" class="caja-input-CC" required>
+                </label>
+
+                 <label>
+                    <input type="number" name="dni" placeholder="DNI" class="caja-input-CC" required>
                 </label>
 
                 <label>
@@ -48,6 +57,8 @@
         </section>
     </main>
 
+
+<script type="module" src="../JavaScript.js"></script>
 </body>
 
 </html>
