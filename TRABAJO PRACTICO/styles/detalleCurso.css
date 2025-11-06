@@ -114,6 +114,10 @@ summary {
   margin: 1em auto;
 }
 
+.boton-carrito-inscripcion-curso{
+  display: flex;
+
+}
 .block-informacion-contenidos__boton {
   padding: 10px 20px;
   background-color: #694d99;
@@ -194,6 +198,7 @@ h4 {
   display: flex;
   /* Para hacer scroll horizontal  */
   overflow-x: auto;
+  gap:1em;
 }
 
 .carousel-titulo {
@@ -240,7 +245,7 @@ h4 {
   display: block;
   /* Para ajustar la imagen sin que se deforme  */
   object-fit: cover;
-  border-radius: 12px 12px 0 0;
+  border-radius: 12px;
 }
 
 .course-card h3 {

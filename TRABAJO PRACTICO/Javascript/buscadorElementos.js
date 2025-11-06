@@ -12,4 +12,8 @@ export class BuscadorElementos{
         return document.querySelectorAll(selectorCss)
     };
 
+    buscarUnElementoPorId(selectorCss){
+        return document.getElementById(selectorCss);
+    }
+
 } 
