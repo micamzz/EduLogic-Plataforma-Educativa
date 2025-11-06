@@ -16,17 +16,85 @@ a{
 
 
 /*MAIN*/
-.hero-slider {
-  max-height: 42.5em; 
-  overflow: hidden; 
-  margin-bottom: 2em;
+/* Contenedor del Carrusel */
+.hero-slider-container {
+    max-height: 42.5em; 
+    overflow: hidden; 
+    margin-bottom: 2em;
+    position: relative; /* para posicionar las flechas y puntos */
+    width: 100%;
 }
 
-.hero-slider img {
-  width: 100%; 
-  height: 100%;
-  object-fit: cover; 
+.slider {
+    display: flex;
+    transition: transform 0.5s ease-in-out; /* Animación de desplazamiento */
+    width: 300%;
+    height: 100%;
 }
+
+.slide {
+    width: calc(100% / 3); /* Cada imagen ocupa un tercio del ancho total */
+    height: 100%;
+    flex-shrink: 0; 
+    object-fit: cover;
+}
+
+
+
+.prev-btn, .next-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    z-index: 10;
+    font-size: 20px;
+    line-height: 1;
+    border-radius: 50%;
+    transition: background 0.3s;
+}
+
+.prev-btn:hover, .next-btn:hover {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+.prev-btn {
+    left: 10px;
+}
+
+.next-btn {
+    right: 10px;
+}
+
+
+.dots-container {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    display: flex;
+    gap: 8px;
+}
+
+.dot {
+    height: 12px;
+    width: 12px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.dot.active {
+    background-color: #7E57C2; 
+}
+
 
 /* Pasos */
 .steps-container {
@@ -154,10 +222,7 @@ h4 {
   .courses-grid {
      grid-template-columns: 1fr;
   }
-  .hero-slider .slider-text {
-    font-size: 0.9em;
-    padding: 0.8em;
-  }
+  
 
   .steps-container {
     display: flex;
@@ -165,6 +230,10 @@ h4 {
     align-items: center;
  
 }
+ .prev-btn, .next-btn {
+        padding: 5px 10px;
+        font-size: 16px;
+    }
 }
 
 
