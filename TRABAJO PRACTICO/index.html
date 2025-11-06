@@ -36,31 +36,32 @@
                 <li><a href="./paginas/cursos.html" class="nav-link">Cursos</a></li>
                 <li><a href="./paginas/inscripcionCurso.html" class="nav-link">Inscripción</a></li>
                 <li><a href="./paginas/calendario.html" class="nav-link"> Proximos </a></li>
-                <li><a href="./paginas/perfil.html" class="nav-link">Mi Perfil</a></li>
+                <li><a href="./paginas/perfil.html" class="nav-link perfil-link" style="display: none;">Mi Perfil</a></li>
 
             </ul>
         </nav>
 
         <!-- Barra de búsqueda -->
 <section class="search-bar">
-  <form action="" method="get" onchange="this.action=this.curso.value">
-    <select name="curso" required>
-      <option value="">Seleccioná un curso</option>
-      <option value="paginas/detalleDelCurso/detalleCursoFrontend.html">Programación Front-End</option>
-      <option value="paginas/detalleDelCurso/detalleCursoBackend.html">Programación Back-End</option>
-      <option value="paginas/detalleDelCurso/detalleCursoCiberseguridad.html">Ciberseguridad</option>
-      <option value="paginas/detalleDelCurso/detalleCursoInglesAvanzado.html">Inglés Avanzado</option>
-      <option value="paginas/detalleDelCurso/detalleCursoMarketingDigital.html">Marketing Digital</option>
-      <option value="paginas/detalleDelCurso/detalleCursoFinanzasPersonales.html">Finanzas Personales</option>
-    </select>
+  <form id="search-form">
+    <input list="cursos-list" name="curso-buscado" id="curso-input" placeholder="Buscar curso..."> 
+    
+    <!-- ACTUALIZADO PARA JS -->
+    <datalist id="cursos-list">
+        <option value="Programación Front-End" data-url="./paginas/detalleCurso.html?curso=Programación+Front-End"></option>
+        <option value="Programación Back-End" data-url="./paginas/detalleCurso.html?curso=Programación+Back-End"></option>
+        <option value="Ciberseguridad" data-url="./paginas/detalleCurso.html?curso=Ciberseguridad"></option>
+        <option value="Inglés Avanzado" data-url="./paginas/detalleCurso.html?curso=Inglés+Avanzado"></option>
+        <option value="Marketing Digital" data-url="./paginas/detalleCurso.html?curso=Marketing+Digital"></option>
+        <option value="Finanzas Personales" data-url="./paginas/detalleCurso.html?curso=Finanzas+Personales"></option>
+    </datalist>
+
     <button type="submit" class="search-button">
       <img src="./img/lupa.png" alt="Buscar">
     </button>
   </form>
 </section>
 
-
-   
 
         <section class="user-actions">
              <a href="./paginas/inicioSesion.html"> 
@@ -149,9 +150,22 @@
     <main class=" main-content">
 
         <!-- BANNER PAGINA -->
-        <section class="hero-slider">
-            <img src="./img/banner.png" alt="Banner promocional de cursos" class="slider-img">
-        </section>
+     <section class="hero-slider-container">
+      <div class="slider">
+        <img src="./img/banner.png" alt="Banner promocional de cursos" class="slide active">
+        <img src="./img/finanzas.jpg" alt="Banner finanzas" class="slide">
+        <img src="./img/progrmacion.jpg" alt="Banner Programacion" class="slide">
+      </div>
+
+      <div class="dots-container">
+        <span class="dot active" data-slide-index="0"></span>
+        <span class="dot" data-slide-index="1"></span>
+        <span class="dot" data-slide-index="2"></span>
+      </div>
+
+    <button class="prev-btn">❮</button>
+    <button class="next-btn">❯</button>
+</section>
 
 
         <!-- Pasos para Inscribirse -->
@@ -294,7 +308,6 @@
         </section>
 
     </footer>
-
     <!-- JS  PRINCIPAL-->
      <script type="module" src="./JavaScript.js"></script>
 </body>
