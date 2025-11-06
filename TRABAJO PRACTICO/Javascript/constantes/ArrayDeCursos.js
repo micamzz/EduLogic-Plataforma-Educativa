@@ -97,7 +97,7 @@ export const LISTA_CURSOS = [
     imagen: "../img/frontend.jpg",
     modulos: [
       {
-        nombre: "MÓDULO 1 – Curso desarrollo web",
+        nombre: "MÓDULO 1 - Curso desarrollo web",
         clases: [
           "Clase 1: HTML (120 min)",
           "Clase 2: CSS (120 min)",
@@ -105,7 +105,7 @@ export const LISTA_CURSOS = [
         ]
       },
       {
-        nombre: "MÓDULO 2 – Introducción a Git y GitHub",
+        nombre: "MÓDULO 2 - Introducción a Git y GitHub",
         clases: [
           "Clase 4: Grids (120 min)",
           "Clase 5: Animaciones (120 min)",
@@ -114,7 +114,7 @@ export const LISTA_CURSOS = [
         ]
       },
       {
-        nombre: "MÓDULO 3 – Curso JavaScript",
+        nombre: "MÓDULO 3 - Curso JavaScript",
         clases: [
           "Clase 8: Introducción a JavaScript (120 min)",
           "Clase 9: Control de ciclos (120 min)",
@@ -122,7 +122,7 @@ export const LISTA_CURSOS = [
         ]
       },
       {
-        nombre: "MÓDULO 4 – Curso JavaScript parte II",
+        nombre: "MÓDULO 4 - Curso JavaScript parte II",
         clases: [
           "Clase 11: Arrays (120 min)",
           "Clase 12: Objetos (120 min)",
@@ -130,14 +130,14 @@ export const LISTA_CURSOS = [
         ]
       },
       {
-        nombre: "MÓDULO 5 – Curso de React JS",
+        nombre: "MÓDULO 5 - Curso de React JS",
         clases: [
           "Clase 14: Introducción a React (120 min)",
           "Clase 15: Configuración del entorno (120 min)"
         ]
       },
       {
-        nombre: "MÓDULO 6 – JSX, transpiling y componentes",
+        nombre: "MÓDULO 6 - JSX, transpiling y componentes",
         clases: [
           "Clase 16: Componentes II (120 min)",
           "Clase 17: Promises, asincronía y MAP (120 min)",
@@ -145,7 +145,7 @@ export const LISTA_CURSOS = [
         ]
       },
       {
-        nombre: "MÓDULO 7 – Proyecto Final",
+        nombre: "MÓDULO 7 - Proyecto Final",
         clases: [
           "Clase 19-20: Diseño del proyecto (240 min)",
           "Clase 21-22: Implementación y deploy (240 min)"
@@ -174,7 +174,7 @@ export const LISTA_CURSOS = [
     imagen: "../img/ciberseguridad.jpg",
     modulos: [
       {
-        nombre: "MÓDULO 1 – Introducción al ciberdelito y ciberamenazas",
+        nombre: "MÓDULO 1 - Introducción al ciberdelito y ciberamenazas",
         clases: [
           "Clase 1: Panorama del ciberdelito...",
           "Clase 2: Tipos de ciberamenazas...",
@@ -182,7 +182,7 @@ export const LISTA_CURSOS = [
         ]
       },
       {
-        nombre: "MÓDULO 2 – Vulnerabilidades y amenazas",
+        nombre: "MÓDULO 2 - Vulnerabilidades y amenazas",
         clases: [
           "Clase 4: Concepto de vulnerabilidad...",
           "Clase 5: Principales amenazas...",
@@ -191,7 +191,7 @@ export const LISTA_CURSOS = [
         ]
       },
       {
-        nombre: "MÓDULO 3 – Hacking ético",
+        nombre: "MÓDULO 3 - Hacking ético",
         clases: [
           "Clase 8: Qué es el hacking ético...",
           "Clase 9: Fases de un test...",
@@ -199,7 +199,7 @@ export const LISTA_CURSOS = [
         ]
       },
       {
-        nombre: "MÓDULO 4 – Ciberseguridad, criptografía y cifrado",
+        nombre: "MÓDULO 4 -  Ciberseguridad, criptografía y cifrado",
         clases: [
           "Clase 11: Fundamentos de ciberseguridad...",
           "Clase 12: Criptografía...",
@@ -207,14 +207,14 @@ export const LISTA_CURSOS = [
         ]
       },
       {
-        nombre: "MÓDULO 5 – Tecnología de protección a usuarios",
+        nombre: "MÓDULO 5 - Tecnología de protección a usuarios",
         clases: [
           "Clase 14: Seguridad en dispositivos...",
           "Clase 15: Seguridad en la nube..."
         ]
       },
       {
-        nombre: "MÓDULO 6 – Tecnologías de protección de perímetro",
+        nombre: "MÓDULO 6 - Tecnologías de protección de perímetro",
         clases: [
           "Clase 16: Firewalls, IDS/IPS...",
           "Clase 17: Seguridad en entornos corporativos...",
@@ -222,7 +222,7 @@ export const LISTA_CURSOS = [
         ]
       },
       {
-        nombre: "MÓDULO 7 – Proyecto Final",
+        nombre: "MÓDULO 7 - Proyecto Final",
         clases: [
           "Clase 19-20: Diseño del proyecto (300 min)",
           "Clase 21-22: Implementación y deploy (300 min)"
@@ -252,7 +252,7 @@ export const LISTA_CURSOS = [
     imagen: "../img/finanzasperso.jpg",
     modulos: [
       {
-        nombre: "MÓDULO 1 – Introducción de finanzas personales",
+        nombre: "MÓDULO 1 - Introducción de finanzas personales",
         clases: [
           "Clase 1: Introducción a las Finanzas Personales (90 min)",
           "Clase 2: La importancia de la educación financiera...",
@@ -260,7 +260,7 @@ export const LISTA_CURSOS = [
         ]
       },
       {
-        nombre: "MÓDULO 2 – Creación y gestión de presupuesto",
+        nombre: "MÓDULO 2 - Creación y gestión de presupuesto",
         clases: [
           "Clase 4: Presupuesto personal...",
           "Clase 5: Deudas...",
@@ -269,7 +269,7 @@ export const LISTA_CURSOS = [
         ]
       },
       {
-        nombre: "MÓDULO 3 – Fundamentos del ahorro",
+        nombre: "MÓDULO 3 - Fundamentos del ahorro",
         clases: [
           "Clase 8: El ahorro...",
           "Clase 9: Objetivos financieros...",
@@ -277,7 +277,7 @@ export const LISTA_CURSOS = [
         ]
       },
       {
-        nombre: "MÓDULO 4 – Introducción a la inversión",
+        nombre: "MÓDULO 4 - Introducción a la inversión",
         clases: [
           "Clase 11: Inflación y su impacto...",
           "Clase 12: Seguros...",
@@ -285,14 +285,14 @@ export const LISTA_CURSOS = [
         ]
       },
       {
-        nombre: "MÓDULO 5 – El crédito",
+        nombre: "MÓDULO 5 - El crédito",
         clases: [
           "Clase 14: Psicología del dinero...",
           "Clase 15: Educación financiera..."
         ]
       },
       {
-        nombre: "MÓDULO 6 – Gestión de deudas",
+        nombre: "MÓDULO 6 - Gestión de deudas",
         clases: [
           "Clase 16: Introducción...",
           "Clase 17: Herramientas digitales...",
@@ -300,7 +300,7 @@ export const LISTA_CURSOS = [
         ]
       },
       {
-        nombre: "MÓDULO 7 – Proyecto Final",
+        nombre: "MÓDULO 7 - Proyecto Final",
         clases: [
           "Clase 19-20: Diseño del proyecto (90 min)",
           "Clase 21-22: Implementación y deploy (90 min)"
@@ -329,7 +329,7 @@ export const LISTA_CURSOS = [
     imagen: "../img/ingles.jpg",
     modulos: [
       {
-        nombre: "MÓDULO 1 – Expresiones y fluidez avanzada",
+        nombre: "MÓDULO 1 - Expresiones y fluidez avanzada",
         clases: [
           "Clase 1: Idioms y expresiones...",
           "Clase 2: Phrasal verbs...",
@@ -337,7 +337,7 @@ export const LISTA_CURSOS = [
         ]
       },
       {
-        nombre: "MÓDULO 2 – Gramática compleja en uso real",
+        nombre: "MÓDULO 2 - Gramática compleja en uso real",
         clases: [
           "Clase 4: Inversion for emphasis...",
           "Clase 5: Mixed conditionals...",
@@ -346,7 +346,7 @@ export const LISTA_CURSOS = [
         ]
       },
       {
-        nombre: "MÓDULO 3 – Writing académico y profesional",
+        nombre: "MÓDULO 3 - Writing académico y profesional",
         clases: [
           "Clase 8: Essay writing...",
           "Clase 9: Formal reports...",
@@ -354,7 +354,7 @@ export const LISTA_CURSOS = [
         ]
       },
       {
-        nombre: "MÓDULO 4 – Listening y comprensión",
+        nombre: "MÓDULO 4 - Listening y comprensión",
         clases: [
           "Clase 11: Acento británico...",
           "Clase 12: Acentos globales...",
@@ -362,14 +362,14 @@ export const LISTA_CURSOS = [
         ]
       },
       {
-        nombre: "MÓDULO 5 – Speaking avanzado",
+        nombre: "MÓDULO 5 - Speaking avanzado",
         clases: [
           "Clase 14: Debates y argumentación...",
           "Clase 15: Presentaciones profesionales..."
         ]
       },
       {
-        nombre: "MÓDULO 6 – Cultura, matices y preparación final",
+        nombre: "MÓDULO 6 - Cultura, matices y preparación final",
         clases: [
           "Clase 16: Cross-cultural communication...",
           "Clase 17: C1-C2 practice...",
@@ -377,7 +377,7 @@ export const LISTA_CURSOS = [
         ]
       },
       {
-        nombre: "MÓDULO 7 – Proyecto Final",
+        nombre: "MÓDULO 7 - Proyecto Final",
         clases: [
           "Clase 19-20: Diseño del proyecto (240 min)",
           "Clase 21-22: Implementación y deploy (240 min)"
@@ -406,7 +406,7 @@ export const LISTA_CURSOS = [
     imagen: "../img/marketing.jpg",
     modulos: [
       {
-        nombre: "MÓDULO 1 – Plan de marketing",
+        nombre: "MÓDULO 1 - Plan de marketing",
         clases: [
           "Clase 1: Introducción al Marketing...",
           "Clase 2: El rol del CM...",
@@ -414,7 +414,7 @@ export const LISTA_CURSOS = [
         ]
       },
       {
-        nombre: "MÓDULO 2 – Estrategia de contenido",
+        nombre: "MÓDULO 2 - Estrategia de contenido",
         clases: [
           "Clase 4: Estrategias en Facebook...",
           "Clase 5: Estrategias en Instagram...",
@@ -422,7 +422,7 @@ export const LISTA_CURSOS = [
         ]
       },
       {
-        nombre: "MÓDULO 3 – Estrategia de contenido II",
+        nombre: "MÓDULO 3 - Estrategia de contenido II",
         clases: [
           "Clase 8: Estrategias en Twitter...",
           "Clase 9: Estrategias en WhatsApp...",
@@ -430,28 +430,28 @@ export const LISTA_CURSOS = [
         ]
       },
       {
-        nombre: "MÓDULO 4 – Creación y gestión de anuncios en redes sociales",
+        nombre: "MÓDULO 4 - Creación y gestión de anuncios en redes sociales",
         clases: [
           "Clase 11: Cómo atrapar al cliente...",
           "Clase 12: Estrategias de venta..."
         ]
       },
       {
-        nombre: "MÓDULO 5 – Video marketing y Google Ads",
+        nombre: "MÓDULO 5 - Video marketing y Google Ads",
         clases: [
           "Clase 14: Introducción...",
           "Clase 15: Manejo de Google Ads..."
         ]
       },
       {
-        nombre: "MÓDULO 6 – Estrategias de e-mail marketing",
+        nombre: "MÓDULO 6 - Estrategias de e-mail marketing",
         clases: [
           "Clase 16: Introducción...",
           "Clase 17: Google Analytics..."
         ]
       },
       {
-        nombre: "MÓDULO 7 – Proyecto Final",
+        nombre: "MÓDULO 7 - Proyecto Final",
         clases: [
           "Clase 19-20: Diseño del proyecto (240 min)",
           "Clase 21-22: Implementación y deploy (240 min)"
