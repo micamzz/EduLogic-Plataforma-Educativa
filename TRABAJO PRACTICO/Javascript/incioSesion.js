@@ -1,5 +1,10 @@
+// Archivo: Javascript/incioSesion.js
+import { mostrarPopup } from './popupManager.js'; // Importar la nueva función
 
-// Función auxiliar que contiene la lógica central
+// La lógica del popup ya no está aquí, solo usamos la función mostrarPopup()
+// No necesitamos el código de btnAceptar y popup
+
+// Función auxiliar 
 export function iniciarLogin(redirectUrl) {
     const form = document.getElementById('login-form');
     if (!form) return;
@@ -13,7 +18,7 @@ export function iniciarLogin(redirectUrl) {
         const storedUser = localStorage.getItem('currentUser');
 
         if (!storedUser) {
-            alert('No hay cuentas registradas. Por favor, regístrate.');
+            mostrarPopup('Error de Login', 'No hay cuentas registradas. Por favor, regístrate.');
             return;
         }
 
@@ -22,22 +27,22 @@ export function iniciarLogin(redirectUrl) {
         // Verificación de credenciales
         if (user.email === emailInput && user.password === passwordInput) {
             localStorage.setItem('isLoggedIn', 'true');
-            alert('Inicio de sesión exitoso. ¡Bienvenido, ' + user.nombre + '!');
-
-            // Redirige al destino especificado
-            window.location.href = redirectUrl || '../index.html';
+            
+            mostrarPopup('Éxito', 'Inicio de sesión exitoso. ¡Bienvenido, ' + user.nombre + '!', 'alert', () => {
+                 window.location.href = redirectUrl || '../index.html';
+            });
         } else {
-            alert('Credenciales incorrectas. Verifica tu correo y contraseña.');
+            mostrarPopup('Error de Credenciales', 'Credenciales incorrectas. Verifica tu correo y contraseña.');
         }
     });
 }
 
-// Funciones para el ruteo en JavaScript.js
+// Funciones para el ruteo 
 export function iniciarLoginNormal() {
     iniciarLogin('../index.html'); 
 }
 
 export function iniciarLoginPago() {
     // Redirige a la página de pago después de iniciar sesión
-    iniciarLogin('./pago.html'); // Ajusta la URL de pago si es necesario
+    iniciarLogin('../paginas/formularioDePago.html'); 
 }

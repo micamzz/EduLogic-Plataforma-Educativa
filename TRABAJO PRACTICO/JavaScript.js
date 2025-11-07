@@ -1,4 +1,3 @@
-
 import { BuscadorElementos } from "./Javascript/buscadorElementos.js";
 import { Calendario } from "./Javascript/calendario.js";
 import { DetalleCursos } from "./Javascript/detalleCurso.js";
@@ -7,18 +6,19 @@ import { iniciarPaginaPrincipal } from './Javascript/index.js';
 import { iniciarRegistroNormal, iniciarRegistroPago } from './Javascript/registrarse.js';
 import { iniciarLoginNormal, iniciarLoginPago } from './Javascript/incioSesion.js';
 import { iniciarLogicaPerfil } from './Javascript/perfil.js';
+import { iniciarLogicaRecuperacion } from './Javascript/recuperarContra.js';
 import { formularioDeContacto } from "./Javascript/contactoFormulario.js";
 
 
 const BUSCADOR = new BuscadorElementos();
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
 
-// HEADER
+  // HEADER
   manejarVisualizacionHeader();
   manejarBusqueda();
 
-  //  DETALLE DE LOS CURSOS 
+  // DETALLE DE LOS CURSOS 
   const contenedorDetalle = BUSCADOR.buscarUnElementoPorId("js-curso-detalle");
   if (contenedorDetalle) {
     DetalleCursos.mostrarDetalleDeCurso();
@@ -56,8 +56,20 @@ document.addEventListener("DOMContentLoaded", () => {
       Calendario.iniciar(); 
     }
 
-  // Si la ruta actual contiene "contacto.html", se ejecuta la lógica del formulario:
+  } else if (path.includes('/recuperarContra.html')) {
+    iniciarLogicaRecuperacion();
+
+  }  
+   // FORMULARIO DE CONTACTO
+  if (path.includes("/contacto.html")) {
+    formularioDeContacto();
+  }
+ //  Importar popupManager solo si NO estamos en contacto
+  if (!path.includes("/contacto.html")) {
+    await import("./Javascript/popupManager.js"); 
+    // Si la ruta actual contiene "contacto.html", se ejecuta la lógica del formulario:
   } else if (path.includes('/contacto.html')) {
     formularioDeContacto(); // ✅ LLAMADA A LA FUNCIÓN DEL FORMULARIO
+
   }
 });

@@ -19,7 +19,7 @@
             </nav>
             <h1>Recuperar Contraseña</h1>
 
-            <form action="#popup2" method="get" class="form-iniciarSesion">
+            <form id="recuperacion-form" action="#" method="post" class="form-iniciarSesion">
 
                 <label>
                     <input type="email" name="email" placeholder="Correo electrónico" class="caja-input" required>
@@ -33,18 +33,24 @@
                     <a href="./inicioSesion.html">Volver al inicio de sesión</a>
                 </article>
 
-                <!-- Popup de confirmación -->
-                <section id="popup2" class="popup-confirmacion2">
-                    <article class="popup-contenido2">
-                        <h3>✅ ! Se ha enviado un mail para recuperar la contraseña!</h3>
-                        <a href="#" class="cerrar-popup">Cerrar</a>
-                    </article>
-                </section>
-
-                
             </form>
         </section>
     </main>
+
+    <div class="popup-fondo" id="custom-popup">
+        <div class="popup-contenido2">
+            <h3 id="popup-title"></h3>
+            <p id="popup-message"></p>
+            
+            <div id="popup-buttons-container">
+                <button type="button" class="popup-cerrar" id="btn-cancelar">Cancelar</button> 
+                <button type="button" class="boton-enviar" id="btn-aceptar">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+
+    <script type="module" src="../JavaScript.js"></script>
 
 </body>
 
