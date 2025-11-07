@@ -10,7 +10,8 @@ export class ValidadorFormulario {
 
   static expresionesRegulares = {
     email: /^[0-9a-zA-Z._.-]+@[0-9a-zA-Z._.-]+\.[0-9a-zA-Z]+$/,
-    telefono: /^\d{8,15}$/ 
+    telefono: /^(?:\d{8}|\d{4}-\d{4})$/
+
   };
 
   static campoVacio(valor) {
@@ -26,7 +27,7 @@ export class ValidadorFormulario {
   }
 
   static telefonoValido(tel) {
-    if (tel.trim() === "") return true; // teléfono opcional
+    if (tel.trim() === "") return true; // SI EL TELEFONO ESTA VACIO NO SE HACE VALIDACION
     return ValidadorFormulario.expresionesRegulares.telefono.test(tel.trim());
   }
 
