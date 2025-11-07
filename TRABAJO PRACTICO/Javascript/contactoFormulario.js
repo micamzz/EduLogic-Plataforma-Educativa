@@ -82,19 +82,19 @@ export function formularioDeContacto() {
 
         if (!esValido) return;
 
-        mostrarPopup(CREADOR);
+        mostrarPopupDeContacto(CREADOR);
     });
 }
 
-
 // --- POPUP ---
-function mostrarPopup(CREADOR) {
+function mostrarPopupDeContacto(CREADOR) {
     const POPUP = CREADOR.crearUnElemento("section");
     POPUP.classList.add("popup-confirmacion");
     POPUP.innerHTML = `
     <article class="popup-contenido">
       <h3>Consulta enviada</h3>
-      <p>Gracias por contactarnos. Nos comunicaremos pronto.</p>
+      <p>Gracias por contactarnos</p>
+      <p> Nos comunicaremos pronto.</p>
       <button id="boton-aceptar">Aceptar</button>
     </article>
   `;

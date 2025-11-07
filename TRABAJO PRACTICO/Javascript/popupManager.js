@@ -1,4 +1,4 @@
-import { BuscadorElementos } from "./buscadorElementos";    
+import { BuscadorElementos } from "./buscadorElementos.js";  
 
 const BUSCADOR = new BuscadorElementos();
 
