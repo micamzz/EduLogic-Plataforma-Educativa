@@ -1,11 +1,13 @@
-// Archivo: Javascript/popupManager.js
+import { BuscadorElementos } from "./buscadorElementos";    
+
+const BUSCADOR = new BuscadorElementos();
 
 // Referencias a los elementos del pop-up (deben existir en el HTML que lo use)
-const popup = document.getElementById('custom-popup');
-const popupTitle = document.getElementById('popup-title');
-const popupMessage = document.getElementById('popup-message');
-const btnAceptar = document.getElementById('btn-aceptar');
-const btnCancelar = document.getElementById('btn-cancelar'); // Puede ser null en páginas que solo tienen 'alert'
+const popup = BUSCADOR.buscarUnElementoPorId('custom-popup');
+const popupTitle = BUSCADOR.buscarUnElementoPorId('popup-title');
+const popupMessage = BUSCADOR.buscarUnElementoPorId('popup-message');
+const btnAceptar = BUSCADOR.buscarUnElementoPorId('btn-aceptar');
+const btnCancelar = BUSCADOR.buscarUnElementoPorId('btn-cancelar'); 
 
 // Variable para almacenar la función a ejecutar al confirmar (la acción)
 let currentOnConfirmAction = null;
@@ -40,7 +42,6 @@ function inicializarPopupListeners() {
 // Inicializar los listeners tan pronto como se cargue el módulo
 inicializarPopupListeners();
 
-
 /**
  * Muestra el pop-up modal personalizado.
  * @param {string} title - El título del pop-up.
@@ -50,13 +51,6 @@ inicializarPopupListeners();
  */
 export function mostrarPopup(title, message, type = 'alert', onConfirm = () => {}) {
     if (!popup || !btnAceptar) {
-        // Fallback para navegadores o errores de DOM
-        if (type === 'confirm') {
-            window.confirm(message) && onConfirm();
-        } else {
-            window.alert(title + ': ' + message);
-            onConfirm();
-        }
         return;
     }
 
