@@ -97,47 +97,92 @@ h1 {
 }
 
 
-.popup-confirmacion {
+
+/* pop up*/
+.popup-fondo {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(6px);
-  display: none;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none; /* Oculto por defecto, JS lo muestra */
   justify-content: center;
   align-items: center;
-  z-index: 999;
+  z-index: 1000;
 }
 
-/*  mensaje pop up*/
-.popup-contenido {
-  background: #ffffff;
-  padding: 2em;
-  border-radius: 1.2em;
-  text-align: center;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-  width: 90%;
+
+.popup {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 1.5em 2em;
   max-width: 400px;
-  position: relative;
-  animation: aparecer 0.4s ease;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
 }
 
-.popup-contenido h3 {
-  color: #7E57C2;
-  margin-bottom: 0.8em;
-  font-size: 1.3em;
+
+.popup h3 {
+  color: #7E57C2; 
+  margin-bottom: 0.5em;
+  font-size: 1.5em; 
 }
 
-.popup-contenido p {
+
+.popup p {
+  margin-bottom: 1em;
   color: #333;
-  margin-bottom: 1.5em;
 }
 
-/* Mostrar el popup  */
-:target {
-  display: flex;
+
+.popup-boton {
+  background-color: #7E57C2;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 0.6em 1em;
+  cursor: pointer;
+  margin: 0.3em;
+  transition: background-color 0.3s;
+}
+
+.popup-boton:hover {
+  background-color: #9575CD;
+}
+
+.popup-cerrar {
+  background-color: #888;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 0.6em 1em;
+  cursor: pointer;
+  margin: 0.3em;
+  transition: background-color 0.3s;
+}
+
+.popup-cerrar:hover {
+  background-color: #666;
+}
+
+
+#popup-buttons-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px; 
+}
+
+
+.full-width-btn {
+    width: 100%; 
+    margin: 0 !important; 
+}
+
+#popup-buttons-container #btn-cancelar {
+    margin-right: 10px; 
+    margin-left: 0;
 }
 
 /* Botones */
@@ -173,6 +218,17 @@ h1 {
  {
   background-color: #7E57C2;
   transform: scale(1.05);
+}
+
+.eliminar-cuenta-btn {
+    background-color: darkred; 
+    border-color: #990000; 
+    grid-column: span 2;
+}
+
+.eliminar-cuenta-btn:hover {
+    background-color: #cc0000; /* Color más claro al pasar el ratón */
+    transform: scale(1.02);
 }
 
 
