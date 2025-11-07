@@ -152,41 +152,25 @@
     <!-- PRINCIPAL  -->
     <main class="container-main">
         <section class="container-contacto">
-            <!--  VER ESTO DEL ACTION Y ENVIAR MSJ -->
-            <form action="#popup" method="get">
-                <h2>CONTÁCTANOS </h2>
-                <label for="name" class="label-form"> Nombre:
-                    <input type="text" name="name" id="name" class="caja-form">
-                </label>
-
-                <label for="mail" class="label-form label-email"> Email:
-                    <input type="email" name="mail" id="mail" required class="caja-form">
-                </label>
-
-                <label for="telefono" class="label-form"> Teléfono:
-                    <input type="tel" name="telefono" id="telefono" class="caja-form">
-                </label>
-
-                <label for="mensaje" class="label-form"> Mensaje:
-                    <textarea name="mensaje" id="mensaje" class="caja-textarea" maxlength="250" required></textarea>
-                </label>
+        
+            <form id="form-contacto">
+                <h2>CONTÁCTANOS</h2>
+        
+                <label for="name" class="label-form">Nombre y Apellido:</label>
+                <input type="text" name="name" id="name" class="caja-form">
+            
+                <label for="mail" class="label-form">Email:</label>
+                <input type="email" name="mail" id="mail" class="caja-form" required>
+        
+                <label for="telefono" class="label-form">Teléfono: (opcional)</label>
+                <input type="tel" name="telefono" id="telefono" class="caja-form">
+        
+                <label for="mensaje" class="label-form">Mensaje:</label>
+                <textarea name="mensaje" id="mensaje" class="caja-textarea" maxlength="1000" required></textarea>
+            
+        
                 <button type="submit" class="boton-enviar">Enviar</button>
-
-                <!-- Popup de confirmación -->
-                <section id="popup" class="popup-confirmacion">
-                    <article class="popup-contenido">
-                        <h3>✅ ¡Su mensaje ha sido enviado correctamente!</h3>
-                        <p> Nos estaremos comunicando brevemente.</p>
-                        <a href="#" class="cerrar-popup">Cerrar</a>
-                    </article>
-                </section>
             </form>
-
-
-
-
-
-
 
             <section class="container-dondeEstamos">
                 <h2> ENCONTRANOS EN..</h2>
@@ -200,7 +184,6 @@
 
         </section>
 
-
         <section class="section-ubicacion">
             <h2>Ubicación</h2>
             <iframe
@@ -210,11 +193,6 @@
         </section>
 
     </main>
-
-
-
-
-
 
     <!-- Footer -->
     <footer class="container-footer">
@@ -257,8 +235,7 @@
 
         </section>
     </footer>
+
     <script type="module" src="../JavaScript.js"></script>
-
 </body>
-
 </html>

@@ -7,6 +7,8 @@ import { iniciarPaginaPrincipal } from './Javascript/index.js';
 import { iniciarRegistroNormal, iniciarRegistroPago } from './Javascript/registrarse.js';
 import { iniciarLoginNormal, iniciarLoginPago } from './Javascript/incioSesion.js';
 import { iniciarLogicaPerfil } from './Javascript/perfil.js';
+import { formularioDeContacto } from "./Javascript/contactoFormulario.js";
+
 
 const BUSCADOR = new BuscadorElementos();
 
@@ -53,5 +55,9 @@ document.addEventListener("DOMContentLoaded", () => {
     if (typeof Calendario !== 'undefined' && Calendario.iniciar) {
       Calendario.iniciar(); 
     }
+
+  // Si la ruta actual contiene "contacto.html", se ejecuta la lógica del formulario:
+  } else if (path.includes('/contacto.html')) {
+    formularioDeContacto(); // ✅ LLAMADA A LA FUNCIÓN DEL FORMULARIO
   }
 });
