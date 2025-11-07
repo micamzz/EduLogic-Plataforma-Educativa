@@ -1,16 +1,18 @@
-// Archivo: Javascript/perfil.js
 
-// Eliminamos la importación de header.js ya que las funciones se llaman en JavaScript.js
+import { mostrarPopup } from './popupManager.js'; // Importar la nueva función
+
+
+
 
 export function iniciarLogicaPerfil() {
     const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
     const storedUser = localStorage.getItem('currentUser');
 
-    // Redirige al login si no está logueado
+    
     if (!isLoggedIn) {
         if (window.location.href.includes('perfil.html')) {
             alert('Debes iniciar sesión para ver tu perfil.');
-            // Aseguramos la ruta de redirección correcta
+         
             window.location.href = '../paginas/inicioSesion.html'; 
             return;
         }
@@ -37,7 +39,7 @@ export function iniciarLogicaPerfil() {
         if (nombreUsuario) nombreUsuario.textContent = (user.nombre + ' ' + user.apellido).trim() || 'Mi Perfil';
 
 
-        // Manejar la ACTUALIZACIÓN del perfil
+        //ACTUALIZACIÓN del perfil
         const formPerfil = document.getElementById('perfil-form');
         if (formPerfil) {
             formPerfil.addEventListener('submit', function(e) {
@@ -54,19 +56,54 @@ export function iniciarLogicaPerfil() {
                 user.pais = document.getElementById('perfil-pais').value;
 
                 localStorage.setItem('currentUser', JSON.stringify(user));
-                alert('¡Datos de perfil actualizados con éxito!');
-                window.location.reload();
+                
+                // Guardar Cambios (usando la función importada)
+                mostrarPopup('Éxito', '¡Datos de perfil actualizados con éxito!', 'alert', () => {
+                    window.location.reload();
+                });
             });
         }
+        
 
-        // Manejar el CERRAR SESIÓN
+        // CERRAR SESIÓN (usando la función importada)
         const logoutButton = document.getElementById('logout-button');
         if (logoutButton) {
             logoutButton.addEventListener('click', () => {
-                localStorage.removeItem('isLoggedIn');
-                alert('Sesión cerrada correctamente.');
-                window.location.href = '../index.html';
+                // POP-UP ESTÉTICO: Cerrar Sesión (Confirmación)
+                mostrarPopup('Cerrar Sesión', '¿Estás seguro de que deseas cerrar tu sesión?', 'confirm', () => {
+                    localStorage.removeItem('isLoggedIn');
+                    
+                    // POP-UP ESTÉTICO: Sesión Cerrada
+                    mostrarPopup('Adiós', 'Sesión cerrada correctamente.', 'alert', () => {
+                         window.location.href = '../index.html';
+                    });
+                });
             });
         }
+
+        // ELIMINAR CUENTA (usando la función importada)
+        const deleteAccountButton = document.getElementById('eliminar-cuenta-button');
+        if (deleteAccountButton) {
+            deleteAccountButton.addEventListener('click', () => {
+                // POP-UP ESTÉTICO: Eliminar Cuenta (Confirmación)
+                mostrarPopup(
+                    'Eliminar Cuenta', 
+                    'ADVERTENCIA: ¿Estás seguro de que deseas eliminar tu cuenta? Esta acción es irreversible y se perderán todos tus datos locales.', 
+                    'confirm', 
+                    () => {
+                        // Acción al confirmar
+                        localStorage.removeItem('currentUser');
+                        localStorage.removeItem('isLoggedIn');
+                        
+                        // POP-UP ESTÉTICO: Cuenta Eliminada
+                        mostrarPopup('Cuenta Eliminada', 'Tu cuenta ha sido eliminada. Serás redirigido al inicio.', 'alert', () => {
+                            window.location.href = '../index.html';
+                        });
+                    }
+                );
+            });
+        }
+
+        
     }
 }
