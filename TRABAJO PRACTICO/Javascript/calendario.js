@@ -1,4 +1,4 @@
-import { BuscadorElementos } from "../Javascript/buscadorElementos.js";
+import { BuscadorElementos } from "./buscadorElementos.js";
 import { CURSOS_CALENDARIO } from "../Javascript/constantes/cursosDelMesCalendario.js";
 import { CreadorElementos } from "./creadorElementos.js";
 
