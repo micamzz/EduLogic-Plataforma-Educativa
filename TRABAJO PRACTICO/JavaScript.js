@@ -7,11 +7,13 @@ import { iniciarPaginaPrincipal } from './Javascript/index.js';
 import { iniciarRegistroNormal, iniciarRegistroPago } from './Javascript/registrarse.js';
 import { iniciarLoginNormal, iniciarLoginPago } from './Javascript/incioSesion.js';
 import { iniciarLogicaPerfil } from './Javascript/perfil.js';
+import { iniciarLogicaRecuperacion } from './Javascript/recuperarContra.js';
 
 const BUSCADOR = new BuscadorElementos();
 
 document.addEventListener("DOMContentLoaded", () => {
 
+  
 // HEADER
   manejarVisualizacionHeader();
   manejarBusqueda();
@@ -53,5 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (typeof Calendario !== 'undefined' && Calendario.iniciar) {
       Calendario.iniciar(); 
     }
-  }
+  } else if (path.includes('recuperarContra.html')) {
+        iniciarLogicaRecuperacion();
+    }
 });
