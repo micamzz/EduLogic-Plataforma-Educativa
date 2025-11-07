@@ -10,29 +10,53 @@ export function iniciarLogicaRecuperacion() {
 
     form.addEventListener('submit', function(e) {
         e.preventDefault();
-
         
-        
-        const emailInput = this.querySelector('input[name="email"]').value;
+        const emailInput = this.querySelector('input[name="email"]').value.trim().toLowerCase();
 
+        if (!emailInput) {
+            mostrarPopup('Error de Validación', 'Por favor, introduce tu correo electrónico.');
+            return;
+        }
+       
      
-        const storedUser = localStorage.getItem('currentUser');
-        if (!storedUser || JSON.parse(storedUser).email !== emailInput) {
-            
-            mostrarPopup('Recuperación Enviada', 
+        const usersJSON = localStorage.getItem('registeredUsers');
+        
+        // Asumimos que no hay usuarios registrados si usersJSON es nulo
+        if (!usersJSON) {
+             mostrarPopup('Recuperación Enviada', 
                          'Si el correo electrónico existe en nuestro sistema, te enviaremos un enlace para restablecer tu contraseña.', 
-                         'alert');
+                         'alert', 
+                         () => {
+                             window.location.href = './inicioSesion.html';
+                         });
             return;
         }
 
+        const users = JSON.parse(usersJSON);
 
-        mostrarPopup(
-            '¡Correo Enviado!', 
-            'Se ha enviado un mail a ' + emailInput + ' para recuperar la contraseña.', 
-            'alert', 
-            () => {
-                window.location.href = './inicioSesion.html';
-            }
+        // Buscar el usuario en el array
+        const userFound = users.find(user => 
+            user.email.toLowerCase() === emailInput
         );
-    });
+
+        if (userFound) {
+             mostrarPopup(
+                '¡Correo Enviado!', 
+                'Se ha enviado un mail a ' + emailInput + ' para recuperar la contraseña.', 
+                'alert', 
+                () => {
+                    window.location.href = './inicioSesion.html';
+                }
+            );
+        } else {
+            
+            mostrarPopup('Recuperación Enviada', 
+                         'Si el correo electrónico existe en nuestro sistema, te enviaremos un enlace para restablecer tu contraseña.', 
+                         'alert', 
+                         () => {
+                            window.location.href = './inicioSesion.html';
+                         });
+        }
+    }); 
+       
 }

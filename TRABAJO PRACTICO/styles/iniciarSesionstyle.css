@@ -55,6 +55,13 @@ section {
     font-size: 0.95em;
     text-align: center; /* Centrar el texto descriptivo */
 }
+.form-iniciarSesion .botones-container {
+    display: flex;
+    justify-content: center; 
+    width: 100%; 
+    margin-top: 0.5em; 
+
+}
 
 .form-iniciarSesion .boton-enviar {
     align-self: center; /* Centrar el botón */

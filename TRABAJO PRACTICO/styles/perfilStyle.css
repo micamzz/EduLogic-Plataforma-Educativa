@@ -36,18 +36,27 @@ body {
   margin-bottom: 2em;
 }
 
+.foto-perfil-label {
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 50%;
+    border: 3px solid #9575CD; 
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
 .foto-perfil {
   width: 120px;
   height: 120px;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid #9575CD;
-  cursor: pointer;
-  transition: 0.3s ease;
+  border: none; 
+  display: block; 
 }
 
-.foto-perfil:hover {
-  opacity: 0.8;
+
+.foto-perfil-label:hover {
+  border-color: #7E57C2;
+  box-shadow: 0 0 0 4px rgba(126, 87, 194, 0.5); 
 }
 
 h1 {

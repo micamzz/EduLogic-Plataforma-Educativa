@@ -1,8 +1,9 @@
 import { BuscadorElementos } from "../Javascript/buscadorElementos.js";
 
+
 const BUSCADOR = new BuscadorElementos();
 
-// 🔍 Lógica de la Barra de Búsqueda
+
 export function manejarBusqueda() {
   const form = BUSCADOR.buscarUnElementoPorId("search-form");
   const input = BUSCADOR.buscarUnElementoPorId("curso-input");
@@ -23,14 +24,14 @@ export function manejarBusqueda() {
     });
 
     if (destino) {
-      window.location.href = destino;  // REDIRIGE AL HTML QUE SE CARGA POR JS
+      window.location.href = destino;  
     } else {
-      alert("Por favor, seleccioná un curso válido de la lista.");
+      
     }
   });
 }
 
-// Lógica para visualizar u ocultar los enlaces del Header
+//visualizar u ocultar los enlaces del Header
 export function manejarVisualizacionHeader() {
     const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
     const perfilLink = document.querySelector('.perfil-link');
@@ -43,7 +44,7 @@ export function manejarVisualizacionHeader() {
         if (signupButton) signupButton.style.display = 'none';
     } else {
         if (perfilLink) perfilLink.style.display = 'none';
-        if (loginButton) loginButton.style.display = 'flex'; // Usar 'flex' para mantener estilo
+        if (loginButton) loginButton.style.display = 'flex'; 
         if (signupButton) signupButton.style.display = 'block';
     }
 }

@@ -139,7 +139,11 @@
   <main class="container-perfil">
       <section class="section-perfil">
       <section class="perfil-encabezado">
-        <img src="../img/fotoPerfil.jpg" alt="Foto de perfil del usuario" class="foto-perfil">
+       <!---FOTO EDITABLE-->
+       <label for="input-foto" class="foto-perfil-label">
+            <img src="../img/fotoPerfil.jpg" alt="Foto de perfil del usuario" class="foto-perfil" id="perfil-foto">
+            </label>
+        <input type="file" id="input-foto" accept="image/*" style="display: none;">
         <h1 id="nombre-usuario">Mi Perfil</h1> 
       </section>
 
