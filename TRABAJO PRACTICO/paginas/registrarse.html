@@ -47,8 +47,9 @@
                         required>
                 </label>
 
-                <button type="submit" class="boton-enviar">Registrarse</button>
-
+                    <div class="botones-container">
+                        <button type="submit" class="boton-enviar">Registrarme</button> 
+                    </div>
                 <article class="olvide-contrasenia">
                     <a href="./inicioSesion.html">¿Ya tienes una cuenta? Inicia sesión</a>
                 </article>
@@ -57,6 +58,17 @@
         </section>
     </main>
 
+    <div class="popup-fondo" id="custom-popup">
+        <div class="popup-contenido2">
+            <h3 id="popup-title"></h3>
+            <p id="popup-message"></p>
+            
+            <div id="popup-buttons-container">
+                <button type="button" class="popup-cerrar" id="btn-cancelar">Cancelar</button> 
+                <button type="button" class="boton-enviar" id="btn-aceptar">OK</button>
+            </div>
+        </div>
+    </div>
 
 <script type="module" src="../JavaScript.js"></script>
 </body>

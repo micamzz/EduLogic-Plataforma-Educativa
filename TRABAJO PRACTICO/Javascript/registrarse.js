@@ -1,32 +1,39 @@
 // Archivo: Javascript/registrarse.js
+import { mostrarPopup } from './popupManager.js'; // Importar la nueva función
 
-// Función auxiliar que contiene la lógica central
 export function iniciarRegistro(redirectUrl) {
     const form = document.getElementById('registro-form');
-    if (!form) return;
+    if (!form) {
+        console.error("Error crítico: No se encontró el formulario 'registro-form'.");
+        return;
+    }
 
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
+    // La lógica de los listeners del popup ahora está en popupManager.js, 
+    // solo usamos la función mostrarPopup()
 
-        const nombre = this.querySelector('input[name="nombre"]').value;
-        // Capturamos el apellido del formulario
-        const apellido = this.querySelector('input[name="apellido"]').value; 
-        const dni = this.querySelector('input[name="dni"]').value; 
-        const email = this.querySelector('input[name="email"]').value;
-        const password = this.querySelector('input[name="password"]').value;
-        const confirmPassword = this.querySelector('input[name="confirm_password"]').value;
-        
+    // FUNCIÓN CENTRAL DE REGISTRO
+    function registrarUsuario(form, redirectUrl) {
+        // Obtener datos y validar contraseñas
+        const nombre = form.querySelector('input[name="nombre"]').value;
+        const apellido = form.querySelector('input[name="apellido"]').value; 
+        const dni = form.querySelector('input[name="dni"]').value; 
+        const email = form.querySelector('input[name="email"]').value;
+        const password = form.querySelector('input[name="password"]').value;
+        const confirmPassword = form.querySelector('input[name="confirm_password"]').value;
+
         if (password !== confirmPassword) {
-            alert('Las contraseñas no coinciden. Por favor, verifícalas.');
+            // Usar mostrarPopup (tipo 'alert' por defecto)
+            mostrarPopup('Error de Registro', 'Las contraseñas no coinciden. Por favor, verifícalas.');
             return;
         }
-
+        
+        // Crear el objeto de usuario a guardar
         const userData = {
-            nombre: nombre,
-            apellido: apellido, 
-            dni: dni,
-            email: email,
-            password: password,
+            nombre,
+            apellido,
+            dni,
+            email,
+            password,
             telefono: '',
             direccion: '',
             localidad: '',
@@ -34,13 +41,20 @@ export function iniciarRegistro(redirectUrl) {
             codigo_postal: '',
             pais: ''
         };
-
+        
+        // Guardar datos en localStorage
         localStorage.setItem('currentUser', JSON.stringify(userData));
 
-        alert('¡Registro exitoso! Ahora puedes iniciar sesión con tu cuenta.');
+        // Muestra pop-up y ejecuta la redirección al hacer clic en OK.
+        mostrarPopup('Éxito', '¡Registro exitoso! Ahora puedes iniciar sesión con tu cuenta.', 'alert', () => {
+            window.location.href = redirectUrl || './inicioSesion.html';
+        });
+    }
 
-        // Redirige al destino especificado
-        window.location.href = redirectUrl || './inicioSesion.html';
+    // Listener principal para el envío del formulario
+    form.addEventListener('submit', function(e) {
+        e.preventDefault(); 
+        registrarUsuario(form, redirectUrl);
     });
 }
 
@@ -50,6 +64,5 @@ export function iniciarRegistroNormal() {
 }
 
 export function iniciarRegistroPago() {
-    // Redirige al login de pago
     iniciarRegistro('./inicioSesionPago.html');
 }
