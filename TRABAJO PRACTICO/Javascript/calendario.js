@@ -1,4 +1,4 @@
-import { BuscadorElementos } from "../Javascript/buscadorElementos.js";
+import { BuscadorElementos } from "./buscadorElementos.js";
 import { CURSOS_CALENDARIO } from "../Javascript/constantes/cursosDelMesCalendario.js";
 import { CreadorElementos } from "./creadorElementos.js";
 
@@ -114,7 +114,8 @@ function mostrarPopup(curso) {
     <a href="${curso.url}">
       <button class="popup-boton">Ver detalle del curso</button>
     </a>
-    <button class="popup-agregarCarrito popup-boton">Agregar al carrito</button>
+    <button class="popup-agregarCarrito popup-boton js-producto-agregar" data-id="${curso.id}">Agregar al carrito
+</button>
     <button class="popup-cerrar">Cerrar</button>
   `;
 

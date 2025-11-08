@@ -67,79 +67,19 @@
 
       <a href="../paginas/registrarse.html"><button class="signup-button">Registrarse</button></a>
 
-<!-- icono carrito -->
 
-      <input type="checkbox" name="Carro" id="Carro" value="Carro" checked />
-
-      
-      <article class="carrito">
-        <label for="Carro">
-          <img src="../img/carrito.png" alt="Carrito de compra" class="carrito_icono">
-        </label>
-        <span class="cart-count">3</span>
-
-      </article>
-
-      <!-- Menu Desplegable Carrito -->
-      <section class="caja_carrito">
-
-        <article class="producto1_carrito">
-          <img src="../img/ingles.jpg" class="Imagen_agregar_carrito">
-          <h3>Curso: Ingles avanzado</h3>
-          <h4>Precio : 120.000$</h4>
-
-          <section class="expandir_borrar">
-            <a href="../paginas/detalleDelCurso/detalleCursoInglesAvanzado.html">
-              <img src="../Imagenes/icono_flechas_expandiendo.webp">
-            </a>
-
-            <img src="../Imagenes/icono_basura.png">
-          </section>
-
-        </article>
-
-        <article class="producto2_carrito">
-
-          <img src="../img/backend.jpg" class="Imagen_agregar_carrito">
-          <h3>Curso: Programación Back-end</h3>
-          <h4>Precio : 250.000$</h4>
-
-          <section class="expandir_borrar">
-
-            <a href="../paginas/detalleDelCurso/detalleCursoBackend.html">
-              <img src="../Imagenes/icono_flechas_expandiendo.webp">
-            </a>
-            <img src="../Imagenes/icono_basura.png">
-          </section>
-
-        </article>
-
-        <article class="producto3_carrito">
-
-          <img src="../Imagenes/gift_card.png " class="Imagen_agregar_carrito">
-          <h3>Regalo. Gift Card</h3>
-          <h4>Precio : 400.000$</h4>
-
-          <section class="expandir_borrar">
-            <a href="../Imagenes/gift_card.png " target="_blank">
-              <img src="../Imagenes/icono_flechas_expandiendo.webp">
-            </a>
-
-
-            <img src="../Imagenes/icono_basura.png">
-
-          </section>
-
-        </article>
-
-        <article class="confirmar_carrito">
-          <h4>Total a pagar : 770.000$ </h4>
-          <a href="../paginas/inicioSesionPago.html">
-            <button>Continuar con la compra</button>
-          </a>
-        </article>
-
-      </section>
+      <!--  CARRITO -->
+     <input type="checkbox" name="Carro" id="Carro" value="Carro"/>
+            <article class="carrito">
+                <label for="Carro">
+                    <img src="../img/carrito.png" alt="Carrito de compra" class="carrito_icono">
+                </label>
+                <span id="cart-count" class="cart-count">0</span>
+            </article>
+            <!-- Menu Desplegable Carrito -->
+            <section class="caja_carrito" id="js-caja-carrito">
+            </section>
+        </section>
     </section>
   </header>
 

@@ -1,4 +1,3 @@
-
 import { BuscadorElementos } from "./Javascript/buscadorElementos.js";
 import { Calendario } from "./Javascript/calendario.js";
 import { DetalleCursos } from "./Javascript/detalleCurso.js";
@@ -8,17 +7,19 @@ import { iniciarRegistroNormal, iniciarRegistroPago } from './Javascript/registr
 import { iniciarLoginNormal, iniciarLoginPago } from './Javascript/incioSesion.js';
 import { iniciarLogicaPerfil } from './Javascript/perfil.js';
 import { iniciarLogicaRecuperacion } from './Javascript/recuperarContra.js';
+import { formularioDeContacto } from "./Javascript/contactoFormulario.js";
+import { inicializarCarrito } from './Javascript/carritoDeCompras.js';
+
 
 const BUSCADOR = new BuscadorElementos();
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
 
-  
-// HEADER
+  // HEADER
   manejarVisualizacionHeader();
   manejarBusqueda();
 
-  //  DETALLE DE LOS CURSOS 
+  // DETALLE DE LOS CURSOS 
   const contenedorDetalle = BUSCADOR.buscarUnElementoPorId("js-curso-detalle");
   if (contenedorDetalle) {
     DetalleCursos.mostrarDetalleDeCurso();
@@ -30,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
     Calendario.iniciar();
   }
 
-  // --- LÓGICA DE RUTEO SEGÚN LA PÁGINA ---
+
   const path = window.location.pathname;
 
   if (path.includes('/index.html') || path === '/') {
@@ -55,7 +56,35 @@ document.addEventListener("DOMContentLoaded", () => {
     if (typeof Calendario !== 'undefined' && Calendario.iniciar) {
       Calendario.iniciar(); 
     }
-  } else if (path.includes('recuperarContra.html')) {
-        iniciarLogicaRecuperacion();
-    }
+
+  } else if (path.includes('/recuperarContra.html')) {
+    iniciarLogicaRecuperacion();
+
+  }  
+   // FORMULARIO DE CONTACTO
+  if (path.includes("/contacto.html")) {
+    formularioDeContacto();
+  }
+
+  //  Importar popupManager solo si NO estamos en contacto
+  if (!path.includes("/contacto.html")) {
+    await import("./Javascript/popupManager.js");
+  }
+
+
+  inicializarCarrito();
+  
+// const carritoIcono = BUSCADOR.buscarUnElemento(".carrito_icono");
+
+// if (carritoIcono) {
+//   carritoIcono.addEventListener("click", (e) => {
+//     const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+
+//     if (!isLoggedIn) {
+//       e.preventDefault(); // Evita que abra el menú del carrito
+//       window.location.href = "../paginas/inicioSesion.html";
+//     }
+//   });
+// }
+
 });
