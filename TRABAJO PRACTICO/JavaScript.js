@@ -3,8 +3,8 @@ import { Calendario } from "./Javascript/calendario.js";
 import { DetalleCursos } from "./Javascript/detalleCurso.js";
 import { manejarVisualizacionHeader, manejarBusqueda } from './Javascript/header.js';  
 import { iniciarPaginaPrincipal } from './Javascript/index.js'; 
-import { iniciarRegistroNormal, iniciarRegistroPago } from './Javascript/registrarse.js';
-import { iniciarLoginNormal, iniciarLoginPago } from './Javascript/incioSesion.js';
+import { iniciarRegistro } from './Javascript/registrarse.js'; // Importación única
+import { iniciarLogin } from './Javascript/incioSesion.js'; // Importación única
 import { iniciarLogicaPerfil } from './Javascript/perfil.js';
 import { iniciarLogicaRecuperacion } from './Javascript/recuperarContra.js';
 import { formularioDeContacto } from "./Javascript/contactoFormulario.js";
@@ -38,16 +38,10 @@ document.addEventListener("DOMContentLoaded", async () => {
     iniciarPaginaPrincipal();
 
   } else if (path.includes('/registrarse.html')) {
-    iniciarRegistroNormal();
-
-  } else if (path.includes('/registrarsePago.html')) {
-    iniciarRegistroPago();
+    iniciarRegistro(); // Llamada única para la única página de registro
 
   } else if (path.includes('/inicioSesion.html')) {
-    iniciarLoginNormal();
-
-  } else if (path.includes('/inicioSesionPago.html')) {
-    iniciarLoginPago();
+    iniciarLogin(); // Llamada única para la única página de login
 
   } else if (path.includes('/perfil.html')) {
     iniciarLogicaPerfil();

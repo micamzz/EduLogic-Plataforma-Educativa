@@ -1,6 +1,5 @@
-// Archivo: Javascript/registrarse.js
 import { mostrarPopup } from './popupManager.js';
-
+import { ValidadorFormulario } from './validarFormulario.js';
 
 function validarContraseniaComplejidad(password) {
     if (password.length < 6) {
@@ -15,10 +14,10 @@ function validarContraseniaComplejidad(password) {
     if (!/[^A-Za-z0-9]/.test(password)) {
         return 'La contraseña debe contener al menos un símbolo (ej: !, @, #, $).';
     }
-    return null; // La contraseña es válida
+    return null; 
 }
 
-// Función auxiliar para validar campos de texto (solo letras/espacios)
+// Función auxiliar para validar campos de texto
 function validarCampoTexto(valor, nombreCampo) {
     const patron = /^[A-Za-zñÑáÁéÉíÍóÓúÚ\s]+$/;
     if (!valor.trim()) {
@@ -30,7 +29,7 @@ function validarCampoTexto(valor, nombreCampo) {
     return null;
 }
 
-// Función auxiliar para validar DNI (8-12 dígitos numéricos)
+
 function validarDNI(dni) {
     const patron = /^[0-9]{8,12}$/;
     if (!dni.trim()) {
@@ -43,16 +42,15 @@ function validarDNI(dni) {
 }
 
 
-export function iniciarRegistro(redirectUrl) {
+export function iniciarRegistro() { 
     const form = document.getElementById('registro-form');
     if (!form) {
-        console.error("Error crítico: No se encontró el formulario 'registro-form'.");
         return;
     }
 
-    // FUNCIÓN CENTRAL 
-    function registrarUsuario(form, redirectUrl) {
-        // Obtener datos y validar contraseñas
+    
+    function registrarUsuario(form) { 
+    
         const nombre = form.querySelector('input[name="nombre"]').value.trim();
         const apellido = form.querySelector('input[name="apellido"]').value.trim(); 
         const dni = form.querySelector('input[name="dni"]').value.trim(); 
@@ -70,9 +68,10 @@ export function iniciarRegistro(redirectUrl) {
         error = validarDNI(dni);
         if (error) { mostrarPopup('Error de Validación', error); return; }
         
-        if (!email) { 
-            mostrarPopup('Error de Validación', 'El campo Correo electrónico es obligatorio.'); 
+        if (!ValidadorFormulario.emailValido(email)) { 
+            mostrarPopup('Error de Validación', ValidadorFormulario.MENSAJES.emailInvalido);
             return; 
+           
         }
         
         error = validarContraseniaComplejidad(password);
@@ -90,14 +89,14 @@ export function iniciarRegistro(redirectUrl) {
         const usersJSON = localStorage.getItem('registeredUsers');
         const users = usersJSON ? JSON.parse(usersJSON) : [];//Array de usuarios
         
-        //Validación de email duplicado 
+        //Validación 
         const emailExists = users.some(user => user.email.toLowerCase() === email.toLowerCase());
         if (emailExists) {
             mostrarPopup('Error de Registro', 'El correo electrónico ya está registrado.');
             return;
         }
         
-        // Crear el objeto de usuario a guardar
+        // Crear el objeto de usuario 
         const newUserData = {
             nombre,
             apellido,
@@ -112,7 +111,7 @@ export function iniciarRegistro(redirectUrl) {
             pais: ''
         };
 
-    // Agregar el nuevo usuario a la lista y guardar
+    
         users.push(newUserData);
         localStorage.setItem('registeredUsers', JSON.stringify(users));
         
@@ -120,21 +119,14 @@ export function iniciarRegistro(redirectUrl) {
         localStorage.removeItem('currentUser');
         localStorage.removeItem('isLoggedIn');
         
+        
         mostrarPopup('Éxito', '¡Registro exitoso! Ahora puedes iniciar sesión con tu cuenta.', 'alert', () => {
-            window.location.href = redirectUrl || './inicioSesion.html';
+            window.location.href = './inicioSesion.html';
         });
     }
 
     form.addEventListener('submit', function(e) {
         e.preventDefault(); 
-        registrarUsuario(form, redirectUrl);
+        registrarUsuario(form);
     });
-}
-
-export function iniciarRegistroNormal() {
-    iniciarRegistro('./inicioSesion.html'); 
-}
-
-export function iniciarRegistroPago() {
-    iniciarRegistro('./inicioSesionPago.html');
 }

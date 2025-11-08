@@ -1,7 +1,8 @@
-import { mostrarPopup } from './popupManager.js'; // Importar la nueva función
+import { mostrarPopup } from './popupManager.js';
+import { ValidadorFormulario } from './validarFormulario.js';
 
-// Función auxiliar 
-export function iniciarLogin(redirectUrl) {
+// Función auxiliar que maneja el proceso de inicio de sesión
+export function iniciarLogin() {
     const form = document.getElementById('login-form');
     if (!form) return;
 
@@ -11,45 +12,54 @@ export function iniciarLogin(redirectUrl) {
         const emailInput = this.querySelector('input[name="mail"]').value;
         const passwordInput = this.querySelector('input[name="password"]').value;
 
-        const storedUser = localStorage.getItem('currentUser');
+        // Validación de formato de mail
+        if (!ValidadorFormulario.emailValido(emailInput)) {
+             mostrarPopup('Error de Validación', ValidadorFormulario.MENSAJES.emailInvalido);
+             return;
+        }
 
-        if (!storedUser) {
-            mostrarPopup('Error de Login', 'No hay cuentas registradas. Por favor, regístrate.');
+        const storedUsersJSON = localStorage.getItem('registeredUsers');
+
+        if (!storedUsersJSON) {
+             mostrarPopup('Error de Login', 'No hay cuentas registradas. Por favor, regístrate.');
+             return;
+        }
+
+        const users = JSON.parse(storedUsersJSON);
+
+        // Buscar el usuario en el array 
+        const user = users.find(u => u.email.toLowerCase() === emailInput.toLowerCase());
+
+        if (!user) {
+            mostrarPopup('Error de Credenciales', 'Credenciales incorrectas. Verifica tu correo y contraseña.');
             return;
         }
 
-        const user = JSON.parse(storedUser);
-
-        // Verificación de credenciales
-        if (user.email === emailInput && user.password === passwordInput) {
-            localStorage.setItem('isLoggedIn', 'true');
-
-            const redirectGuardado = localStorage.getItem("redirectAfterLogin");
-            const destino = redirectGuardado || redirectUrl || '../index.html';
+        // Verificación 
+        if (user.password === passwordInput) {
             
-            mostrarPopup(
-              'Éxito',
-              'Inicio de sesión exitoso. ¡Bienvenido, ' + user.nombre + '!',
-              'alert',
-              () => {
-                if (redirectGuardado) {
-                  localStorage.removeItem("redirectAfterLogin");
-                }
-                window.location.href = destino;
-              }
-            );
+            localStorage.setItem('currentUser', JSON.stringify(user));
+            localStorage.setItem('isLoggedIn', 'true');
+            
+            let redirectUrl = localStorage.getItem("redirectAfterLogin");
+            if (redirectUrl) {
+                localStorage.removeItem("redirectAfterLogin");
+            } else {
+                redirectUrl = '../index.html'; 
+            }
+
+            mostrarPopup('¡Éxito!', 'Inicio de sesión exitoso.', 'success', () => {
+                window.location.href = redirectUrl;
+            });
+
         } else {
             mostrarPopup('Error de Credenciales', 'Credenciales incorrectas. Verifica tu correo y contraseña.');
         }
     });
 }
-
-// Funciones para el ruteo 
-export function iniciarLoginNormal() {
-    iniciarLogin('../index.html'); 
-}
-
-export function iniciarLoginPago() {
-    // Redirige a la página de pago después de iniciar sesión
-    iniciarLogin('../paginas/formularioDePago.html'); 
-}
+// Iniciar el login automáticamente 
+document.addEventListener('DOMContentLoaded', () => {
+    if (window.location.pathname.includes('inicioSesion.html')) {
+        iniciarLogin();
+    }
+});
