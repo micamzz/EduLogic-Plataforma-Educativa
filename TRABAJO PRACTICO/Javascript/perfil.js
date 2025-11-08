@@ -3,7 +3,7 @@ import { mostrarPopup } from './popupManager.js';
 
 
 
-// Función auxiliar para validar campos de texto 
+//validar campos de texto 
 function validarCampoTexto(valor, nombreCampo) {
     const patron = /^[A-Za-zñÑáÁéÉíÍóÓúÚ\s]+$/;
     if (!valor.trim()) {
@@ -16,7 +16,7 @@ function validarCampoTexto(valor, nombreCampo) {
 }
 
 
-// Función que actualiza el usuario en la lista global de registeredUsers
+// Función que actualiza el usuario 
 function actualizarUsuarioGlobal(oldEmail, newUserData) {
     const usersJSON = localStorage.getItem('registeredUsers');
     if (!usersJSON) return false; 
@@ -27,8 +27,8 @@ function actualizarUsuarioGlobal(oldEmail, newUserData) {
     const index = users.findIndex(user => user.email.toLowerCase() === oldEmail.toLowerCase());
     
     if (index !== -1) {
-        // Reemplazar la información vieja con la nueva.
-        // Usa el spread operator para fusionar, manteniendo la contraseña y otros campos no enviados
+        // Reemplaza la información vieja 
+        //spread operator para fusionar
         users[index] = { ...users[index], ...newUserData }; 
         localStorage.setItem('registeredUsers', JSON.stringify(users));
         return true;
@@ -37,24 +37,23 @@ function actualizarUsuarioGlobal(oldEmail, newUserData) {
 }
 
 
-// Función para manejar la subida y conversión de la imagen
+
 function manejarCambioFoto(e, currentUser) {
     const file = e.target.files[0];
     if (!file) return;
 
-    // Validación básica del tipo de archivo
+    // Validacin tipo de archivo
     if (!file.type.startsWith('image/')) {
         mostrarPopup('Error de Carga', 'Por favor, selecciona un archivo de imagen válido.', 'alert');
         e.target.value = ''; // Limpiar el input
         return;
     }
     
-    // Usar FileReader para convertir la imagen a Base64
     const reader = new FileReader();
     reader.onload = function(event) {
         const base64Image = event.target.result;
         
-        // 1. Actualizar el DOM (pre-visualización)
+        // pre-visualización
         document.getElementById('perfil-foto').src = base64Image;
 
         const oldEmail = currentUser.email; 
@@ -74,12 +73,10 @@ function manejarCambioFoto(e, currentUser) {
              mostrarPopup('Error', 'No se pudo guardar la foto en la base de datos.');
         }
     };
-    //Lee el contenido del archivo y lo codifica como una URL de datos (Base64)
     reader.readAsDataURL(file);
 }
 
 
-//Función para cargar los datos del usuario en los inputs del formulario (MODIFICADO)
 function cargarDatosUsuario(user) {
     const fields = ['nombre', 'apellido', 'dni', 'email', 'telefono', 'direccion', 'localidad', 'provincia', 'codigo_postal', 'pais'];
     
@@ -88,7 +85,7 @@ function cargarDatosUsuario(user) {
         if (input && user[field]) {
             input.value = user[field];
         }
-        // Desactivar campos clave (DNI y Email)
+        
         if (field === 'dni' || field === 'email') {
              if (input) input.disabled = true;
         }

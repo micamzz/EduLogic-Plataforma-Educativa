@@ -57,9 +57,3 @@ export function iniciarLogin() {
         }
     });
 }
-// Iniciar el login automáticamente 
-document.addEventListener('DOMContentLoaded', () => {
-    if (window.location.pathname.includes('inicioSesion.html')) {
-        iniciarLogin();
-    }
-});
