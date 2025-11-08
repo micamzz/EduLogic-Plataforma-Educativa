@@ -2,11 +2,12 @@
 export const LISTA_CURSOS = [
   // PRIMER CURSO- BACK-END
   {
+    id : "curso1",
     titulo: "Programación Back-End",
     duracion: "44 hs.",
     dedicacion: "2 hs diarias.",
     requisitos: "Conocimientos en Base de Datos y API's",
-    precio: "$250.000,00 ARS",
+    precio: 250000 ,
     rating: 4,
     descripcion:
       "Curso avanzado de Back-End orientado a desarrolladores con conocimientos previos en programación y bases de datos. A lo largo de la formación profundizarás en arquitectura de software, seguridad, optimización de consultas, integración de APIs, servicios en la nube y despliegue de aplicaciones escalables. El objetivo es que adquieras la capacidad de diseñar y mantener sistemas robustos, eficientes y preparados para entornos de alta demanda profesional.",
@@ -79,11 +80,12 @@ export const LISTA_CURSOS = [
 
   // PROGRAMACIÓN FRONT-END
   {
+     id : "curso2",
     titulo: "Programación Front-End",
     duracion: "44 hs.",
     dedicacion: "2 hs diarias.",
     requisitos: "Conocimientos introductorios de HTML y CSS (deseable).",
-    precio: "$120.000,00 ARS",
+    precio: 120000,
     rating: 4,
     descripcion:
       "Este curso introduce a los estudiantes en el desarrollo de interfaces web interactivas y atractivas, enfocadas en la experiencia del usuario. Se aprenderá a estructurar páginas con HTML, darles estilo con CSS y dotarlas de dinamismo mediante JavaScript.",
@@ -156,11 +158,12 @@ export const LISTA_CURSOS = [
 
   // CIBERSEGURIDAD
   {
+     id : "curso3",
     titulo: "Ciberseguridad",
     duracion: "49 hs.",
     dedicacion: "2 hs diarias.",
     requisitos: "Manejo básico de sistemas operativos.",
-    precio: "$400.000,00 ARS",
+    precio: 400000,
     rating: 4,
     descripcion:
       "Este curso brinda los fundamentos esenciales para proteger información y sistemas frente a amenazas digitales. Aprenderás a identificar vulnerabilidades, aplicar buenas prácticas de seguridad y comprender los principales riesgos en redes, aplicaciones y dispositivos. Con un enfoque práctico, se abordan técnicas de prevención, detección y respuesta a incidentes, preparando a los participantes para desenvolverse con mayor seguridad en el entorno tecnológico actual.",
@@ -233,12 +236,13 @@ export const LISTA_CURSOS = [
 
   // FINANZAS PERSONALES
   {
+     id : "curso4",
     titulo: "Finanzas Personales",
     duracion: "30 hs.",
     dedicacion: "2 hs diarias.",
     requisitos:
       "Interés en organizar mejor sus ingresos, gastos y hábitos financieros.",
-    precio: "$75.000,00 ARS",
+    precio: 75000,
     rating: 4,
     descripcion:
       "Este curso está diseñado para ayudarte a tomar el control de tu dinero y desarrollar hábitos financieros saludables. A lo largo de la capacitación aprenderás a organizar tus ingresos y gastos, planificar un presupuesto realista, comprender el uso responsable del crédito y sentar bases sólidas para el ahorro y la inversión. Con un enfoque práctico y ejemplos cotidianos, te brindaremos herramientas que podrás aplicar de inmediato para alcanzar mayor estabilidad y seguridad económica.",
@@ -311,11 +315,12 @@ export const LISTA_CURSOS = [
 
   // INGLÉS AVANZADO
   {
+     id : "curso5",
     titulo: "Inglés Avanzado",
     duracion: "44 hs.",
     dedicacion: "2 hs diarias.",
     requisitos: "Conocimiento previo de gramática y vocabulario general.",
-    precio: "$120.000,00 ARS",
+    precio: 120000,
     rating: 4,
     descripcion:
       "Este curso está orientado a desarrollar las habilidades clave del idioma inglés: comprensión oral, lectura, escritura y expresión verbal. A través de actividades prácticas, ejercicios comunicativos y situaciones de la vida real, adquirirás confianza para desenvolverte tanto en contextos académicos como profesionales. El objetivo es que avances de manera progresiva, mejorando tu fluidez y ampliando tu vocabulario para lograr una comunicación clara y efectiva.",
@@ -388,11 +393,12 @@ export const LISTA_CURSOS = [
 
   // MARKETING DIGITAL
   {
+     id : "curso6",
     titulo: "Marketing Digital",
     duracion: "38 hs.",
     dedicacion: "2 hs diarias.",
     requisitos: "Manejo básico de redes sociales e internet.",
-    precio: "$90.000,00 ARS",
+    precio: 90000,
     rating: 4,
     descripcion:
       "Este curso ofrece una introducción integral a las estrategias y herramientas del marketing en entornos digitales, con el objetivo de crear campañas efectivas y medibles que potencien la visibilidad de marcas, productos o servicios.",

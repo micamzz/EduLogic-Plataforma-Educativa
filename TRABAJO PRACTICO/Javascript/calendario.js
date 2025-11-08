@@ -114,7 +114,8 @@ function mostrarPopup(curso) {
     <a href="${curso.url}">
       <button class="popup-boton">Ver detalle del curso</button>
     </a>
-    <button class="popup-agregarCarrito popup-boton">Agregar al carrito</button>
+    <button class="popup-agregarCarrito popup-boton js-producto-agregar" data-id="${curso.id}">Agregar al carrito
+</button>
     <button class="popup-cerrar">Cerrar</button>
   `;
 
