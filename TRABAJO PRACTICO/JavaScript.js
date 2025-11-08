@@ -62,10 +62,8 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   }  
    // FORMULARIO DE CONTACTO
-  if (path.includes("/contacto.html")) {
     formularioDeContacto();
-  }
-
+ 
   //  Importar popupManager solo si NO estamos en contacto
   if (!path.includes("/contacto.html")) {
     await import("./Javascript/popupManager.js");

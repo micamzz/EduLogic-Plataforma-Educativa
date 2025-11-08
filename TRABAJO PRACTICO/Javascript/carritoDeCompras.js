@@ -37,6 +37,7 @@ function renderCarrito() {
 
   let subtotal = 0;
 
+  const estoyEnPaginas = window.location.pathname.includes("/paginas/");
   // Template 
   let html = `<div class="carrito-contenido">
    <h3 class="js-titulo-carrito">Carrito</h3>
@@ -49,12 +50,18 @@ function renderCarrito() {
     subtotal += precioNumero * cantidad; 
 
     const precioFormateado = precioNumero.toLocaleString("es-AR", {style: "currency", currency: "ARS" });
+      
+       let imagenSrc = curso.imagen;
+
+         if (!estoyEnPaginas) {
+      imagenSrc = imagenSrc.replace("../", "./");
+    }
 
     html += `
       <article class="carrito-item">
         <div class="carrito-item-info">
          <div class="carrito-boton-eliminar">
-          <img src="${curso.imagen}" alt="${curso.titulo}" class="js-img-curso"><button class="carrito-eliminar" data-id="${curso.id}">&times;</button>
+          <img src="${imagenSrc}" alt="${curso.titulo}" class="js-img-curso"><button class="carrito-eliminar" data-id="${curso.id}">&times;</button>
          </div>
           <h4 class="js-titulo-curso">${curso.titulo}</h4>
           <p class="js-precio-carrito-curso">Precio: ${precioFormateado}</p>
