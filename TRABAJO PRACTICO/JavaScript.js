@@ -8,6 +8,7 @@ import { iniciarLoginNormal, iniciarLoginPago } from './Javascript/incioSesion.j
 import { iniciarLogicaPerfil } from './Javascript/perfil.js';
 import { iniciarLogicaRecuperacion } from './Javascript/recuperarContra.js';
 import { formularioDeContacto } from "./Javascript/contactoFormulario.js";
+import { inicializarCarrito } from './Javascript/carritoDeCompras.js';
 
 
 const BUSCADOR = new BuscadorElementos();
@@ -30,7 +31,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     Calendario.iniciar();
   }
 
-  // --- LÓGICA DE RUTEO SEGÚN LA PÁGINA ---
+
   const path = window.location.pathname;
 
   if (path.includes('/index.html') || path === '/') {
@@ -72,4 +73,21 @@ document.addEventListener("DOMContentLoaded", async () => {
     formularioDeContacto(); // ✅ LLAMADA A LA FUNCIÓN DEL FORMULARIO
 
   }
+
+
+  inicializarCarrito();
+  
+// const carritoIcono = BUSCADOR.buscarUnElemento(".carrito_icono");
+
+// if (carritoIcono) {
+//   carritoIcono.addEventListener("click", (e) => {
+//     const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+
+//     if (!isLoggedIn) {
+//       e.preventDefault(); // Evita que abra el menú del carrito
+//       window.location.href = "../paginas/inicioSesion.html";
+//     }
+//   });
+// }
+
 });
