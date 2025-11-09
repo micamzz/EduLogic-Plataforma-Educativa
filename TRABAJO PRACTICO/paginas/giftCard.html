@@ -39,23 +39,27 @@
         <li><a href="../paginas/cursos.html" class="nav-link">Cursos</a></li>
         <li><a href="../paginas/inscripcionCurso.html" class="nav-link">Inscripción</a></li>
         <li><a href="../paginas/calendario.html" class="nav-link"> Proximos </a></li>
-        <li><a href="../paginas/perfil.html" class="nav-link">Mi Perfil</a></li>
+        <li><a href="../paginas/perfil.html" class="nav-link perfil-link" style="display: none;">Mi Perfil</a></li>
 
       </ul>
     </nav>
 
     <!-- Barra de búsqueda -->
-     <section class="search-bar">
-  <form action="" method="get" onchange="this.action=this.curso.value">
-    <select name="curso" required>
-      <option value="">Seleccioná un curso</option>
-      <option value="./detalleDelCurso/detalleCursoFrontend.html">Programación Front-End</option>
-      <option value="./detalleDelCurso/detalleCursoBackend.html">Programación Back-End</option>
-      <option value="./detalleDelCurso/detalleCursoCiberseguridad.html">Ciberseguridad</option>
-      <option value="./detalleDelCurso/detalleCursoInglesAvanzado.html">Inglés Avanzado</option>
-      <option value="./detalleDelCurso/detalleCursoMarketingDigital.html">Marketing Digital</option>
-      <option value="./detalleDelCurso/detalleCursoFinanzasPersonales.html">Finanzas Personales</option>
-    </select>
+    <section class="search-bar">
+  <form id="search-form">
+    <input list="cursos-list" name="curso-buscado" id="curso-input" placeholder="Buscar curso..."> 
+    
+     <!-- ACTUALIZADO PARA JS -->
+    <datalist id="cursos-list">
+        <option value="Programación Front-End" data-url="./detalleCurso.html?curso=Programación+Front-End"></option>
+        <option value="Programación Back-End" data-url="./detalleCurso.html?curso=Programación+Back-End"></option>
+        <option value="Ciberseguridad" data-url="./detalleCurso.html?curso=Ciberseguridad"></option>
+        <option value="Inglés Avanzado" data-url="./detalleCurso.html?curso=Inglés+Avanzado"></option>
+        <option value="Marketing Digital" data-url="./detalleCurso.html?curso=Marketing+Digital"></option>
+        <option value="Finanzas Personales" data-url="./detalleCurso.html?curso=Finanzas+Personales"></option>
+    </datalist>
+
+    
     <button type="submit" class="search-button">
       <img src="../img/lupa.png" alt="Buscar">
     </button>
@@ -71,83 +75,21 @@
 
       <a href="../paginas/registrarse.html"><button class="signup-button">Registrarse</button></a>
 
-<!-- icono carrito -->
-
-      <input type="checkbox" name="Carro" id="Carro" value="Carro" checked />
-
-      
-      <article class="carrito">
-        <label for="Carro">
-          <img src="../img/carrito.png" alt="Carrito de compra" class="carrito_icono">
-        </label>
-        <span class="cart-count">3</span>
-
-      </article>
-
-      <!-- Menu Desplegable Carrito -->
-      <section class="caja_carrito">
-
-        <article class="producto1_carrito">
-          <img src="../img/ingles.jpg" class="Imagen_agregar_carrito">
-          <h3>Curso: Ingles avanzado</h3>
-          <h4>Precio : 120.000$</h4>
-
-          <section class="expandir_borrar">
-            <a href="../paginas/detalleDelCurso/detalleCursoInglesAvanzado.html">
-              <img src="../Imagenes/icono_flechas_expandiendo.webp">
-            </a>
-
-            <img src="../Imagenes/icono_basura.png">
-          </section>
-
-        </article>
-
-        <article class="producto2_carrito">
-
-          <img src="../img/backend.jpg" class="Imagen_agregar_carrito">
-          <h3>Curso: Programación Back-end</h3>
-          <h4>Precio : 250.000$</h4>
-
-          <section class="expandir_borrar">
-
-            <a href="../paginas/detalleDelCurso/detalleCursoBackend.html">
-              <img src="../Imagenes/icono_flechas_expandiendo.webp">
-            </a>
-            <img src="../Imagenes/icono_basura.png">
-          </section>
-
-        </article>
-
-        <article class="producto3_carrito">
-
-          <img src="../Imagenes/gift_card.png " class="Imagen_agregar_carrito">
-          <h3>Regalo. Gift Card</h3>
-          <h4>Precio : 400.000$</h4>
-
-          <section class="expandir_borrar">
-            <a href="../Imagenes/gift_card.png " target="_blank">
-              <img src="../Imagenes/icono_flechas_expandiendo.webp">
-            </a>
-
-
-            <img src="../Imagenes/icono_basura.png">
-
-          </section>
-
-        </article>
-
-        <article class="confirmar_carrito">
-          <h4>Total a pagar : 770.000$ </h4>
-          <a href="../paginas/inicioSesionPago.html">
-            <button>Continuar con la compra</button>
-          </a>
-        </article>
-
-      </section>
+  <!--  CARRITO -->
+     <input type="checkbox" name="Carro" id="Carro" value="Carro"  />
+            <article class="carrito">
+                <label for="Carro">
+                    <img src="../img/carrito.png" alt="Carrito de compra" class="carrito_icono">
+                </label>
+                <span id="cart-count" class="cart-count">0</span>
+            </article>
+            <!-- Menu Desplegable Carrito -->
+            <section class="caja_carrito" id="js-caja-carrito">
+            </section>
+        </section>
     </section>
-
-
   </header>
+  
 
   <!-- MAIN -->
   <main class="Box_main">
@@ -173,7 +115,7 @@
           <div class="Formulario_estilo">
             <label for="style">Fuente : </label>
 
-            <select name="style" id="styleSelect" class="style_type">
+            <select name="style" id="style" class="style_type">
               <option disabled selected>Seleccione su fuente</option>
 
               <option value="Arial">Arial</option>
@@ -188,7 +130,7 @@
           <div class="Formulario_estilo_tamaño">
             <label for="tamaño_estilo">Tamaño:</label>
 
-            <select name="style_color" id="style_size">
+            <select name="style_color" id="syle_color">
               <option value="5">5</option>
 
               <option selected value="11">11</option>
@@ -207,36 +149,36 @@
         <section class="colores">
 
           <label for="Rojo">
-            <input type="radio" name="color_estilo" id="Rojo" value="red" checked />
+            <input type="radio" name="color_estilo" id="Rojo" value="Rojo" checked />
             <div class="color circuloRojo"></div>
 
           </label>
 
           <label for="Amarillo">
 
-            <input type="radio" name="color_estilo" id="Amarillo" value="yellow" />
+            <input type="radio" name="color_estilo" id="Amarillo" value="Amarillo" />
             <div class="color circuloAmarillo"></div>
           </label>
 
 
           <label for="Azul">
 
-            <input type="radio" name="color_estilo" id="Azul" value="blue" />
+            <input type="radio" name="color_estilo" id="Azul" value="Azul" />
             <div class="color circuloAzul"></div>
           </label>
 
           <label for="Verde">
-            <input type="radio" name="color_estilo" id="Verde" value="green" />
+            <input type="radio" name="color_estilo" id="Verde" value="Verde" />
             <div class="color circuloVerde"></div>
           </label>
           <label for="Lila">
 
-            <input type="radio" name="color_estilo" id="Lila" value="purple" />
+            <input type="radio" name="color_estilo" id="Lila" value="Lila" />
             <div class="color circuloLila"></div>
           </label>
           <label for="Naranja">
 
-            <input type="radio" name="color_estilo" id="Naranja" value="orange  " />
+            <input type="radio" name="color_estilo" id="Naranja" value="Naranja" />
             <div class="color circuloNaranja"></div>
           </label>
 
@@ -244,31 +186,31 @@
         <div class="Formulario_fondo">
           <label for="Fondo1">
 
-            <input type="radio" name="Fondo" id="Fondo1" value="../Imagenes/gc_fondo1.jpeg" checked />
+            <input type="radio" name="Fondo" id="Fondo1" value="Fondo1" checked />
 
             <img src="../Imagenes/gc_fondo1.jpeg" class="fondo"></label>
 
           <label for="Fondo2">
 
-            <input type="radio" name="Fondo" id="Fondo2" value="../Imagenes/gc_fondo2.jpg" />
+            <input type="radio" name="Fondo" id="Fondo2" value="Fondo2" />
 
             <img src="../Imagenes/gc_fondo2.jpg" class="fondo"></label>
 
           <label for="Fondo3">
 
-            <input type="radio" name="Fondo" id="Fondo3" value="../Imagenes/gc_fondo3.jpg" />
+            <input type="radio" name="Fondo" id="Fondo3" value="Fondo3" />
 
             <img src="../Imagenes/gc_fondo3.jpg" class="fondo"></label>
 
           <label for="Fondo4">
 
-            <input type="radio" name="Fondo" id="Fondo4" value="../Imagenes/gc_fondo4.jpg" />
+            <input type="radio" name="Fondo" id="Fondo4" value="Fondo4" />
 
             <img src="../Imagenes/gc_fondo4.jpg" class="fondo"></label>
 
           <label for="Fondo5">
 
-            <input type="radio" name="Fondo" id="Fondo5" value="../Imagenes/gc_fondo5.jpg" />
+            <input type="radio" name="Fondo" id="Fondo5" value="Fondo5" />
 
             <img src="../Imagenes/gc_fondo5.jpg" class="fondo"></label>
 
@@ -294,7 +236,6 @@
 
         <div class="Destinatario">
           <h3>¡Felicidades! :</h3>
-          <h3 class="Destinatario2"></h3>
         </div>
 
         <div class="Monto">
@@ -302,7 +243,7 @@
         </div>
 
         <div class="Mensaje">
-          <h3>Clickea aqui</h3>
+          <h3>Contenido del mensaje</h2>
         </div>
 
       </section>
@@ -313,15 +254,15 @@
         <section class="ubicacion_monto">
 
           <label>
-            <input type="radio" name="Ubicacion" id="ubi_monto" value="ubi_monto" data-columna="1" data-fila="3" data-hori="start" data-verti="end">
+            <input type="radio" name="Ubicacion" id="ubi_monto" value="ubi_monto">
             <img class="imagen_monto" src="../Imagenes/monto_abajo_izquierda.JPG">
           </label>
           <label>
-            <input type="radio" name="Ubicacion" id="ubi_monto2" value="ubi_monto2" checked data-columna="3" data-fila="3" data-hori="end" data-verti="end">
+            <input type="radio" name="Ubicacion" id="ubi_monto2" value="ubi_monto2" checked>
             <img class="imagen_monto" src="../Imagenes/monto_abajo_derecha.JPG">
           </label>
           <label>
-            <input type="radio" name="Ubicacion" id="ubi_monto3" value="ubi_monto3" data-columna="3" data-fila="1" data-hori="end" data-verti="start">
+            <input type="radio" name="Ubicacion" id="ubi_monto3" value="ubi_monto3">
             <img class="imagen_monto" src="../Imagenes/monto_arriba_izquierda.JPG">
           </label>
 
@@ -368,9 +309,10 @@
       </nav>
     </section>
 
-  </footer>
 
-  <script src="../paginas/giftCardEventos.js"></script>
+    </section>
+  </footer>
+    <script type="module" src="../JavaScript.js"></script>
 </body>
 
 </html>

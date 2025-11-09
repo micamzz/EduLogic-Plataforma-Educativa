@@ -400,12 +400,9 @@ el  ~  permite aplicar los estilos  a fondo que sean hermanos del input marcado*
   .Box_main {
     display: flex;
     flex-direction: column;
-    padding: 1rem;
-    gap: 1.5rem;
+   padding: 0.5em;
+    gap: 18.5em;
     margin-top: 0;
-  }
-  .Box_Preview{
-    margin-bottom: -20em;
   }
   .Box_form .data label {
   font-size: 2em;
@@ -492,7 +489,6 @@ el  ~  permite aplicar los estilos  a fondo que sean hermanos del input marcado*
 .Cuadro_Preview{
   height: 28em;
     width: auto;
-    margin-top: 26em;
 }
 .Box_form form .confirmacion button{
   width: 12em;

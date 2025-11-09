@@ -35,23 +35,27 @@
                 <li><a href="../paginas/cursos.html" class="nav-link">Cursos</a></li>
                 <li><a href="../paginas/inscripcionCurso.html" class="nav-link">Inscripción</a></li>
                 <li><a href="../paginas/calendario.html" class="nav-link"> Proximos </a></li>
-                <li><a href="../paginas/perfil.html" class="nav-link">Mi Perfil</a></li>
+                <li><a href="../paginas/perfil.html" class="nav-link perfil-link" style="display: none;">Mi Perfil</a></li>
 
             </ul>
         </nav>
 
         <!-- Barra de búsqueda -->
-         <section class="search-bar">
-  <form action="" method="get" onchange="this.action=this.curso.value">
-    <select name="curso" required>
-      <option value="">Seleccioná un curso</option>
-      <option value="./detalleDelCurso/detalleCursoFrontend.html">Programación Front-End</option>
-      <option value="./detalleDelCurso/detalleCursoBackend.html">Programación Back-End</option>
-      <option value="./detalleDelCurso/detalleCursoCiberseguridad.html">Ciberseguridad</option>
-      <option value="./detalleDelCurso/detalleCursoInglesAvanzado.html">Inglés Avanzado</option>
-      <option value="./detalleDelCurso/detalleCursoMarketingDigital.html">Marketing Digital</option>
-      <option value="./detalleDelCurso/detalleCursoFinanzasPersonales.html">Finanzas Personales</option>
-    </select>
+   <section class="search-bar">
+  <form id="search-form">
+    <input list="cursos-list" name="curso-buscado" id="curso-input" placeholder="Buscar curso..."> 
+    
+     <!-- ACTUALIZADO PARA JS -->
+    <datalist id="cursos-list">
+        <option value="Programación Front-End" data-url="./detalleCurso.html?curso=Programación+Front-End"></option>
+        <option value="Programación Back-End" data-url="./detalleCurso.html?curso=Programación+Back-End"></option>
+        <option value="Ciberseguridad" data-url="./detalleCurso.html?curso=Ciberseguridad"></option>
+        <option value="Inglés Avanzado" data-url="./detalleCurso.html?curso=Inglés+Avanzado"></option>
+        <option value="Marketing Digital" data-url="./detalleCurso.html?curso=Marketing+Digital"></option>
+        <option value="Finanzas Personales" data-url="./detalleCurso.html?curso=Finanzas+Personales"></option>
+    </datalist>
+
+    
     <button type="submit" class="search-button">
       <img src="../img/lupa.png" alt="Buscar">
     </button>
@@ -67,88 +71,27 @@
 
             <a href="../paginas/registrarse.html"><button class="signup-button">Registrarse</button></a> -->
 
-
-            <input type="checkbox" name="Carro" id="Carro" value="Carro" checked />
-            <!-- icono carrito -->
-
+  <!--  CARRITO -->
+     <input type="checkbox" name="Carro" id="Carro" value="Carro"  />
             <article class="carrito">
                 <label for="Carro">
                     <img src="../img/carrito.png" alt="Carrito de compra" class="carrito_icono">
                 </label>
-                <span class="cart-count">3</span>
-
+                <span id="cart-count" class="cart-count">0</span>
             </article>
-
             <!-- Menu Desplegable Carrito -->
-            <section class="caja_carrito">
-
-                <article class="producto1_carrito">
-                    <img src="../img/ingles.jpg" class="Imagen_agregar_carrito">
-                    <h3>Curso: Ingles avanzado</h3>
-                    <h4>Precio : 120.000$</h4>
-
-                    <section class="expandir_borrar">
-                        <a href="../paginas/detalleDelCurso/detalleCursoInglesAvanzado.html">
-                            <img src="../Imagenes/icono_flechas_expandiendo.webp">
-                        </a>
-
-                        <img src="../Imagenes/icono_basura.png">
-                    </section>
-
-                </article>
-
-                <article class="producto2_carrito">
-
-                    <img src="../img/backend.jpg" class="Imagen_agregar_carrito">
-                    <h3>Curso: Programación Back-end</h3>
-                    <h4>Precio : 250.000$</h4>
-
-                    <section class="expandir_borrar">
-
-                        <a href="../paginas/detalleDelCurso/detalleCursoBackend.html">
-                            <img src="../Imagenes/icono_flechas_expandiendo.webp">
-                        </a>
-                        <img src="../Imagenes/icono_basura.png">
-                    </section>
-
-                </article>
-
-                <article class="producto3_carrito">
-
-                    <img src="../Imagenes/gift_card.png " class="Imagen_agregar_carrito">
-                    <h3>Regalo. Gift Card</h3>
-                    <h4>Precio : 400.000$</h4>
-
-                    <section class="expandir_borrar">
-                        <a href="../Imagenes/gift_card.png " target="_blank">
-                            <img src="../Imagenes/icono_flechas_expandiendo.webp">
-                        </a>
-
-
-                        <img src="../Imagenes/icono_basura.png">
-
-                    </section>
-
-                </article>
-
-                <article class="confirmar_carrito">
-                    <h4>Total a pagar : 770.000$ </h4>
-                    <a href="../paginas/inicioSesionPago.html">
-                        <button>Continuar con la compra</button>
-                    </a>
-                </article>
-
+            <section class="caja_carrito" id="js-caja-carrito">
             </section>
         </section>
-
-
-    </header>
+    </section>
+  </header>
+  
 
     <main class="main-content">
         <section class="formulario-inscripcion">
             <h2>Detalle de Pago</h2>
 
-            <form action="#popup">
+            <form action="#popup" id="formulario-pago">
                 <article class="persona">
                     <label>Email:</label>
                     <input type="email" name="email" placeholder="Email@explample.com" required>
@@ -250,6 +193,7 @@
             </nav>
         </section>
     </footer>
+    <script type="module" src="../JavaScript.js"></script>
 </body>
 
 </html>

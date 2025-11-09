@@ -21,6 +21,7 @@ h1 {
 
 a {
     text-decoration: none;
+    color: #6a0dad;
 }
 
 .container-nav {
@@ -48,6 +49,19 @@ section {
 
 }
 
+.form-iniciarSesion p {
+    margin: -0.5em 0 0.5em 0;
+    color: #555;
+    font-size: 0.95em;
+    text-align: center; /* Centrar el texto descriptivo */
+}
+
+.form-iniciarSesion .boton-enviar {
+    align-self: center; /* Centrar el botón */
+    width: 10em;
+    margin-top: 0.5em; 
+}
+
 .caja-input {
     border: 2px solid #9575CD;
     border-radius: 6px;
@@ -69,6 +83,10 @@ section {
     border: none;
     border-radius: 5px;
     justify-content: center;
+    color: white; 
+    font-weight: bold; 
+    cursor: pointer;
+    transition: background-color 0.3s, border-bottom 0.3s;
 }
 
 .boton-enviar:hover {
@@ -100,55 +118,93 @@ section {
     font-size: 1em;
 }
 
-/* POPUP EN OLVIDE CONTRASEÑA  */
-.popup-confirmacion2 {
-  position: fixed;  
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: rgba(0, 0, 0, 0.45);
-  backdrop-filter: blur(5px);
-  display: none;
+/* POPUP  */
+
+.popup-fondo {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px); 
+  display: none; 
   justify-content: center;
   align-items: center;
-  z-index: 10;
-
-  
+  z-index: 1000;
 }
 
-/* Cuando se apreta el boton , que se active  */
-.popup-confirmacion2:target {
-  display: flex;
-}
 
 .popup-contenido2 {
-  background: #fff;
-  padding: 1.5em;
-  border-radius: 1em;
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 1.5em 2em;
+  max-width: 400px;
   text-align: center;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
   width: 80%;
   max-width: 280px; 
-  animation: aparecer 0.4s ease;
-    
-
 }
+
 
 .popup-contenido2 h3 {
  color: #7E57C2;
   margin-bottom: 0.8em;
-  font-size: 1.1em;
+  font-size: 1.3em; 
 }
 
-.cerrar-popup {
-    display: inline-block;
-    margin-top: 1rem;
-    background-color: #dc3545;
-    color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
-    text-decoration: none;
+
+#popup-buttons-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1.5em; 
+    width: 100%;
 }
+
+
+
+
+.boton-enviar {
+  background-color: #9575CD;
+  width: auto;
+  border: none;
+  border-radius: 0.6em;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 0.8em 1.4em;
+  text-align: center;
+  text-decoration: none;
+  font-size: 1em;
+  transition: background-color 0.3s ease, transform 0.2s;
+  display: inline-block;
+}
+
+
+.popup-cerrar {
+  background-color: #888;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 0.6em 1em;
+  cursor: pointer;
+  margin-right: 10px; 
+  transition: background-color 0.3s;
+}
+
+.popup-cerrar:hover {
+  background-color: #666;
+}
+
+
+
+.full-width-btn {
+    flex-grow: 1;
+    width: 100% !important; 
+    margin: 0 !important; 
+}
+
 
 .link-registrarse {
     display: flex;
@@ -156,7 +212,6 @@ section {
     margin-top: -1em;
     font-size: 0.9rem;
 }
-
 
 /* Responsive - Media querys */
 @media screen and (max-width: 480px) {

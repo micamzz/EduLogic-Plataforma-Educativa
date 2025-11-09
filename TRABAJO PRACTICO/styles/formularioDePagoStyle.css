@@ -6,6 +6,7 @@
   background-color: #fdfdfd;
   border-radius: 0.625em;
   box-shadow: 0 0 0.625em rgba(0, 0, 0, 0.1);
+  border-top: 6px solid #9575CD;
 }
 
 .formulario-inscripcion h2,

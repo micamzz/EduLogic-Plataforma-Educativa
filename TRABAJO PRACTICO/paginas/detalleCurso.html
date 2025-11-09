@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programación Back-End</title>
+    <!-- Link a CSS  -->
+    <link rel="stylesheet" href="../styles/detalleCurso.css">
+    <link rel="stylesheet" href="../styles/header_footer.css">
+     <link rel="icon" type="image/png" href="../../img/favicon.ico">
+</head>
+<body>
+     <!-- Encabezado -->
+  <header class="main-header">
+    <section class="logo">
+      <a href="../index.html"> <img src="../img/logoPagBlanco.png" alt="Logo de la plataforma" class="logo-desktop"></a>
+
+      <a href="../index.html"> <img src="../img/iconoBlancoLogoCelu.png" alt="Logo móvil" class="logo-mobile"></a>
+    </section>
+    <!-- Barra de Navegación -->
+
+    <input type="checkbox" id="menu-toggle">
+    <label for="menu-toggle" class="menu-icon">
+      <section class="line"></section>
+      <section class="line"></section>
+      <section class="line"></section>
+    </label>
+    <nav class="navbar">
+      <ul class="nav-list">
+        <li><a href="../index.html" class="nav-link">Inicio</a></li>
+        <li><a href="../paginas/giftCard.html" class="nav-link">GiftCard</a></li>
+        <li><a href="../paginas/cursos.html" class="nav-link">Cursos</a></li>
+        <li><a href="../paginas/inscripcionCurso.html" class="nav-link">Inscripción</a></li>
+        <li><a href="../paginas/calendario.html" class="nav-link"> Proximos </a></li>
+        <li><a href="../paginas/perfil.html" class="nav-link perfil-link" style="display: none;">Mi Perfil</a></li>
+
+      </ul>
+    </nav>
+
+    <!-- Barra de búsqueda -->
+    <section class="search-bar">
+  <form id="search-form">
+    <input list="cursos-list" name="curso-buscado" id="curso-input" placeholder="Buscar curso..."> 
+    
+      <!-- ACTUALIZADO PARA JS -->
+    <datalist id="cursos-list">
+        <option value="Programación Front-End" data-url="./detalleCurso.html?curso=Programación+Front-End"></option>
+        <option value="Programación Back-End" data-url="./detalleCurso.html?curso=Programación+Back-End"></option>
+        <option value="Ciberseguridad" data-url="./detalleCurso.html?curso=Ciberseguridad"></option>
+        <option value="Inglés Avanzado" data-url="./detalleCurso.html?curso=Inglés+Avanzado"></option>
+        <option value="Marketing Digital" data-url="./detalleCurso.html?curso=Marketing+Digital"></option>
+        <option value="Finanzas Personales" data-url="./detalleCurso.html?curso=Finanzas+Personales"></option>
+    </datalist>
+    
+    <button type="submit" class="search-button">
+      <img src="../img/lupa.png" alt="Buscar">
+    </button>
+  </form>
+</section>
+
+    <section class="user-actions">
+      <a href="../paginas/inicioSesion.html">
+        <button class="login-button">
+          <img src="../img/logo-fondo-transparente.png" alt="Imagen de logo iniciar sesion"
+            class="logo-iniciarSesion-Responsive">
+          Iniciar Sesión </button></a>
+
+      <a href="../paginas/registrarse.html"><button class="signup-button">Registrarse</button></a>
+
+
+      <!--  CARRITO -->
+     <input type="checkbox" name="Carro" id="Carro" value="Carro"/>
+            <article class="carrito">
+                <label for="Carro">
+                    <img src="../img/carrito.png" alt="Carrito de compra" class="carrito_icono">
+                </label>
+                <span id="cart-count" class="cart-count">0</span>
+            </article>
+            <!-- Menu Desplegable Carrito -->
+            <section class="caja_carrito" id="js-caja-carrito">
+            </section>
+        </section>
+    </section>
+  </header>
+
+
+   <main>
+   <!--  SE RELLENA CON JS -->
+ <section id="js-curso-detalle"></section>
+
+    <!-- Links a otros cursos -->
+    <aside class="carousel">
+        <h2 class="carousel-titulo">También te puede interesar</h2>
+       
+        <!--  SE RELLENA CON EL JS -->
+        <div id="js-cursos-relacionados" class="courses-carousel"></div>
+    </aside>
+
+ </main>
+
+     <!-- Footer -->
+    <footer class="container-footer">
+        <section class="datos-equipo">
+            <ul>
+                <li class="nombre-equipo"> EQUIPO: UNDEFINED </li>
+                <li>Collado, Camila Sol DNI: 43.098.593</li>
+                <li>Martelli, Rocio Belen DNI: 44.161.046</li>
+                <li>Mazza, Micaela Montserrat DNI: 38.662.441</li>
+                <li>Moyano Vivas, Matias Ernesto DNI:40.240.664</li>
+                <li>Viana, Sol Belen DNI: 45.889.073</li>
+            </ul>
+        </section>
+
+
+        <section class="menu-inferior">
+            <a href="../index.html">Inicio</a>
+            <a href="../paginas/contacto.html">Contacto</a>
+            <a href="../paginas/inscripcionCurso.html">Formulario</a>
+
+        </section>
+
+        <section class="redes-sociales">
+            <p class="parrafo-socialMedia">REDES SOCIALES</p>
+            <nav class="redes-sociales-nav">
+                <a href="https://www.instagram.com/unlamoficial/" target="_blank">
+                    <img src="../img/instagram.png" alt="Logo Instagram" class="social-icon">
+                </a>
+
+                <a href="https://www.facebook.com/UnlamOficial/" target="_blank">
+                    <img src="../img/facebook.png" alt="Logo de Facebook" class="social-icon">
+                </a>
+                <a href="https://wa.me/5491155844612" target="_blank">
+                    <img src="../img/whatsapp.png" alt="Logo de whastapp" class="social-icon">
+                </a>
+            </nav>
+        </section>
+
+    </footer>
+  <!--  JS PRINCIPAL -->
+    <script type="module" src="../JavaScript.js"></script>
+</body>
+</html>

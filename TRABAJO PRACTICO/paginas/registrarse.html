@@ -19,10 +19,19 @@
             </nav>
             <h1 class="titulo-crearCuenta">Crear una cuenta</h1>
 
-            <form action="./inicioSesion.html" method="get" class="form-iniciarSesion">
+            <form id="registro-form" action="#" method="post" class="form-iniciarSesion">
 
                 <label>
-                    <input type="text" name="nombre" placeholder="Nombre completo" class="caja-input-CC" required>
+                    <input type="text" name="nombre" placeholder="Nombre" class="caja-input-CC" required>
+                </label>
+
+                
+                <label>
+                    <input type="text" name="apellido" placeholder="Apellido" class="caja-input-CC" required>
+                </label>
+
+                 <label>
+                    <input type="number" name="dni" placeholder="DNI" class="caja-input-CC" required>
                 </label>
 
                 <label>
@@ -38,8 +47,9 @@
                         required>
                 </label>
 
-                <button type="submit" class="boton-enviar">Registrarse</button>
-
+                    <div class="botones-container">
+                        <button type="submit" class="boton-enviar">Registrarme</button> 
+                    </div>
                 <article class="olvide-contrasenia">
                     <a href="./inicioSesion.html">¿Ya tienes una cuenta? Inicia sesión</a>
                 </article>
@@ -48,6 +58,19 @@
         </section>
     </main>
 
+    <div class="popup-fondo" id="custom-popup">
+        <div class="popup-contenido2">
+            <h3 id="popup-title"></h3>
+            <p id="popup-message"></p>
+            
+            <div id="popup-buttons-container">
+                <button type="button" class="popup-cerrar" id="btn-cancelar">Cancelar</button> 
+                <button type="button" class="boton-enviar" id="btn-aceptar">OK</button>
+            </div>
+        </div>
+    </div>
+
+<script type="module" src="../JavaScript.js"></script>
 </body>
 
 </html>

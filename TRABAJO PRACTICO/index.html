@@ -36,31 +36,32 @@
                 <li><a href="./paginas/cursos.html" class="nav-link">Cursos</a></li>
                 <li><a href="./paginas/inscripcionCurso.html" class="nav-link">Inscripción</a></li>
                 <li><a href="./paginas/calendario.html" class="nav-link"> Proximos </a></li>
-                <li><a href="./paginas/perfil.html" class="nav-link">Mi Perfil</a></li>
+                <li><a href="./paginas/perfil.html" class="nav-link perfil-link" style="display: none;">Mi Perfil</a></li>
 
             </ul>
         </nav>
 
         <!-- Barra de búsqueda -->
 <section class="search-bar">
-  <form action="" method="get" onchange="this.action=this.curso.value">
-    <select name="curso" required>
-      <option value="">Seleccioná un curso</option>
-      <option value="paginas/detalleDelCurso/detalleCursoFrontend.html">Programación Front-End</option>
-      <option value="paginas/detalleDelCurso/detalleCursoBackend.html">Programación Back-End</option>
-      <option value="paginas/detalleDelCurso/detalleCursoCiberseguridad.html">Ciberseguridad</option>
-      <option value="paginas/detalleDelCurso/detalleCursoInglesAvanzado.html">Inglés Avanzado</option>
-      <option value="paginas/detalleDelCurso/detalleCursoMarketingDigital.html">Marketing Digital</option>
-      <option value="paginas/detalleDelCurso/detalleCursoFinanzasPersonales.html">Finanzas Personales</option>
-    </select>
+  <form id="search-form">
+    <input list="cursos-list" name="curso-buscado" id="curso-input" placeholder="Buscar curso..."> 
+    
+    <!-- ACTUALIZADO PARA JS -->
+    <datalist id="cursos-list">
+        <option value="Programación Front-End" data-url="./paginas/detalleCurso.html?curso=Programación+Front-End"></option>
+        <option value="Programación Back-End" data-url="./paginas/detalleCurso.html?curso=Programación+Back-End"></option>
+        <option value="Ciberseguridad" data-url="./paginas/detalleCurso.html?curso=Ciberseguridad"></option>
+        <option value="Inglés Avanzado" data-url="./paginas/detalleCurso.html?curso=Inglés+Avanzado"></option>
+        <option value="Marketing Digital" data-url="./paginas/detalleCurso.html?curso=Marketing+Digital"></option>
+        <option value="Finanzas Personales" data-url="./paginas/detalleCurso.html?curso=Finanzas+Personales"></option>
+    </datalist>
+
     <button type="submit" class="search-button">
       <img src="./img/lupa.png" alt="Buscar">
     </button>
   </form>
 </section>
 
-
-   
 
         <section class="user-actions">
              <a href="./paginas/inicioSesion.html"> 
@@ -71,87 +72,40 @@
             <a href="./paginas/registrarse.html"><button class="signup-button">Registrarse</button></a>
 
 
-        <input type="checkbox" name="Carro" id="Carro" value="Carro" checked />
-           <!-- icono carrito -->
-
-        <article class="carrito">   
-            <label for="Carro" >
-            <img src="./img/carrito.png" alt="Carrito de compra" class="carrito_icono">
-            </label>
-             <span class="cart-count">3</span>
-
+          <!--  CARRITO -->
+     <input type="checkbox" name="Carro" id="Carro" value="Carro" />
+            <article class="carrito">
+                <label for="Carro">
+                    <img src="./img/carrito.png" alt="Carrito de compra" class="carrito_icono">
+                </label>
+                <span id="cart-count" class="cart-count">0</span>
             </article>
-
-         <!-- Menu Desplegable Carrito -->       
-           <section class="caja_carrito"> 
-
-            <article class="producto1_carrito">
-                <img src="./img/ingles.jpg" class="Imagen_agregar_carrito">
-                <h3>Curso: Ingles avanzado</h3>
-                <h4>Precio : 120.000$</h4>
-
-                <section class="expandir_borrar">
-                <a href="./paginas/detalleDelCurso/detalleCursoInglesAvanzado.html">
-                 <img src="./Imagenes/icono_flechas_expandiendo.webp" alt="icono de flechas expandiendose">
-                </a>
-                <img src="./Imagenes/icono_basura.png" alt="icono para tacho de basura para eliminar curso">
-                </section>
-
-            </article>   
-
-            <article class="producto2_carrito">
-
-                <img src="./img/backend.jpg" class="Imagen_agregar_carrito">
-                <h3>Curso: Programación Back-end</h3>
-                <h4>Precio : 250.000$</h4>
-                
-                <section class="expandir_borrar">
-                  
-                <a href="./paginas/detalleDelCurso/detalleCursoBackend.html">
-                 <img src="./Imagenes/icono_flechas_expandiendo.webp" alt="icono de flechas expandiendose">
-                </a>
-                <img src="./Imagenes/icono_basura.png" alt="icono para tacho de basura para eliminar curso">
-                </section>
-
-            </article>
-
-            <article class="producto3_carrito">
-
-                <img src="./Imagenes/gift_card.png" class="Imagen_agregar_carrito">
-                <h3>Regalo. Gift Card</h3>
-                <h4>Precio : 400.000$</h4>
-                
-                <section class="expandir_borrar">
-                <a href="../TRABAJO PRACTICO/Imagenes/gift_card.png " target="_blank">
-                 <img src="./Imagenes/icono_flechas_expandiendo.webp" alt="icono de flechas expandiendose">
-                </a>
-
-        
-                <img src="./Imagenes/icono_basura.png" alt="icono para tacho de basura para eliminar curso">
-                </section>
-
-            </article>
-
-            <article class="confirmar_carrito">
-            <h4>Total a pagar : 770.000$ </h4>
-            <a href="./paginas/inicioSesionPago.html"> 
-                <button>Continuar con la compra</button>
-            </a>
-            </article>
-
-           </section>
+            <!-- Menu Desplegable Carrito -->
+            <section class="caja_carrito" id="js-caja-carrito"> </section>
         </section>
-
-
-    </header>
+    </section>
+  </header>
 
     <!-- Secciones Principales -->
     <main class=" main-content">
 
         <!-- BANNER PAGINA -->
-        <section class="hero-slider">
-            <img src="./img/banner.png" alt="Banner promocional de cursos" class="slider-img">
-        </section>
+     <section class="hero-slider-container">
+      <div class="slider">
+        <img src="./img/banner.png" alt="Banner promocional de cursos" class="slide active">
+        <img src="./img/finanzas.jpg" alt="Banner finanzas" class="slide">
+        <img src="./img/progrmacion.jpg" alt="Banner Programacion" class="slide">
+      </div>
+
+      <div class="dots-container">
+        <span class="dot active" data-slide-index="0"></span>
+        <span class="dot" data-slide-index="1"></span>
+        <span class="dot" data-slide-index="2"></span>
+      </div>
+
+    <button class="prev-btn">❮</button>
+    <button class="next-btn">❯</button>
+</section>
 
 
         <!-- Pasos para Inscribirse -->
@@ -180,8 +134,8 @@
             <h2>Cursos Destacados</h2>
             
             <div class="courses-grid">
-
-                <a href="./paginas/detalleDelCurso/detalleCursoFrontend.html">
+               <!-- FRONT END -->
+                <a href="./paginas/detalleCurso.html?curso=Programación+Front-End">
                 <article class="course-card">
                     <img src="./img/frontend.jpg" alt="Curso de Programación Front-end">
                     <h3>Programación Front-end</h3>
@@ -190,8 +144,8 @@
                     <h4>Ver Detalle</h4>
                 </article>
                 </a>
-
-                <a href="./paginas/detalleDelCurso/detalleCursoBackend.html">
+                <!-- BACK END -->
+                <a href="./paginas/detalleCurso.html?curso=Programación+Back-End">
                 <article class="course-card">
                     <img src="./img/backend.jpg" alt="Curso de Programación Back-end">
                     <h3>Programación Back-end</h3>
@@ -200,8 +154,8 @@
                     <h4>Ver Detalle</h4>
                 </article>
                 </a>
-
-                <a href="./paginas/detalleDelCurso/detalleCursoCiberseguridad.html">
+                <!-- CIBERSEGURIDAD -->
+               <a href="./paginas/detalleCurso.html?curso=Ciberseguridad">
                 <article class="course-card">
                     <img src="./img/ciberseguridad.jpg" alt="Curso de Ciberseguridad">
                     <h3>Ciberseguridad</h3>
@@ -210,9 +164,8 @@
                     <h4>Ver Detalle</h4>
                 </article>
                 </a>
-
-                
-                <a href="./paginas/detalleDelCurso/detalleCursoInglesAvanzado.html">
+            <!-- INGLES -->
+               <a href="./paginas/detalleCurso.html?curso=Inglés+Avanzado">
                 <article class="course-card">
                     <img src="./img/ingles.jpg" alt="Curso de Inglés">
                     <h3>Inglés Avanzado</h3>
@@ -221,8 +174,8 @@
                     <h4>Ver Detalle</h4>
                 </article>
                 </a>
-
-                <a href="./paginas/detalleDelCurso/detalleCursoMarketingDigital.html">
+              <!-- MARKETING -->
+                 <a href="./paginas/detalleCurso.html?curso=Marketing+Digital">
                 <article class="course-card">
                     <img src="./img/marketing.jpg" alt="Curso de Marketing Digital">
                     <h3>Marketing Digital</h3>
@@ -231,8 +184,8 @@
                     <h4>Ver Detalle</h4>
                 </article>
                 </a>
-
-                <a href="./paginas/detalleDelCurso/detalleCursoFinanzasPersonales.html">
+                <!-- CURSOS FINANZAS PERSONALES -->
+                 <a href="./paginas/detalleCurso.html?curso=Finanzas+Personales">
                 <article class="course-card">
                     <img src="./img/finanzasperso.jpg" alt="Curso de Finanzas Personales">
                     <h3>Finanzas Personales</h3>
@@ -240,10 +193,7 @@
                     <p class="price">$75.000</p>
                     <h4>Ver Detalle</h4>
                 </article>
-                </a>
-
-                
-
+            </a>
             </div>
         </section>
 
@@ -298,6 +248,8 @@
         </section>
 
     </footer>
+    <!-- JS  PRINCIPAL-->
+     <script type="module" src="./JavaScript.js"></script>
 </body>
 
 </html>

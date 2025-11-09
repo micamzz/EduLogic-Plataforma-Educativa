@@ -14,6 +14,10 @@ body {
   font-family: Arial, sans-serif;
 }
 
+a{
+  color:#7E57C2;
+}
+
 /* Estilos de los Cursos */
 .block-informacion-curso {
   margin: 2% 10% 2% 10%;
@@ -110,6 +114,10 @@ summary {
   margin: 1em auto;
 }
 
+.boton-carrito-inscripcion-curso{
+  display: flex;
+
+}
 .block-informacion-contenidos__boton {
   padding: 10px 20px;
   background-color: #694d99;
@@ -190,6 +198,7 @@ h4 {
   display: flex;
   /* Para hacer scroll horizontal  */
   overflow-x: auto;
+  gap:1em;
 }
 
 .carousel-titulo {
@@ -236,7 +245,7 @@ h4 {
   display: block;
   /* Para ajustar la imagen sin que se deforme  */
   object-fit: cover;
-  border-radius: 12px 12px 0 0;
+  border-radius: 12px;
 }
 
 .course-card h3 {
@@ -245,9 +254,11 @@ h4 {
 }
 
 .course-card .price {
-  font-weight: bold;
-  color: #333333;
+    font-weight: bold;
+    color: #7E57C2;
+    margin: 0.25em 0;
 }
+
 
 .course-card a {
   color: #6a0dad;

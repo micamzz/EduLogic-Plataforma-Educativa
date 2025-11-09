@@ -6,12 +6,12 @@
 }
 
 .container-contacto {
-
     margin: 2em;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     gap: 3em;
+
 }
 
 .container-contacto h2 {
@@ -21,11 +21,17 @@
 }
 
 .container-contacto form {
-    background-color: #EDE7F6;
     padding: 2em;
     gap: 0.8em;
     width: 50%;
-    border-radius: 23px;
+     text-align: center; 
+  max-width: 43.75em;
+  margin: 2em auto;
+  padding: 2em;
+  background-color: #fdfdfd;
+  border-radius: 0.625em;
+  box-shadow: 0 0 0.625em rgba(0, 0, 0, 0.1);
+  border-top: 6px solid #9575CD;
 
 
 }
@@ -41,8 +47,9 @@
 .caja-form {
     /* width: 21em; */
     width: 100%;
-    padding: 0.4em;
+    padding: 0.6em;
     border: 2px solid #9575CD;
+    border-radius: 12px;
 }
 
 .caja-form:hover {
@@ -51,8 +58,9 @@
 
 .caja-textarea {
     width: 100%;
-    height: 6em;
+    height: 7em;
     border: 2px solid #9575CD;
+  border-radius: 12px;
 }
 
 .caja-textarea:hover {
@@ -64,7 +72,7 @@
     display: flex;
     align-items: flex-start;
     gap: 0.2em;
-    margin-bottom: 0.4em;
+    margin-bottom: -0.4em;
 }
 
 .label-email input {
@@ -88,10 +96,18 @@
 }
 
 .container-dondeEstamos {
-    background-color: #EDE7F6;
-    width: 50%;
-    padding: 2em;
-    border-radius: 23px;
+    /* /* background-color: #EDE7F6; */
+    /* width: 50%; */
+    /* padding: 2em; */
+    border-radius: 23px; 
+     /* text-align: center; */
+  max-width: 43.75em;
+  margin: 2em auto;
+  padding: 2em;
+  background-color: #fdfdfd;
+  border-radius: 0.625em;
+  box-shadow: 0 0 0.625em rgba(0, 0, 0, 0.1);
+  border-top: 6px solid #9575CD;
 }
 
 .datos-dondeEstamos {
@@ -107,47 +123,77 @@
     padding-bottom: 1em;
 
 }
+
+/* POPUP  */
 .popup-confirmacion {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
-  display: none;
+  background-color: rgba(0, 0, 0, 0.6); 
+  display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 999;
+  z-index: 1000;
+
 }
 
-.popup-confirmacion:target {
-  display: flex;
-}
 
 .popup-contenido {
-  background-color: #fff;
-  padding: 2rem;
+   background-color: #fff;
   border-radius: 10px;
-  text-align: center;
+  padding: 1.5em 2em;
   max-width: 400px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
 }
+
 
 .popup-contenido h3 {
-  color: #388e3c;
-  margin-bottom: 1rem;
+  color: #7E57C2; 
+  margin-bottom: 0.5em;
+  font-size: 1.5em; 
 }
 
-.cerrar-popup {
-  display: inline-block;
-  margin-top: 1rem;
-  background-color: #dc3545;
-  color: white;
-  padding: 0.5rem 1rem;
+
+.popup-contenido p {
+  margin-bottom: 1em;
+  color: #333;
+}
+
+#boton-aceptar {
+  background-color: #AB7DEB;
+  color: BLACK;
+  border: none;
+  padding: 10px 20px;
   border-radius: 5px;
-  text-decoration: none;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s ease;
+  
 }
 
+#boton-aceptar:hover {
+   background-color: #666666;
+}
+
+/* ERROR EN EL FORM */
+.error-texto {
+  font-size: 0.6rem;
+  text-align: end;
+
+}
+
+/*  CONTADOR DEL JS */
+
+.contador {
+  font-size: 0.9em;
+  color: #555;
+  margin-top: 5px;
+  text-align: right;
+  font-style: italic;
+}
 
 /* RESPONSIVE MEDIA QUERYS */
 

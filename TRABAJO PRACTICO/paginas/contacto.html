@@ -41,24 +41,28 @@
         </nav>
 
         <!-- Barra de búsqueda -->
-        <section class="search-bar">
-  <form action="" method="get" onchange="this.action=this.curso.value">
-    <select name="curso" required>
-      <option value="">Seleccioná un curso</option>
-      <option value="./detalleDelCurso/detalleCursoFrontend.html">Programación Front-End</option>
-      <option value="./detalleDelCurso/detalleCursoBackend.html">Programación Back-End</option>
-      <option value="./detalleDelCurso/detalleCursoCiberseguridad.html">Ciberseguridad</option>
-      <option value="./detalleDelCurso/detalleCursoInglesAvanzado.html">Inglés Avanzado</option>
-      <option value="./detalleDelCurso/detalleCursoMarketingDigital.html">Marketing Digital</option>
-      <option value="./detalleDelCurso/detalleCursoFinanzasPersonales.html">Finanzas Personales</option>
-    </select>
+ <section class="search-bar">
+  <form id="search-form">
+    <input list="cursos-list" name="curso-buscado" id="curso-input" placeholder="Buscar curso..."> 
+    
+    <!-- ACTUALIZADO PARA JS -->
+    <datalist id="cursos-list">
+        <option value="Programación Front-End" data-url="./detalleCurso.html?curso=Programación+Front-End"></option>
+        <option value="Programación Back-End" data-url="./detalleCurso.html?curso=Programación+Back-End"></option>
+        <option value="Ciberseguridad" data-url="./detalleCurso.html?curso=Ciberseguridad"></option>
+        <option value="Inglés Avanzado" data-url="./detalleCurso.html?curso=Inglés+Avanzado"></option>
+        <option value="Marketing Digital" data-url="./detalleCurso.html?curso=Marketing+Digital"></option>
+        <option value="Finanzas Personales" data-url="./detalleCurso.html?curso=Finanzas+Personales"></option>
+    </datalist>
+    
     <button type="submit" class="search-button">
       <img src="../img/lupa.png" alt="Buscar">
     </button>
   </form>
 </section>
-
-        <section class="user-actions">
+  
+    
+        <section class="user-actions" id="js-carrito-container">
             <a href="../paginas/inicioSesion.html">
                 <button class="login-button">
                     <img src="../img/logo-fondo-transparente.png" alt="Imagen de logo iniciar sesion"
@@ -68,76 +72,19 @@
             <a href="../paginas/registrarse.html"><button class="signup-button">Registrarse</button></a>
 
 
-            <input type="checkbox" name="Carro" id="Carro" value="Carro" checked />
+            <input type="checkbox" name="Carro" id="Carro" value="Carro" />
             <!-- icono carrito -->
 
             <article class="carrito">
                 <label for="Carro">
                     <img src="../img/carrito.png" alt="Carrito de compra" class="carrito_icono">
                 </label>
-                <span class="cart-count">3</span>
+                <span class="cart-count">0</span>
 
             </article>
 
             <!-- Menu Desplegable Carrito -->
-            <section class="caja_carrito">
-
-                <article class="producto1_carrito">
-                    <img src="../img/ingles.jpg" class="Imagen_agregar_carrito">
-                    <h3>Curso: Ingles avanzado</h3>
-                    <h4>Precio : 120.000$</h4>
-
-                    <section class="expandir_borrar">
-                        <a href="../paginas/detalleDelCurso/detalleCursoInglesAvanzado.html">
-                            <img src="../Imagenes/icono_flechas_expandiendo.webp">
-                        </a>
-
-                        <img src="../Imagenes/icono_basura.png">
-                    </section>
-
-                </article>
-
-                <article class="producto2_carrito">
-
-                    <img src="../img/backend.jpg" class="Imagen_agregar_carrito">
-                    <h3>Curso: Programación Back-end</h3>
-                    <h4>Precio : 250.000$</h4>
-
-                    <section class="expandir_borrar">
-
-                        <a href="../paginas/detalleDelCurso/detalleCursoBackend.html">
-                            <img src="../Imagenes/icono_flechas_expandiendo.webp">
-                        </a>
-                        <img src="../Imagenes/icono_basura.png">
-                    </section>
-
-                </article>
-
-                <article class="producto3_carrito">
-
-                    <img src="../Imagenes/gift_card.png " class="Imagen_agregar_carrito">
-                    <h3>Regalo. Gift Card</h3>
-                    <h4>Precio : 400.000$</h4>
-
-                    <section class="expandir_borrar">
-                        <a href="../Imagenes/gift_card.png " target="_blank">
-                            <img src="../Imagenes/icono_flechas_expandiendo.webp">
-                        </a>
-
-
-                        <img src="../Imagenes/icono_basura.png">
-
-                    </section>
-
-                </article>
-
-                <article class="confirmar_carrito">
-                    <h4>Total a pagar : 770.000$ </h4>
-                    <a href="../paginas/inicioSesionPago.html">
-                        <button>Continuar con la compra</button>
-                    </a>
-                </article>
-
+            <section class="caja_carrito" id="js-caja-carrito">
             </section>
         </section>
 
@@ -148,41 +95,25 @@
     <!-- PRINCIPAL  -->
     <main class="container-main">
         <section class="container-contacto">
-            <!--  VER ESTO DEL ACTION Y ENVIAR MSJ -->
-            <form action="#popup" method="get">
-                <h2>CONTÁCTANOS </h2>
-                <label for="name" class="label-form"> Nombre:
-                    <input type="text" name="name" id="name" class="caja-form">
-                </label>
-
-                <label for="mail" class="label-form label-email"> Email:
-                    <input type="email" name="mail" id="mail" required class="caja-form">
-                </label>
-
-                <label for="telefono" class="label-form"> Teléfono:
-                    <input type="tel" name="telefono" id="telefono" class="caja-form">
-                </label>
-
-                <label for="mensaje" class="label-form"> Mensaje:
-                    <textarea name="mensaje" id="mensaje" class="caja-textarea" maxlength="250" required></textarea>
-                </label>
+        
+            <form id="form-contacto">
+                <h2>CONTÁCTANOS</h2>
+        
+                <label for="name" class="label-form">Nombre y Apellido:</label>
+                <input type="text" name="name" id="name" class="caja-form">
+            
+                <label for="mail" class="label-form">Email:</label>
+                <input type="email" name="mail" id="mail" class="caja-form" >
+        
+                <label for="telefono" class="label-form">Teléfono: (opcional)</label>
+                <input type="tel" name="telefono" id="telefono" class="caja-form">
+        
+                <label for="mensaje" class="label-form">Mensaje:</label>
+                <textarea name="mensaje" id="mensaje" class="caja-textarea" maxlength="1000" required></textarea>
+            
+        
                 <button type="submit" class="boton-enviar">Enviar</button>
-
-                <!-- Popup de confirmación -->
-                <section id="popup" class="popup-confirmacion">
-                    <article class="popup-contenido">
-                        <h3>✅ ¡Su mensaje ha sido enviado correctamente!</h3>
-                        <p> Nos estaremos comunicando brevemente.</p>
-                        <a href="#" class="cerrar-popup">Cerrar</a>
-                    </article>
-                </section>
             </form>
-
-
-
-
-
-
 
             <section class="container-dondeEstamos">
                 <h2> ENCONTRANOS EN..</h2>
@@ -196,7 +127,6 @@
 
         </section>
 
-
         <section class="section-ubicacion">
             <h2>Ubicación</h2>
             <iframe
@@ -206,12 +136,7 @@
         </section>
 
     </main>
-
-
-
-
-
-
+   
     <!-- Footer -->
     <footer class="container-footer">
         <section class="datos-equipo">
@@ -254,6 +179,6 @@
         </section>
     </footer>
 
+    <script type="module" src="../JavaScript.js"></script>
 </body>
-
 </html>
