@@ -9,8 +9,7 @@ import { iniciarLogicaPerfil } from './Javascript/perfil.js';
 import { iniciarLogicaRecuperacion } from './Javascript/recuperarContra.js';
 import { formularioDeContacto } from "./Javascript/contactoFormulario.js";
 import { inicializarCarrito } from './Javascript/carritoDeCompras.js';
-
-
+import { iniciarFormularioDePago } from "./Javascript/formularioPago.js";
 const BUSCADOR = new BuscadorElementos();
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -69,10 +68,17 @@ document.addEventListener("DOMContentLoaded", async () => {
   if (!path.includes("/contacto.html")) {
     await import("./Javascript/popupManager.js"); 
     // Si la ruta actual contiene "contacto.html", se ejecuta la lógica del formulario:
-  } else if (path.includes('/contacto.html')) {
-    formularioDeContacto(); // ✅ LLAMADA A LA FUNCIÓN DEL FORMULARIO
+ } else if (path.includes('/contacto.html')) {
+  formularioDeContacto();
+}
 
-  }
+// FORMULARIO DE PAGO
+if (path.includes("/formularioDePago.html")) {
+  iniciarFormularioDePago();
+  console.log({ form, nombre, email, numeroTarjeta, vencimiento, codigoSeguridad });
+
+}
+
 
 
   inicializarCarrito();

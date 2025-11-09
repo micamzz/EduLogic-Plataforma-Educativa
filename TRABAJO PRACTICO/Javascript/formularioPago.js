@@ -1,54 +1,144 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const form = document.getElementById("formulario-pago");
-    const popup = document.getElementById("popup");
-    const cerrarPopup = document.querySelector(".cerrar-popup");
+import { BuscadorElementos } from "./buscadorElementos.js";
 
-    function mostrarPopup() {
-        popup.style.display = "flex";
-    }
+export function iniciarFormularioDePago() {
+  const BUSCADOR = new BuscadorElementos();
+  const params = new URLSearchParams(window.location.search);
 
-    function ocultarPopup() {
-        popup.style.display = "none";
-    }
+  const cursosSeleccionados = [
+    params.get("curso1"),
+    params.get("curso2"),
+    params.get("curso3")
+  ].filter(c => c); 
 
-    cerrarPopup.addEventListener("click", (e) => {
-        e.preventDefault();
-        ocultarPopup();
+  // Precios de cursos
+  const cursosPrecios = {
+    "frontend": 120000,
+    "backend": 250000,
+    "ciberseguridad": 400000,
+    "ingles": 120000,
+    "marketing": 90000,
+    "finanzas": 75000
+  };
+
+  // Mostrar info de los cursos y calcular total
+  let total = 0;
+  const infoCurso = document.createElement("div");
+  infoCurso.classList.add("info-curso");
+
+  if (cursosSeleccionados.length === 0) {
+    infoCurso.innerHTML = `<p>No seleccionaste ningún curso.</p>`;
+  } else {
+    infoCurso.innerHTML = `<h3>Cursos seleccionados:</h3>`;
+    const lista = document.createElement("ul");
+
+    cursosSeleccionados.forEach(curso => {
+      const precio = cursosPrecios[curso.toLowerCase()] || 0;
+      total += precio;
+      const li = document.createElement("li");
+      li.textContent = `${curso} - $${precio.toLocaleString("es-AR")}`;
+      lista.appendChild(li);
     });
 
-    form.addEventListener("submit", (e) => {
-        e.preventDefault();
+    infoCurso.appendChild(lista);
+    infoCurso.innerHTML += `<p><strong>Total: $${total.toLocaleString("es-AR")}</strong></p>`;
+  }
 
-        const email = document.getElementById("email").value.trim();
-        const nombre = document.getElementById("nombre-titular").value.trim();
-        const numeroTarjeta = document.getElementById("numero-tarjeta").value.trim();
-        const vencimiento = document.getElementById("vencimiento").value.trim();
-        const codigoSeguridad = document.getElementById("codigo-seguridad").value.trim();
+  const contenedorFormulario = BUSCADOR.buscarUnElemento(".formulario-inscripcion");
+  if (contenedorFormulario) contenedorFormulario.prepend(infoCurso);
 
-        if (!email || !nombre || !numeroTarjeta || !vencimiento || !codigoSeguridad) {
-            alert("Por favor completa todos los campos.");
-            return;
-        }
+  // Elementos del formulario
+  const form = BUSCADOR.buscarUnElementoPorId("formulario-pago");
+  const nombre = BUSCADOR.buscarUnElementoPorId("nombre-titular");
+  const email = BUSCADOR.buscarUnElementoPorId("email");
+  const numeroTarjeta = BUSCADOR.buscarUnElementoPorId("numero-tarjeta");
+  const vencimiento = BUSCADOR.buscarUnElementoPorId("vencimiento");
+  const codigoSeguridad = BUSCADOR.buscarUnElementoPorId("codigo-seguridad");
+  const popup = BUSCADOR.buscarUnElementoPorId("popup");
+  const cerrarPopup = BUSCADOR.buscarUnElemento(".cerrar-popup");
 
-        if (numeroTarjeta.length < 13 || numeroTarjeta.length > 19 || isNaN(numeroTarjeta)) {
-            alert("El número de tarjeta debe tener entre 13 y 19 dígitos numéricos.");
-            return;
-        }
+  if (!form) return;
 
-        if (codigoSeguridad.length !== 3 || isNaN(codigoSeguridad)) {
-            alert("El código de seguridad debe tener 3 dígitos numéricos.");
-            return;
-        }
+  // Listener submit
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    limpiarErrores();
 
-        if (!/^(0[1-9]|1[0-2])[0-9]{2}$/.test(vencimiento)) {
-            alert("La fecha de vencimiento debe tener formato MMAA y ser válida.");
-            return;
-        }
+    let esValido = true;
 
-        mostrarPopup();
+    if (nombre.value.trim() === "") {
+      mostrarError(nombre, "El nombre es obligatorio.");
+      esValido = false;
+    } else if (nombre.value.trim().length < 3) {
+      mostrarError(nombre, "El nombre debe tener al menos 3 letras.");
+      esValido = false;
+    }
 
-        form.reset();
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (email.value.trim() === "") {
+      mostrarError(email, "El email es obligatorio.");
+      esValido = false;
+    } else if (!emailRegex.test(email.value)) {
+      mostrarError(email, "Formato de email no válido");
+      esValido = false;
+    }
 
-        console.log("Pago realizado con éxito");
-    });
-});
+    const numeroSinEspacios = numeroTarjeta.value.replace(/\s/g, "");
+    if (numeroSinEspacios === "") {
+      mostrarError(numeroTarjeta, "El número de tarjeta es obligatorio.");
+      esValido = false;
+    } else if (!/^\d{13,19}$/.test(numeroSinEspacios)) {
+      mostrarError(numeroTarjeta, "Debe tener entre 13 y 19 dígitos numéricos.");
+      esValido = false;
+    }
+
+    const valorVencimiento = vencimiento.value.replace(/\s/g, "");
+    if (valorVencimiento === "") {
+      mostrarError(vencimiento, "La fecha de expiración es obligatoria.");
+      esValido = false;
+    } else if (!/^(0[1-9]|1[0-2])[0-9]{2}$/.test(valorVencimiento)) {
+      mostrarError(vencimiento, "Formato incorrecto (MMAA, ej: 1231).");
+      esValido = false;
+    }
+
+    if (codigoSeguridad.value.trim() === "") {
+      mostrarError(codigoSeguridad, "El código de seguridad es obligatorio.");
+      esValido = false;
+    } else if (!/^\d{3}$/.test(codigoSeguridad.value.trim())) {
+      mostrarError(codigoSeguridad, "Debe tener 3 dígitos numéricos.");
+      esValido = false;
+    }
+
+    if (esValido) {
+      popup.style.display = "flex";
+      resetearCarrito();
+    }
+  });
+
+  cerrarPopup?.addEventListener("click", () => {
+    popup.style.display = "none";
+    form.reset();
+  });
+
+  // Funciones auxiliares
+  function mostrarError(input, mensaje) {
+    const contenedor = input.parentElement;
+    let error = contenedor.querySelector(".error-mensaje");
+    if (!error) {
+      error = document.createElement("small");
+      error.classList.add("error-mensaje");
+      contenedor.appendChild(error);
+    }
+    error.textContent = mensaje;
+    input.classList.add("input-error");
+  }
+
+  function limpiarErrores() {
+    BUSCADOR.buscarVariosElementos(".error-mensaje").forEach(e => e.remove());
+    BUSCADOR.buscarVariosElementos(".input-error").forEach(i => i.classList.remove("input-error"));
+  }
+
+  function resetearCarrito() {
+    const contador = BUSCADOR.buscarUnElementoPorId("cart-count");
+    if (contador) contador.textContent = "0";
+  }
+}
