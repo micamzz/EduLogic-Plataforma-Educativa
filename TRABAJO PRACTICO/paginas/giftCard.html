@@ -173,7 +173,7 @@
           <div class="Formulario_estilo">
             <label for="style">Fuente : </label>
 
-            <select name="style" id="style" class="style_type">
+            <select name="style" id="styleSelect" class="style_type">
               <option disabled selected>Seleccione su fuente</option>
 
               <option value="Arial">Arial</option>
@@ -188,7 +188,7 @@
           <div class="Formulario_estilo_tamaño">
             <label for="tamaño_estilo">Tamaño:</label>
 
-            <select name="style_color" id="syle_color">
+            <select name="style_color" id="style_size">
               <option value="5">5</option>
 
               <option selected value="11">11</option>
@@ -207,36 +207,36 @@
         <section class="colores">
 
           <label for="Rojo">
-            <input type="radio" name="color_estilo" id="Rojo" value="Rojo" checked />
+            <input type="radio" name="color_estilo" id="Rojo" value="red" checked />
             <div class="color circuloRojo"></div>
 
           </label>
 
           <label for="Amarillo">
 
-            <input type="radio" name="color_estilo" id="Amarillo" value="Amarillo" />
+            <input type="radio" name="color_estilo" id="Amarillo" value="yellow" />
             <div class="color circuloAmarillo"></div>
           </label>
 
 
           <label for="Azul">
 
-            <input type="radio" name="color_estilo" id="Azul" value="Azul" />
+            <input type="radio" name="color_estilo" id="Azul" value="blue" />
             <div class="color circuloAzul"></div>
           </label>
 
           <label for="Verde">
-            <input type="radio" name="color_estilo" id="Verde" value="Verde" />
+            <input type="radio" name="color_estilo" id="Verde" value="green" />
             <div class="color circuloVerde"></div>
           </label>
           <label for="Lila">
 
-            <input type="radio" name="color_estilo" id="Lila" value="Lila" />
+            <input type="radio" name="color_estilo" id="Lila" value="purple" />
             <div class="color circuloLila"></div>
           </label>
           <label for="Naranja">
 
-            <input type="radio" name="color_estilo" id="Naranja" value="Naranja" />
+            <input type="radio" name="color_estilo" id="Naranja" value="orange  " />
             <div class="color circuloNaranja"></div>
           </label>
 
@@ -244,31 +244,31 @@
         <div class="Formulario_fondo">
           <label for="Fondo1">
 
-            <input type="radio" name="Fondo" id="Fondo1" value="Fondo1" checked />
+            <input type="radio" name="Fondo" id="Fondo1" value="../Imagenes/gc_fondo1.jpeg" checked />
 
             <img src="../Imagenes/gc_fondo1.jpeg" class="fondo"></label>
 
           <label for="Fondo2">
 
-            <input type="radio" name="Fondo" id="Fondo2" value="Fondo2" />
+            <input type="radio" name="Fondo" id="Fondo2" value="../Imagenes/gc_fondo2.jpg" />
 
             <img src="../Imagenes/gc_fondo2.jpg" class="fondo"></label>
 
           <label for="Fondo3">
 
-            <input type="radio" name="Fondo" id="Fondo3" value="Fondo3" />
+            <input type="radio" name="Fondo" id="Fondo3" value="../Imagenes/gc_fondo3.jpg" />
 
             <img src="../Imagenes/gc_fondo3.jpg" class="fondo"></label>
 
           <label for="Fondo4">
 
-            <input type="radio" name="Fondo" id="Fondo4" value="Fondo4" />
+            <input type="radio" name="Fondo" id="Fondo4" value="../Imagenes/gc_fondo4.jpg" />
 
             <img src="../Imagenes/gc_fondo4.jpg" class="fondo"></label>
 
           <label for="Fondo5">
 
-            <input type="radio" name="Fondo" id="Fondo5" value="Fondo5" />
+            <input type="radio" name="Fondo" id="Fondo5" value="../Imagenes/gc_fondo5.jpg" />
 
             <img src="../Imagenes/gc_fondo5.jpg" class="fondo"></label>
 
@@ -294,6 +294,7 @@
 
         <div class="Destinatario">
           <h3>¡Felicidades! :</h3>
+          <h3 class="Destinatario2"></h3>
         </div>
 
         <div class="Monto">
@@ -301,7 +302,7 @@
         </div>
 
         <div class="Mensaje">
-          <h3>Contenido del mensaje</h2>
+          <h3>Clickea aqui</h3>
         </div>
 
       </section>
@@ -312,15 +313,15 @@
         <section class="ubicacion_monto">
 
           <label>
-            <input type="radio" name="Ubicacion" id="ubi_monto" value="ubi_monto">
+            <input type="radio" name="Ubicacion" id="ubi_monto" value="ubi_monto" data-columna="1" data-fila="3" data-hori="start" data-verti="end">
             <img class="imagen_monto" src="../Imagenes/monto_abajo_izquierda.JPG">
           </label>
           <label>
-            <input type="radio" name="Ubicacion" id="ubi_monto2" value="ubi_monto2" checked>
+            <input type="radio" name="Ubicacion" id="ubi_monto2" value="ubi_monto2" checked data-columna="3" data-fila="3" data-hori="end" data-verti="end">
             <img class="imagen_monto" src="../Imagenes/monto_abajo_derecha.JPG">
           </label>
           <label>
-            <input type="radio" name="Ubicacion" id="ubi_monto3" value="ubi_monto3">
+            <input type="radio" name="Ubicacion" id="ubi_monto3" value="ubi_monto3" data-columna="3" data-fila="1" data-hori="end" data-verti="start">
             <img class="imagen_monto" src="../Imagenes/monto_arriba_izquierda.JPG">
           </label>
 
@@ -367,9 +368,9 @@
       </nav>
     </section>
 
-
-    </section>
   </footer>
+
+  <script src="../paginas/giftCardEventos.js"></script>
 </body>
 
 </html>

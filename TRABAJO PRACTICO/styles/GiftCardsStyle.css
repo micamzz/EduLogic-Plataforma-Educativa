@@ -12,7 +12,9 @@
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr;
 }
-
+.Cuadro_Preview * {
+  font-family: inherit;
+}
 .Cuadro_Preview {
   height: 30em;
   width: 60em;
@@ -25,11 +27,13 @@
 }
 
 .Cuadro_Preview .Destinatario {
+  
   grid-column: 1;
   grid-row: 1;
 }
 
 .Cuadro_Preview .Monto {
+  
   grid-column: 3;
   grid-row: 3;
   align-self: end;
@@ -37,6 +41,7 @@
 }
 
 .Cuadro_Preview .Mensaje {
+ 
   grid-column: 2;
   grid-row: 2;
   align-self: center;
@@ -54,14 +59,14 @@
 }
 
 .Mensaje-Monto h2 {
-  font-family: Arial, Helvetica, sans-serif;
+  
   color: #9575CD;
   display: flex;
   justify-content: center;
 }
 
 .Mensaje-Monto h3 {
-  font-family: Arial, Helvetica, sans-serif;
+ 
   display: flex;
   justify-content: center;
 }
