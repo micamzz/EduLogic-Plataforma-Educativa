@@ -12,6 +12,10 @@ export function formularioDeContacto() {
     const TELEFONO = BUSCADOR.buscarUnElementoPorId("telefono");
     const MENSAJE = BUSCADOR.buscarUnElementoPorId("mensaje");
 
+      if (!FORM || !NOMBRE || !MAIL || !TELEFONO || !MENSAJE) {
+    return;
+  }
+
     // CONTADOR DE CARACTERES
     const CONTADOR = CREADOR.crearUnElemento("p");
     CONTADOR.classList.add("contador");
