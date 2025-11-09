@@ -1,8 +1,4 @@
-// Archivo: Javascript/incioSesion.js
 import { mostrarPopup } from './popupManager.js'; // Importar la nueva función
-
-// La lógica del popup ya no está aquí, solo usamos la función mostrarPopup()
-// No necesitamos el código de btnAceptar y popup
 
 // Función auxiliar 
 export function iniciarLogin(redirectUrl) {
@@ -27,10 +23,21 @@ export function iniciarLogin(redirectUrl) {
         // Verificación de credenciales
         if (user.email === emailInput && user.password === passwordInput) {
             localStorage.setItem('isLoggedIn', 'true');
+
+            const redirectGuardado = localStorage.getItem("redirectAfterLogin");
+            const destino = redirectGuardado || redirectUrl || '../index.html';
             
-            mostrarPopup('Éxito', 'Inicio de sesión exitoso. ¡Bienvenido, ' + user.nombre + '!', 'alert', () => {
-                 window.location.href = redirectUrl || '../index.html';
-            });
+            mostrarPopup(
+              'Éxito',
+              'Inicio de sesión exitoso. ¡Bienvenido, ' + user.nombre + '!',
+              'alert',
+              () => {
+                if (redirectGuardado) {
+                  localStorage.removeItem("redirectAfterLogin");
+                }
+                window.location.href = destino;
+              }
+            );
         } else {
             mostrarPopup('Error de Credenciales', 'Credenciales incorrectas. Verifica tu correo y contraseña.');
         }

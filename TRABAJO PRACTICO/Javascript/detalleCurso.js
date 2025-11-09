@@ -17,6 +17,7 @@ export class DetalleCursos {
     const contenedor = BUSCADOR.buscarUnElementoPorId("js-curso-detalle");
 
     // GUARDAR LAS PROPIEDADES DE LOS CURSOS EN VARIABLES.
+    const id = curso.id;
     const titulo = curso.titulo;
     const descripcion = curso.descripcion;
     const duracion = curso.duracion;
@@ -77,17 +78,12 @@ export class DetalleCursos {
       ${modulosHTML}
 
       <article class="block-informacion-contenidos_precio-y-boton">
-        <span class="block-informacion-contenidos__precio">Precio final: ${precio}</span>
-          
-        <div class="boton-carrito-inscripcion-curso>
-          <!-- BOTON INSCRIPCION CURSO DSP BORRAR ESTE COMENTARIO ANTES DE ENTREGAR-->
-        <a href="../inscripcionCurso.html">
-          <button class="block-informacion-contenidos__boton">Inscribirse</button>  
+        <span class="block-informacion-contenidos__precio">Precio final: ${precio} ARS</span>
+        <div class="boton-carrito-inscripcion-curso">
+        <a href="../paginas/inscripcionCurso.html"> <button class="block-informacion-contenidos__boton">Inscribirse</button>  
         </a>
-         <!-- BOTON CARRITO  BORRAR COMENTARIO ANTES DE ENTREGAR PORQ SI NO SE VE EN EL DOM-->
-        <a href="../inscripcionCurso.html">
-          <button class="block-informacion-contenidos__boton">Agregar al carrito</button>  
-        </a>
+         <button class="block-informacion-contenidos__boton js-producto-agregar" data-id="${curso.id}">Agregar al carrito</button>
+
         </div>
       </article>
     </article>
