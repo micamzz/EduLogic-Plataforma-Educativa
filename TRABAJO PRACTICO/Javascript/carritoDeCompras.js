@@ -66,12 +66,10 @@ function renderCarrito() {
 
   const subtotalFormateado = subtotal.toLocaleString("es-AR", {style: "currency",currency: "ARS" });
 
-  //const hrefPago = window.location.pathname.includes('/paginas/')
-    //? './formularioDePago.html'
-    //: './paginas/formularioDePago.html';
-    const hrefPago = window.location.pathname.includes('/paginas/')
-  ? `./formularioDePago.html?curso=${encodeURIComponent(curso.titulo)}&precio=${curso.precio}`
-  : `./paginas/formularioDePago.html?curso=${encodeURIComponent(curso.titulo)}&precio=${curso.precio}`;
+  const hrefPago = window.location.pathname.includes('/paginas/')
+    ? './formularioDePago.html'
+    : './paginas/formularioDePago.html';
+ 
 
 
   html += `

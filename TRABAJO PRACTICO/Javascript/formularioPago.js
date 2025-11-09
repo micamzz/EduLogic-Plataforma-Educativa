@@ -4,13 +4,14 @@ export function iniciarFormularioDePago() {
   const BUSCADOR = new BuscadorElementos();
   const params = new URLSearchParams(window.location.search);
 
+  // Cursos seleccionados desde query params
   const cursosSeleccionados = [
     params.get("curso1"),
     params.get("curso2"),
     params.get("curso3")
-  ].filter(c => c); 
+  ].filter(c => c);
 
-  // Precios de cursos
+  // Precios de los cursos
   const cursosPrecios = {
     "frontend": 120000,
     "backend": 250000,
@@ -20,7 +21,7 @@ export function iniciarFormularioDePago() {
     "finanzas": 75000
   };
 
-  // Mostrar info de los cursos y calcular total
+  // Mostrar info de cursos y total
   let total = 0;
   const infoCurso = document.createElement("div");
   infoCurso.classList.add("info-curso");
@@ -58,7 +59,7 @@ export function iniciarFormularioDePago() {
 
   if (!form) return;
 
-  // Listener submit
+  // Listener para submit
   form.addEventListener("submit", (e) => {
     e.preventDefault();
     limpiarErrores();
@@ -110,7 +111,7 @@ export function iniciarFormularioDePago() {
 
     if (esValido) {
       popup.style.display = "flex";
-      resetearCarrito();
+      // No reseteamos carrito, lo hará el usuario manualmente
     }
   });
 
@@ -135,10 +136,5 @@ export function iniciarFormularioDePago() {
   function limpiarErrores() {
     BUSCADOR.buscarVariosElementos(".error-mensaje").forEach(e => e.remove());
     BUSCADOR.buscarVariosElementos(".input-error").forEach(i => i.classList.remove("input-error"));
-  }
-
-  function resetearCarrito() {
-    const contador = BUSCADOR.buscarUnElementoPorId("cart-count");
-    if (contador) contador.textContent = "0";
   }
 }
