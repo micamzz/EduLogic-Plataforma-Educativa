@@ -94,7 +94,7 @@
             <form action="#popup" id="formulario-pago">
                 <article class="persona">
                     <label>Email:</label>
-                    <input type="email" name="email" placeholder="Email@explample.com" required>
+                    <input type="email" id="email" name="email" placeholder="Email@explample.com" required>
 
                 </article>
                 <h3>Pago con Tarjeta</h3>
@@ -112,8 +112,8 @@
                 </article>
                 <article class="datos-tarjeta">
                     <label for="card">Numero de Tarjeta:</label>
-                    <input type="text" inputmode="numeric" pattern="[0-9]{13,19}" name="card" maxlength="19"
-                        placeholder="XXXX XXXX XXXX XXXX" required>
+                    <input type="text" id="numero-tarjeta" name="card" maxlength="19" placeholder="XXXX XXXX XXXX XXXX" required>
+
                     <div class="vencimiento-y-codigo-de-seguridad">
                         <div class="vencimiento">
                             <label for="vencimiento">Fecha de vencimiento</label>
@@ -121,7 +121,8 @@
                                 placeholder="MMAA" pattern="(0[1-9]|1[0-2])[0-9]{2}"  maxlength="4" required>
                         </div>
                         <div class="codigo-seguridad">
-                            <label for="vencimiento">Código de Seguridad</label>
+                            <label for="codigo-seguridad">Código de Seguridad</label>
+
                             <input type="password" inputmode="numeric" name="codigo-seguridad" id="codigo-seguridad"
                                 placeholder="000" pattern="[0-9]{3}" maxlength="3" required>
                             <!--le agregue el {3 } a patter porq solo permitia un numero
@@ -133,7 +134,8 @@
                 </article>
                 <article class="persona">
                     <label>Nombre:</label>
-                    <input type="text" name="nombre-titular" placeholder="Como figura en la tarjeta" required>
+                    <input type="text" id="nombre-titular" name="nombre-titular" placeholder="Como figura en la tarjeta" required>
+
 
                 </article>
                 <button type="submit" class="boton-enlace">Confirmar Pago</button>
@@ -193,7 +195,8 @@
             </nav>
         </section>
     </footer>
-    <script type="module" src="../JavaScript.js"></script>
+    <script src="../Javascript/formularioPago.js"></script>
+    
 </body>
 
 </html>
