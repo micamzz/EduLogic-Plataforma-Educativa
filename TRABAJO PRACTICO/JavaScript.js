@@ -11,6 +11,8 @@ import { formularioDeContacto } from "./Javascript/contactoFormulario.js";
 import { inicializarCarrito } from './Javascript/carritoDeCompras.js';
 import {GiftCard} from './Javascript/giftCardEventos.js';
 import { iniciarFormularioDePago } from "./Javascript/formularioPago.js";
+import { iniciarFormularioEmpresa } from './Javascript/inscripcionEmpresa.js';
+
 const BUSCADOR = new BuscadorElementos();
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -86,9 +88,14 @@ else if (path.includes('/contacto.html')) {
 
 const iconoCarrito = document.querySelector('.carrito_icono');
 
-if (iconoCarrito) {
+if (path.includes('/inscripcionCurso.html')) {
+    iniciarFormularioEmpresa(); 
+    inicializarCarrito();
+  }
+
+
   inicializarCarrito();
-}
+
   
 // const carritoIcono = BUSCADOR.buscarUnElemento(".carrito_icono");
 

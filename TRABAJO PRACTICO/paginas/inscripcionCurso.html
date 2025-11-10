@@ -88,85 +88,66 @@
 
     <main class="main-content">
         <section class="formulario-inscripcion">
-            <h2>Formulario de inscripción a nuestros cursos</h2>
+    <h2>Formulario de inscripción a nuestros cursos</h2>
+    
+    <div class="tipo-inscripcion-selector">
+        <h3>Tipo de Inscripción</h3>
+        <label>
+            <input type="radio" name="tipo-inscripcion" value="personal" id="radio-personal" checked> Personal
+        </label>
+        <label>
+            <input type="radio" name="tipo-inscripcion" value="empresa" id="radio-empresa"> Empresarial
+        </label>
+    </div>
 
-            <h3>Datos de el alumno</h3>
-
-            <form action="./formularioDePago.html">
-                <div class="persona">
-                    <label>Alumno:</label>
-                    <input type="text" name="nombre1" placeholder="Nombre y Apellido" required minlength="5">
-                    <input type="text" inputmode="numeric" name="dni1" placeholder="DNI" pattern="[0-9]{8,12}" required minlength="8">
-                </div>
-
-
-                <div class="curso curso-1">
-                    <label for="curso1">Curso 1:</label>
-                    <select id="curso1" name="curso1" required>
-                        <option value="">-- Elegí un curso --</option>
-                        <option value="frontend">Programación Front-End</option>
-                        <option value="backend">Programación Back-End</option>
-                        <option value="ciberseguridad">Ciberseguridad</option>
-                        <option value="ingles">Inglés Avanzado</option>
-                        <option value="marketing">Marketing Digital</option>
-                        <option value="finanzas">Finanzas Personales</option>
-                    </select>
-                </div>
-
-                <input type="checkbox" id="mostrar-curso-2" class="toggle">
-                <label for="mostrar-curso-2" class="toggle-label">Agregar Curso 2</label>
-
-                <div class="curso curso-2">
-                    <label for="curso2">Curso 2:</label>
-                    <select id="curso2" name="curso2">
-                        <option value="">-- Elegí un curso --</option>
-                        <option value="frontend">Programación Front-End</option>
-                        <option value="backend">Programación Back-End</option>
-                        <option value="ciberseguridad">Ciberseguridad</option>
-                        <option value="ingles">Inglés Avanzado</option>
-                        <option value="marketing">Marketing Digital</option>
-                        <option value="finanzas">Finanzas Personales</option>
-                    </select>
-
-                    <label for="mostrar-curso-2" class="toggle-label quitar">Quitar Curso 2</label>
-                </div>
-
-                <!-- Checkbox oculto para Curso 3 -->
-                <input type="checkbox" id="mostrar-curso-3" class="toggle">
-                <label for="mostrar-curso-3" class="toggle-label">Agregar Curso 3</label>
-
-                <div class="curso curso-3">
-                    <label for="curso3">Curso 3:</label>
-                    <select id="curso3" name="curso3">
-                        <option value="">-- Elegí un curso --</option>
-                        <option value="frontend">Programación Front-End</option>
-                        <option value="backend">Programación Back-End</option>
-                        <option value="ciberseguridad">Ciberseguridad</option>
-                        <option value="ingles">Inglés Avanzado</option>
-                        <option value="marketing">Marketing Digital</option>
-                        <option value="finanzas">Finanzas Personales</option>
-
-                    </select>
-
-                    <label for="mostrar-curso-3" class="toggle-label quitar">Quitar Curso 3</label>
-                </div>
-
-                <button class="boton-enlace">Ir a Pagar</button>
-            </form>
-
-
-            <!-- Popup de confirmación -->
-            <div id="popup" class="popup-confirmacion">
-                <div class="popup-contenido">
-                    <h3>✅ ¡Usted se inscribio correctamente!</h3>
-                    <p> Sus datos fueron registrados con éxito.</p>
-
-
-                    <a href="#" class="cerrar-popup">Cerrar</a>
-                </div>
+    <div id="contenedor-personal">
+        <h3>Datos de el alumno</h3>
+        <form id="formulario-personal" action="./formularioDePago.html">
+            <div class="persona">
+                <label>Alumno:</label>
+                <input type="text" name="nombre1" placeholder="Nombre y Apellido" required minlength="5">
+                <input type="text" inputmode="numeric" name="dni1" placeholder="DNI" pattern="[0-9]{8,12}" required minlength="8">
             </div>
 
-        </section>
+            <div class="curso curso-1">
+                <label for="curso1">Curso:</label>
+                <select id="curso1" name="curso1" required>
+                    <option value="">-- Elegí un curso --</option>
+                    <option value="frontend">Programación Front-End</option>
+                    <option value="backend">Programación Back-End</option>
+                    <option value="ciberseguridad">Ciberseguridad</option>
+                    <option value="ingles">Inglés Avanzado</option>
+                    <option value="marketing">Marketing Digital</option>
+                    <option value="finanzas">Finanzas Personales</option>
+                </select>
+                </div>
+            <button type="submit" class="boton-enlace">Ir a Pagar</button>
+        </form>
+    </div>
+
+    <div id="contenedor-empresa" style="display: none;">
+        <h3>Datos de la empresa y participantes</h3>
+        <form id="formulario-empresa" action="#">
+            
+            <div id="contenedor-participantes">
+                </div>
+
+            <button type="button" class="toggle-label" id="btn-agregar-persona">Agregar persona</button>
+            <p id="total-pago">Total a Pagar: **$ 0**</p>
+            
+            <button type="submit" class="boton-enlace" id="btn-inscribirse-empresa">Inscribirse</button>
+        </form>
+    </div>
+    
+    <div id="popup" class="popup-confirmacion">
+        <div class="popup-contenido">
+            <h3>✅ Resumen de Inscripción</h3>
+            <div id="resumen-inscripcion"></div>
+            <p>Total a Pagar: <strong id="resumen-total"></strong></p>
+            <a href="#" class="cerrar-popup" id="btn-cerrar-popup-empresa">Cerrar</a>
+        </div>
+    </div>
+</section>
     </main>
 
 
