@@ -51,6 +51,7 @@ a{
   padding: 0.25em;
   background-color: rgb(225, 213, 238);
   display: flex;
+
 }
 
 
@@ -66,6 +67,7 @@ a{
   justify-content: center;
   align-items: center;
   display: flex;
+  margin-bottom: 1em;
 }
 
 .block-informacion-contenidos__imagen-propiedades {
@@ -126,7 +128,6 @@ summary {
   border-radius: 5px;
   cursor: pointer;
   margin: 1em;
-  font-weight: bold;
 }
 
 .block-informacion-contenidos__precio {
@@ -138,7 +139,8 @@ summary {
 .h2-docente-a-cargo {
   width: 80%;
   margin: auto;
-  margin-top: 2em;
+  margin-top: 1em;
+
 }
 
 .block-informacion-docente {
@@ -325,4 +327,18 @@ h4 {
     font-weight: lighter;
   }
 
+}
+
+@media screen and (max-width: 768px) {
+
+  .block-informacion-contenidos {
+  display: flex;
+      flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+  .h2-docente-a-cargo {
+ text-align: center;
+
+}
 }

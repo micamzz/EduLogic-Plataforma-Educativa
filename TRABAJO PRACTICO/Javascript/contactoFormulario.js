@@ -94,8 +94,7 @@ export function formularioDeContacto() {
 // POPUP 
 function mostrarPopupDeContacto(CREADOR) {
         mostrarPopup(CREADOR);
-    });
-}
+    }
 
 // POPUP 
 function mostrarPopup(CREADOR) {
@@ -107,8 +106,6 @@ function mostrarPopup(CREADOR) {
 
       <p>Gracias por contactarnos</p>
       <p> Nos comunicaremos pronto.</p>
-
-      <p>Gracias por contactarnos. Nos comunicaremos pronto.</p>
       <button id="boton-aceptar">Aceptar</button>
     </article>
   `;
