@@ -34,52 +34,54 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 const path = window.location.pathname.toLowerCase();
 
-  if (path.toLowerCase().includes('/index.html') || path === '/') {
-    iniciarPaginaPrincipal();
+  if (path.includes('/index.html') || path === '/') {
+  iniciarPaginaPrincipal();
 
-  } else if (path.toLowerCase().includes('/registrarse.html')) {
-    iniciarRegistroNormal();
+} else if (path.includes('/registrarse.html')) {
+  iniciarRegistroNormal();
 
-  } else if (path.toLowerCase().includes('/registrarsePago.html')) {
-    iniciarRegistroPago();
+} else if (path.includes('/registrarsepago.html')) {
+  iniciarRegistroPago();
 
-  } else if (path.toLowerCase().includes('/paginas/iniciosesion.html')) {
-    iniciarLoginNormal();
+} else if (path.includes('/iniciosesion.html')) {
+  iniciarLoginNormal();
 
-  } else if (path.toLowerCase().includes('/inicioSesionPago.html')) {
-    iniciarLoginPago();
+} else if (path.includes('/iniciosesionpago.html')) {
+  iniciarLoginPago();
 
-  } else if (path.toLowerCase().includes('/perfil.html')) {
-    iniciarLogicaPerfil();
+} else if (path.includes('/perfil.html')) {
+  iniciarLogicaPerfil();
 
-  } 
-  else if (path.toLowerCase().includes('/contacto.html')) {
-    formularioDeContacto();
-
+} else if (path.includes('/calendario.html')) {
+  if (typeof Calendario !== 'undefined' && Calendario.iniciar) {
+    Calendario.iniciar(); 
   }
-  else if (path.toLowerCase().includes('/calendario.html')) {
-    if (typeof Calendario !== 'undefined' && Calendario.iniciar) {
-      Calendario.iniciar(); 
-    }
 
-  } else if (path.toLowerCase().includes('/recuperarContra.html')) {
-    iniciarLogicaRecuperacion();
+} else if (path.includes('/recuperarcontra.html')) {
+  iniciarLogicaRecuperacion();
 
-  }  
-  else if (path.toLowerCase().includes('/giftcard.html')) {
-  console.log('🎁 Inicializando GiftCard...');
-  GiftCard();
-}
-  else if (path.includes('/formulariodepago.html')) {  
+} else if (path.includes('/formulariodepago.html')) {
   console.log('💳 Inicializando formulario de pago...');
   iniciarFormularioDePago();
+
+} else if (path.includes('/giftcard.html')) {
+  console.log('🎁 Inicializando GiftCard...');
+  GiftCard();
+
+} else if (path.includes('/contacto.html')) {
+  console.log('📞 Inicializando formulario de contacto...');
+  formularioDeContacto();
 }
- 
-  //  Importar popupManager solo si NO estamos en contacto
-  if (!path.includes("/contacto.html")) {
-    await import("./Javascript/popupManager.js"); 
+
+// Importar popupManager solo si NO estamos en contacto
+if (!path.includes("/contacto.html")) {
+  await import("./Javascript/popupManager.js"); 
+}
     // Si la ruta actual contiene "contacto.html", se ejecuta la lógica del formulario:
- } 
+else if (path.includes('/contacto.html')) {
+  formularioDeContacto();
+}
+
 
 
 const iconoCarrito = document.querySelector('.carrito_icono');

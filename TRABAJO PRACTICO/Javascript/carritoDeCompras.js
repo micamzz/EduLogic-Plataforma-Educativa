@@ -60,26 +60,20 @@ function renderCarrito() {
     `;
   });
 
-  const cursosParams = PRODUCTOS_EN_CARRITO
-  .map((item, index) => `curso${index + 1}=${encodeURIComponent(item.titulo || item.id)}`)
-  .join('&');
+  const hrefPago = estoyEnPaginas ? './formularioDePago.html' : './paginas/formularioDePago.html';
+ 
 
-const hrefPago = estoyEnPaginas 
-  ? `./formularioDePago.html?${cursosParams}`
-  : `./paginas/formularioDePago.html?${cursosParams}`;
-
-console.log('🔗 URL de pago:', hrefPago); // Para debug
-
-html += `
-  <div class="carrito-subtotal">
-    <p class="carrito-subtotal-texto">Subtotal: ${subtotal.toLocaleString("es-AR",{style:"currency",currency:"ARS"})}</p>
-    <div class="carrito-pagar-vaciar">
-      <a href="${hrefPago}" class="carrito-pagar-boton">Ir a pagar</a>
-      <button class="carrito-vaciar">Vaciar carrito</button>
+  html += `
+    <div class="carrito-subtotal">
+      <p class="carrito-subtotal-texto">Subtotal: ${subtotal.toLocaleString("es-AR",{style:"currency",currency:"ARS"})}</p>
+      <div class="carrito-pagar-vaciar">
+        <a href="${hrefPago}" class="carrito-pagar-boton">Ir a pagar</a>
+        <button class="carrito-vaciar">Vaciar carrito</button>
+      </div>
     </div>
   </div>
-</div>
-`;
+  `;
+
   contenedor.innerHTML = html;
 
   contenedor.querySelectorAll(".carrito-eliminar").forEach(btn => {
