@@ -78,11 +78,7 @@ if (!path.includes("/contacto.html")) {
   await import("./Javascript/popupManager.js"); 
 }
     // Si la ruta actual contiene "contacto.html", se ejecuta la lógica del formulario:
-else if (path.includes('/contacto.html')) {
-  formularioDeContacto();
-}
-
-
+  }
 
 const iconoCarrito = document.querySelector('.carrito_icono');
 
