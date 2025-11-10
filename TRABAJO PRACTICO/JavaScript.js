@@ -52,7 +52,12 @@ const path = window.location.pathname.toLowerCase();
   } else if (path.toLowerCase().includes('/perfil.html')) {
     iniciarLogicaPerfil();
 
-  } else if (path.toLowerCase().includes('/calendario.html')) {
+  } 
+  else if (path.toLowerCase().includes('/contacto.html')) {
+    formularioDeContacto();
+
+  }
+  else if (path.toLowerCase().includes('/calendario.html')) {
     if (typeof Calendario !== 'undefined' && Calendario.iniciar) {
       Calendario.iniciar(); 
     }
@@ -62,26 +67,19 @@ const path = window.location.pathname.toLowerCase();
 
   }  
   else if (path.toLowerCase().includes('/giftcard.html')) {
+  console.log('🎁 Inicializando GiftCard...');
   GiftCard();
 }
-  
-   // FORMULARIO DE CONTACTO
-    formularioDeContacto();
+  else if (path.includes('/formulariodepago.html')) {  
+  console.log('💳 Inicializando formulario de pago...');
+  iniciarFormularioDePago();
+}
  
   //  Importar popupManager solo si NO estamos en contacto
   if (!path.includes("/contacto.html")) {
     await import("./Javascript/popupManager.js"); 
     // Si la ruta actual contiene "contacto.html", se ejecuta la lógica del formulario:
- } else if (path.includes('/contacto.html')) {
-  formularioDeContacto();
-}
-
-// FORMULARIO DE PAGO
-if (path.includes("/formularioDePago.html")) {
-  iniciarFormularioDePago();
-  console.log({ form, nombre, email, numeroTarjeta, vencimiento, codigoSeguridad });
-
-}
+ } 
 
 
 const iconoCarrito = document.querySelector('.carrito_icono');

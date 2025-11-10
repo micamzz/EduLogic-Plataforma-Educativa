@@ -94,7 +94,7 @@
             <form action="#popup" id="formulario-pago">
                 <article class="persona">
                     <label>Email:</label>
-                    <input type="email" name="email" placeholder="Email@explample.com" required>
+                    <input type="email" id="email" name="email" placeholder="Email@explample.com" required>
 
                 </article>
                 <h3>Pago con Tarjeta</h3>
@@ -112,7 +112,7 @@
                 </article>
                 <article class="datos-tarjeta">
                     <label for="card">Numero de Tarjeta:</label>
-                    <input type="text" inputmode="numeric" pattern="[0-9]{13,19}" name="card" maxlength="19"
+                    <input type="text" id="numero-tarjeta" inputmode="numeric" pattern="[0-9]{13,19}" name="card" maxlength="19"
                         placeholder="XXXX XXXX XXXX XXXX" required>
                     <div class="vencimiento-y-codigo-de-seguridad">
                         <div class="vencimiento">
@@ -133,7 +133,7 @@
                 </article>
                 <article class="persona">
                     <label>Nombre:</label>
-                    <input type="text" name="nombre-titular" placeholder="Como figura en la tarjeta" required>
+                    <input type="text" name="nombre-titular" id="nombre-titular" placeholder="Como figura en la tarjeta" required>
 
                 </article>
                 <button type="submit" class="boton-enlace">Confirmar Pago</button>

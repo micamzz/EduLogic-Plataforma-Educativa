@@ -1,42 +1,33 @@
 import { BuscadorElementos } from "./buscadorElementos.js";
+import { vaciarCarrito } from './carritoDeCompras.js';
 
 export function iniciarFormularioDePago() {
   const BUSCADOR = new BuscadorElementos();
-  const params = new URLSearchParams(window.location.search);
-
-  // Cursos seleccionados desde query params
-  const cursosSeleccionados = [
-    params.get("curso1"),
-    params.get("curso2"),
-    params.get("curso3")
-  ].filter(c => c);
-
-  // Precios de los cursos
-  const cursosPrecios = {
-    "frontend": 120000,
-    "backend": 250000,
-    "ciberseguridad": 400000,
-    "ingles": 120000,
-    "marketing": 90000,
-    "finanzas": 75000
-  };
+  
+  // ✅ LEER DIRECTAMENTE DEL CARRITO
+  const user = JSON.parse(localStorage.getItem("currentUser"));
+  const carritoActual = JSON.parse(localStorage.getItem(`carrito_${user?.email}`)) || [];
+  
+  console.log('📦 Carrito para pago:', carritoActual);
 
   // Mostrar info de cursos y total
   let total = 0;
   const infoCurso = document.createElement("div");
   infoCurso.classList.add("info-curso");
 
-  if (cursosSeleccionados.length === 0) {
-    infoCurso.innerHTML = `<p>No seleccionaste ningún curso.</p>`;
+  if (carritoActual.length === 0) {
+    infoCurso.innerHTML = `<p>No hay cursos en el carrito.</p>`;
   } else {
-    infoCurso.innerHTML = `<h3>Cursos seleccionados:</h3>`;
+    infoCurso.innerHTML = `<h3>Resumen de compra:</h3>`;
     const lista = document.createElement("ul");
 
-    cursosSeleccionados.forEach(curso => {
-      const precio = cursosPrecios[curso.toLowerCase()] || 0;
-      total += precio;
+    carritoActual.forEach(item => {
+      const precio = item.precio || 0;
+      const cantidad = item.cantidad || 1;
+      total += precio * cantidad;
+      
       const li = document.createElement("li");
-      li.textContent = `${curso} - $${precio.toLocaleString("es-AR")}`;
+      li.textContent = `${item.titulo} - $${precio.toLocaleString("es-AR")} x ${cantidad}`;
       lista.appendChild(li);
     });
 
@@ -110,8 +101,17 @@ export function iniciarFormularioDePago() {
     }
 
     if (esValido) {
+      console.log('🎯 PAGO EXITOSO - llamando a vaciarCarrito()');
       popup.style.display = "flex";
-      // No reseteamos carrito, lo hará el usuario manualmente
+      
+      if (infoCurso && infoCurso.parentNode) {
+      infoCurso.parentNode.removeChild(infoCurso);
+    }
+        vaciarCarrito();
+       
+     
+       
+
     }
   });
 

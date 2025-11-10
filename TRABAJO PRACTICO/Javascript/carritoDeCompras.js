@@ -60,20 +60,26 @@ function renderCarrito() {
     `;
   });
 
-  const hrefPago = estoyEnPaginas ? './formularioDePago.html' : './paginas/formularioDePago.html';
- 
+  const cursosParams = PRODUCTOS_EN_CARRITO
+  .map((item, index) => `curso${index + 1}=${encodeURIComponent(item.titulo || item.id)}`)
+  .join('&');
 
-  html += `
-    <div class="carrito-subtotal">
-      <p class="carrito-subtotal-texto">Subtotal: ${subtotal.toLocaleString("es-AR",{style:"currency",currency:"ARS"})}</p>
-      <div class="carrito-pagar-vaciar">
-        <a href="${hrefPago}" class="carrito-pagar-boton">Ir a pagar</a>
-        <button class="carrito-vaciar">Vaciar carrito</button>
-      </div>
+const hrefPago = estoyEnPaginas 
+  ? `./formularioDePago.html?${cursosParams}`
+  : `./paginas/formularioDePago.html?${cursosParams}`;
+
+console.log('🔗 URL de pago:', hrefPago); // Para debug
+
+html += `
+  <div class="carrito-subtotal">
+    <p class="carrito-subtotal-texto">Subtotal: ${subtotal.toLocaleString("es-AR",{style:"currency",currency:"ARS"})}</p>
+    <div class="carrito-pagar-vaciar">
+      <a href="${hrefPago}" class="carrito-pagar-boton">Ir a pagar</a>
+      <button class="carrito-vaciar">Vaciar carrito</button>
     </div>
   </div>
-  `;
-
+</div>
+`;
   contenedor.innerHTML = html;
 
   contenedor.querySelectorAll(".carrito-eliminar").forEach(btn => {
@@ -123,10 +129,35 @@ export function agregarGiftCardAlCarrito(giftCard) {
 
 
 export function vaciarCarrito() {
-  PRODUCTOS_EN_CARRITO = [];
+  console.log('🔄 EJECUTANDO vaciarCarrito()');
+  
   const user = JSON.parse(localStorage.getItem("currentUser"));
-  if (user?.email) localStorage.removeItem(`carrito_${user.email}`);
-  actualizarContador();
+  console.log('👤 Usuario actual:', user);
+  console.log('📧 Email del usuario:', user?.email);
+  
+  // Verificar estado ANTES de vaciar
+  const carritoAntes = localStorage.getItem(`carrito_${user?.email}`);
+  console.log('📦 Carrito en localStorage ANTES:', carritoAntes);
+  console.log('📦 PRODUCTOS_EN_CARRITO ANTES:', PRODUCTOS_EN_CARRITO);
+  
+  if (user?.email) {
+ 
+    PRODUCTOS_EN_CARRITO = [];
+    
+    localStorage.setItem(`carrito_${user.email}`, JSON.stringify([]));
+    
+
+    const carritoDespues = localStorage.getItem(`carrito_${user.email}`);
+   
+    actualizarContador();
+    
+    const carritoCheckbox = document.querySelector('#Carro');
+    if (carritoCheckbox?.checked) {
+      renderCarrito();
+    }
+    
+  } 
+  
 }
 
 export function inicializarCarrito() {
