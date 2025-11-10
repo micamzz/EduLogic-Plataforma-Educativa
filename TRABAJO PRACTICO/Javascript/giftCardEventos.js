@@ -1,4 +1,5 @@
 import { mostrarPopup } from './popupManager.js'; 
+import { agregarGiftCardAlCarrito } from './carritoDeCompras.js';
 
 function obtenerReferenciasDOM() {
   return {
@@ -16,12 +17,13 @@ function obtenerReferenciasDOM() {
     destinatario: document.querySelector('input[name="destinatario"]'),
     montoIngresado: document.querySelector('input[name="monto"]'),
     estilos: document.getElementById('styleSelect'),
-    tamaño: document.getElementById('style_size')
+    tamaño: document.getElementById('style_size'),
+    formularioGift: document.getElementById('formGiftCard')
   };
 }
 
 export function GiftCard() {
-const {
+  const {
     radiosColor,
     colorSeleccionado,
     listaFondos,
@@ -36,141 +38,104 @@ const {
     destinatario,
     montoIngresado,
     estilos,
-    tamaño
+    tamaño,
+    formularioGift
   } = obtenerReferenciasDOM();
-function aplicarColor(radio) {
-  if (radio.checked) {
-    mensaje.style.color = radio.value;
-    monto.style.color = radio.value;
-    desti1.style.color = radio.value;
-    desti2.style.color = radio.value;
+
+  // ====== FUNCIONES DE ESTILO ======
+  function aplicarColor(radio) {
+    if (radio.checked) {
+      mensaje.style.color = radio.value;
+      monto.style.color = radio.value;
+      desti1.style.color = radio.value;
+      desti2.style.color = radio.value;
+    }
   }
-}
 
-function aplicarFondo(fondo) {
-  if (fondo.checked) {
-    cajaPreview.style.background = `url(${fondo.value})`;
-    cajaPreview.style.backgroundSize = 'cover';
-    cajaPreview.style.backgroundPosition = 'center';
+  function aplicarFondo(fondo) {
+    if (fondo.checked) {
+      cajaPreview.style.background = `url(${fondo.value})`;
+      cajaPreview.style.backgroundSize = 'cover';
+      cajaPreview.style.backgroundPosition = 'center';
+    }
   }
-}
 
-function aplicarUbicacion(ubi) {
-  if (ubi.checked) {
-    monto.style.gridColumn = ubi.dataset.columna;
-    monto.style.gridRow = ubi.dataset.fila;
-    monto.style.justifySelf = ubi.dataset.hori;
-    monto.style.alignSelf = ubi.dataset.verti;
+  function aplicarUbicacion(ubi) {
+    if (ubi.checked) {
+      monto.style.gridColumn = ubi.dataset.columna;
+      monto.style.gridRow = ubi.dataset.fila;
+      monto.style.justifySelf = ubi.dataset.hori;
+      monto.style.alignSelf = ubi.dataset.verti;
+    }
   }
-}
 
-function aplicarTamaño() {
-  const size = tamaño.value + 'px';
-  mensaje.style.fontSize = size;
-  monto.style.fontSize = size;
-  desti1.style.fontSize = size;
-  desti2.style.fontSize = size;
-}
+  function aplicarTamaño() {
+    const size = tamaño.value + 'px';
+    mensaje.style.fontSize = size;
+    monto.style.fontSize = size;
+    desti1.style.fontSize = size;
+    desti2.style.fontSize = size;
+  }
 
+  // ====== EVENTOS ======
+  radiosColor.forEach((radio) => radio.addEventListener('change', () => aplicarColor(radio)));
+  listaFondos.forEach((fondo) => fondo.addEventListener('change', () => aplicarFondo(fondo)));
+  montoUbis.forEach((ubi) => ubi.addEventListener('change', () => aplicarUbicacion(ubi)));
 
-// ========== FOR EACH / EVENTOS ==========
+  destinatario.addEventListener('input', () => { desti2.textContent = destinatario.value; });
+  montoIngresado.addEventListener('input', () => { monto.textContent = montoIngresado.value + '$'; });
 
-// Colores
-radiosColor.forEach((radio) => {
-  radio.addEventListener('change', () => aplicarColor(radio));
-});
+  mensaje.setAttribute('contenteditable', 'true');
+  mensaje.addEventListener('focus', function borrarAlPrimerClick() {
+    mensaje.textContent = '';
+    mensaje.removeEventListener('focus', borrarAlPrimerClick);
+  });
 
-// Fondos
-listaFondos.forEach((fondo) => {
-  fondo.addEventListener('change', () => aplicarFondo(fondo));
-});
+  estilos.addEventListener('change', () => { cajaPreview.style.fontFamily = estilos.value; });
+  tamaño.addEventListener('change', aplicarTamaño);
 
-// Ubicación
-montoUbis.forEach((ubi) => {
-  ubi.addEventListener('change', () => aplicarUbicacion(ubi));
-});
+  // ====== INICIALIZACIÓN ======
+  if (colorSeleccionado) aplicarColor(colorSeleccionado);
+  if (fondoSeleccionado) aplicarFondo(fondoSeleccionado);
+  if (ubiSeleccionada) aplicarUbicacion(ubiSeleccionada);
+  aplicarTamaño();
 
-// Input destinatario
-destinatario.addEventListener('input', () => {
-  desti2.textContent = destinatario.value;
-});
+  // ====== FUNCIONALIDAD CARRITO ======
+  if (!formularioGift) return;
 
-// Input monto
-montoIngresado.addEventListener('input', () => {
-  monto.textContent = montoIngresado.value + '$';
-});
-
-// Editable mensaje
-mensaje.setAttribute('contenteditable', 'true');
-mensaje.addEventListener('focus', function borrarAlPrimerClick() {
-  mensaje.textContent = '';
-  mensaje.removeEventListener('focus', borrarAlPrimerClick);
-});
-
-// Selector de fuente
-estilos.addEventListener('change', () => {
-  const fuente = estilos.value;
-  cajaPreview.style.fontFamily = fuente;
-});
-
-// Selector de tamaño
-tamaño.addEventListener('change', aplicarTamaño);
-
-
-// ========== INICIALIZACIÓN ==========
-
-if (colorSeleccionado) {
-  aplicarColor(colorSeleccionado);
-}
-
-if (fondoSeleccionado) {
-  aplicarFondo(fondoSeleccionado);
-}
-
-if (ubiSeleccionada) {
-  aplicarUbicacion(ubiSeleccionada);
-}
-
-aplicarTamaño();
-
-// ======== CARRITO ============
-
-const formularioGift = document.getElementById('formGiftCard');
-
-if (formularioGift) {
-  formularioGift.addEventListener('submit', (e) => {
+  formularioGift.addEventListener("submit", (e) => {
     e.preventDefault();
 
-    const montoValor = parseFloat(montoIngresado.value);
-    const nombreDestinatario = destinatario.value.trim();
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
 
-    if (isNaN(montoValor) || montoValor <= 0) {
-      mostrarPopup("Monto inválido", "Por favor, ingresá un monto válido para la gift card.", "alert");
+    if (!isLoggedIn || !currentUser?.email) {
+      localStorage.setItem("redirectAfterLogin", "../paginas/giftCard.html");
+      window.location.href = "../paginas/inicioSesion.html";
+      return;
+    }
+
+    const precio = parseFloat(montoIngresado.value);
+    if (isNaN(precio) || precio <= 0) {
+      mostrarPopup("Monto inválido", "Por favor, ingresá un monto válido.", "alert");
       return;
     }
 
     const giftCard = {
       id: "gift-" + Date.now(),
-      titulo: `Gift Card para ${nombreDestinatario}`,
-      precio: montoValor,
-      imagen: fondoSeleccionado ? fondoSeleccionado.value : "../imagenes/giftcard.png",
+      titulo: `Gift Card para ${destinatario.value || "Destinatario"}`,
+      precio,
+      imagen: fondoSeleccionado?.value || "../imagenes/giftcard.png",
       cantidad: 1,
-      destinatario: nombreDestinatario,
-      mensaje: mensaje.textContent || "",
-      tipo: "giftcard"
+      tipo: "giftcard",
+      mensaje: mensaje.textContent || ""
     };
 
-    const carrito = JSON.parse(localStorage.getItem("carrito")) || [];
-    carrito.push(giftCard);
-    localStorage.setItem("carrito", JSON.stringify(carrito));
+    agregarGiftCardAlCarrito(giftCard);
 
-      mostrarPopup("Éxito", "🎁 Gift Card agregada al carrito!", "alert", () => {
-      formularioGift.reset(); 
-      window.location.href = "../index.html";
+    mostrarPopup("Éxito", "🎁 Gift Card agregada al carrito!", "alert", () => {
+      formularioGift.reset();
+      window.location.href = "../index.html"; 
     });
   });
-}
-
-
-}
-
+  }

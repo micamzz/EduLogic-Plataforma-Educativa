@@ -1,6 +1,6 @@
 
-import { mostrarPopup } from './popupManager.js'; // Importar la nueva función
-
+import { mostrarPopup } from './popupManager.js'; 
+import { vaciarCarrito } from './carritoDeCompras.js';
 
 
 
@@ -71,8 +71,17 @@ export function iniciarLogicaPerfil() {
             logoutButton.addEventListener('click', () => {
                 // POP-UP ESTÉTICO: Cerrar Sesión (Confirmación)
                 mostrarPopup('Cerrar Sesión', '¿Estás seguro de que deseas cerrar tu sesión?', 'confirm', () => {
+             const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+            
+            // ✅ GUARDAR BACKUP del carrito antes de cerrar sesión
+            if (currentUser?.email) {
+                const carritoActual = JSON.parse(localStorage.getItem(`carrito_${currentUser.email}`)) || [];
+                localStorage.setItem(`carrito_backup_${currentUser.email}`, JSON.stringify(carritoActual));
+            }
                     localStorage.removeItem('isLoggedIn');
-                    
+                      vaciarCarrito();
+
+
                     // POP-UP ESTÉTICO: Sesión Cerrada
                     mostrarPopup('Adiós', 'Sesión cerrada correctamente.', 'alert', () => {
                          window.location.href = '../index.html';

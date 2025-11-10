@@ -1,5 +1,5 @@
-import { mostrarPopup } from './popupManager.js'; // Importar la nueva función
-
+import { mostrarPopup } from './popupManager.js'; 
+import {restaurarCarritoUsuario} from'./carritoDeCompras.js';
 // Función auxiliar 
 export function iniciarLogin(redirectUrl) {
     const form = document.getElementById('login-form');
@@ -8,7 +8,7 @@ export function iniciarLogin(redirectUrl) {
         return;
     }
 
-    console.log("✅ Listener de login activo."); // <--- agregá esto
+    console.log("✅ Listener de login activo."); 
 
     form.addEventListener('submit', function(e) {
         e.preventDefault();
@@ -27,7 +27,10 @@ export function iniciarLogin(redirectUrl) {
 
         // Verificación de credenciales
         if (user.email === emailInput && user.password === passwordInput) {
+
             localStorage.setItem('isLoggedIn', 'true');
+            localStorage.setItem("currentUser", JSON.stringify(user));
+            restaurarCarritoUsuario(user.email);
 
             const redirectGuardado = localStorage.getItem("redirectAfterLogin");
             const destino = redirectGuardado || redirectUrl || '../index.html';
