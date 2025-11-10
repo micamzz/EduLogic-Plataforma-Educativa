@@ -1,5 +1,5 @@
 # Trabajo Práctico Grupal - Programación Web 1  
-###  [EduLogic] (https://edulogic-cursosenlinea.netlify.app/)
+###  [EduLogic] (https://edulogic-cursosonline.netlify.app/)
 ### 👩‍💻 Colaboradores  
 
 - **COLLADO, Camila Sol**  

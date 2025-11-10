@@ -12,6 +12,10 @@ export function formularioDeContacto() {
     const TELEFONO = BUSCADOR.buscarUnElementoPorId("telefono");
     const MENSAJE = BUSCADOR.buscarUnElementoPorId("mensaje");
 
+      if (!FORM || !NOMBRE || !MAIL || !TELEFONO || !MENSAJE) {
+    return;
+  }
+
     // CONTADOR DE CARACTERES
     const CONTADOR = CREADOR.crearUnElemento("p");
     CONTADOR.classList.add("contador");
@@ -82,26 +86,30 @@ export function formularioDeContacto() {
 
         if (!esValido) return;
 
+
         mostrarPopupDeContacto(CREADOR);
     });
 }
 
-// --- POPUP ---
-function mostrarPopupDeContacto(CREADOR) {
-    const POPUP = CREADOR.crearUnElemento("section");
-    POPUP.classList.add("popup-confirmacion");
-    POPUP.innerHTML = `
-    <article class="popup-contenido">
-      <h3>Consulta enviada</h3>
-      <p>Gracias por contactarnos</p>
-      <p> Nos comunicaremos pronto.</p>
-      <button id="boton-aceptar">Aceptar</button>
-    </article>
-  `;
-    document.body.appendChild(POPUP);
 
-    const BTN_ACEPTAR = POPUP.querySelector("#boton-aceptar");
-    BTN_ACEPTAR.addEventListener("click", () => {
-        window.location.href = "../index.html";
-    });
-}
+// POPUP 
+ function mostrarPopupDeContacto(creador) {
+        const POPUP = creador.crearUnElemento("section");
+        POPUP.classList.add("popup-confirmacion");
+        POPUP.innerHTML = `
+            <article class="popup-contenido">
+                <h3>✅ Consulta enviada</h3>
+                <p>Gracias por contactarnos. Nos comunicaremos pronto.</p>
+                <button id="boton-aceptar">Aceptar</button>
+            </article>
+        `;
+        document.body.appendChild(POPUP);
+
+        const BTN_ACEPTAR = POPUP.querySelector("#boton-aceptar");
+        BTN_ACEPTAR.addEventListener("click", () => {
+            POPUP.remove(); // 
+            FORM.reset(); // 
+            CONTADOR.textContent = "";
+            window.location.href = "../index.html";
+        });
+    }
