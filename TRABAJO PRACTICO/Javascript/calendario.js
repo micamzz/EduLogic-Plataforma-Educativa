@@ -150,12 +150,12 @@ export class Calendario {
       ventanaPopup.innerHTML = `
         <h3>Curso agregado al carrito</h3>
         <p>El curso <strong>${curso.nombre}</strong> fue agregado a tu carrito.</p>
-        <button class="popup-boton popup-cerrar">Aceptar</button>`;
+        <button class="popup-boton popup-cerrar2">Aceptar</button>`;
 
       fondoPopup.appendChild(ventanaPopup);
       document.body.appendChild(fondoPopup);
 
-      const botonCerrar = ventanaPopup.querySelector(".popup-cerrar"); 
+      const botonCerrar = ventanaPopup.querySelector(".popup-cerrar2"); 
 
       botonCerrar.addEventListener("click", () => {
         fondoPopup.remove();
