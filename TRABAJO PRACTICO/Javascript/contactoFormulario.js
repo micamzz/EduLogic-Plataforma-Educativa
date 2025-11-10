@@ -95,6 +95,8 @@ export function formularioDeContacto() {
 function mostrarPopupDeContacto(CREADOR) {
         mostrarPopup(CREADOR);
     }
+    }
+
 
 // POPUP 
 function mostrarPopup(CREADOR) {

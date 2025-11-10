@@ -61,6 +61,8 @@ function renderCarrito() {
   });
 
   const hrefPago = estoyEnPaginas ? './formularioDePago.html' : './paginas/formularioDePago.html';
+ 
+
   html += `
     <div class="carrito-subtotal">
       <p class="carrito-subtotal-texto">Subtotal: ${subtotal.toLocaleString("es-AR",{style:"currency",currency:"ARS"})}</p>
