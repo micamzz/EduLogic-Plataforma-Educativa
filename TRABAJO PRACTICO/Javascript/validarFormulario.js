@@ -10,7 +10,7 @@ export class ValidadorFormulario {
 
   static expresionesRegulares = {
     email: /^[0-9a-zA-Z._.-]+@[0-9a-zA-Z._.-]+\.[0-9a-zA-Z]+$/,
- telefono: /^\d{4,15}$|^\d{4}-\d{4,11}$/ // Entre 8 y 15 numeros con o sin guion
+    telefono: /^\d{8,15}$|^\d{4}-\d{4,11}$/ // Entre 8 y 15 numeros con o sin guion
   };
 
   static campoVacio(valor) {

@@ -12,7 +12,9 @@
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr;
 }
-
+.Cuadro_Preview * {
+  font-family: inherit;
+}
 .Cuadro_Preview {
   height: 30em;
   width: 60em;
@@ -25,11 +27,13 @@
 }
 
 .Cuadro_Preview .Destinatario {
+  
   grid-column: 1;
   grid-row: 1;
 }
 
 .Cuadro_Preview .Monto {
+  
   grid-column: 3;
   grid-row: 3;
   align-self: end;
@@ -37,6 +41,7 @@
 }
 
 .Cuadro_Preview .Mensaje {
+ 
   grid-column: 2;
   grid-row: 2;
   align-self: center;
@@ -54,14 +59,14 @@
 }
 
 .Mensaje-Monto h2 {
-  font-family: Arial, Helvetica, sans-serif;
+  
   color: #9575CD;
   display: flex;
   justify-content: center;
 }
 
 .Mensaje-Monto h3 {
-  font-family: Arial, Helvetica, sans-serif;
+ 
   display: flex;
   justify-content: center;
 }
@@ -193,6 +198,85 @@ el  ~  permite aplicar los estilos  a .imagen_monto que sean hermanos del input 
 .Formulario_fondo .fondo {
   width: 8em;
   height: 8em;
+}
+/* POPUP */
+
+.popup-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  display: none; /* oculto por defecto */
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup-box {
+  background-color: #ffffff;
+  border: 4px solid #9575CD;
+  border-radius: 20px;
+  padding: 2em;
+  max-width: 25em;
+  width: 80%;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+}
+
+.popup-box h2 {
+  color: #7E57C2;
+  margin-bottom: 0.8em;
+  font-size: 1.4em;
+}
+
+.popup-box p {
+  color: #555;
+  font-size: 1em;
+  margin-bottom: 1.5em;
+}
+
+/* BOTONES DEL POPUP */
+.popup-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1em;
+}
+
+.full-width-btn {
+  background-color: #9575CD;
+  border: none;
+  border-radius: 0.6em;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 0.8em 1.4em;
+  font-size: 1em;
+  transition: background-color 0.3s ease, transform 0.2s;
+  flex-grow: 1;
+}
+
+.full-width-btn:hover {
+  background-color: #AB7DEB;
+  transform: scale(1.03);
+}
+
+#btn-volver {
+  background-color: #888;
+  border: none;
+  border-radius: 0.6em;
+  color: white;
+  cursor: pointer;
+  padding: 0.8em 1.4em;
+  font-size: 1em;
+  transition: background-color 0.3s;
+}
+
+#btn-volver:hover {
+  background-color: #666;
 }
 
 /* Selecciona un elemento de formulario fondo y solo afecta a los inputs de tipo
