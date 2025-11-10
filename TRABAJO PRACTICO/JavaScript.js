@@ -9,6 +9,7 @@ import { iniciarLogicaPerfil } from './Javascript/perfil.js';
 import { iniciarLogicaRecuperacion } from './Javascript/recuperarContra.js';
 import { formularioDeContacto } from "./Javascript/contactoFormulario.js";
 import { inicializarCarrito } from './Javascript/carritoDeCompras.js';
+import {GiftCard} from './Javascript/giftCardEventos.js';
 
 
 const BUSCADOR = new BuscadorElementos();
@@ -32,35 +33,39 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
 
-  const path = window.location.pathname;
+const path = window.location.pathname.toLowerCase();
 
-  if (path.includes('/index.html') || path === '/') {
+  if (path.toLowerCase().includes('/index.html') || path === '/') {
     iniciarPaginaPrincipal();
 
-  } else if (path.includes('/registrarse.html')) {
+  } else if (path.toLowerCase().includes('/registrarse.html')) {
     iniciarRegistroNormal();
 
-  } else if (path.includes('/registrarsePago.html')) {
+  } else if (path.toLowerCase().includes('/registrarsePago.html')) {
     iniciarRegistroPago();
 
-  } else if (path.includes('/inicioSesion.html')) {
+  } else if (path.toLowerCase().includes('/paginas/iniciosesion.html')) {
     iniciarLoginNormal();
 
-  } else if (path.includes('/inicioSesionPago.html')) {
+  } else if (path.toLowerCase().includes('/inicioSesionPago.html')) {
     iniciarLoginPago();
 
-  } else if (path.includes('/perfil.html')) {
+  } else if (path.toLowerCase().includes('/perfil.html')) {
     iniciarLogicaPerfil();
 
-  } else if (path.includes('/calendario.html')) {
+  } else if (path.toLowerCase().includes('/calendario.html')) {
     if (typeof Calendario !== 'undefined' && Calendario.iniciar) {
       Calendario.iniciar(); 
     }
 
-  } else if (path.includes('/recuperarContra.html')) {
+  } else if (path.toLowerCase().includes('/recuperarContra.html')) {
     iniciarLogicaRecuperacion();
 
   }  
+  else if (path.toLowerCase().includes('/giftcard.html')) {
+  GiftCard();
+}
+  
    // FORMULARIO DE CONTACTO
     formularioDeContacto();
  
@@ -73,8 +78,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   }
 
+const iconoCarrito = document.querySelector('.carrito_icono');
 
+if (iconoCarrito) {
   inicializarCarrito();
+}
   
 // const carritoIcono = BUSCADOR.buscarUnElemento(".carrito_icono");
 

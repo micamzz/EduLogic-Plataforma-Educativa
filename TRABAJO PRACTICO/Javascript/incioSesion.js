@@ -3,7 +3,12 @@ import { mostrarPopup } from './popupManager.js'; // Importar la nueva función
 // Función auxiliar 
 export function iniciarLogin(redirectUrl) {
     const form = document.getElementById('login-form');
-    if (!form) return;
+     if (!form) {
+        console.warn("⚠️ No se encontró el formulario de login.");
+        return;
+    }
+
+    console.log("✅ Listener de login activo."); // <--- agregá esto
 
     form.addEventListener('submit', function(e) {
         e.preventDefault();
