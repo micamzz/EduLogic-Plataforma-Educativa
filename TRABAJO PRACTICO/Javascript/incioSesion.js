@@ -9,11 +9,10 @@ export function iniciarLogin(urlRedireccion) {
   const formularioLogin = buscador.buscarUnElementoPorId('login-form');
 
   if (!formularioLogin) {
-    console.warn("⚠️ No se encontró el formulario de login.");
+    console.warn("⚠️ No se encontró el formulario de inicio.");
     return;
   }
 
-  console.log("✅ Listener de login activo."); 
 
   formularioLogin.addEventListener('submit', (evento) => {
     evento.preventDefault();
@@ -48,8 +47,8 @@ export function iniciarLogin(urlRedireccion) {
       restaurarCarritoUsuario(usuario.email);
 
       const redireccionGuardada = localStorage.getItem("redirectAfterLogin");
-      const destino = redireccionGuardada || urlRedireccion || '../index.html';
-            
+     const destino = redireccionGuardada || urlRedireccion || '../index.html';
+          
       mostrarPopup(
         'Éxito',
         'Inicio de sesión exitoso. ¡Bienvenido, ' + (usuario.nombre || '') + '!',
@@ -71,6 +70,4 @@ export function iniciarLoginNormal() {
   iniciarLogin('../index.html'); 
 }
 
-export function iniciarLoginPago() {
-  iniciarLogin('../paginas/formularioDePago.html'); 
-}
+

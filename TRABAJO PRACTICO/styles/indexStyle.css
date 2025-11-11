@@ -18,7 +18,7 @@ a{
 /*MAIN*/
 /* Contenedor del Carrusel */
 .hero-slider-container {
-    max-height: 42.5em; 
+    height: 30em; 
     overflow: hidden; 
     margin-bottom: 2em;
     position: relative; /* para posicionar las flechas y puntos */

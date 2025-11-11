@@ -3,8 +3,8 @@ import { Calendario } from "./Javascript/calendario.js";
 import { DetalleCursos } from "./Javascript/detalleCurso.js";
 import { manejarVisualizacionHeader, manejarBusqueda } from './Javascript/header.js';  
 import { iniciarPaginaPrincipal } from './Javascript/index.js'; 
-import { iniciarRegistroNormal, iniciarRegistroPago } from './Javascript/registrarse.js';
-import { iniciarLoginNormal, iniciarLoginPago } from './Javascript/incioSesion.js';
+import { iniciarRegistroNormal} from './Javascript/registrarse.js';
+import { iniciarLoginNormal} from './Javascript/incioSesion.js';
 import { iniciarLogicaPerfil } from './Javascript/perfil.js';
 import { iniciarLogicaRecuperacion } from './Javascript/recuperarContra.js';
 import { formularioDeContacto } from "./Javascript/contactoFormulario.js";
@@ -45,14 +45,8 @@ if (path.includes('/index.html') || path === '/') {
 } else if (path.includes('registrarse')) {  
   iniciarRegistroNormal();
 
-} else if (path.includes('registrarsepago')) {  
-  iniciarRegistroPago();
-
 } else if (path.includes('iniciosesion')) {  
   iniciarLoginNormal();
-
-} else if (path.includes('iniciosesionpago')) {  
-  iniciarLoginPago();
 
 } else if (path.includes('perfil')) {  
   iniciarLogicaPerfil();
@@ -76,8 +70,7 @@ if (path.includes('/index.html') || path === '/') {
   console.log('💳 Inicializando formulario de pago...');
   iniciarFormularioDePago();
   
-} else if (path.includes('inscripcioncurso')) { // NUEVO: Lógica de Inscripción Personal/Empresa
-  console.log('📝 Inicializando lógica de inscripción...');
+} else if (path.includes('inscripcioncurso')) { 
   iniciarLogicaInscripcion();
 }
 

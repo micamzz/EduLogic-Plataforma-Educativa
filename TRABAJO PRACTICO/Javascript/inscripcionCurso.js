@@ -187,7 +187,7 @@ export function iniciarLogicaInscripcion() {
             camposEmpresa.querySelectorAll('input, select').forEach(input => input.removeAttribute('required'));
             camposPersonal.querySelectorAll('input, select').forEach(input => input.setAttribute('required', 'required'));
             
-            // Se asume que el primer bloque de persona-empresa (si existe) siempre tiene campos
+            // Se asume que el primer bloque de persona-empresa  siempre tiene campos
             // que se deben validar si se está en modo empresa
             
         } else if (tipo === 'empresa') {
@@ -263,6 +263,9 @@ export function iniciarLogicaInscripcion() {
             let esValido = true;
             let resumenHTML = '<ul>';
             
+            const dnisEncontrados = new Set(); // Set para rastrear DNIs
+            let dniDuplicado = false; // para duplicados
+
             BUSCADOR.buscarVariosElementos('.persona-empresa').forEach(bloque => {
                 const id = bloque.dataset.id;
                 const nombreInput = bloque.querySelector(`input[name="nombre_${id}"]`);
@@ -270,14 +273,22 @@ export function iniciarLogicaInscripcion() {
                 const emailInput = bloque.querySelector(`input[name="email_${id}"]`);
                 const telInput = bloque.querySelector(`input[name="telefono_${id}"]`);
 
-                // Validación simple de que todos los campos de una persona no estén vacíos
+                // Validación de campos vacíos 
                 if (!nombreInput.value.trim() || !dniInput.value.trim() || !emailInput.value.trim() || !telInput.value.trim()) {
                     esValido = false;
                     }
 
+                //VALIDACIÓN DE DUPLICADOS DE DNI
+                const dni = dniInput.value.trim();
+                if (dnisEncontrados.has(dni)) {
+                    dniDuplicado = true;
+                }
+                dnisEncontrados.add(dni);
+                // FIN NUEVA VALIDACIÓN
+                
                 personas.push({
                     nombre: nombreInput.value.trim(),
-                    dni: dniInput.value.trim(),
+                    dni: dni,
                     email: emailInput.value.trim(),
                     telefono: telInput.value.trim()
                 });
@@ -288,6 +299,13 @@ export function iniciarLogicaInscripcion() {
             });
             resumenHTML += '</ul>';
             
+            // VERIFICACIÓN DE DUPLICADOS ANTES DE CONTINUAR
+            if (dniDuplicado) {
+                 alert("Error de validación: No se pueden inscribir personas con el mismo DNI.");
+                 return; // Detiene la ejecución
+            }
+
+
             if (!esValido) {
                 form.reportValidity();
                 return;

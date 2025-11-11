@@ -1,5 +1,5 @@
-// Archivo: Javascript/registrarse.js
-import { mostrarPopup } from './popupManager.js'; // Importar la nueva función
+
+import { mostrarPopup } from './popupManager.js'; 
 
 export function iniciarRegistro(redirectUrl) {
     const form = document.getElementById('registro-form');
@@ -8,8 +8,7 @@ export function iniciarRegistro(redirectUrl) {
         return;
     }
 
-    // La lógica de los listeners del popup ahora está en popupManager.js, 
-    // solo usamos la función mostrarPopup()
+  
 
     // FUNCIÓN CENTRAL DE REGISTRO
     function registrarUsuario(form, redirectUrl) {
@@ -22,7 +21,7 @@ export function iniciarRegistro(redirectUrl) {
         const confirmPassword = form.querySelector('input[name="confirm_password"]').value;
 
         if (password !== confirmPassword) {
-            // Usar mostrarPopup (tipo 'alert' por defecto)
+            // Usar mostrarPopup 
             mostrarPopup('Error de Registro', 'Las contraseñas no coinciden. Por favor, verifícalas.');
             return;
         }
@@ -45,24 +44,20 @@ export function iniciarRegistro(redirectUrl) {
         // Guardar datos en localStorage
         localStorage.setItem('currentUser', JSON.stringify(userData));
 
-        // Muestra pop-up y ejecuta la redirección al hacer clic en OK.
+        // Muestra popup y ejecuta la redirección al hacer clic en ok
         mostrarPopup('Éxito', '¡Registro exitoso! Ahora puedes iniciar sesión con tu cuenta.', 'alert', () => {
-            window.location.href = redirectUrl || './inicioSesion.html';
+            window.location.href =  './inicioSesion.html';
         });
     }
 
     // Listener principal para el envío del formulario
     form.addEventListener('submit', function(e) {
         e.preventDefault(); 
-        registrarUsuario(form, redirectUrl);
+        registrarUsuario(form);
     });
 }
 
-// Funciones para el ruteo en JavaScript.js
 export function iniciarRegistroNormal() {
     iniciarRegistro('./inicioSesion.html'); 
 }
 
-export function iniciarRegistroPago() {
-    iniciarRegistro('./inicioSesionPago.html');
-}
