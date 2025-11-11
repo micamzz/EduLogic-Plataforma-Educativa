@@ -179,10 +179,19 @@
 }
 
 /* ERROR EN EL FORM */
-.error-texto {
-  font-size: 0.6rem;
-  text-align: end;
 
+.error-texto {
+  color: #b71c1c; 
+  font-size: 0.85em;
+  margin-top: -0.5em;
+  margin-bottom: 1em;
+  text-align: left;
+  display: block;
+}
+
+
+.input-error {
+  border-color: #e53935;
 }
 
 /*  CONTADOR DEL JS */

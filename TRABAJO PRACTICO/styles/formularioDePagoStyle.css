@@ -133,6 +133,21 @@
   text-decoration: none;
 }
 
+.error-mensaje {
+  color: #b71c1c; 
+  font-size: 0.85em;
+  margin-top: -0.5em;
+  margin-bottom: 1em;
+  text-align: left;
+  display: block;
+}
+
+
+.input-error {
+  border-color: #e53935;
+}
+
+
 
 /*  CELULARES  */
 @media (max-width: 480px) {
@@ -186,18 +201,8 @@
     width: auto;
     padding: 0.8em 2em;
     font-size: 1em;
-  }}
-.error-mensaje {
-  color: #b71c1c; 
-  font-size: 0.85em;
-  margin-top: -0.5em;
-  margin-bottom: 1em;
-  text-align: left;
-  display: block;
+  }
 }
 
 
-.input-error {
-  border-color: #e53935;
-}
 

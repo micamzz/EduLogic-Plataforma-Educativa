@@ -59,7 +59,6 @@ export function iniciarFormularioDePago() {
       mostrarError(nombre, "El nombre debe tener al menos 3 letras.");
       esValido = false;
     }
-
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (email.value.trim() === "") {
       mostrarError(email, "El email es obligatorio.");
@@ -70,6 +69,7 @@ export function iniciarFormularioDePago() {
     }
 
     const numeroSinEspacios = numeroTarjeta.value.replace(/\s/g, "");
+
     if (numeroSinEspacios === "") {
       mostrarError(numeroTarjeta, "El número de tarjeta es obligatorio.");
       esValido = false;
@@ -111,17 +111,22 @@ export function iniciarFormularioDePago() {
     form.reset();
   });
 
-  function mostrarError(input, mensaje) {
-    const contenedor = input.parentElement;
-    let error = contenedor.querySelector(".error-mensaje");
-    if (!error) {
-      error = document.createElement("small");
-      error.classList.add("error-mensaje");
-      contenedor.appendChild(error);
-    }
-    error.textContent = mensaje;
-    input.classList.add("input-error");
+function mostrarError(input, mensaje) {
+  
+  let error = input.nextElementSibling; // para buscar un error
+
+  if (!error || !error.classList.contains("error-mensaje")) {
+    error = document.createElement("div");
+    error.classList.add("error-mensaje");
+    
+  
+    // SE INSERTA EL MSJ DE ERROR DESPUES DEL INPUT
+    input.insertAdjacentElement("afterend", error);
   }
+  
+  error.textContent = mensaje;
+  input.classList.add("input-error");
+}
 
   function limpiarErrores() {
     BUSCADOR.buscarVariosElementos(".error-mensaje").forEach(e => e.remove());
