@@ -121,20 +121,21 @@ export function GiftCard() {
     return;
   }
 
+  // ✅ OBTENER EL FONDO ACTUAL EN EL MOMENTO DEL SUBMIT
   const fondoActual = document.querySelector('input[name="Fondo"]:checked');
-  console.log('🎨 Fondo seleccionado:', fondoActual?.value); 
+  console.log('🎨 Fondo seleccionado:', fondoActual?.value); // Para debug
 
   const giftCard = {
     id: "gift-" + Date.now(),
     titulo: `Gift Card para ${destinatario.value || "Destinatario"}`,
     precio,
-    imagen: fondoActual?.value || "../imagenes/giftcard.png", 
+    imagen: fondoActual?.value || "../imagenes/giftcard.png", // ← Usar fondoActual
     cantidad: 1,
     tipo: "giftcard",
     mensaje: mensaje.textContent || ""
   };
 
-  console.log('📦 GiftCard creada:', giftCard); 
+  console.log('📦 GiftCard creada:', giftCard); // Para debug
 
   agregarGiftCardAlCarrito(giftCard);
 

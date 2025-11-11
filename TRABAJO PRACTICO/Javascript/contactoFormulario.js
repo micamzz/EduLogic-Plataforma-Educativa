@@ -91,28 +91,25 @@ export function formularioDeContacto() {
     });
 }
 
+
 // POPUP 
-function mostrarPopupDeContacto(CREADOR) {
-        mostrarPopup(CREADOR);
+ function mostrarPopupDeContacto(creador) {
+        const POPUP = creador.crearUnElemento("section");
+        POPUP.classList.add("popup-confirmacion");
+        POPUP.innerHTML = `
+            <article class="popup-contenido">
+                <h3>✅ Consulta enviada</h3>
+                <p>Gracias por contactarnos. Nos comunicaremos pronto.</p>
+                <button id="boton-aceptar">Aceptar</button>
+            </article>
+        `;
+        document.body.appendChild(POPUP);
+
+        const BTN_ACEPTAR = POPUP.querySelector("#boton-aceptar");
+        BTN_ACEPTAR.addEventListener("click", () => {
+            POPUP.remove(); // 
+            FORM.reset(); // 
+            CONTADOR.textContent = "";
+            window.location.href = "../index.html";
+        });
     }
-
-// POPUP 
-function mostrarPopup(CREADOR) {
-    const POPUP = CREADOR.crearUnElemento("section");
-    POPUP.classList.add("popup-confirmacion");
-    POPUP.innerHTML = `
-    <article class="popup-contenido">
-      <h3>Consulta enviada</h3>
-
-      <p>Gracias por contactarnos</p>
-      <p> Nos comunicaremos pronto.</p>
-      <button id="boton-aceptar">Aceptar</button>
-    </article>
-  `;
-    document.body.appendChild(POPUP);
-
-    const BTN_ACEPTAR = POPUP.querySelector("#boton-aceptar");
-    BTN_ACEPTAR.addEventListener("click", () => {
-        window.location.href = "../index.html";
-    });
-}
