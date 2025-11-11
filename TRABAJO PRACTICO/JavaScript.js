@@ -11,6 +11,8 @@ import { formularioDeContacto } from "./Javascript/contactoFormulario.js";
 import { inicializarCarrito } from './Javascript/carritoDeCompras.js';
 import {GiftCard} from './Javascript/giftCardEventos.js';
 import { iniciarFormularioDePago } from "./Javascript/formularioPago.js";
+import { iniciarLogicaInscripcion } from "./Javascript/inscripcionCurso.js"; // NUEVA IMPORTACIÓN
+
 const BUSCADOR = new BuscadorElementos();
 
 
@@ -73,6 +75,10 @@ if (path.includes('/index.html') || path === '/') {
 } else if (path.includes('formulariodepago')) {  
   console.log('💳 Inicializando formulario de pago...');
   iniciarFormularioDePago();
+  
+} else if (path.includes('inscripcioncurso')) { // NUEVO: Lógica de Inscripción Personal/Empresa
+  console.log('📝 Inicializando lógica de inscripción...');
+  iniciarLogicaInscripcion();
 }
 
 
