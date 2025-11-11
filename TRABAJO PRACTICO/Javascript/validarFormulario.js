@@ -26,7 +26,7 @@ export class ValidadorFormulario {
   }
 
   static telefonoValido(tel) {
-    if (tel.trim() === "") return true; // SI EL TELEFONO ESTA VACIO NO SE HACE VALIDACION
+    if (tel.trim() === "") return true; // SI EL TELEFONO ESTA VACIO NO SE HACE VALIDACION 
     return ValidadorFormulario.expresionesRegulares.telefono.test(tel.trim());
   }
 
