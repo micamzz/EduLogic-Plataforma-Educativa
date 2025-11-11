@@ -1,4 +1,3 @@
-// Archivo: Javascript/index.js
 
 export function iniciarPaginaPrincipal() {
     const sliderContainer = document.querySelector('.slider');

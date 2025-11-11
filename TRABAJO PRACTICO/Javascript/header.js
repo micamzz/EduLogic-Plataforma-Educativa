@@ -2,7 +2,7 @@ import { BuscadorElementos } from "../Javascript/buscadorElementos.js";
 
 const BUSCADOR = new BuscadorElementos();
 
-// 🔍 Lógica de la Barra de Búsqueda
+//logica de la barra de busqueda
 export function manejarBusqueda() {
   const form = BUSCADOR.buscarUnElementoPorId("search-form");
   const input = BUSCADOR.buscarUnElementoPorId("curso-input");
@@ -30,7 +30,7 @@ export function manejarBusqueda() {
   });
 }
 
-// Lógica para visualizar u ocultar los enlaces del Header
+//logica para visualizar u ocultar los enlaces del heder como Mi perfil si el user esta en el localStorage
 export function manejarVisualizacionHeader() {
     const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
     const perfilLink = document.querySelector('.perfil-link');
@@ -43,7 +43,7 @@ export function manejarVisualizacionHeader() {
         if (signupButton) signupButton.style.display = 'none';
     } else {
         if (perfilLink) perfilLink.style.display = 'none';
-        if (loginButton) loginButton.style.display = 'flex'; // Usar 'flex' para mantener estilo
+        if (loginButton) loginButton.style.display = 'flex'; // usamos flex para mantener estilo
         if (signupButton) signupButton.style.display = 'block';
     }
 }
