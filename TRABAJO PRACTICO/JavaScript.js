@@ -79,9 +79,13 @@ const path = window.location.pathname.toLowerCase();
   if (!path.includes("/contacto.html")) {
     await import("./Javascript/popupManager.js"); 
     // Si la ruta actual contiene "contacto.html", se ejecuta la lógica del formulario:
+<<<<<<< Updated upstream
  } 
 
 
+=======
+  
+>>>>>>> Stashed changes
 const iconoCarrito = document.querySelector('.carrito_icono');
 
 if (iconoCarrito) {
@@ -100,5 +104,4 @@ if (iconoCarrito) {
 //     }
 //   });
 // }
-
 });
