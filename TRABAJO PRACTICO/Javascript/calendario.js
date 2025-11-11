@@ -66,7 +66,7 @@ export class Calendario {
         }
 
         // mostrar cursos del día
-          if (cursosDelDia) {
+        if (cursosDelDia) {
           cursosDelDia.cursos.forEach(curso => {
             const enlace = CREADOR.crearUnElemento("span");
             enlace.textContent = curso.nombre;
@@ -101,30 +101,71 @@ export class Calendario {
 
     calendario(fechaActual);
 
-function mostrarPopup(curso) {
-  const fondoPopup = CREADOR.crearUnElemento("div");
-  fondoPopup.classList.add("popup-fondo");
+    function mostrarPopup(curso) {
+      const fondoPopup = CREADOR.crearUnElemento("div");
+      fondoPopup.classList.add("popup-fondo");
 
-  const ventanaPopup= CREADOR.crearUnElemento("div");
- ventanaPopup.classList.add("popup");
+      const ventanaPopup = CREADOR.crearUnElemento("div");
+      ventanaPopup.classList.add("popup");
 
-  ventanaPopup.innerHTML = `
-    <h3>${curso.nombre}</h3>
-    <p>${curso.mensaje || "Conocé más sobre este curso y anotate."}</p>
-    <a href="${curso.url}">
-      <button class="popup-boton">Ver detalle del curso</button>
-    </a>
-    <button class="popup-agregarCarrito popup-boton js-producto-agregar" data-id="${curso.id}">Agregar al carrito
-</button>
-    <button class="popup-cerrar">Cerrar</button>
-  `;
+      ventanaPopup.innerHTML = `
+        <h3>${curso.nombre}</h3>
+        <p>${curso.mensaje || "Conocé más sobre este curso y anotate."}</p>
+        <a href="${curso.url}">
+          <button class="popup-boton">Ver detalle del curso</button>
+        </a>
+        <button class="popup-agregarCarrito popup-boton js-producto-agregar" data-id="${curso.id}">
+          Agregar al carrito
+        </button>
+        <button class="popup-cerrar popup-boton">Cerrar</button>
+      `;
 
-  fondoPopup.appendChild(ventanaPopup);
-  document.body.appendChild(fondoPopup);
+      fondoPopup.appendChild(ventanaPopup);
+      document.body.appendChild(fondoPopup);
 
-  // Cerrar popup al hacer click en el botón o fuera del popup
-  ventanaPopup.querySelector(".popup-cerrar").addEventListener("click", () => fondoPopup.remove());
-  fondoPopup.addEventListener("click", e => { if (e.target === fondoPopup) fondoPopup.remove(); });
-}
+  
+      const botonCerrar = ventanaPopup.querySelector(".popup-cerrar");
+      const botonAgregar = ventanaPopup.querySelector(".popup-agregarCarrito");
+
+      // Cerrar popup al hacer click en "Cerrar"
+      botonCerrar.addEventListener("click", () => {
+        fondoPopup.remove();
+      });
+
+      
+      // para mostrar otro popup cuando se agrega al carrito el curso
+      botonAgregar.addEventListener("click", () => {
+        fondoPopup.remove();
+        mostrarPopupAgregadoAlCarrito(curso); // CAMBIO: llamada al nuevo popup
+      });
+    }
+
+    function mostrarPopupAgregadoAlCarrito(curso) {
+      const fondoPopup = CREADOR.crearUnElemento("div");
+      fondoPopup.classList.add("popup-fondo");
+
+      const ventanaPopup = CREADOR.crearUnElemento("div");
+      ventanaPopup.classList.add("popup");
+
+      ventanaPopup.innerHTML = `
+        <h3>Curso agregado al carrito</h3>
+        <p>El curso <strong>${curso.nombre}</strong> fue agregado a tu carrito.</p>
+        <button class="popup-boton popup-cerrar2">Aceptar</button>`;
+
+      fondoPopup.appendChild(ventanaPopup);
+      document.body.appendChild(fondoPopup);
+
+      const botonCerrar = ventanaPopup.querySelector(".popup-cerrar2"); 
+
+      botonCerrar.addEventListener("click", () => {
+        fondoPopup.remove();
+      });
+
+      fondoPopup.addEventListener("click", (e) => {
+        if (e.target === fondoPopup) {
+          fondoPopup.remove();
+        }
+      });
+    }
   }
 }

@@ -103,15 +103,11 @@ export function iniciarFormularioDePago() {
     if (esValido) {
       console.log('🎯 PAGO EXITOSO - llamando a vaciarCarrito()');
       popup.style.display = "flex";
-      
+
       if (infoCurso && infoCurso.parentNode) {
       infoCurso.parentNode.removeChild(infoCurso);
     }
         vaciarCarrito();
-       
-     
-       
-
     }
   });
 

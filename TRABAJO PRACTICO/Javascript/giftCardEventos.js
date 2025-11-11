@@ -103,39 +103,44 @@ export function GiftCard() {
   // ====== FUNCIONALIDAD CARRITO ======
   if (!formularioGift) return;
 
-  formularioGift.addEventListener("submit", (e) => {
-    e.preventDefault();
+ formularioGift.addEventListener("submit", (e) => {
+  e.preventDefault();
 
-    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
 
-    if (!isLoggedIn || !currentUser?.email) {
-      localStorage.setItem("redirectAfterLogin", "../paginas/giftCard.html");
-      window.location.href = "../paginas/inicioSesion.html";
-      return;
-    }
+  if (!isLoggedIn || !currentUser?.email) {
+    localStorage.setItem("redirectAfterLogin", "../paginas/giftCard.html");
+    window.location.href = "../paginas/inicioSesion.html";
+    return;
+  }
 
-    const precio = parseFloat(montoIngresado.value);
-    if (isNaN(precio) || precio <= 0) {
-      mostrarPopup("Monto inválido", "Por favor, ingresá un monto válido.", "alert");
-      return;
-    }
+  const precio = parseFloat(montoIngresado.value);
+  if (isNaN(precio) || precio <= 0) {
+    mostrarPopup("Monto inválido", "Por favor, ingresá un monto válido.", "alert");
+    return;
+  }
 
-    const giftCard = {
-      id: "gift-" + Date.now(),
-      titulo: `Gift Card para ${destinatario.value || "Destinatario"}`,
-      precio,
-      imagen: fondoSeleccionado?.value || "../imagenes/giftcard.png",
-      cantidad: 1,
-      tipo: "giftcard",
-      mensaje: mensaje.textContent || ""
-    };
+  const fondoActual = document.querySelector('input[name="Fondo"]:checked');
+  console.log('🎨 Fondo seleccionado:', fondoActual?.value); 
 
-    agregarGiftCardAlCarrito(giftCard);
+  const giftCard = {
+    id: "gift-" + Date.now(),
+    titulo: `Gift Card para ${destinatario.value || "Destinatario"}`,
+    precio,
+    imagen: fondoActual?.value || "../imagenes/giftcard.png", 
+    cantidad: 1,
+    tipo: "giftcard",
+    mensaje: mensaje.textContent || ""
+  };
 
-    mostrarPopup("Éxito", "🎁 Gift Card agregada al carrito!", "alert", () => {
-      formularioGift.reset();
-      window.location.href = "../index.html"; 
-    });
+  console.log('📦 GiftCard creada:', giftCard); 
+
+  agregarGiftCardAlCarrito(giftCard);
+
+  mostrarPopup("Éxito", "🎁 Gift Card agregada al carrito!", "alert", () => {
+    formularioGift.reset();
+    window.location.href = "../index.html"; 
   });
+});
   }
