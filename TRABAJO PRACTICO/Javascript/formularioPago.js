@@ -46,6 +46,36 @@ export function iniciarFormularioDePago() {
 
   if (!form) return;
 
+  // VALIDACION PARA LA FECHA DE VENCIMIENTO, CUANDO ESCRIBA LOS NUMEROS QUE SE AGREGUE LA / AUTOMATICAMENTE
+ vencimiento.addEventListener("input", (e) => {
+    let valor = e.target.value.replace(/\D/g, ""); //PERMITE SOLO NUMEROS /D --> NO DIGITO.
+    if (valor.length > 4) {
+      // slice te da los caracteres desde la posicion que le indiques.
+      // desde cero hasta antes del 4, no lo incluye
+      valor = valor.slice(0, 4);
+    }
+    let mes = valor.slice(0, 2);
+    let anio = valor.slice(2);
+    if (valor.length >= 3) {
+      e.target.value = `${mes}/${anio}`;
+    } else {
+      e.target.value = mes;
+    }
+  });
+
+  // PARA CUANDO PONGA EL NUMERO DE LA TARJETA LE AGREGUE ESPACIOS 
+  numeroTarjeta.addEventListener("input", (e) => {
+    let valor = e.target.value.replace(/\D/g, "");
+     
+   const grupos = [];
+  for (let i = 0; i < valor.length; i += 4) {
+    grupos.push(valor.slice(i, i + 4));
+  }
+  // LE AGREGA EL ESPACIO A LOS NUMEROS
+  e.target.value = grupos.join(" ");
+});
+
+
   form.addEventListener("submit", (e) => {
     e.preventDefault();
     limpiarErrores();
@@ -78,12 +108,12 @@ export function iniciarFormularioDePago() {
       esValido = false;
     }
 
-    const valorVencimiento = vencimiento.value.replace(/\s/g, "");
+    const valorVencimiento = vencimiento.value.replace(/\D/g, ""); 
     if (valorVencimiento === "") {
       mostrarError(vencimiento, "La fecha de expiración es obligatoria.");
       esValido = false;
     } else if (!/^(0[1-9]|1[0-2])[0-9]{2}$/.test(valorVencimiento)) {
-      mostrarError(vencimiento, "Formato incorrecto (MMAA, ej: 1231).");
+      mostrarError(vencimiento, "Formato incorrecto (MM/AA, ej: 12/31).");
       esValido = false;
     }
 
@@ -118,8 +148,7 @@ function mostrarError(input, mensaje) {
   if (!error || !error.classList.contains("error-mensaje")) {
     error = document.createElement("div");
     error.classList.add("error-mensaje");
-    
-  
+
     // SE INSERTA EL MSJ DE ERROR DESPUES DEL INPUT
     input.insertAdjacentElement("afterend", error);
   }
