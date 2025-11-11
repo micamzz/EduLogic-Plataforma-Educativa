@@ -23,15 +23,27 @@ function carritoAbierto() {
 }
 
 export function actualizarContador() {
-  const contador = BUSCADOR.buscarUnElemento("#cart-count");
-  const total = PRODUCTOS_EN_CARRITO.reduce((acum, curso) => acum + (curso.cantidad || 1), 0);
+   const contador = BUSCADOR.buscarUnElemento("#cart-count");
+
+  // 🔒 CORRECCIÓN: si en esta página no existe #cart-count, no rompemos todo el JS
+  if (!contador) {
+    // Opcional, para debug:
+    // console.warn("No se encontró #cart-count en esta página, se omite actualización de contador.");
+    return;
+  }
+
+  const total = PRODUCTOS_EN_CARRITO.reduce(
+    (acum, curso) => acum + (curso.cantidad || 1),
+    0
+  );
   contador.textContent = total;
 }
 
 function renderCarrito() {
   const contenedor = BUSCADOR.buscarUnElemento("#js-caja-carrito");
   if (!PRODUCTOS_EN_CARRITO.length) {
-    contenedor.innerHTML = `<div class="carrito-vacio"><p>No hay cursos agregados en el carrito.</p></div>`;
+    contenedor.innerHTML = `<div class="carrito-vacio"><p>Todavía no se obtuvieron
+cursos</p></div>`;
     return;
   }
 

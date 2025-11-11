@@ -1,63 +1,76 @@
+import { BuscadorElementos } from "./buscadorElementos.js";
 import { mostrarPopup } from './popupManager.js'; 
-import {restaurarCarritoUsuario} from'./carritoDeCompras.js';
+import { restaurarCarritoUsuario } from './carritoDeCompras.js';
+
+const buscador = new BuscadorElementos();
+
 // Función auxiliar 
-export function iniciarLogin(redirectUrl) {
-    const form = document.getElementById('login-form');
-     if (!form) {
-        console.warn("⚠️ No se encontró el formulario de login.");
-        return;
+export function iniciarLogin(urlRedireccion) {
+  const formularioLogin = buscador.buscarUnElementoPorId('login-form');
+
+  if (!formularioLogin) {
+    console.warn("⚠️ No se encontró el formulario de login.");
+    return;
+  }
+
+  console.log("✅ Listener de login activo."); 
+
+  formularioLogin.addEventListener('submit', (evento) => {
+    evento.preventDefault();
+
+    const campoEmail = formularioLogin.querySelector('input[name="mail"]');
+    const campoContrasena = formularioLogin.querySelector('input[name="password"]');
+
+    if (!campoEmail || !campoContrasena) {
+      console.error("Error: No se encontraron los campos de email o contraseña en el formulario.");
+      return;
     }
 
-    console.log("✅ Listener de login activo."); 
+    const emailIngresado = campoEmail.value;
+    const contrasenaIngresada = campoContrasena.value;
 
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
+    const usuarioGuardadoTexto = localStorage.getItem('currentUser');
 
-        const emailInput = this.querySelector('input[name="mail"]').value;
-        const passwordInput = this.querySelector('input[name="password"]').value;
+    if (!usuarioGuardadoTexto) {
+      mostrarPopup('Error de Login', 'No hay cuentas registradas. Por favor, regístrate.');
+      return;
+    }
 
-        const storedUser = localStorage.getItem('currentUser');
+    const usuario = JSON.parse(usuarioGuardadoTexto);
 
-        if (!storedUser) {
-            mostrarPopup('Error de Login', 'No hay cuentas registradas. Por favor, regístrate.');
-            return;
-        }
+    // Verificación de credenciales
+    if (usuario.email === emailIngresado && usuario.password === contrasenaIngresada) {
 
-        const user = JSON.parse(storedUser);
+      localStorage.setItem('isLoggedIn', 'true');
+      localStorage.setItem('currentUser', JSON.stringify(usuario));
 
-        // Verificación de credenciales
-        if (user.email === emailInput && user.password === passwordInput) {
+      // Restaurar carrito si había backup
+      restaurarCarritoUsuario(usuario.email);
 
-            localStorage.setItem('isLoggedIn', 'true');
-            localStorage.setItem("currentUser", JSON.stringify(user));
-            restaurarCarritoUsuario(user.email);
-
-            const redirectGuardado = localStorage.getItem("redirectAfterLogin");
-            const destino = redirectGuardado || redirectUrl || '../index.html';
+      const redireccionGuardada = localStorage.getItem("redirectAfterLogin");
+      const destino = redireccionGuardada || urlRedireccion || '../index.html';
             
-            mostrarPopup(
-              'Éxito',
-              'Inicio de sesión exitoso. ¡Bienvenido, ' + user.nombre + '!',
-              'alert',
-              () => {
-                if (redirectGuardado) {
-                  localStorage.removeItem("redirectAfterLogin");
-                }
-                window.location.href = destino;
-              }
-            );
-        } else {
-            mostrarPopup('Error de Credenciales', 'Credenciales incorrectas. Verifica tu correo y contraseña.');
+      mostrarPopup(
+        'Éxito',
+        'Inicio de sesión exitoso. ¡Bienvenido, ' + (usuario.nombre || '') + '!',
+        'alert',
+        () => {
+          if (redireccionGuardada) {
+            localStorage.removeItem("redirectAfterLogin");
+          }
+          window.location.href = destino;
         }
-    });
+      );
+    } else {
+      mostrarPopup('Error de Credenciales', 'Credenciales incorrectas. Verifica tu correo y contraseña.');
+    }
+  });
 }
 
-// Funciones para el ruteo 
 export function iniciarLoginNormal() {
-    iniciarLogin('../index.html'); 
+  iniciarLogin('../index.html'); 
 }
 
 export function iniciarLoginPago() {
-    // Redirige a la página de pago después de iniciar sesión
-    iniciarLogin('../paginas/formularioDePago.html'); 
+  iniciarLogin('../paginas/formularioDePago.html'); 
 }

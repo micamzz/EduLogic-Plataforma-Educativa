@@ -4,13 +4,9 @@ import { vaciarCarrito } from './carritoDeCompras.js';
 export function iniciarFormularioDePago() {
   const BUSCADOR = new BuscadorElementos();
   
-  // ✅ LEER DIRECTAMENTE DEL CARRITO
   const user = JSON.parse(localStorage.getItem("currentUser"));
   const carritoActual = JSON.parse(localStorage.getItem(`carrito_${user?.email}`)) || [];
   
-  console.log('📦 Carrito para pago:', carritoActual);
-
-  // Mostrar info de cursos y total
   let total = 0;
   const infoCurso = document.createElement("div");
   infoCurso.classList.add("info-curso");
@@ -38,7 +34,7 @@ export function iniciarFormularioDePago() {
   const contenedorFormulario = BUSCADOR.buscarUnElemento(".formulario-inscripcion");
   if (contenedorFormulario) contenedorFormulario.prepend(infoCurso);
 
-  // Elementos del formulario
+
   const form = BUSCADOR.buscarUnElementoPorId("formulario-pago");
   const nombre = BUSCADOR.buscarUnElementoPorId("nombre-titular");
   const email = BUSCADOR.buscarUnElementoPorId("email");
@@ -50,7 +46,6 @@ export function iniciarFormularioDePago() {
 
   if (!form) return;
 
-  // Listener para submit
   form.addEventListener("submit", (e) => {
     e.preventDefault();
     limpiarErrores();
@@ -116,7 +111,6 @@ export function iniciarFormularioDePago() {
     form.reset();
   });
 
-  // Funciones auxiliares
   function mostrarError(input, mensaje) {
     const contenedor = input.parentElement;
     let error = contenedor.querySelector(".error-mensaje");
