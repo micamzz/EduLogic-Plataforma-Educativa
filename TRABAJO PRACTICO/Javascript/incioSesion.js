@@ -57,7 +57,7 @@ export function iniciarLogin(urlRedireccion) {
 
     if (usuario) { // Login exitoso
 
-      //Guardar el usuario logueado en currentUser
+      //Guardar el usuario logueado 
       localStorage.setItem('isLoggedIn', 'true');
       localStorage.setItem('currentUser', JSON.stringify(usuario));
 

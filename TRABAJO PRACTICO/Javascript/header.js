@@ -23,7 +23,7 @@ export function manejarBusqueda() {
     });
 
     if (destino) {
-      window.location.href = destino;  // REDIRIGE AL HTML QUE SE CARGA POR JS
+      window.location.href = destino;  
     } 
   });
 }
@@ -41,7 +41,7 @@ export function manejarVisualizacionHeader() {
         if (signupButton) signupButton.style.display = 'none';
     } else {
         if (perfilLink) perfilLink.style.display = 'none';
-        if (loginButton) loginButton.style.display = 'flex'; // usamos flex para mantener estilo
+        if (loginButton) loginButton.style.display = 'flex'; 
         if (signupButton) signupButton.style.display = 'block';
     }
 }

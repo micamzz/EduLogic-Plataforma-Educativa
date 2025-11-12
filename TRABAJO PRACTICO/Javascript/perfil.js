@@ -91,12 +91,12 @@ export function iniciarLogicaPerfil() {
           '¿Estás seguro de que deseas cerrar tu sesión?',
           'confirm',
           () => {
-            const usuarioActual = JSON.parse(localStorage.getItem("currentUser"));
+            const currentUser = JSON.parse(localStorage.getItem("currentUser"));
             
             //Guardar backup del carrito antes de cerrar sesión
-            if (usuarioActual?.email) {
-              const carritoActual = JSON.parse(localStorage.getItem(`carrito_${usuarioActual.email}`)) || [];
-              localStorage.setItem(`carrito_backup_${usuarioActual.email}`, JSON.stringify(carritoActual));
+            if (currentUser?.email) {
+              const carritoActual = JSON.parse(localStorage.getItem(`carrito_${currentUser.email}`)) || [];
+              localStorage.setItem(`carrito_backup_${currentUser.email}`, JSON.stringify(carritoActual));
             }
 
             localStorage.removeItem('isLoggedIn');
@@ -124,8 +124,8 @@ export function iniciarLogicaPerfil() {
           'ADVERTENCIA: ¿Estás seguro de que deseas eliminar tu cuenta? Esta acción es irreversible y se perderán todos tus datos locales.', 
           'confirm', 
           () => {
-            const usuarioActual = JSON.parse(localStorage.getItem("currentUser"));
-            const emailAEliminar = usuarioActual ? usuarioActual.email : null;
+            const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+            const emailAEliminar = currentUser ? currentUser.email : null;
 
             // 1. Obtener la lista de todos los usuarios registrados
             const usuariosGuardados = localStorage.getItem('registeredUsers');

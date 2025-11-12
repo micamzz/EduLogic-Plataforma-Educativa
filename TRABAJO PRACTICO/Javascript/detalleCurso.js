@@ -4,7 +4,7 @@ import { BuscadorElementos } from "./buscadorElementos.js";
 const BUSCADOR = new BuscadorElementos();
 
 export class DetalleCursos {
-  render() {
+  MostrarModulos() {
 
     const params = new URLSearchParams(window.location.search);
     const nombreCurso = params.get("curso");
@@ -32,15 +32,15 @@ export class DetalleCursos {
     // RECORRER LOS MODULOS 
     let modulosHTML = "";
 
-    for (let j = 0; j < modulos.length; j++) {
-      const mod = modulos[j];
+    for (let i = 0; i < modulos.length; i++) {
+      const mod = modulos[i];
 
-      modulosHTML += `<details ${j === 0 ? "open" : ""}>`;
+      modulosHTML += `<details ${i === 0 ? "open" : ""}>`;
       modulosHTML += `<summary>${mod.nombre}</summary>`;
       modulosHTML += `<article class="summary-contenidos_desplegable"><ul>`;
 
-      for (let k = 0; k < mod.clases.length; k++) {
-        const clase = mod.clases[k];
+      for (let j = 0; j< mod.clases.length; j++) {
+        const clase = mod.clases[j];
         modulosHTML += `
           <li class="summary-contenidos_desplegable_temas">
             <span>${clase}</span>
@@ -138,18 +138,19 @@ for (const sugerido of sugerencias) {
     </a>
   `;
 }
-// INSERTA EL CONTENIDO EN EL CAROUSEL DE CURSOS EN EL DIV.
+
+// INSERTÁ EL CONTENIDO EN EL CAROUSEL DE CURSOS EN EL DIV.
 contenedorRelacionados.innerHTML = sugeridosHTML;
   }
   // PARA LLAMAR AL CURSO DESDE EL JS PRINCIPAL.
   static mostrarDetalleDeCurso() {
     const detalle = new DetalleCursos();
-    detalle.render();
+    detalle.MostrarModulos();
   }
   
 }
 
-// CARRUSEL DEL ASIDE
+
 
 
 

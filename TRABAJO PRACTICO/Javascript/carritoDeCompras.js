@@ -41,7 +41,7 @@ export function actualizarContador() {
   contador.textContent = total;
 }
 
-function renderCarrito() {
+function MostrarCarrito() {
   const contenedor = BUSCADOR.buscarUnElemento("#js-caja-carrito");
   if (!PRODUCTOS_EN_CARRITO.length) {
     contenedor.innerHTML = `<div class="carrito-vacio"><p>Todavía no se obtuvieron
@@ -133,7 +133,7 @@ cursos</p></div>`;
       
       guardarCarrito();
       actualizarContador();
-      renderCarrito();
+      MostrarCarrito();
     });
   });
 
@@ -142,7 +142,7 @@ cursos</p></div>`;
     PRODUCTOS_EN_CARRITO = [];
     guardarCarrito();
     actualizarContador();
-    renderCarrito();
+    MostrarCarrito();
   });
 }
 
@@ -164,7 +164,7 @@ export function agregarCustomAlCarrito(item) {
     
     guardarCarrito();
     actualizarContador();
-    if (carritoAbierto()) renderCarrito();
+    if (carritoAbierto()) MostrarCarrito();
 }
 
 /**
@@ -198,7 +198,7 @@ export function vaciarCarrito() {
     
     const carritoCheckbox = document.querySelector('#Carro');
     if (carritoCheckbox?.checked) {
-      renderCarrito();
+      MostrarCarrito();
     }
     
   } 
@@ -217,7 +217,7 @@ export function inicializarCarrito() {
         actualizarContador();
     }
   const checkbox = BUSCADOR.buscarUnElemento("#Carro");
-  if (checkbox) checkbox.addEventListener("change", () => { if (checkbox.checked) renderCarrito(); });
+  if (checkbox) checkbox.addEventListener("change", () => { if (checkbox.checked) MostrarCarrito(); });
 
   document.addEventListener("click", e => {
     const btn = e.target.closest(".js-producto-agregar");
