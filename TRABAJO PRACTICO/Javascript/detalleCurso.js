@@ -83,7 +83,6 @@ export class DetalleCursos {
         <a href="../paginas/inscripcionCurso.html"> <button class="block-informacion-contenidos__boton">Inscribirse</button>  
         </a>
          <button class="block-informacion-contenidos__boton js-producto-agregar" data-id="${curso.id}">Agregar al carrito</button>
-
         </div>
       </article>
     </article>
