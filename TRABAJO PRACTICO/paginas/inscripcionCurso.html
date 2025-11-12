@@ -114,7 +114,7 @@
                         <label>Email:</label>
                         <input type="email" name="email_personal" placeholder="Email@example.com" required>
                         <label>Teléfono:</label>
-                        <input type="tel" name="telefono_personal" placeholder="Teléfono" required minlength="8">
+                        <input type="tel" name="telefono_personal" placeholder="Teléfono" required minlength="8" maxlength="15">
                     </div>
                 </div>
 
@@ -128,16 +128,16 @@
                             <label>Nombre y Apellido:</label>
                             <input type="text" name="nombre_1" placeholder="Nombre y Apellido" required minlength="5">
                             <label>DNI:</label>
-                            <input type="text" inputmode="numeric" name="dni_1" placeholder="DNI" pattern="[0-9]{8,12}" required minlength="8">
+                            <input type="text" inputmode="numeric" name="dni_1" placeholder="DNI" pattern="[0-9]{8,12}" required minlength="6" maxlength="12"> 
                             <label>Email:</label>
                             <input type="email" name="email_1" placeholder="Email@example.com" required>
                             <label>Teléfono:</label>
-                            <input type="tel" name="telefono_1" placeholder="Teléfono" required minlength="8">
+                            <input type="tel" name="telefono_1" placeholder="Teléfono" required minlength="8" maxlength="15"
                              <div class="placeholder-boton-quitar"></div>
                         </div>
                     </div>
 
-                    <button type="button" id="agregar-persona-btn" class="toggle-label">+ Agregar Persona</button>
+                    <button type="button" id="agregar-persona-btn" class="toggle-label">Agregar Persona</button>
                     <div id="total-a-pagar">Total: $0.00 ARS</div>
 
                 </div>
