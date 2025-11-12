@@ -4,8 +4,9 @@ import { BuscadorElementos } from "./buscadorElementos.js";
 const BUSCADOR = new BuscadorElementos();
 
 export class DetalleCursos {
-  MostrarModulos() {
+  render() {
 
+    //extrae el nombre del curso de la URL
     const params = new URLSearchParams(window.location.search);
     const nombreCurso = params.get("curso");
 
@@ -29,18 +30,19 @@ export class DetalleCursos {
     const docente = curso.docente;
     const modulos = curso.modulos;
 
-    // RECORRER LOS MODULOS 
+    // RECORRER LOS MODULOS (CONTENIDOS X CLASES) acordeon
     let modulosHTML = "";
 
-    for (let i = 0; i < modulos.length; i++) {
-      const mod = modulos[i];
+    for (let j = 0; j < modulos.length; j++) {
+      const mod = modulos[j];
 
-      modulosHTML += `<details ${i === 0 ? "open" : ""}>`;
-      modulosHTML += `<summary>${mod.nombre}</summary>`;
-      modulosHTML += `<article class="summary-contenidos_desplegable"><ul>`;
+      modulosHTML += `<details ${j === 0 ? "open" : ""}>`;//widget desplegable=details
+      modulosHTML += `<summary>${mod.nombre}</summary>`;//titulo del widget
+      modulosHTML += `<article class="summary-contenidos_desplegable"><ul>`;//contenido del widget
 
-      for (let j = 0; j< mod.clases.length; j++) {
-        const clase = mod.clases[j];
+      // RECORRER LAS CLASES DENTRO DE CADA MODULO
+      for (let k = 0; k < mod.clases.length; k++) {
+        const clase = mod.clases[k];
         modulosHTML += `
           <li class="summary-contenidos_desplegable_temas">
             <span>${clase}</span>
@@ -138,18 +140,16 @@ for (const sugerido of sugerencias) {
     </a>
   `;
 }
-
-// INSERTÁ EL CONTENIDO EN EL CAROUSEL DE CURSOS EN EL DIV.
+// INSERTA EL CONTENIDO EN EL CAROUSEL DE CURSOS EN EL DIV.
 contenedorRelacionados.innerHTML = sugeridosHTML;
   }
-  // PARA LLAMAR AL CURSO DESDE EL JS PRINCIPAL.
+  // PARA LLAMAR AL CURSO DESDE EL JS PRINCIPAL
   static mostrarDetalleDeCurso() {
     const detalle = new DetalleCursos();
-    detalle.MostrarModulos();
+    detalle.render();
   }
   
 }
-
 
 
 

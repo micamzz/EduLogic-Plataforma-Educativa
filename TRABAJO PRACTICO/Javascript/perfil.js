@@ -4,11 +4,13 @@ import { vaciarCarrito } from './carritoDeCompras.js';
 
 const buscador = new BuscadorElementos(); 
 
+
+// Lógica para la página de perfil de usuario
 export function iniciarLogicaPerfil() {
   const estaLogueado = localStorage.getItem('isLoggedIn') === 'true';
-  const usuarioGuardado = localStorage.getItem('currentUser');
+  const usuarioGuardado = localStorage.getItem('currentUser'); //verifica si existe el usuario y si esta logueado del local storage
 
-  
+  //si no esta logueado y quiere entrar al perfil, redirige al incio de sesion
   if (!estaLogueado) {
     if (window.location.href.includes('perfil.html')) {
       window.location.href = '../paginas/inicioSesion.html'; 
@@ -47,17 +49,17 @@ export function iniciarLogicaPerfil() {
     // Mostrar nombre en el encabezado
     const textoNombreUsuario = buscador.buscarUnElementoPorId('nombre-usuario');
     if (textoNombreUsuario) {
-      const nombreCompleto = `${usuario.nombre || ''} ${usuario.apellido || ''}`.trim();
+      const nombreCompleto = `${usuario.nombre || ''} ${usuario.apellido || ''}`.trim(); //elimina espacios blancos inncio y final
       textoNombreUsuario.textContent = nombreCompleto || 'Mi Perfil';
     }
 
-    // FORMULARIO DE PERFIL actualizar datos
+    // FORMULARIO DE PERFIL actualiza datos
     const formularioPerfil = buscador.buscarUnElementoPorId('perfil-form');
     if (formularioPerfil) {
       formularioPerfil.addEventListener('submit', (evento) => {
         evento.preventDefault();
 
-        //Actualiza datos del usuario con lo que está en los inputs
+        //Actualiza datos del usuario con lo que esta en los inputs
         if (inputNombre)    usuario.nombre        = inputNombre.value;
         if (inputApellido)  usuario.apellido      = inputApellido.value;
         if (inputEmail)     usuario.email         = inputEmail.value;
@@ -82,7 +84,7 @@ export function iniciarLogicaPerfil() {
       });
     }
 
-    //BOTÓN CERRAR SESIÓN
+    //CERRAR SESION
     const botonCerrarSesion = buscador.buscarUnElementoPorId('logout-button');
     if (botonCerrarSesion) {
       botonCerrarSesion.addEventListener('click', () => {
@@ -91,12 +93,12 @@ export function iniciarLogicaPerfil() {
           '¿Estás seguro de que deseas cerrar tu sesión?',
           'confirm',
           () => {
-            const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+            const usuarioActual = JSON.parse(localStorage.getItem("currentUser"));
             
             //Guardar backup del carrito antes de cerrar sesión
-            if (currentUser?.email) {
-              const carritoActual = JSON.parse(localStorage.getItem(`carrito_${currentUser.email}`)) || [];
-              localStorage.setItem(`carrito_backup_${currentUser.email}`, JSON.stringify(carritoActual));
+            if (usuarioActual?.email) {
+              const carritoActual = JSON.parse(localStorage.getItem(`carrito_${usuarioActual.email}`)) || [];
+              localStorage.setItem(`carrito_backup_${usuarioActual.email}`, JSON.stringify(carritoActual));
             }
 
             localStorage.removeItem('isLoggedIn');
@@ -115,7 +117,7 @@ export function iniciarLogicaPerfil() {
       });
     }
 
-    //BOTÓN ELIMINAR CUENTA
+    //BOTON ELIMINAR CUENTA
     const botonEliminarCuenta = buscador.buscarUnElementoPorId('eliminar-cuenta-button');
     if (botonEliminarCuenta) {
       botonEliminarCuenta.addEventListener('click', () => {
@@ -124,28 +126,30 @@ export function iniciarLogicaPerfil() {
           'ADVERTENCIA: ¿Estás seguro de que deseas eliminar tu cuenta? Esta acción es irreversible y se perderán todos tus datos locales.', 
           'confirm', 
           () => {
-            const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-            const emailAEliminar = currentUser ? currentUser.email : null;
 
-            // 1. Obtener la lista de todos los usuarios registrados
+           
+            const usuarioActual = JSON.parse(localStorage.getItem("currentUser"));
+            const emailAEliminar = usuarioActual ? usuarioActual.email : null;
+
+             //buscamos las cosas a eliminar del storage
             const usuariosGuardados = localStorage.getItem('registeredUsers');
             let usuarios = usuariosGuardados ? JSON.parse(usuariosGuardados) : [];
 
             if (emailAEliminar) {
-              // 2. Filtrar el array para excluir al usuario actual
+              //filtra el array para agarrar al usuario actual crea nuevo array con lso users - el de elimanr
               usuarios = usuarios.filter(user => user.email !== emailAEliminar);
               
-              // 3. Guardar la lista actualizada en localStorage
+              //guarda la lista actualizada en localStorage
               localStorage.setItem('registeredUsers', JSON.stringify(usuarios));
               
-              // Opcional: Eliminar el carrito específico del usuario
+              // elimina el carrito de ese usuario
               localStorage.removeItem(`carrito_${emailAEliminar}`);
             }
 
-            // Eliminar la sesión local (currentUser ya no es necesario, pero lo eliminamos por seguridad)
+            // Eliminar la sesión local 
             localStorage.removeItem('currentUser');
             localStorage.removeItem('isLoggedIn');
-            vaciarCarrito(); // Asegurar que el carrito actual esté vacío
+            vaciarCarrito(); //asegura que el carrito actual esté vacío
 
             mostrarPopup(
               'Cuenta Eliminada',

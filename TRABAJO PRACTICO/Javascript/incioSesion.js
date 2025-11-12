@@ -4,31 +4,34 @@ import { restaurarCarritoUsuario } from './carritoDeCompras.js';
 
 const buscador = new BuscadorElementos();
 
-//Obtiene el array completo de usuarios registrados.
+//obtiene el array completo de usuarios registrados
 function obtenerUsuariosRegistrados() {
     const usuariosTexto = localStorage.getItem('registeredUsers');
-    try {
-        // Devuelve el array de usuarios o un array vacío si no hay datos.
+    try {//con try pq convertir textJSON a un objeto puede fallar
+
+        //devuelve el array de usuarios o un array vacio si no hay datos
         return usuariosTexto ? JSON.parse(usuariosTexto) : [];
-    } catch (e) {
-        console.error("Error al parsear 'registeredUsers' de localStorage en login", e);
-        return [];
+
+    } catch (e) {//si falla el parseo
+        
+        return [];//array vacio
     }
 }
 
-// Función auxiliar 
+// Func auxiliar 
 export function iniciarLogin(urlRedireccion) {
   const formularioLogin = buscador.buscarUnElementoPorId('login-form');
 
-  if (!formularioLogin) {
+  if (!formularioLogin) { //no encuentra form
     console.warn("No se encontró el formulario de inicio.");
     return;
   }
 
-
+  //cuando clickea en iniciar sesion
   formularioLogin.addEventListener('submit', (evento) => {
-    evento.preventDefault();
+    evento.preventDefault();//detiene el comportamiento por defecto
 
+    //busco los campos de email y contraseña
     const campoEmail = formularioLogin.querySelector('input[name="mail"]');
     const campoContrasena = formularioLogin.querySelector('input[name="password"]');
 
@@ -53,18 +56,16 @@ export function iniciarLogin(urlRedireccion) {
         user => user.email === emailIngresado && user.password === contrasenaIngresada
     );
 
-    // Verificación de credenciales
-
     if (usuario) { // Login exitoso
 
       //Guardar el usuario logueado 
       localStorage.setItem('isLoggedIn', 'true');
       localStorage.setItem('currentUser', JSON.stringify(usuario));
 
-      //Restaurar carrito si habia backup
+      //traer carrito si habia backup
       restaurarCarritoUsuario(usuario.email);
 
-      const redireccionGuardada = localStorage.getItem("redirectAfterLogin");
+     const redireccionGuardada = localStorage.getItem("redirectAfterLogin");
      const destino = redireccionGuardada || urlRedireccion || '../index.html';
           
       mostrarPopup(
@@ -75,7 +76,7 @@ export function iniciarLogin(urlRedireccion) {
           if (redireccionGuardada) {
             localStorage.removeItem("redirectAfterLogin");
           }
-          window.location.href = destino;
+          window.location.href = destino;//index.html o la guardada arriba
         }
       );
     } else { //Credenciales incorrectas o usuario no encontrado

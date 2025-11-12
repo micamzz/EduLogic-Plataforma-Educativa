@@ -2,37 +2,43 @@ import { BuscadorElementos } from "./buscadorElementos.js";
 import { vaciarCarrito } from "./carritoDeCompras.js";
 import { ValidadorFormulario } from "./validarFormulario.js";
 
-// Definimos el costo administrativo aquí para el cálculo detallado en el resumen
+//costo administrativo para calculo detallado en el resumen
 const COSTO_ADMINISTRATIVO_ARS = 50000;
 
 export function iniciarFormularioDePago() {
   const BUSCADOR = new BuscadorElementos();
   
+
+  //trae user loggeado ysu email para buscar su carrito
   const user = JSON.parse(localStorage.getItem("currentUser"));
   const carritoActual = JSON.parse(localStorage.getItem(`carrito_${user?.email}`)) || [];
-  
+
+  //resumen de compra 
   let total = 0;
-  const infoCurso = document.createElement("div");
+  const infoCurso = document.createElement("div");//crea el contenedor donde se poen el resumen
   infoCurso.classList.add("info-curso");
+  
 
   if (carritoActual.length === 0) {
     infoCurso.innerHTML = `<p>No hay cursos en el carrito.</p>`;
   } else {
-    // 1. Iniciar el resumen
+    //Inicia el resumen
     infoCurso.innerHTML = `<h3>Resumen de compra:</h3>`;
     const lista = document.createElement("ul");
-    let detalleAdministrativo = "";
+    let detalleAdministrativo = "";//cadena para los costos
     let hayDetalleAdmin = false;
 
+    // Recorre los items del carrito para mostrarlos en el resumen
     carritoActual.forEach(item => {
       const precioUnitario = item.precio || 0;
       const cantidad = item.cantidad || 1;
       const subtotalItem = precioUnitario * cantidad;
       total += subtotalItem;
       
-      let nombreItem = item.titulo;
-      const li = document.createElement("li");
-      
+      let nombreItem = item.titulo;//nombre del curso o giftcard 
+      const li = document.createElement("li");//crea y muestra cada item en el resumen
+
+      //si es empresa o giftcard hace el desglose especial
       if (item.tipo === "empresa") {
         const precioBaseUnitario = precioUnitario - COSTO_ADMINISTRATIVO_ARS;
         const costoAdministrativoTotal = COSTO_ADMINISTRATIVO_ARS * cantidad;
@@ -42,7 +48,7 @@ export function iniciarFormularioDePago() {
         
         nombreItem = `${item.titulo} (Empresa: ${cantidad} pers.)`;
         
-        // 2. Simplificar la presentación del desglose
+        //presentación del desglose
         detalleAdministrativo += `
           <li>Costo Base Curso (${cantidad} uds.): ${subtotalCursos.toLocaleString("es-AR", { style: "currency", currency: "ARS", minimumFractionDigits: 2 })}</li>
           <li>Costo Administrativo (${cantidad} uds. x ${COSTO_ADMINISTRATIVO_ARS.toLocaleString("es-AR", { style: "currency", currency: "ARS", minimumFractionDigits: 2 })}): ${costoAdministrativoTotal.toLocaleString("es-AR", { style: "currency", currency: "ARS", minimumFractionDigits: 2 })}</li>
@@ -58,21 +64,22 @@ export function iniciarFormularioDePago() {
         li.textContent = `${nombreItem} - ${precioUnitario.toLocaleString("es-AR", { style: "currency", currency: "ARS", minimumFractionDigits: 2 })} x ${cantidad}`;
       }
       
-      lista.appendChild(li);
+      lista.appendChild(li);//inserta al li como ultimo hijo del ul(lista)
     });
 
-    infoCurso.appendChild(lista);
+    infoCurso.appendChild(lista);//inserta la lista en el contenedor del resumen
     
-    // 3. Mostrar el desglose administrativo como un grupo separado (más limpio)
+    //muestra el desglose administrativo separado
     if (hayDetalleAdmin) {
       infoCurso.innerHTML += `<p><strong>Desglose por Inscripción de Empresa:</strong></p>`;
       infoCurso.innerHTML += `<ul class="detalle-costos-empresa">${detalleAdministrativo}</ul>`;
     }
     
-    // 4. Mostrar el total final
+    //muestra total
     infoCurso.innerHTML += `<p><strong>Total Final a Pagar: ${total.toLocaleString("es-AR", { style: "currency", currency: "ARS" })}</strong></p>`;
   }
 
+  //FROMULARIO DE PAGO
   const contenedorFormulario = BUSCADOR.buscarUnElemento(".formulario-inscripcion");
   if (contenedorFormulario) contenedorFormulario.prepend(infoCurso);
 
@@ -114,7 +121,7 @@ export function iniciarFormularioDePago() {
     e.target.value = grupos.join(" ");
   });
 
-  // ---------- VALIDACIÓN USANDO ValidadorFormulario ----------
+  //VALIDACION AL ENVIAR EL FORMULARIO
   form.addEventListener("submit", (e) => {
     e.preventDefault();
     limpiarErrores();
@@ -158,7 +165,7 @@ export function iniciarFormularioDePago() {
       esValido = false;
     }
 
-    // CÓDIGO DE SEGURIDAD (CVV)
+    // CÓDIGO DE SEGURIDAD 
     if (!ValidadorFormulario.campoVacio(codigoSeguridad.value)) {
       mostrarError(codigoSeguridad, ValidadorFormulario.MENSAJES.cvvVacio);
       esValido = false;
@@ -167,14 +174,15 @@ export function iniciarFormularioDePago() {
       esValido = false;
     }
 
+
+    //TODOS LOS CAMPOS PASARON LA VALIDACION
     if (esValido) {
-      console.log("🎯 PAGO EXITOSO - llamando a vaciarCarrito()");
       popup.style.display = "flex";
 
       if (infoCurso && infoCurso.parentNode) {
-        infoCurso.parentNode.removeChild(infoCurso);
+        infoCurso.parentNode.removeChild(infoCurso);//elimina el resumen de compra
       }
-      vaciarCarrito();
+      vaciarCarrito();//resetea el carrito
     }
   });
 
@@ -183,6 +191,8 @@ export function iniciarFormularioDePago() {
     form.reset();
   });
 
+
+  //PARA ERRORES
   function mostrarError(input, mensaje) {
     let error = input.nextElementSibling; // para buscar un error
 

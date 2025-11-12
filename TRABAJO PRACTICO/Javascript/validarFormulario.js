@@ -1,5 +1,6 @@
 export class ValidadorFormulario {
 
+  //alamcena msg de error
   static MENSAJES = {
     nombreVacio: "El nombre y apellido no puede estar vacío.",
     nombreCorto: "El nombre debe tener al menos 3 letras.",
@@ -14,6 +15,7 @@ export class ValidadorFormulario {
     cvvInvalido: "Debe tener 3 dígitos numéricos."
   };
 
+  //expresiones para validaciones
   static expresionesRegulares = {
     email: /^[0-9a-zA-Z._.-]+@[0-9a-zA-Z._.-]+\.[0-9a-zA-Z]+$/,
     telefono: /^\d{8,15}$|^\d{4}-\d{4,11}$/,
@@ -23,15 +25,15 @@ export class ValidadorFormulario {
   };
 
   static campoVacio(valor) {
-    return valor.trim() !== "";
+    return valor.trim() !== "";//true si no esta vacio
   }
 
   static longitudMinima(valor, minimo) {
-    return valor.trim().length >= minimo;
+    return valor.trim().length >= minimo;//true si cumple la longitud minima
   }
 
   static emailValido(email) {
-    return ValidadorFormulario.expresionesRegulares.email.test(email.trim());
+    return ValidadorFormulario.expresionesRegulares.email.test(email.trim());//true si es valido
   }
 
   static telefonoValido(tel) {

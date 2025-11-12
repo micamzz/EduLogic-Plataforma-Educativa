@@ -11,12 +11,14 @@ import { formularioDeContacto } from "./Javascript/contactoFormulario.js";
 import { inicializarCarrito } from './Javascript/carritoDeCompras.js';
 import {GiftCard} from './Javascript/giftCardEventos.js';
 import { iniciarFormularioDePago } from "./Javascript/formularioPago.js";
-import { iniciarLogicaInscripcion } from "./Javascript/inscripcionCurso.js";
+import { iniciarLogicaInscripcion } from "./Javascript/inscripcionCurso.js"; // NUEVA IMPORTACIÓN
 
 const BUSCADOR = new BuscadorElementos();
 
 
 document.addEventListener("DOMContentLoaded", async () => {
+
+  
   
   // HEADER
   manejarVisualizacionHeader();
@@ -61,11 +63,10 @@ if (path.includes('/index.html') || path === '/') {
   iniciarLogicaRecuperacion();
 
 } else if (path.includes('giftcard')) {  
-  console.log('🎁 Inicializando GiftCard...');
+  
   GiftCard();
 
 } else if (path.includes('formulariodepago')) {  
-  console.log('💳 Inicializando formulario de pago...');
   iniciarFormularioDePago();
   
 } else if (path.includes('inscripcioncurso')) { 
@@ -82,16 +83,5 @@ if (iconoCarrito) {
   inicializarCarrito();
 }
   
-// const carritoIcono = BUSCADOR.buscarUnElemento(".carrito_icono");
 
-// if (carritoIcono) {
-//   carritoIcono.addEventListener("click", (e) => {
-//     const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
-
-//     if (!isLoggedIn) {
-//       e.preventDefault(); // Evita que abra el menú del carrito
-//       window.location.href = "../paginas/inicioSesion.html";
-//     }
-//   });
-// }
 });
