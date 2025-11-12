@@ -1,5 +1,5 @@
 # Trabajo Práctico Grupal - Programación Web 1  
-### [EduLogic](https://cursosenlinea-edulogic.netlify.app)
+### [Ir al sitio](https://cursosenlinea-edulogic.netlify.app)
 ### 👩‍💻 Colaboradores  
 
 
