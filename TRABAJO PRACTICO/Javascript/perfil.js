@@ -16,7 +16,7 @@ export function iniciarLogicaPerfil() {
     }
   }
 
-  // Si está logueado y hay usuario guardado
+  // Si esta logueado y hay usuario guardado
   if (estaLogueado && usuarioGuardado) {
     const usuario = JSON.parse(usuarioGuardado);
 
@@ -51,13 +51,13 @@ export function iniciarLogicaPerfil() {
       textoNombreUsuario.textContent = nombreCompleto || 'Mi Perfil';
     }
 
-    // FORMULARIO DE PERFIL (actualizar datos)
+    // FORMULARIO DE PERFIL actualizar datos
     const formularioPerfil = buscador.buscarUnElementoPorId('perfil-form');
     if (formularioPerfil) {
       formularioPerfil.addEventListener('submit', (evento) => {
         evento.preventDefault();
 
-        // Actualizar datos del usuario con lo que está en los inputs
+        //Actualiza datos del usuario con lo que está en los inputs
         if (inputNombre)    usuario.nombre        = inputNombre.value;
         if (inputApellido)  usuario.apellido      = inputApellido.value;
         if (inputEmail)     usuario.email         = inputEmail.value;
@@ -70,7 +70,7 @@ export function iniciarLogicaPerfil() {
 
         localStorage.setItem('currentUser', JSON.stringify(usuario));
         
-        // Guardar cambios con popup
+        //Guardar cambios  popup
         mostrarPopup(
           'Éxito',
           '¡Datos de perfil actualizados con éxito!',
@@ -82,7 +82,7 @@ export function iniciarLogicaPerfil() {
       });
     }
 
-    // BOTÓN CERRAR SESIÓN
+    //BOTÓN CERRAR SESIÓN
     const botonCerrarSesion = buscador.buscarUnElementoPorId('logout-button');
     if (botonCerrarSesion) {
       botonCerrarSesion.addEventListener('click', () => {
@@ -93,7 +93,7 @@ export function iniciarLogicaPerfil() {
           () => {
             const usuarioActual = JSON.parse(localStorage.getItem("currentUser"));
             
-            // Guardar backup del carrito antes de cerrar sesión
+            //Guardar backup del carrito antes de cerrar sesión
             if (usuarioActual?.email) {
               const carritoActual = JSON.parse(localStorage.getItem(`carrito_${usuarioActual.email}`)) || [];
               localStorage.setItem(`carrito_backup_${usuarioActual.email}`, JSON.stringify(carritoActual));
@@ -115,7 +115,7 @@ export function iniciarLogicaPerfil() {
       });
     }
 
-    // BOTÓN ELIMINAR CUENTA
+    //BOTÓN ELIMINAR CUENTA
     const botonEliminarCuenta = buscador.buscarUnElementoPorId('eliminar-cuenta-button');
     if (botonEliminarCuenta) {
       botonEliminarCuenta.addEventListener('click', () => {

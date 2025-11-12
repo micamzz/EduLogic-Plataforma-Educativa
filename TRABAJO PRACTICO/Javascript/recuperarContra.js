@@ -4,7 +4,7 @@ import { mostrarPopup } from './popupManager.js';
 const buscador = new BuscadorElementos();
 
 export function iniciarLogicaRecuperacion() {
-  // Buscamos el formulario por id usando la clase BuscadorElementos
+  //Buscamos el formulario por id usando la clase BuscadorElementos
   const formularioRecuperacion = buscador.buscarUnElementoPorId('recuperacion-form');
 
   if (!formularioRecuperacion) {
@@ -15,7 +15,7 @@ export function iniciarLogicaRecuperacion() {
   formularioRecuperacion.addEventListener('submit', (evento) => {
     evento.preventDefault();
 
-    // Buscamos el input de email dentro del formulario
+    //Buscamos el input de email dentro del formulario
     const campoEmail = formularioRecuperacion.querySelector('input[name="email"]');
 
     if (!campoEmail) {
@@ -25,10 +25,10 @@ export function iniciarLogicaRecuperacion() {
 
     const emailIngresado = campoEmail.value.trim();
 
-    // Usuario guardado en localStorage
+    //Usuario guardado en localStorage
     const usuarioGuardadoTexto = localStorage.getItem('currentUser');
 
-    // Si no hay usuario guardado o el email no coincide, mostramos mensaje genérico
+    //Si no hay usuario guardado o el email no coincide, mostramos mensaje genérico
     if (!usuarioGuardadoTexto || JSON.parse(usuarioGuardadoTexto).email !== emailIngresado) {
       mostrarPopup(
         'Recuperación Enviada', 
@@ -38,7 +38,7 @@ export function iniciarLogicaRecuperacion() {
       return;
     }
 
-    // Si el email coincide con el usuario guardado
+    //Si el email coincide con el usuario guardado
     mostrarPopup(
       '¡Correo Enviado!', 
       'Se ha enviado un mail a ' + emailIngresado + ' para recuperar la contraseña.', 

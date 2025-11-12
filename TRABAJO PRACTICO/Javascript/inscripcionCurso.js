@@ -1,5 +1,3 @@
-// TRABAJO PRACTICO/Javascript/inscripcionCurso.js - MODIFICADO
-
 import { BuscadorElementos } from "./buscadorElementos.js";
 import { CreadorElementos } from "./creadorElementos.js";
 import { LISTA_CURSOS } from "./constantes/ArrayDeCursos.js";
@@ -12,9 +10,8 @@ const COSTO_ADMINISTRATIVO_ARS = 50000;
 let contadorPersonas = 1;
 
 
-/**
- * Genera el HTML para un bloque de campos de persona.
- */
+// Genera el HTML para un bloque de campos de persona.
+
 function crearBloquePersona(id, esPrimeraPersona = false) {
     const div = CREADOR.crearUnElemento('div');
     div.classList.add('persona-campos', 'persona-empresa', `persona-data-${id}`);
@@ -48,9 +45,8 @@ function crearBloquePersona(id, esPrimeraPersona = false) {
     return div;
 }
 
-/**
- * Re-numera los títulos de las personas (Persona 1, Persona 2, etc.) en orden secuencial.
- */
+//Re-numera las personas en orden secuencial
+
 function actualizarNumeracionPersonas() {
     const personas = BUSCADOR.buscarVariosElementos('#personas-container .persona-empresa');
     let indice = 1;
@@ -64,7 +60,7 @@ function actualizarNumeracionPersonas() {
     });
 }
 
-/* Calcula el total a pagar en la modalidad Empresa.*/
+// Calcula el total a pagar en la modo Empresa
 function recalcularTotal() {
     const totalDiv = BUSCADOR.buscarUnElementoPorId('total-a-pagar');
     if (!totalDiv) return;
@@ -99,7 +95,7 @@ function recalcularTotal() {
 }
 
 
-/*Agrega un nuevo bloque de campos para una persona*/
+//Agrega un nuevo bloque de campos para una persona
 function agregarPersona() {
     contadorPersonas++; 
     const personasContainer = BUSCADOR.buscarUnElementoPorId('personas-container');
@@ -111,9 +107,8 @@ function agregarPersona() {
     actualizarNumeracionPersonas(); 
 }
 
-/**
- * Elimina un bloque de campos de persona.
- */
+// Elimina un bloque de campos de persona
+ 
 function eliminarPersona(id, elemento) {
     if (id !== 1 || !elemento.classList.contains('persona-1')) { 
         elemento.remove();
@@ -122,9 +117,8 @@ function eliminarPersona(id, elemento) {
     }
 }
 
-/**
- * Limpia los campos de la primera persona.
- */
+//Limpia los campos de la primera persona
+
 function limpiarPrimeraPersona(primerBloque) {
     if (primerBloque) {
         primerBloque.querySelectorAll('input').forEach(input => {
@@ -150,7 +144,7 @@ export function iniciarLogicaInscripcion() {
     const popupEmpresa = BUSCADOR.buscarUnElementoPorId('popup-contenido-empresa');
     
     // Referencia al checkbox del carrito
-    const carritoCheckbox = BUSCADOR.buscarUnElemento('#Carro'); // <-- Nueva referencia
+    const carritoCheckbox = BUSCADOR.buscarUnElemento('#Carro'); 
 
     
     if (!selectorTipo || !form || !camposPersonal || !camposEmpresa || !agregarPersonaBtn || !personasContainer || !popup || !totalAPagarDiv) {
@@ -186,9 +180,8 @@ export function iniciarLogicaInscripcion() {
     actualizarNumeracionPersonas();
 
 
-    /**
-     * Muestra/Oculta campos y el botón de agregar persona.
-     */
+    // Muestra/Oculta campos y el botón de agregar persona
+     
     function manejarCambioTipoInscripcion() {
         const tipo = selectorTipo.value;
 
@@ -241,7 +234,7 @@ export function iniciarLogicaInscripcion() {
         }
         
         // CERRAR CARRITO ANTES DE MOSTRAR EL POPUP
-        if (carritoCheckbox) { // <-- Se utiliza la referencia
+        if (carritoCheckbox) { //Se utiliza la referencia
             carritoCheckbox.checked = false;
         }
 
@@ -261,18 +254,18 @@ export function iniciarLogicaInscripcion() {
                  const itemPersonal = {
                      ...cursoBase, 
                      tipo: 'curso', 
-                     precio: totalPagarPersonal, // Precio original sin adicional.
+                     precio: totalPagarPersonal, //Precio original sin adicional.
                      cantidad: 1 
                  };
                  agregarCustomAlCarrito(itemPersonal); 
-                 console.log(`✅ Curso ${nombreCurso} agregado al carrito para pago personal. Precio: ${totalPagarPersonal}`);
+                 //console.log(`Curso ${nombreCurso} agregado al carrito para pago personal. Precio: ${totalPagarPersonal}`);
             }
 
             const nombre = BUSCADOR.buscarUnElemento('input[name="nombre_personal"]').value;
             const email = BUSCADOR.buscarUnElemento('input[name="email_personal"]').value;
             const telefono = BUSCADOR.buscarUnElemento('input[name="telefono_personal"]').value;
 
-            // Muestra el resumen personal (limpio de **)
+            // Muestra el resumen personal 
             BUSCADOR.buscarUnElemento('#resumen-personal-detalle').innerHTML = `
                 <ul>
                     <li><strong>Curso:</strong> ${nombreCurso}</li>
@@ -331,7 +324,7 @@ export function iniciarLogicaInscripcion() {
             const total = totalDiv.dataset.totalPagar;
             const numPersonas = parseInt(totalDiv.dataset.numPersonas);
             
-            //  Agregar el curso al carrito con precio modificado y cantidad
+            //Agrega el curso al carrito con precio modificado y cantidad
             if (cursoBase) {
                 const precioUnitarioEmpresa = precioBase + COSTO_ADMINISTRATIVO_ARS; 
                 
@@ -347,7 +340,7 @@ export function iniciarLogicaInscripcion() {
                 console.log(` Curso ${nombreCurso} (${numPersonas} unidades) agregado al carrito para pago empresa. Precio Unitario (c/adicional): ${precioUnitarioEmpresa}`);
             }
 
-            // Actualizar modal de empresa
+            //Actualiza modal de empresa
             BUSCADOR.buscarUnElemento('#resumen-curso-nombre').textContent = nombreCurso;
             BUSCADOR.buscarUnElemento('#resumen-personas-lista').innerHTML = resumenHTML;
             BUSCADOR.buscarUnElemento('#resumen-total-empresa').textContent = `Total a pagar: ${parseFloat(total).toLocaleString('es-AR', { style: 'currency', currency: 'ARS', minimumFractionDigits: 2 })}`;
@@ -361,7 +354,7 @@ export function iniciarLogicaInscripcion() {
 
     });
     
-    // Listener para cerrar el modal y limpiar el formulario
+    //Listener para cerrar el modal y limpiar el formulario
     popup.querySelectorAll('.boton-enlace').forEach(enlace => {
         enlace.addEventListener('click', () => {
         

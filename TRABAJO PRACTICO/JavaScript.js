@@ -17,7 +17,7 @@ const BUSCADOR = new BuscadorElementos();
 
 
 document.addEventListener("DOMContentLoaded", async () => {
-console.log('🚀 DOMContentLoaded en Netlify');
+//console.log(' DOMContentLoaded en Netlify');
   
   
   // HEADER

@@ -1,22 +1,24 @@
 
 export function iniciarPaginaPrincipal() {
-    const sliderContainer = document.querySelector('.slider');
+    const sliderContainer = document.querySelector('.slider'); //trae el contenedor de las diapos y es el elemento q se mueve en horizontal
     
     // Solo inicializar si el contenedor del carrusel existe
     if (!sliderContainer) return; 
     
-    const dots = document.querySelectorAll('.dot');
-    const prevBtn = document.querySelector('.prev-btn'); 
-    const nextBtn = document.querySelector('.next-btn'); 
-    const slides = document.querySelectorAll('.slide');
-    const totalSlides = slides.length;
-    let currentSlide = 0;
-    let autoSlideInterval;
-    const intervalTime = 4000;
-    let resumeTimeout;
+    const dots = document.querySelectorAll('.dot');//puntos de posicion
+    const prevBtn = document.querySelector('.prev-btn'); //boton anterior
+    const nextBtn = document.querySelector('.next-btn'); //siguiente
+    const slides = document.querySelectorAll('.slide');//img dentro del carrusel
+    const totalSlides = slides.length;//cant de diapos
+    let currentSlide = 0;//en que diapo empieza
+    let autoSlideInterval; //almacena temporizador
+    const intervalTime = 4000; //tiempo entre cada cambio automatico 4 seg
+    let resumeTimeout; //temporizador para reanudar el auto deslizamiento despues de la interaccion del usuario
     const resumeDelay = 5000;
-    const slideWidthPercentage = 100 / totalSlides; 
+    const slideWidthPercentage = 100 / totalSlides; //calcula el ancho de cada diapo en porcentaje
 
+
+    //muestra la diapo
     function showSlide(index) {
         currentSlide = (index + totalSlides) % totalSlides;
         const offset = -currentSlide * slideWidthPercentage; 
