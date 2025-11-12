@@ -6,6 +6,7 @@ const BUSCADOR = new BuscadorElementos();
 export class DetalleCursos {
   render() {
 
+    //extrae el nombre del curso de la URL
     const params = new URLSearchParams(window.location.search);
     const nombreCurso = params.get("curso");
 
@@ -29,16 +30,17 @@ export class DetalleCursos {
     const docente = curso.docente;
     const modulos = curso.modulos;
 
-    // RECORRER LOS MODULOS 
+    // RECORRER LOS MODULOS (CONTENIDOS X CLASES) acordeon
     let modulosHTML = "";
 
     for (let j = 0; j < modulos.length; j++) {
       const mod = modulos[j];
 
-      modulosHTML += `<details ${j === 0 ? "open" : ""}>`;
-      modulosHTML += `<summary>${mod.nombre}</summary>`;
-      modulosHTML += `<article class="summary-contenidos_desplegable"><ul>`;
+      modulosHTML += `<details ${j === 0 ? "open" : ""}>`;//widget desplegable=details
+      modulosHTML += `<summary>${mod.nombre}</summary>`;//titulo del widget
+      modulosHTML += `<article class="summary-contenidos_desplegable"><ul>`;//contenido del widget
 
+      // RECORRER LAS CLASES DENTRO DE CADA MODULO
       for (let k = 0; k < mod.clases.length; k++) {
         const clase = mod.clases[k];
         modulosHTML += `
@@ -141,7 +143,7 @@ for (const sugerido of sugerencias) {
 // INSERTA EL CONTENIDO EN EL CAROUSEL DE CURSOS EN EL DIV.
 contenedorRelacionados.innerHTML = sugeridosHTML;
   }
-  // PARA LLAMAR AL CURSO DESDE EL JS PRINCIPAL.
+  // PARA LLAMAR AL CURSO DESDE EL JS PRINCIPAL
   static mostrarDetalleDeCurso() {
     const detalle = new DetalleCursos();
     detalle.render();
@@ -149,7 +151,6 @@ contenedorRelacionados.innerHTML = sugeridosHTML;
   
 }
 
-// CARRUSEL DEL ASIDE
 
 
 

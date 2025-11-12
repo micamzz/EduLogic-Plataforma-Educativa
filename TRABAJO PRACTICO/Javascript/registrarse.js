@@ -6,11 +6,10 @@ const CONTRASEÑA_VERIF = /^(?=.*[A-Z])(?=.*\d).{6,}$/; //Debe tener al menos 6 
 //obtener todos los usuarios registrados o un array vacio si no hay
 function obtenerUsuariosRegistrados() {
     const usuariosTexto = localStorage.getItem('registeredUsers');
-    try {
+    try {//try pq convertir textJSON a un objeto puede fallar
         return usuariosTexto ? JSON.parse(usuariosTexto) : [];
     } catch (e) {
-        console.error("Error al parsear 'registeredUsers' de localStorage", e);
-        return [];
+       return [];//array vacio
     }
 }
 
@@ -22,8 +21,7 @@ function guardarUsuariosRegistrados(usuarios) {
 export function iniciarRegistro(redirectUrl) {
     const form = document.getElementById('registro-form');
     if (!form) {
-        console.error("Error crítico: No se encontró el formulario 'registro-form'.");
-        return;
+       return;//si no se encuentra el form
     }
 
     //FUNCION CENTRAL DE REGISTRO
@@ -88,16 +86,16 @@ export function iniciarRegistro(redirectUrl) {
         usuarios.push(userData);
         guardarUsuariosRegistrados(usuarios);
 
-        //Establecer como el usuario como logueado
+        //establece como el usuario como logueado
         localStorage.setItem('currentUser', JSON.stringify(userData)); 
 
-        // Muestra popup y ejecuta la redireccion al hacer clic en ok
+        //muestra popup y ejecuta la redireccion al hacer clic en ok
         mostrarPopup('Éxito', '¡Registro exitoso! Ahora puedes iniciar sesión con tu cuenta.', 'alert', () => {
             window.location.href =  './inicioSesion.html';
         });
     }
 
-    // Listener principal para el envio del formulario
+    //al registrarse guarda en localstorage
     form.addEventListener('submit', function(e) {
         e.preventDefault(); 
         registrarUsuario(form);
@@ -105,5 +103,5 @@ export function iniciarRegistro(redirectUrl) {
 }
 
 export function iniciarRegistroNormal() {
-    iniciarRegistro('./inicioSesion.html'); 
+    iniciarRegistro('./inicioSesion.html'); //redirige a inicioSesion despues de registrar
 }

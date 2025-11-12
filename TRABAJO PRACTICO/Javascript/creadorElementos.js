@@ -4,7 +4,7 @@ export class CreadorElementos{
     };
 
   crearUnElemento(selectorCss){
-    return document.createElement(selectorCss)
+    return document.createElement(selectorCss)//simplifica la creacion de elementos NODOS EN EL DOM
   }
  
 

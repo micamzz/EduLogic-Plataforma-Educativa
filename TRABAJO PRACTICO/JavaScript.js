@@ -17,7 +17,7 @@ const BUSCADOR = new BuscadorElementos();
 
 
 document.addEventListener("DOMContentLoaded", async () => {
-//console.log(' DOMContentLoaded en Netlify');
+
   
   
   // HEADER
@@ -63,11 +63,10 @@ if (path.includes('/index.html') || path === '/') {
   iniciarLogicaRecuperacion();
 
 } else if (path.includes('giftcard')) {  
-  console.log('🎁 Inicializando GiftCard...');
+  
   GiftCard();
 
 } else if (path.includes('formulariodepago')) {  
-  console.log('💳 Inicializando formulario de pago...');
   iniciarFormularioDePago();
   
 } else if (path.includes('inscripcioncurso')) { 
@@ -84,16 +83,5 @@ if (iconoCarrito) {
   inicializarCarrito();
 }
   
-// const carritoIcono = BUSCADOR.buscarUnElemento(".carrito_icono");
 
-// if (carritoIcono) {
-//   carritoIcono.addEventListener("click", (e) => {
-//     const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
-
-//     if (!isLoggedIn) {
-//       e.preventDefault(); // Evita que abra el menú del carrito
-//       window.location.href = "../paginas/inicioSesion.html";
-//     }
-//   });
-// }
 });

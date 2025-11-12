@@ -4,14 +4,15 @@ import { mostrarPopup } from './popupManager.js';
 const buscador = new BuscadorElementos();
 
 export function iniciarLogicaRecuperacion() {
-  //Buscamos el formulario por id usando la clase BuscadorElementos
+  //buscamos el formulario por id usando la clase BuscadorElementos
   const formularioRecuperacion = buscador.buscarUnElementoPorId('recuperacion-form');
 
   if (!formularioRecuperacion) {
-    console.error("Error: No se encontró el formulario 'recuperacion-form'.");
+    //console.error("Error: No se encontró el formulario 'recuperacion-form'.");
     return;
   }
 
+  //escuha el envio del formulario
   formularioRecuperacion.addEventListener('submit', (evento) => {
     evento.preventDefault();
 
@@ -19,7 +20,7 @@ export function iniciarLogicaRecuperacion() {
     const campoEmail = formularioRecuperacion.querySelector('input[name="email"]');
 
     if (!campoEmail) {
-      console.error("Error: No se encontró el campo de email dentro del formulario.");
+      //console.error("Error: No se encontró el campo de email dentro del formulario.");
       return;
     }
 

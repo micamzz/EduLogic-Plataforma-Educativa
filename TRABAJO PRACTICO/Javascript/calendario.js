@@ -13,6 +13,8 @@ export class Calendario {
     const BOTON_ATRAS = BUSCADOR.buscarUnElemento('.js-boton-link-atras');
     const BOTON_SIGUENTE = BUSCADOR.buscarUnElemento('.js-boton-link-siguiente');
 
+
+    // eventos para cambiar de mes
     if (BOTON_ATRAS && BOTON_SIGUENTE) {
       BOTON_ATRAS.addEventListener('click', () => {
         fechaActual.setMonth(fechaActual.getMonth() - 1);
@@ -25,30 +27,34 @@ export class Calendario {
       });
     }
 
+    // elementos del calendario
     const TITULO_MES_ANIO = BUSCADOR.buscarUnElemento('.js-titulo');
     const DIAS = BUSCADOR.buscarUnElemento('.js-calendar-numbers');
 
+    //MOTOR DEL CALENDARIO
     function calendario(fecha) {
-      DIAS.innerHTML = '';
+      DIAS.innerHTML = '';//limpia los dias
 
       const ANIO = fecha.getFullYear();
       const MES = fecha.getMonth();
       const NOMBRE_MES = fecha.toLocaleDateString('es-ES', { month: 'long' });
 
+      //calcula los dias del mes
       const PRIMER_DIA_DEL_MES = new Date(ANIO, MES, 1);
       const ULTIMO_DIA_DEL_MES = new Date(ANIO, MES + 1, 0);
 
+      //obtiene el de la semana del primer dia del mes (0=Domingo, 1=Lunes, ..., 6=Sábado)
       const PRIMER_DIA_SEMANA = PRIMER_DIA_DEL_MES.getDay();
       const TOTAL_DIAS = ULTIMO_DIA_DEL_MES.getDate();
 
-      // Días vacíos antes del día 1
+      //dibuja las celdas vacias antes del primer dia
       for (let i = 0; i < PRIMER_DIA_SEMANA; i++) {
         const DIA_VACIO = CREADOR.crearUnElemento('article');
         DIA_VACIO.classList.add('dia');
         DIAS.appendChild(DIA_VACIO);
       }
 
-      const HOY = new Date();
+      const HOY = new Date();//crea la fecha actual para marcar el dia actual
 
       // Días del mes
       for (let i = 1; i <= TOTAL_DIAS; i++) {
@@ -101,6 +107,7 @@ export class Calendario {
 
     calendario(fechaActual);
 
+    //pop ups de los cursos al hacer click
     function mostrarPopup(curso) {
       const fondoPopup = CREADOR.crearUnElemento("div");
       fondoPopup.classList.add("popup-fondo");
@@ -127,7 +134,7 @@ export class Calendario {
       const botonCerrar = ventanaPopup.querySelector(".popup-cerrar");
       const botonAgregar = ventanaPopup.querySelector(".popup-agregarCarrito");
 
-      // Cerrar popup al hacer click en "Cerrar"
+      // Cerrar popup al hacer click en cerrar
       botonCerrar.addEventListener("click", () => {
         fondoPopup.remove();
       });
@@ -136,10 +143,11 @@ export class Calendario {
       // para mostrar otro popup cuando se agrega al carrito el curso
       botonAgregar.addEventListener("click", () => {
         fondoPopup.remove();
-        mostrarPopupAgregadoAlCarrito(curso); // CAMBIO: llamada al nuevo popup
+        mostrarPopupAgregadoAlCarrito(curso); //llamada al nuevo popup
       });
     }
 
+    // popup de confirmacion de agregado al carrito
     function mostrarPopupAgregadoAlCarrito(curso) {
       const fondoPopup = CREADOR.crearUnElemento("div");
       fondoPopup.classList.add("popup-fondo");
