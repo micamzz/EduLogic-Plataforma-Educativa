@@ -2,6 +2,7 @@ import { BuscadorElementos } from "./buscadorElementos.js";
 import { CreadorElementos } from "./creadorElementos.js";
 import { LISTA_CURSOS } from "./constantes/ArrayDeCursos.js";
 import { agregarCustomAlCarrito } from './carritoDeCompras.js'; 
+import { ValidadorFormulario } from "./validarFormulario.js";
 
 const BUSCADOR = new BuscadorElementos();
 const CREADOR = new CreadorElementos();
@@ -9,9 +10,49 @@ const COSTO_ADMINISTRATIVO_ARS = 50000;
 
 let contadorPersonas = 1;
 
+// ESTO AGREGUE - función para mostrar errores específicos en la inscripción
+function mostrarErrorInscripcion(input, mensaje) {
+  if (!input) return;
 
-// Genera el HTML para un bloque de campos de persona.
+  let error = input.nextElementSibling;
 
+  // ES ESTO CAMBIÉ: ahora chequeo "error-mensaje" que es la clase que realmente uso
+  if (!error || !error.classList.contains("error-mensaje")) {
+    error = document.createElement("div");
+    error.classList.add("error-mensaje");
+    input.insertAdjacentElement("afterend", error);
+  }
+
+  error.textContent = mensaje;
+  input.classList.add("input-error");
+}
+
+// ESTO AGREGUE PARA EL INICIO DE SESION
+// VALIDACION DE INICIO DE SESION PARA Q SI NO ESTA LOGUEADO NO PUEDA INSCRIBIRSE 
+function validarSesionAntesDeInscribirse() {
+  const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+  const currentUser = JSON.parse(localStorage.getItem("currentUser") || "null");
+
+  // Si no está logueado, redirigimos al inicio de sesión igual que en el carrito
+  if (!isLoggedIn || !currentUser?.email) {
+    // Guardamos a dónde tiene que volver después de iniciar sesión
+    localStorage.setItem("redirectAfterLogin", location.pathname + location.search);
+
+    // Misma lógica que en carritoDeCompras.js
+    const hrefLogin = window.location.pathname.includes("/paginas/")
+      ? "./inicioSesion.html"
+      : "./paginas/inicioSesion.html";
+
+    window.location.href = hrefLogin;
+    return false;
+  }
+
+  return true;
+}
+
+/**
+ * Genera el HTML para un bloque de campos de persona.
+ */
 function crearBloquePersona(id, esPrimeraPersona = false) {
     const div = CREADOR.crearUnElemento('div');
     div.classList.add('persona-campos', 'persona-empresa', `persona-data-${id}`);
@@ -20,13 +61,13 @@ function crearBloquePersona(id, esPrimeraPersona = false) {
     div.innerHTML = `
         <h4 class="persona-titulo">Persona ${id}</h4>
         <label>Nombre y Apellido:</label>
-        <input type="text" name="nombre_${id}" placeholder="Nombre y Apellido" required minlength="5">
+        <input type="text" name="nombre_${id}" placeholder="Nombre y Apellido" minlength="5">
         <label>DNI:</label>
-        <input type="text" inputmode="numeric" name="dni_${id}" placeholder="DNI" pattern="[0-9]{8,12}" required minlength="8">
+        <input type="text" inputmode="numeric" name="dni_${id}" placeholder="DNI" pattern="[0-9]{8,12}" minlength="8">
         <label>Email:</label>
-        <input type="email" name="email_${id}" placeholder="Email@example.com" required>
+        <input type="email" name="email_${id}" placeholder="Email@example.com">
         <label>Teléfono:</label>
-        <input type="tel" name="telefono_${id}" placeholder="Teléfono" required minlength="8" maxlength="15">
+        <input type="tel" name="telefono_${id}" placeholder="Teléfono" minlength="8" maxlength="15">
         ${esPrimeraPersona ? 
             `<div class="placeholder-boton-quitar"></div>` : 
             `<button type="button" class="boton-quitar-persona" data-id="${id}">&times;</button>`
@@ -45,8 +86,9 @@ function crearBloquePersona(id, esPrimeraPersona = false) {
     return div;
 }
 
-//Re-numera las personas en orden secuencial
-
+/**
+ * Re-numera los títulos de las personas (Persona 1, Persona 2, etc.) en orden secuencial.
+ */
 function actualizarNumeracionPersonas() {
     const personas = BUSCADOR.buscarVariosElementos('#personas-container .persona-empresa');
     let indice = 1;
@@ -60,7 +102,7 @@ function actualizarNumeracionPersonas() {
     });
 }
 
-// Calcula el total a pagar en la modo Empresa
+/* Calcula el total a pagar en la modalidad Empresa.*/
 function recalcularTotal() {
     const totalDiv = BUSCADOR.buscarUnElementoPorId('total-a-pagar');
     if (!totalDiv) return;
@@ -95,7 +137,7 @@ function recalcularTotal() {
 }
 
 
-//Agrega un nuevo bloque de campos para una persona
+/*Agrega un nuevo bloque de campos para una persona*/
 function agregarPersona() {
     contadorPersonas++; 
     const personasContainer = BUSCADOR.buscarUnElementoPorId('personas-container');
@@ -107,8 +149,9 @@ function agregarPersona() {
     actualizarNumeracionPersonas(); 
 }
 
-// Elimina un bloque de campos de persona
- 
+/**
+ * Elimina un bloque de campos de persona.
+ */
 function eliminarPersona(id, elemento) {
     if (id !== 1 || !elemento.classList.contains('persona-1')) { 
         elemento.remove();
@@ -117,8 +160,9 @@ function eliminarPersona(id, elemento) {
     }
 }
 
-//Limpia los campos de la primera persona
-
+/**
+ * Limpia los campos de la primera persona.
+ */
 function limpiarPrimeraPersona(primerBloque) {
     if (primerBloque) {
         primerBloque.querySelectorAll('input').forEach(input => {
@@ -144,7 +188,7 @@ export function iniciarLogicaInscripcion() {
     const popupEmpresa = BUSCADOR.buscarUnElementoPorId('popup-contenido-empresa');
     
     // Referencia al checkbox del carrito
-    const carritoCheckbox = BUSCADOR.buscarUnElemento('#Carro'); 
+    const carritoCheckbox = BUSCADOR.buscarUnElemento('#Carro'); // <-- Nueva referencia
 
     
     if (!selectorTipo || !form || !camposPersonal || !camposEmpresa || !agregarPersonaBtn || !personasContainer || !popup || !totalAPagarDiv) {
@@ -159,9 +203,9 @@ export function iniciarLogicaInscripcion() {
     
     agregarPersonaBtn.addEventListener('click', agregarPersona); 
     
-    const selectCurso = BUSCADOR.buscarUnElementoPorId('curso-empresa');
-    if (selectCurso) {
-        selectCurso.addEventListener('change', () => {
+    const selectCursoCambio = BUSCADOR.buscarUnElementoPorId('curso-empresa');
+    if (selectCursoCambio) {
+        selectCursoCambio.addEventListener('change', () => {
             const primeraPersona = personasContainer.querySelector('.persona-1');
             if (primeraPersona) limpiarPrimeraPersona(primeraPersona);
             
@@ -180,8 +224,9 @@ export function iniciarLogicaInscripcion() {
     actualizarNumeracionPersonas();
 
 
-    // Muestra/Oculta campos y el botón de agregar persona
-     
+    /**
+     * Muestra/Oculta campos y el botón de agregar persona.
+     */
     function manejarCambioTipoInscripcion() {
         const tipo = selectorTipo.value;
 
@@ -195,8 +240,6 @@ export function iniciarLogicaInscripcion() {
             // OCULTAR EL BLOQUE DE RESUMEN DE PRECIOS
             totalAPagarDiv.style.display = 'none'; 
 
-            camposEmpresa.querySelectorAll('input, select').forEach(input => input.removeAttribute('required'));
-            camposPersonal.querySelectorAll('input, select').forEach(input => input.setAttribute('required', 'required'));
             
         } else if (tipo === 'empresa') {
             camposPersonal.style.display = 'none';
@@ -208,9 +251,6 @@ export function iniciarLogicaInscripcion() {
             // MOSTRAR EL BLOQUE DE RESUMEN DE PRECIOS
             totalAPagarDiv.style.display = 'block'; 
 
-            camposEmpresa.querySelectorAll('input, select').forEach(input => input.setAttribute('required', 'required'));
-            camposPersonal.querySelectorAll('input, select').forEach(input => input.removeAttribute('required'));
-            
             recalcularTotal();
             actualizarNumeracionPersonas();
         }
@@ -220,33 +260,77 @@ export function iniciarLogicaInscripcion() {
     selectorTipo.addEventListener('change', manejarCambioTipoInscripcion);
     
     
-    
     // LÓGICA DE SUBMIT
 
     form.addEventListener('submit', (e) => {
         e.preventDefault();
 
-        BUSCADOR.buscarVariosElementos('.error-mensaje-inscripcion').forEach(el => el.remove());
-        
-        if (!form.checkValidity()) {
-            form.reportValidity(); 
-            return;
-        }
-        
-        // CERRAR CARRITO ANTES DE MOSTRAR EL POPUP
-        if (carritoCheckbox) { //Se utiliza la referencia
-            carritoCheckbox.checked = false;
-        }
-
+        BUSCADOR.buscarVariosElementos('.error-mensaje').forEach(el => el.remove());
+        BUSCADOR.buscarVariosElementos('.input-error').forEach(i => i.classList.remove('input-error')); // ESTO AGREGUE
 
         const tipo = selectorTipo.value;
         const selectCurso = BUSCADOR.buscarUnElementoPorId('curso-empresa');
-        const nombreCurso = selectCurso.value;
+        const nombreCurso = selectCurso ? selectCurso.value : "";
+
+        // ESTO AGREGUE - validación del curso seleccionado
+        if (!nombreCurso) {
+            mostrarErrorInscripcion(selectCurso, "El curso es obligatorio.");
+            return;
+        }
+
         const cursoBase = LISTA_CURSOS.find(c => c.titulo === nombreCurso);
         const precioBase = cursoBase?.precio || 0;
 
 
         if (tipo === 'personal') {
+            
+            // ESTO AGREGUE - validaciones con ValidadorFormulario para modalidad personal
+            let esValido = true;
+
+            const nombreInputPersonal = BUSCADOR.buscarUnElemento('input[name="nombre_personal"]');
+            const emailInputPersonal = BUSCADOR.buscarUnElemento('input[name="email_personal"]');
+            const telInputPersonal = BUSCADOR.buscarUnElemento('input[name="telefono_personal"]');
+
+            // Nombre
+            if (!ValidadorFormulario.campoVacio(nombreInputPersonal.value)) {
+                mostrarErrorInscripcion(nombreInputPersonal, "El nombre es obligatorio.");
+                esValido = false;
+            } else if (!ValidadorFormulario.longitudMinima(nombreInputPersonal.value, 5)) {
+                mostrarErrorInscripcion(nombreInputPersonal, ValidadorFormulario.MENSAJES.nombreCorto);
+                esValido = false;
+            }
+
+            // Email
+            if (!ValidadorFormulario.campoVacio(emailInputPersonal.value)) {
+                mostrarErrorInscripcion(emailInputPersonal, "El email es obligatorio.");
+                esValido = false;
+            } else if (!ValidadorFormulario.emailValido(emailInputPersonal.value)) {
+                mostrarErrorInscripcion(emailInputPersonal, ValidadorFormulario.MENSAJES.emailInvalido);
+                esValido = false;
+            }
+
+            // Teléfono
+            if (!ValidadorFormulario.campoVacio(telInputPersonal.value)) {
+                mostrarErrorInscripcion(telInputPersonal, "El teléfono es obligatorio.");
+                esValido = false;
+            } else if (!ValidadorFormulario.telefonoValido(telInputPersonal.value)) {
+                mostrarErrorInscripcion(telInputPersonal, ValidadorFormulario.MENSAJES.telefonoInvalido);
+                esValido = false;
+            }
+
+            if (!esValido) {
+                return;
+            }
+
+            // ES ESTO AGREGUÉ - ahora recién acá pregunto si está logueado
+            if (!validarSesionAntesDeInscribirse()) {
+                return;
+            }
+
+            // CERRAR CARRITO ANTES DE MOSTRAR EL POPUP (LO DEJO ACÁ)
+            if (carritoCheckbox) { 
+                carritoCheckbox.checked = false;
+            }
             
             const totalPagarPersonal = precioBase; 
 
@@ -254,18 +338,18 @@ export function iniciarLogicaInscripcion() {
                  const itemPersonal = {
                      ...cursoBase, 
                      tipo: 'curso', 
-                     precio: totalPagarPersonal, //Precio original sin adicional.
+                     precio: totalPagarPersonal, // Precio original sin adicional.
                      cantidad: 1 
                  };
                  agregarCustomAlCarrito(itemPersonal); 
-                 //console.log(`Curso ${nombreCurso} agregado al carrito para pago personal. Precio: ${totalPagarPersonal}`);
+                 console.log(`✅ Curso ${nombreCurso} agregado al carrito para pago personal. Precio: ${totalPagarPersonal}`);
             }
 
-            const nombre = BUSCADOR.buscarUnElemento('input[name="nombre_personal"]').value;
-            const email = BUSCADOR.buscarUnElemento('input[name="email_personal"]').value;
-            const telefono = BUSCADOR.buscarUnElemento('input[name="telefono_personal"]').value;
+            const nombre = nombreInputPersonal.value;
+            const email = emailInputPersonal.value;
+            const telefono = telInputPersonal.value;
 
-            // Muestra el resumen personal 
+            // Muestra el resumen personal (limpio de **)
             BUSCADOR.buscarUnElemento('#resumen-personal-detalle').innerHTML = `
                 <ul>
                     <li><strong>Curso:</strong> ${nombreCurso}</li>
@@ -291,12 +375,44 @@ export function iniciarLogicaInscripcion() {
                 const id = bloque.dataset.id;
                 const nombreInput = bloque.querySelector(`input[name="nombre_${id}"]`);
                 const dniInput = bloque.querySelector(`input[name="dni_${id}"]`);
-                
-                if (!nombreInput.value.trim() || !dniInput.value.trim()) {
+                const emailInput = bloque.querySelector(`input[name="email_${id}"]`);
+                const telefonoInput = bloque.querySelector(`input[name="telefono_${id}"]`);
+
+                // ESTO AGREGUE - validaciones con ValidadorFormulario para cada persona (empresa)
+
+                // Nombre
+                if (!ValidadorFormulario.campoVacio(nombreInput.value)) {
+                    mostrarErrorInscripcion(nombreInput, "El nombre es obligatorio.");
+                    esValido = false;
+                } else if (!ValidadorFormulario.longitudMinima(nombreInput.value, 5)) {
+                    mostrarErrorInscripcion(nombreInput, ValidadorFormulario.MENSAJES.nombreCorto);
                     esValido = false;
                 }
 
+                // Email
+                if (!ValidadorFormulario.campoVacio(emailInput.value)) {
+                    mostrarErrorInscripcion(emailInput, "El email es obligatorio.");
+                    esValido = false;
+                } else if (!ValidadorFormulario.emailValido(emailInput.value)) {
+                    mostrarErrorInscripcion(emailInput, ValidadorFormulario.MENSAJES.emailInvalido);
+                    esValido = false;
+                }
+
+                // Teléfono
+                if (!ValidadorFormulario.campoVacio(telefonoInput.value)) {
+                    mostrarErrorInscripcion(telefonoInput, "El teléfono es obligatorio.");
+                    esValido = false;
+                } else if (!ValidadorFormulario.telefonoValido(telefonoInput.value)) {
+                    mostrarErrorInscripcion(telefonoInput, ValidadorFormulario.MENSAJES.telefonoInvalido);
+                    esValido = false;
+                }
+                
+                // DNI (dejamos tu lógica original)
                 const dni = dniInput.value.trim();
+                if (!dni) {
+                    esValido = false;
+                }
+
                 if (dnisEncontrados.has(dni)) {
                     dniDuplicado = true;
                 }
@@ -310,21 +426,29 @@ export function iniciarLogicaInscripcion() {
             });
             resumenHTML += '</ul>';
             
-            if (dniDuplicado) {
-                 alert("Error de validación: No se pueden inscribir personas con el mismo DNI.");
-                 return; 
+            // BORRARRRRRRRRRRRRRRRRRRRRR
+            // if (dniDuplicado) {
+            //      alert("Error de validación: No se pueden inscribir personas con el mismo DNI.");
+            //      return; 
+            // }
+
+        
+
+            // ES ESTO AGREGUÉ - validar sesión recién cuando el formulario es válido
+            if (!validarSesionAntesDeInscribirse()) {
+                return;
             }
 
-            if (!esValido) {
-                form.reportValidity();
-                return;
+            // CERRAR CARRITO ANTES DE MOSTRAR EL POPUP (LO DEJO ACÁ)
+            if (carritoCheckbox) { 
+                carritoCheckbox.checked = false;
             }
 
             const totalDiv = BUSCADOR.buscarUnElementoPorId('total-a-pagar');
             const total = totalDiv.dataset.totalPagar;
             const numPersonas = parseInt(totalDiv.dataset.numPersonas);
             
-            //Agrega el curso al carrito con precio modificado y cantidad
+            //  Agregar el curso al carrito con precio modificado y cantidad
             if (cursoBase) {
                 const precioUnitarioEmpresa = precioBase + COSTO_ADMINISTRATIVO_ARS; 
                 
@@ -340,7 +464,7 @@ export function iniciarLogicaInscripcion() {
                 console.log(` Curso ${nombreCurso} (${numPersonas} unidades) agregado al carrito para pago empresa. Precio Unitario (c/adicional): ${precioUnitarioEmpresa}`);
             }
 
-            //Actualiza modal de empresa
+            // Actualizar modal de empresa
             BUSCADOR.buscarUnElemento('#resumen-curso-nombre').textContent = nombreCurso;
             BUSCADOR.buscarUnElemento('#resumen-personas-lista').innerHTML = resumenHTML;
             BUSCADOR.buscarUnElemento('#resumen-total-empresa').textContent = `Total a pagar: ${parseFloat(total).toLocaleString('es-AR', { style: 'currency', currency: 'ARS', minimumFractionDigits: 2 })}`;
@@ -354,7 +478,7 @@ export function iniciarLogicaInscripcion() {
 
     });
     
-    //Listener para cerrar el modal y limpiar el formulario
+    // Listener para cerrar el modal y limpiar el formulario
     popup.querySelectorAll('.boton-enlace').forEach(enlace => {
         enlace.addEventListener('click', () => {
         

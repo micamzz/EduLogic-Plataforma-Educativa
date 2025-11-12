@@ -1,5 +1,6 @@
 import { BuscadorElementos } from "./buscadorElementos.js";
-import { vaciarCarrito } from './carritoDeCompras.js';
+import { vaciarCarrito } from "./carritoDeCompras.js";
+import { ValidadorFormulario } from "./validarFormulario.js";
 
 // Definimos el costo administrativo aquí para el cálculo detallado en el resumen
 const COSTO_ADMINISTRATIVO_ARS = 50000;
@@ -20,7 +21,7 @@ export function iniciarFormularioDePago() {
     // 1. Iniciar el resumen
     infoCurso.innerHTML = `<h3>Resumen de compra:</h3>`;
     const lista = document.createElement("ul");
-    let detalleAdministrativo = '';
+    let detalleAdministrativo = "";
     let hayDetalleAdmin = false;
 
     carritoActual.forEach(item => {
@@ -32,7 +33,7 @@ export function iniciarFormularioDePago() {
       let nombreItem = item.titulo;
       const li = document.createElement("li");
       
-      if (item.tipo === 'empresa') {
+      if (item.tipo === "empresa") {
         const precioBaseUnitario = precioUnitario - COSTO_ADMINISTRATIVO_ARS;
         const costoAdministrativoTotal = COSTO_ADMINISTRATIVO_ARS * cantidad;
         const subtotalCursos = precioBaseUnitario * cantidad;
@@ -49,7 +50,7 @@ export function iniciarFormularioDePago() {
         
         li.innerHTML = `<strong>${nombreItem}</strong>: ${subtotalItem.toLocaleString("es-AR", { style: "currency", currency: "ARS", minimumFractionDigits: 2 })}`;
         
-      } else if (item.tipo === 'giftcard') {
+      } else if (item.tipo === "giftcard") {
         nombreItem = `${item.titulo}`;
         li.innerHTML = `<strong>${nombreItem}</strong>: ${subtotalItem.toLocaleString("es-AR", { style: "currency", currency: "ARS", minimumFractionDigits: 2 })}`;
       } else {
@@ -64,8 +65,8 @@ export function iniciarFormularioDePago() {
     
     // 3. Mostrar el desglose administrativo como un grupo separado (más limpio)
     if (hayDetalleAdmin) {
-         infoCurso.innerHTML += `<p><strong>Desglose por Inscripción de Empresa:</strong></p>`;
-         infoCurso.innerHTML += `<ul class="detalle-costos-empresa">${detalleAdministrativo}</ul>`;
+      infoCurso.innerHTML += `<p><strong>Desglose por Inscripción de Empresa:</strong></p>`;
+      infoCurso.innerHTML += `<ul class="detalle-costos-empresa">${detalleAdministrativo}</ul>`;
     }
     
     // 4. Mostrar el total final
@@ -74,7 +75,6 @@ export function iniciarFormularioDePago() {
 
   const contenedorFormulario = BUSCADOR.buscarUnElemento(".formulario-inscripcion");
   if (contenedorFormulario) contenedorFormulario.prepend(infoCurso);
-
 
   const form = BUSCADOR.buscarUnElementoPorId("formulario-pago");
   const nombre = BUSCADOR.buscarUnElementoPorId("nombre-titular");
@@ -87,63 +87,94 @@ export function iniciarFormularioDePago() {
 
   if (!form) return;
 
+  // VALIDACION PARA LA FECHA DE VENCIMIENTO, CUANDO ESCRIBA LOS NUMEROS QUE SE AGREGUE LA / AUTOMATICAMENTE
+  vencimiento.addEventListener("input", (e) => {
+    let valor = e.target.value.replace(/\D/g, ""); // PERMITE SOLO NUMEROS
+    if (valor.length > 4) {
+      valor = valor.slice(0, 4);
+    }
+    let mes = valor.slice(0, 2);
+    let anio = valor.slice(2);
+    if (valor.length >= 3) {
+      e.target.value = `${mes}/${anio}`;
+    } else {
+      e.target.value = mes;
+    }
+  });
+
+  // PARA CUANDO PONGA EL NUMERO DE LA TARJETA LE AGREGUE ESPACIOS 
+  numeroTarjeta.addEventListener("input", (e) => {
+    let valor = e.target.value.replace(/\D/g, "");
+     
+    const grupos = [];
+    for (let i = 0; i < valor.length; i += 4) {
+      grupos.push(valor.slice(i, i + 4));
+    }
+    // LE AGREGA EL ESPACIO A LOS NUMEROS
+    e.target.value = grupos.join(" ");
+  });
+
+  // ---------- VALIDACIÓN USANDO ValidadorFormulario ----------
   form.addEventListener("submit", (e) => {
     e.preventDefault();
     limpiarErrores();
 
     let esValido = true;
 
-    if (nombre.value.trim() === "") {
+    // NOMBRE
+    if (!ValidadorFormulario.campoVacio(nombre.value)) {
       mostrarError(nombre, "El nombre es obligatorio.");
       esValido = false;
-    } else if (nombre.value.trim().length < 3) {
-      mostrarError(nombre, "El nombre debe tener al menos 3 letras.");
+    } else if (!ValidadorFormulario.longitudMinima(nombre.value, 3)) {
+      mostrarError(nombre, ValidadorFormulario.MENSAJES.nombreCorto);
       esValido = false;
     }
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (email.value.trim() === "") {
+
+    // EMAIL
+    if (!ValidadorFormulario.campoVacio(email.value)) {
       mostrarError(email, "El email es obligatorio.");
       esValido = false;
-    } else if (!emailRegex.test(email.value)) {
-      mostrarError(email, "Formato de email no válido");
+    } else if (!ValidadorFormulario.emailValido(email.value)) {
+      mostrarError(email, ValidadorFormulario.MENSAJES.emailInvalido);
       esValido = false;
     }
 
+    // NÚMERO DE TARJETA
     const numeroSinEspacios = numeroTarjeta.value.replace(/\s/g, "");
-
-    if (numeroSinEspacios === "") {
-      mostrarError(numeroTarjeta, "El número de tarjeta es obligatorio.");
+    if (!ValidadorFormulario.campoVacio(numeroSinEspacios)) {
+      mostrarError(numeroTarjeta, ValidadorFormulario.MENSAJES.tarjetaVacia);
       esValido = false;
-    } else if (!/^\d{13,19}$/.test(numeroSinEspacios)) {
-      mostrarError(numeroTarjeta, "Debe tener entre 13 y 19 dígitos numéricos.");
-      esValido = false;
-    }
-
-    const valorVencimiento = vencimiento.value.replace(/\s/g, "");
-    if (valorVencimiento === "") {
-      mostrarError(vencimiento, "La fecha de expiración es obligatoria.");
-      esValido = false;
-    } else if (!/^(0[1-9]|1[0-2])[0-9]{2}$/.test(valorVencimiento)) {
-      mostrarError(vencimiento, "Formato incorrecto (MMAA, ej: 1231).");
+    } else if (!ValidadorFormulario.numeroTarjetaValido(numeroTarjeta.value)) {
+      mostrarError(numeroTarjeta, ValidadorFormulario.MENSAJES.tarjetaInvalida);
       esValido = false;
     }
 
-    if (codigoSeguridad.value.trim() === "") {
-      mostrarError(codigoSeguridad, "El código de seguridad es obligatorio.");
+    // FECHA DE VENCIMIENTO
+    if (!ValidadorFormulario.campoVacio(vencimiento.value)) {
+      mostrarError(vencimiento, ValidadorFormulario.MENSAJES.vencimientoVacio);
       esValido = false;
-    } else if (!/^\d{3}$/.test(codigoSeguridad.value.trim())) {
-      mostrarError(codigoSeguridad, "Debe tener 3 dígitos numéricos.");
+    } else if (!ValidadorFormulario.vencimientoValido(vencimiento.value)) {
+      mostrarError(vencimiento, ValidadorFormulario.MENSAJES.vencimientoInvalido);
+      esValido = false;
+    }
+
+    // CÓDIGO DE SEGURIDAD (CVV)
+    if (!ValidadorFormulario.campoVacio(codigoSeguridad.value)) {
+      mostrarError(codigoSeguridad, ValidadorFormulario.MENSAJES.cvvVacio);
+      esValido = false;
+    } else if (!ValidadorFormulario.cvvValido(codigoSeguridad.value)) {
+      mostrarError(codigoSeguridad, ValidadorFormulario.MENSAJES.cvvInvalido);
       esValido = false;
     }
 
     if (esValido) {
-      console.log('🎯 PAGO EXITOSO - llamando a vaciarCarrito()');
+      console.log("🎯 PAGO EXITOSO - llamando a vaciarCarrito()");
       popup.style.display = "flex";
 
       if (infoCurso && infoCurso.parentNode) {
-      infoCurso.parentNode.removeChild(infoCurso);
-    }
-        vaciarCarrito();
+        infoCurso.parentNode.removeChild(infoCurso);
+      }
+      vaciarCarrito();
     }
   });
 
@@ -152,22 +183,20 @@ export function iniciarFormularioDePago() {
     form.reset();
   });
 
-function mostrarError(input, mensaje) {
-  
-  let error = input.nextElementSibling; // para buscar un error
+  function mostrarError(input, mensaje) {
+    let error = input.nextElementSibling; // para buscar un error
 
-  if (!error || !error.classList.contains("error-mensaje")) {
-    error = document.createElement("div");
-    error.classList.add("error-mensaje");
+    if (!error || !error.classList.contains("error-mensaje")) {
+      error = document.createElement("div");
+      error.classList.add("error-mensaje");
+
+      // SE INSERTA EL MSJ DE ERROR DESPUES DEL INPUT
+      input.insertAdjacentElement("afterend", error);
+    }
     
-  
-    // SE INSERTA EL MSJ DE ERROR DESPUES DEL INPUT
-    input.insertAdjacentElement("afterend", error);
+    error.textContent = mensaje;
+    input.classList.add("input-error");
   }
-  
-  error.textContent = mensaje;
-  input.classList.add("input-error");
-}
 
   function limpiarErrores() {
     BUSCADOR.buscarVariosElementos(".error-mensaje").forEach(e => e.remove());

@@ -7,7 +7,7 @@
     <title>Formulario De Inscripción</title>
     <link rel="stylesheet" href="../styles/formularioInscripcion.css">
     <link rel="stylesheet" href="../styles/header_footer.css">
-     <link rel="icon" type="image/png" href="../img/favicon.ico">
+    <link rel="icon" type="image/png" href="../img/favicon.ico">
 </head>
 
 <body>
@@ -30,30 +30,34 @@
                 <li><a href="../paginas/giftCard.html" class="nav-link">GiftCard</a></li>
                 <li><a href="../paginas/cursos.html" class="nav-link">Cursos</a></li>
                 <li><a href="../paginas/calendario.html" class="nav-link"> Proximos </a></li>
-                <li><a href="../paginas/perfil.html" class="nav-link perfil-link" style="display: none;">Mi Perfil</a></li>
+                <li><a href="../paginas/perfil.html" class="nav-link perfil-link" style="display: none;">Mi Perfil</a>
+                </li>
 
             </ul>
         </nav>
 
         <section class="search-bar">
-  <form id="search-form">
-    <input list="cursos-list" name="curso-buscado" id="curso-input" placeholder="Buscar curso..."> 
-    
-   <datalist id="cursos-list">
-        <option value="Programación Front-End" data-url="./detalleCurso.html?curso=Programación+Front-End"></option>
-        <option value="Programación Back-End" data-url="./detalleCurso.html?curso=Programación+Back-End"></option>
-        <option value="Ciberseguridad" data-url="./detalleCurso.html?curso=Ciberseguridad"></option>
-        <option value="Inglés Avanzado" data-url="./detalleCurso.html?curso=Inglés+Avanzado"></option>
-        <option value="Marketing Digital" data-url="./detalleCurso.html?curso=Marketing+Digital"></option>
-        <option value="Finanzas Personales" data-url="./detalleCurso.html?curso=Finanzas+Personales"></option>
-    </datalist>
+            <form id="search-form">
+                <input list="cursos-list" name="curso-buscado" id="curso-input" placeholder="Buscar curso...">
 
-    
-    <button type="submit" class="search-button">
-      <img src="../img/lupa.png" alt="Buscar">
-    </button>
-  </form>
-</section>
+                <datalist id="cursos-list">
+                    <option value="Programación Front-End" data-url="./detalleCurso.html?curso=Programación+Front-End">
+                    </option>
+                    <option value="Programación Back-End" data-url="./detalleCurso.html?curso=Programación+Back-End">
+                    </option>
+                    <option value="Ciberseguridad" data-url="./detalleCurso.html?curso=Ciberseguridad"></option>
+                    <option value="Inglés Avanzado" data-url="./detalleCurso.html?curso=Inglés+Avanzado"></option>
+                    <option value="Marketing Digital" data-url="./detalleCurso.html?curso=Marketing+Digital"></option>
+                    <option value="Finanzas Personales" data-url="./detalleCurso.html?curso=Finanzas+Personales">
+                    </option>
+                </datalist>
+
+
+                <button type="submit" class="search-button">
+                    <img src="../img/lupa.png" alt="Buscar">
+                </button>
+            </form>
+        </section>
 
         <section class="user-actions">
             <a href="../paginas/inicioSesion.html">
@@ -64,7 +68,7 @@
 
             <a href="../paginas/registrarse.html"><button class="signup-button">Registrarse</button></a>
 
-  <input type="checkbox" name="Carro" id="Carro" value="Carro"  />
+            <input type="checkbox" name="Carro" id="Carro" value="Carro" />
             <article class="carrito">
                 <label for="Carro">
                     <img src="../img/carrito.png" alt="Carrito de compra" class="carrito_icono">
@@ -74,9 +78,9 @@
             <section class="caja_carrito" id="js-caja-carrito">
             </section>
         </section>
-    </section>
-  </header>
-  
+        </section>
+    </header>
+
 
     <main class="main-content">
         <section class="formulario-inscripcion">
@@ -89,7 +93,7 @@
                     <option value="empresa">Empresa</option>
                 </select>
             </div>
-            
+
             <form action="#popup" id="form-inscripcion-curso">
 
                 <div id="curso-seleccionado-container">
@@ -110,38 +114,38 @@
                     <h3>Datos de Contacto</h3>
                     <div class="persona-campos" data-id="1">
                         <label>Nombre y Apellido:</label>
-                        <input type="text" name="nombre_personal" placeholder="Nombre y Apellido" required minlength="5">
+                        <input type="text" name="nombre_personal" placeholder="Nombre y Apellido">
                         <label>Email:</label>
-                        <input type="email" name="email_personal" placeholder="Email@example.com" required>
+                        <input type="email" name="email_personal" placeholder="Email@example.com">
                         <label>Teléfono:</label>
-                        <input type="tel" name="telefono_personal" placeholder="Teléfono" required minlength="8" maxlength="15">
+                        <input type="tel" name="telefono_personal" placeholder="Teléfono">
                     </div>
                 </div>
 
+                <!-- para cursos de empresa -->
                 <div id="campos-empresa" class="campos-grupo" style="display:none;">
                     <h3>Datos de Inscripción</h3>
-                     <p class="nota-importe">Se adicionará un importe fijo de $50.000 ARS al valor del curso por persona.</p>
+                    <p class="nota-importe">Se adicionará un importe fijo de $50.000 ARS al valor del curso por persona.
+                    </p>
 
                     <div id="personas-container">
                         <div class="persona-campos persona-empresa persona-1" data-id="1">
                             <h4>Persona 1</h4>
                             <label>Nombre y Apellido:</label>
-                            <input type="text" name="nombre_1" placeholder="Nombre y Apellido" required minlength="5">
+                            <input type="text" name="nombre_1" placeholder="Nombre y Apellido">
                             <label>DNI:</label>
-                            <input type="text" inputmode="numeric" name="dni_1" placeholder="DNI" pattern="[0-9]{8,12}" required minlength="6" maxlength="12"> 
+                            <input type="text" inputmode="numeric" name="dni_1" placeholder="DNI" pattern="[0-9]{8,12}">
                             <label>Email:</label>
-                            <input type="email" name="email_1" placeholder="Email@example.com" required>
+                            <input type="email" name="email_1" placeholder="Email@example.com">
                             <label>Teléfono:</label>
-                            <input type="tel" name="telefono_1" placeholder="Teléfono" required minlength="8" maxlength="15"
-                             <div class="placeholder-boton-quitar"></div>
+                            <input type="tel" name="telefono_1" placeholder="Teléfono" class="placeholder-boton-quitar">
                         </div>
                     </div>
 
                     <button type="button" id="agregar-persona-btn" class="toggle-label">Agregar Persona</button>
                     <div id="total-a-pagar">Total: $0.00 ARS</div>
-
                 </div>
-                 
+
                 <button type="submit" class="boton-enlace">Inscribirse</button>
             </form>
 
@@ -153,12 +157,12 @@
                     <div id="resumen-personal-detalle" class="resumen-detalle"></div>
                     <a href="./formularioDePago.html" class="boton-enlace">Continuar al Pago</a>
                 </div>
-                
-                 <div class="popup-contenido-empresa" id="popup-contenido-empresa" style="display: none;">
+
+                <div class="popup-contenido-empresa" id="popup-contenido-empresa" style="display: none;">
                     <h3 class="popup-title">✅ Resumen de Inscripción por Empresa</h3>
                     <p>Se inscribirá el siguiente grupo al curso <span id="resumen-curso-nombre"></span></p>
                     <div id="resumen-personas-lista" class="resumen-detalle">
-                        </div>
+                    </div>
                     <div id="resumen-total-empresa" class="resumen-total"></div>
                     <a href="./formularioDePago.html" class="boton-enlace">Continuar al Pago</a>
                 </div>
@@ -204,7 +208,7 @@
             </nav>
         </section>
     </footer>
-   <script type="module" src="../JavaScript.js"></script>
+    <script type="module" src="../JavaScript.js"></script>
 </body>
 
 </html>

@@ -24,9 +24,7 @@ export function manejarBusqueda() {
 
     if (destino) {
       window.location.href = destino;  // REDIRIGE AL HTML QUE SE CARGA POR JS
-    } else {
-      alert("Por favor, seleccioná un curso válido de la lista.");
-    }
+    } 
   });
 }
 
