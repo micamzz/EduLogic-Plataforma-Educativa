@@ -431,7 +431,7 @@ export function iniciarLogicaInscripcion() {
             //      alert("Error de validación: No se pueden inscribir personas con el mismo DNI.");
             //      return; 
             // }
-
+           
         
 
             // ES ESTO AGREGUÉ - validar sesión recién cuando el formulario es válido

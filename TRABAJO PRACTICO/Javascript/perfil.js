@@ -124,8 +124,28 @@ export function iniciarLogicaPerfil() {
           'ADVERTENCIA: ¿Estás seguro de que deseas eliminar tu cuenta? Esta acción es irreversible y se perderán todos tus datos locales.', 
           'confirm', 
           () => {
+            const usuarioActual = JSON.parse(localStorage.getItem("currentUser"));
+            const emailAEliminar = usuarioActual ? usuarioActual.email : null;
+
+            // 1. Obtener la lista de todos los usuarios registrados
+            const usuariosGuardados = localStorage.getItem('registeredUsers');
+            let usuarios = usuariosGuardados ? JSON.parse(usuariosGuardados) : [];
+
+            if (emailAEliminar) {
+              // 2. Filtrar el array para excluir al usuario actual
+              usuarios = usuarios.filter(user => user.email !== emailAEliminar);
+              
+              // 3. Guardar la lista actualizada en localStorage
+              localStorage.setItem('registeredUsers', JSON.stringify(usuarios));
+              
+              // Opcional: Eliminar el carrito específico del usuario
+              localStorage.removeItem(`carrito_${emailAEliminar}`);
+            }
+
+            // Eliminar la sesión local (currentUser ya no es necesario, pero lo eliminamos por seguridad)
             localStorage.removeItem('currentUser');
             localStorage.removeItem('isLoggedIn');
+            vaciarCarrito(); // Asegurar que el carrito actual esté vacío
 
             mostrarPopup(
               'Cuenta Eliminada',
