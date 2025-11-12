@@ -17,7 +17,7 @@ export function iniciarFormularioDePago() {
   let total = 0;
   const infoCurso = document.createElement("div");//crea el contenedor donde se poen el resumen
   infoCurso.classList.add("info-curso");
-
+  
 
   if (carritoActual.length === 0) {
     infoCurso.innerHTML = `<p>No hay cursos en el carrito.</p>`;

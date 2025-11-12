@@ -29,7 +29,7 @@ export function iniciarLogin(urlRedireccion) {
 
   //cuando clickea en iniciar sesion
   formularioLogin.addEventListener('submit', (evento) => {
-    evento.preventDefault();//detiene elc omportamiento por defecto
+    evento.preventDefault();//detiene el comportamiento por defecto
 
     //busco los campos de email y contraseña
     const campoEmail = formularioLogin.querySelector('input[name="mail"]');
