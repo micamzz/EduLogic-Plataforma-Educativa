@@ -1,6 +1,9 @@
 import { BuscadorElementos } from "./buscadorElementos.js";
 import { vaciarCarrito } from './carritoDeCompras.js';
 
+// Definimos el costo administrativo aquí para el cálculo detallado en el resumen
+const COSTO_ADMINISTRATIVO_ARS = 50000;
+
 export function iniciarFormularioDePago() {
   const BUSCADOR = new BuscadorElementos();
   
@@ -14,21 +17,59 @@ export function iniciarFormularioDePago() {
   if (carritoActual.length === 0) {
     infoCurso.innerHTML = `<p>No hay cursos en el carrito.</p>`;
   } else {
+    // 1. Iniciar el resumen
     infoCurso.innerHTML = `<h3>Resumen de compra:</h3>`;
     const lista = document.createElement("ul");
+    let detalleAdministrativo = '';
+    let hayDetalleAdmin = false;
 
     carritoActual.forEach(item => {
-      const precio = item.precio || 0;
+      const precioUnitario = item.precio || 0;
       const cantidad = item.cantidad || 1;
-      total += precio * cantidad;
+      const subtotalItem = precioUnitario * cantidad;
+      total += subtotalItem;
       
+      let nombreItem = item.titulo;
       const li = document.createElement("li");
-      li.textContent = `${item.titulo} - $${precio.toLocaleString("es-AR")} x ${cantidad}`;
+      
+      if (item.tipo === 'empresa') {
+        const precioBaseUnitario = precioUnitario - COSTO_ADMINISTRATIVO_ARS;
+        const costoAdministrativoTotal = COSTO_ADMINISTRATIVO_ARS * cantidad;
+        const subtotalCursos = precioBaseUnitario * cantidad;
+
+        hayDetalleAdmin = true;
+        
+        nombreItem = `${item.titulo} (Empresa: ${cantidad} pers.)`;
+        
+        // 2. Simplificar la presentación del desglose
+        detalleAdministrativo += `
+          <li>Costo Base Curso (${cantidad} uds.): ${subtotalCursos.toLocaleString("es-AR", { style: "currency", currency: "ARS", minimumFractionDigits: 2 })}</li>
+          <li>Costo Administrativo (${cantidad} uds. x ${COSTO_ADMINISTRATIVO_ARS.toLocaleString("es-AR", { style: "currency", currency: "ARS", minimumFractionDigits: 2 })}): ${costoAdministrativoTotal.toLocaleString("es-AR", { style: "currency", currency: "ARS", minimumFractionDigits: 2 })}</li>
+        `;
+        
+        li.innerHTML = `<strong>${nombreItem}</strong>: ${subtotalItem.toLocaleString("es-AR", { style: "currency", currency: "ARS", minimumFractionDigits: 2 })}`;
+        
+      } else if (item.tipo === 'giftcard') {
+        nombreItem = `${item.titulo}`;
+        li.innerHTML = `<strong>${nombreItem}</strong>: ${subtotalItem.toLocaleString("es-AR", { style: "currency", currency: "ARS", minimumFractionDigits: 2 })}`;
+      } else {
+        nombreItem = item.titulo;
+        li.textContent = `${nombreItem} - ${precioUnitario.toLocaleString("es-AR", { style: "currency", currency: "ARS", minimumFractionDigits: 2 })} x ${cantidad}`;
+      }
+      
       lista.appendChild(li);
     });
 
     infoCurso.appendChild(lista);
-    infoCurso.innerHTML += `<p><strong>Total: $${total.toLocaleString("es-AR")}</strong></p>`;
+    
+    // 3. Mostrar el desglose administrativo como un grupo separado (más limpio)
+    if (hayDetalleAdmin) {
+         infoCurso.innerHTML += `<p><strong>Desglose por Inscripción de Empresa:</strong></p>`;
+         infoCurso.innerHTML += `<ul class="detalle-costos-empresa">${detalleAdministrativo}</ul>`;
+    }
+    
+    // 4. Mostrar el total final
+    infoCurso.innerHTML += `<p><strong>Total Final a Pagar: ${total.toLocaleString("es-AR", { style: "currency", currency: "ARS" })}</strong></p>`;
   }
 
   const contenedorFormulario = BUSCADOR.buscarUnElemento(".formulario-inscripcion");
