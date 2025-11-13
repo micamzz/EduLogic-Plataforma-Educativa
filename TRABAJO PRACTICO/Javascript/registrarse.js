@@ -1,103 +1,206 @@
-
-import { mostrarPopup } from './popupManager.js'; 
+import { mostrarPopup } from './popupManager.js';
+import { ValidadorFormulario } from "./validarFormulario.js";
 
 const CONTRASEÑA_VERIF = /^(?=.*[A-Z])(?=.*\d).{6,}$/; //Debe tener al menos 6 caracteres, una mayus y un num
 
 //obtener todos los usuarios registrados o un array vacio si no hay
 function obtenerUsuariosRegistrados() {
-    const usuariosTexto = localStorage.getItem('registeredUsers');
-    try {//try pq convertir textJSON a un objeto puede fallar
-        return usuariosTexto ? JSON.parse(usuariosTexto) : [];
-    } catch (e) {
-       return [];//array vacio
-    }
+  const usuariosTexto = localStorage.getItem('registeredUsers');
+  try {//try pq convertir textJSON a un objeto puede fallar
+    return usuariosTexto ? JSON.parse(usuariosTexto) : [];
+  } catch (e) {
+    return [];//array vacio
+  }
 }
 
 // guardar la lista completa de usuarios
 function guardarUsuariosRegistrados(usuarios) {
-    localStorage.setItem('registeredUsers', JSON.stringify(usuarios));
+  localStorage.setItem('registeredUsers', JSON.stringify(usuarios));
 }
 
 export function iniciarRegistro(redirectUrl) {
     const form = document.getElementById('registro-form');
     if (!form) {
-       return;//si no se encuentra el form
+        return;//si no se encuentra el form
     }
 
-    //FUNCION CENTRAL DE REGISTRO
-    function registrarUsuario(form) {
-        // Obtener datos y validar contraseñas
-        const nombre = form.querySelector('input[name="nombre"]').value;
-        const apellido = form.querySelector('input[name="apellido"]').value; 
-        const dni = form.querySelector('input[name="dni"]').value; 
-        const email = form.querySelector('input[name="email"]').value;
-        const password = form.querySelector('input[name="password"]').value;
-        const confirmPassword = form.querySelector('input[name="confirm_password"]').value;
+    const nombreInput = form.querySelector('input[name="nombre"]');
+    const apellidoInput = form.querySelector('input[name="apellido"]');
+    const dniInput = form.querySelector('input[name="dni"]');
+    const emailInput = form.querySelector('input[name="email"]');
+    const contraseniaInput = form.querySelector('input[name="password"]');
+    const confirmarContraseniaInput = form.querySelector('input[name="confirm_password"]');
 
-        if (password !== confirmPassword) {
+
+    // REQUISITOS DE LA CONTRASEÑA - PARA MOSTRARLOS
+    let contenedorRequisitos = form.querySelector(".requisitos-password");
+    if (!contenedorRequisitos) {
+        contenedorRequisitos = document.createElement("div");
+        contenedorRequisitos.classList.add("requisitos-password");
+        contenedorRequisitos.innerHTML = `
+      <span id="req-longitud" class="no-cumple"> Al menos 6 caracteres</span>
+      <span id="req-mayuscula" class="no-cumple">Al menos una letra mayúscula</span>
+      <span id="req-numero" class="no-cumple">Al menos un número</span>
+    `;
+        contraseniaInput.insertAdjacentElement("afterend", contenedorRequisitos);
+    }
+    contenedorRequisitos.style.display = "none";
+
+ 
+    const actualizarRequisitos = () => {
+        const valor = contraseniaInput.value;
+        if (valor === "") {
+            contenedorRequisitos.style.display = "none";
+        } else {
+            contenedorRequisitos.style.display = "block";
+        }
+        const tieneLongitud = valor.length >= 6;
+        const tieneMayuscula = /[A-Z]/.test(valor);
+        const tieneNumero = /\d/.test(valor);
+
+        form.querySelector("#req-longitud").className = tieneLongitud ? "cumple" : "no-cumple";
+        form.querySelector("#req-mayuscula").className = tieneMayuscula ? "cumple" : "no-cumple";
+        form.querySelector("#req-numero").className = tieneNumero ? "cumple" : "no-cumple";
+    };
+
+    contraseniaInput.addEventListener("input", actualizarRequisitos);
+    contraseniaInput.addEventListener("focus", actualizarRequisitos); // por si entra directo con tab
+
+
+    form.querySelectorAll("input").forEach(input => {
+        input.addEventListener("input", () => {
+            input.classList.remove("input-error");
+            const siguiente = input.nextElementSibling;
+            if (siguiente && siguiente.classList.contains("error-mensaje")) {
+                siguiente.remove();
+            }
+        });
+    });
+
+
+      function registrarUsuario(form) {
+          form.querySelectorAll(".error-mensaje").forEach(el => el.remove());
+          form.querySelectorAll(".input-error").forEach(el => el.classList.remove("input-error"));
+
+          const nombre = nombreInput.value.trim();
+          const apellido = apellidoInput.value.trim();
+          const dni = dniInput.value.trim();
+          const email = emailInput.value.trim();
+          const password = contraseniaInput.value.trim();
+          const confirmPassword = confirmarContraseniaInput.value.trim();
+
+          let formularioValido = true;
+
+          // VALIDAR NOMBRE
+          if (!ValidadorFormulario.campoVacio(nombre)) {
+              mostrarError(nombreInput, ValidadorFormulario.MENSAJES.nombreVacio2);
+              formularioValido = false;
+          } else if (!ValidadorFormulario.longitudMinima(nombre, 3)) {
+              mostrarError(nombreInput, ValidadorFormulario.MENSAJES.nombreCorto);
+              formularioValido = false;
+          }
+
+          // VALIDAR APELLIDO 
+          if (!ValidadorFormulario.campoVacio(apellido)) {
+              mostrarError(apellidoInput, "El apellido no puede estar vacío.");
+              formularioValido = false;
+          } else if (!ValidadorFormulario.longitudMinima(apellido, 3)) {
+              mostrarError(apellidoInput, "El apellido debe tener al menos 3 letras.");
+              formularioValido = false;
+          }
+
+          // VALIDAR DNI
+          if (!ValidadorFormulario.campoVacio(dni)) {
+              mostrarError(dniInput, "El DNI no puede estar vacío.");
+              formularioValido = false;
+          } else if (dni.length < 7 || dni.length > 9) {
+              mostrarError(dniInput, "El DNI debe tener entre 7 y 9 números.");
+              formularioValido = false;
+          }
+
+          // VALIDAR EMAIL
+          if (!ValidadorFormulario.campoVacio(email)) {
+              mostrarError(emailInput, "El email no puede estar vacío.");
+              formularioValido = false;
+          } else if (!ValidadorFormulario.emailValido(email)) {
+              mostrarError(emailInput, ValidadorFormulario.MENSAJES.emailInvalido);
+              formularioValido = false;
+          }
+
+          // VALIDAR CONTRA
+          if (!ValidadorFormulario.campoVacio(password)) {
+              mostrarError(contraseniaInput, "La contraseña no puede estar vacía.");
+              formularioValido = false;
+          } else if (!CONTRASEÑA_VERIF.test(password)) {
+              mostrarError(contraseniaInput, "Debe tener al menos 6 caracteres, una mayúscula y un número.");
+              formularioValido = false;
+          }
+
+          // VALIDAR CONFIRMACION DE CONTRASEÑA
+          if (!ValidadorFormulario.campoVacio(confirmPassword)) {
+              mostrarError(confirmarContraseniaInput, "La confirmación de contraseña no puede estar vacía.");
+              formularioValido = false;
+          } else if (password !== confirmPassword) {
             
-            mostrarPopup('Error de Registro', 'Las contraseñas no coinciden. Por favor, verifícalas.');
-            return;
-        }
+              mostrarError(confirmarContraseniaInput, "Las contraseñas no coinciden.");
+              formularioValido = false;
+          }
+
+          
+          contenedorRequisitos.style.display = formularioValido ? "none" : "block";
+
+          if (!formularioValido || contraseniaInput.value.trim() === "") {
+              contenedorRequisitos.style.display = "none";
+          }
 
 
-        //VALIDACION DE CONTRASEÑA
-        if (!CONTRASEÑA_VERIF.test(password)) {
-            mostrarPopup(
-                'Error de Contraseña',
-                'La contraseña debe tener al menos 6 caracteres, incluir al menos una mayúscula y un número.'
-            );
-            return;
-        }
+          if (!formularioValido) return;
 
-        //OBTENER USUARIOS EXISTENTES
-        const usuarios = obtenerUsuariosRegistrados();
+          //  VALIDAR CUENTAS EXISTENTES O DNI
+          const usuarios = obtenerUsuariosRegistrados();
+          const emailExiste = usuarios.some(user => user.email === email);
+          const dniExiste = usuarios.some(user => user.dni === dni);
 
-        //VALIDAR DUPLICADOS DE EMAIL O DNI
-        const emailExiste = usuarios.some(user => user.email === email);
-        const dniExiste = usuarios.some(user => user.dni === dni);
+          if (emailExiste) {
+              mostrarError(emailInput, "Ya existe una cuenta registrada con este email.");
+              return;
+          }
 
-        if (emailExiste) {
-             mostrarPopup('Error de Registro', 'Ya existe una cuenta registrada con este correo electrónico.');
-             return;
-        }
+          if (dniExiste) {
+              mostrarError(dniInput, "Ya existe una cuenta registrada con este DNI.");
+              return;
+          }
 
-        if (dniExiste) {
-             mostrarPopup('Error de Registro', 'Ya existe una cuenta registrada con este DNI.');
-             return;
-        }
-        
-        //CREA NUEVO OBJETO DE USUARIO
-        const userData = {
-            nombre,
-            apellido,
-            dni,
-            email,
-            password,
-            telefono: '',
-            direccion: '',
-            localidad: '',
-            provincia: '',
-            codigo_postal: '',
-            pais: ''
-        };
-        
-        //AÑADIR NUEVO USUARIO Y GUARDAR LA LISTA COMPLETA
+          //  DATOS CREAR USUARIO
+          const userData = {
+              nombre, apellido, dni, email, password,
+              telefono: '', direccion: '', localidad: '',
+              provincia: '', codigo_postal: '', pais: ''
+          };
+
         usuarios.push(userData);
         guardarUsuariosRegistrados(usuarios);
+        localStorage.setItem('currentUser', JSON.stringify(userData));
 
-        //establece como el usuario como logueado
-        localStorage.setItem('currentUser', JSON.stringify(userData)); 
+        contenedorRequisitos.style.display = "none"; 
 
-        //muestra popup y ejecuta la redireccion al hacer clic en ok
-        mostrarPopup('Éxito', '¡Registro exitoso! Ahora puedes iniciar sesión con tu cuenta.', 'alert', () => {
-            window.location.href =  './inicioSesion.html';
+        mostrarPopup('Éxito', '¡Registro exitoso! Ahora puedes iniciar sesión.', 'alert', () => {
+            window.location.href = './inicioSesion.html';
         });
     }
 
+
+    function mostrarError(input, mensaje) {
+        input.classList.add("input-error");
+        const error = document.createElement("p");
+        error.className = "error-mensaje";
+        error.textContent = mensaje;
+        input.insertAdjacentElement("afterend", error);
+    }
+
     //al registrarse guarda en localstorage
-    form.addEventListener('submit', function(e) {
-        e.preventDefault(); 
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
         registrarUsuario(form);
     });
 }

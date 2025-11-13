@@ -1,52 +1,35 @@
 import { mostrarPopup } from './popupManager.js'; 
 import { agregarGiftCardAlCarrito } from './carritoDeCompras.js';
+import { ValidadorFormulario } from "./validarFormulario.js";
+import { BuscadorElementos } from "./buscadorElementos.js";
 
-function obtenerReferenciasDOM() {
-  return {
-    radiosColor: document.querySelectorAll('input[name="color_estilo"]'),
-    colorSeleccionado: document.querySelector('input[name="color_estilo"]:checked'),
-    listaFondos: document.querySelectorAll('input[name="Fondo"]'),
-    fondoSeleccionado: document.querySelector('input[name="Fondo"]:checked'),
-    montoUbis: document.querySelectorAll('input[name="Ubicacion"]'),
-    ubiSeleccionada: document.querySelector('input[name="Ubicacion"]:checked'),
-    mensaje: document.querySelector('.Box_Preview .Mensaje'),
-    monto: document.querySelector('.Box_Preview .Monto'),
-    desti1: document.querySelector('.Box_Preview .Destinatario'),
-    desti2: document.querySelector('.Box_Preview .Destinatario2'),
-    cajaPreview: document.querySelector('.Cuadro_Preview'),
-    destinatario: document.querySelector('input[name="destinatario"]'),
-    montoIngresado: document.querySelector('input[name="monto"]'),
-    estilos: document.getElementById('styleSelect'),
-    tamaño: document.getElementById('style_size'),
-    formularioGift: document.getElementById('formGiftCard')
-  };
-}
+const buscador = new BuscadorElementos();
+
+const radiosColor = buscador.buscarVariosElementos('input[name="color_estilo"]');
+const colorSeleccionado = buscador.buscarUnElemento('input[name="color_estilo"]:checked');
+const listaFondos = buscador.buscarVariosElementos('input[name="Fondo"]');
+const fondoSeleccionado = buscador.buscarUnElemento('input[name="Fondo"]:checked');
+const montoUbis = buscador.buscarVariosElementos('input[name="Ubicacion"]');
+const ubiSeleccionada = buscador.buscarUnElemento('input[name="Ubicacion"]:checked');
+const mensaje = buscador.buscarUnElemento('.Box_Preview .Mensaje');
+const montoVista = buscador.buscarUnElemento('.Box_Preview .Monto');
+const desti1 = buscador.buscarUnElemento('.Box_Preview .Destinatario');
+const desti2 = buscador.buscarUnElemento('.Box_Preview .Destinatario2');
+const cajaPreview = buscador.buscarUnElemento('.Cuadro_Preview');
+const destinatario = buscador.buscarUnElemento('input[name="destinatario"]');
+const montoIngresado = buscador.buscarUnElemento('input[name="monto"]');
+const estilos = buscador.buscarUnElementoPorId('styleSelect');
+const tamaño = buscador.buscarUnElementoPorId('style_size');
+const formularioGift = buscador.buscarUnElementoPorId('formGiftCard');
+
 
 export function GiftCard() {
-  const {
-    radiosColor,
-    colorSeleccionado,
-    listaFondos,
-    fondoSeleccionado,
-    montoUbis,
-    ubiSeleccionada,
-    mensaje,
-    monto,
-    desti1,
-    desti2,
-    cajaPreview,
-    destinatario,
-    montoIngresado,
-    estilos,
-    tamaño,
-    formularioGift
-  } = obtenerReferenciasDOM();
 
   // ====== FUNCIONES DE ESTILO ======
   function aplicarColor(radio) {
     if (radio.checked) {
       mensaje.style.color = radio.value;
-      monto.style.color = radio.value;
+      montoVista.style.color = radio.value;
       desti1.style.color = radio.value;
       desti2.style.color = radio.value;
     }
@@ -62,17 +45,17 @@ export function GiftCard() {
 
   function aplicarUbicacion(ubi) {
     if (ubi.checked) {
-      monto.style.gridColumn = ubi.dataset.columna;
-      monto.style.gridRow = ubi.dataset.fila;
-      monto.style.justifySelf = ubi.dataset.hori;
-      monto.style.alignSelf = ubi.dataset.verti;
+      montoVista.style.gridColumn = ubi.dataset.columna;
+      montoVista.style.gridRow = ubi.dataset.fila;
+      montoVista.style.justifySelf = ubi.dataset.hori;
+      montoVista.style.alignSelf = ubi.dataset.verti;
     }
   }
 
   function aplicarTamaño() {
     const size = tamaño.value + 'px';
     mensaje.style.fontSize = size;
-    monto.style.fontSize = size;
+    montoVista.style.fontSize = size;
     desti1.style.fontSize = size;
     desti2.style.fontSize = size;
   }
@@ -83,7 +66,7 @@ export function GiftCard() {
   montoUbis.forEach((ubi) => ubi.addEventListener('change', () => aplicarUbicacion(ubi)));
 
   destinatario.addEventListener('input', () => { desti2.textContent = destinatario.value; });
-  montoIngresado.addEventListener('input', () => { monto.textContent = montoIngresado.value + '$'; });
+  montoIngresado.addEventListener('input', () => { montoVista.textContent = montoIngresado.value + '$'; });
 
   mensaje.setAttribute('contenteditable', 'true');
   mensaje.addEventListener('focus', function borrarAlPrimerClick() {
@@ -103,45 +86,72 @@ export function GiftCard() {
   // ====== FUNCIONALIDAD CARRITO ======
   if (!formularioGift) return;
 
- formularioGift.addEventListener("submit", (e) => {
-  e.preventDefault();
+  formularioGift.addEventListener("submit", (e) => {
+    e.preventDefault();
 
-  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-  const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+    formularioGift.querySelectorAll(".error-mensaje").forEach(el => el.remove());
+    formularioGift.querySelectorAll(".input-error").forEach(el => el.classList.remove("input-error"));
 
-  if (!isLoggedIn || !currentUser?.email) {
-    localStorage.setItem("redirectAfterLogin", "../paginas/giftCard.html");
-    window.location.href = "../paginas/inicioSesion.html";
-    return;
-  }
+    const nombreInput = document.getElementById("destinatario");
+    const emailInput = document.getElementById("email");
+    const montoInput = document.getElementById("monto");
 
-  const precio = parseFloat(montoIngresado.value);
-  if (isNaN(precio) || precio <= 0) {
-    mostrarPopup("Monto inválido", "Por favor, ingresá un monto válido.", "alert");
-    return;
-  }
+    const nombre = nombreInput.value.trim();
+    const email = emailInput.value.trim();
+    const montoValor = montoInput.value.trim(); // ✅ Renombrado
 
-  // ✅ OBTENER EL FONDO ACTUAL EN EL MOMENTO DEL SUBMIT
-  const fondoActual = document.querySelector('input[name="Fondo"]:checked');
-  console.log('🎨 Fondo seleccionado:', fondoActual?.value); // Para debug
+    let formularioValido = true;
 
-  const giftCard = {
-    id: "gift-" + Date.now(),
-    titulo: `Gift Card para ${destinatario.value || "Destinatario"}`,
-    precio,
-    imagen: fondoActual?.value || "../imagenes/giftcard.png", // ← Usar fondoActual
-    cantidad: 1,
-    tipo: "giftcard",
-    mensaje: mensaje.textContent || ""
-  };
+    // === VALIDAR NOMBRE ===
+    if (!ValidadorFormulario.campoVacio(nombre)) {
+      mostrarError(nombreInput, ValidadorFormulario.MENSAJES.nombreVacio2);
+      formularioValido = false;
+    } else if (!ValidadorFormulario.longitudMinima(nombre, 3)) {
+      mostrarError(nombreInput, ValidadorFormulario.MENSAJES.nombreCorto);
+      formularioValido = false;
+    }
 
-  console.log('📦 GiftCard creada:', giftCard); // Para debug
+    // === VALIDAR EMAIL ===
+    if (!ValidadorFormulario.campoVacio(email)) {
+      mostrarError(emailInput, "El campo email no puede estar vacío."); // ✅ Cambiado
+      formularioValido = false;
+    } else if (!ValidadorFormulario.emailValido(email)) {
+      mostrarError(emailInput, ValidadorFormulario.MENSAJES.emailInvalido);
+      formularioValido = false;
+    }
 
-  agregarGiftCardAlCarrito(giftCard);
+    // === VALIDAR MONTO ===
+    const precio = parseFloat(montoValor);
+    if (isNaN(precio) || precio <= 0) {
+      mostrarError(montoInput, "Por favor, ingresá un monto válido.");
+      formularioValido = false;
+    }
 
-  mostrarPopup("Éxito", "🎁 Gift Card agregada al carrito!", "alert", () => {
+    if (!formularioValido) return;
+
+    const fondoActual = document.querySelector('input[name="Fondo"]:checked');
+
+    const giftCard = {
+      id: "gift-" + Date.now(),
+      titulo: `Gift Card para ${nombre}`,
+      precio,
+      imagen: fondoActual?.value || "../imagenes/giftcard.png",
+      cantidad: 1,
+      tipo: "giftcard",
+      mensaje: mensaje.textContent || ""
+    };
+
+    agregarGiftCardAlCarrito(giftCard);
+
     formularioGift.reset();
     window.location.href = "../index.html"; 
   });
-});
+
+  function mostrarError(input, mensaje) {
+    input.classList.add("input-error");
+    const error = document.createElement("p");
+    error.className = "error-mensaje";
+    error.textContent = mensaje;
+    input.insertAdjacentElement("afterend", error);
   }
+}
