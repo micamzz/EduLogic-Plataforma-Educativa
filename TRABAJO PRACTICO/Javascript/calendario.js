@@ -5,8 +5,8 @@ import { CreadorElementos } from "./creadorElementos.js";
 export class Calendario {
 
   static iniciar() {
-    const BUSCADOR = new BuscadorElementos();
-    const CREADOR = new CreadorElementos();
+    const BUSCADOR = new BuscadorElementos();//es una clase para buscar elementos en el DOM
+    const CREADOR = new CreadorElementos();//variable para crear elementos en el DOM
 
     let fechaActual = new Date();
 

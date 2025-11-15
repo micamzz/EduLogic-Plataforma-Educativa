@@ -16,23 +16,24 @@ export class ValidadorFormulario {
   };
 
   //expresiones para validaciones
+  //metodo estatico para no instanciar la clase
   static expresionesRegulares = {
-    email: /^[0-9a-zA-Z._.-]+@[0-9a-zA-Z._.-]+\.[0-9a-zA-Z]+$/,
+    email: /^[0-9a-zA-Z._.-]+@[0-9a-zA-Z._.-]+\.[0-9a-zA-Z]+$/,//valores permitidos en email
     telefono: /^\d{8,15}$|^\d{4}-\d{4,11}$/,
     tarjeta: /^\d{13,19}$/,                  // 13 a 19 dígitos
     vencimiento: /^(0[1-9]|1[0-2])[0-9]{2}$/, // MMYY
     cvv: /^\d{3}$/  // Entre 8 y 15 numeros con o sin guion
   };
 
-  static campoVacio(valor) {
-    return valor.trim() !== "";//true si no esta vacio
+  static campoVacio(valor) {//valida si el campo esta vacio
+    return valor.trim() !== "";//true si no esta vacio,
   }
 
-  static longitudMinima(valor, minimo) {
+  static longitudMinima(valor, minimo) {//hace la validacion de longitud minima
     return valor.trim().length >= minimo;//true si cumple la longitud minima
   }
 
-  static emailValido(email) {
+  static emailValido(email) {//valida el formato del email
     return ValidadorFormulario.expresionesRegulares.email.test(email.trim());//true si es valido
   }
 
@@ -41,15 +42,15 @@ export class ValidadorFormulario {
     return ValidadorFormulario.expresionesRegulares.telefono.test(tel.trim());
   }
 
-  static longitudTextoValida(texto, maximo) {
+  static longitudTextoValida(texto, maximo) {//valida longitud maxima
     return texto.trim().length <= maximo;
   }
- static numeroTarjetaValido(numeroTarjeta) {
+ static numeroTarjetaValido(numeroTarjeta) {//valida numero tarjeta
     const limpio = numeroTarjeta.replace(/\s/g, ""); // saca espacios
-    return ValidadorFormulario.expresionesRegulares.tarjeta.test(limpio);
+    return ValidadorFormulario.expresionesRegulares.tarjeta.test(limpio);//devuelve true si es valido
   }
 
-  static vencimientoValido(vencimiento) {
+  static vencimientoValido(vencimiento) {//valida fecha vencimiento
     const soloNumeros = vencimiento.replace(/\D/g, ""); // saca barra y demás
     return ValidadorFormulario.expresionesRegulares.vencimiento.test(soloNumeros);
   }

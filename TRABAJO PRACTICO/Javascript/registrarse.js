@@ -6,8 +6,8 @@ const CONTRASEÑA_VERIF = /^(?=.*[A-Z])(?=.*\d).{6,}$/; //Debe tener al menos 6 
 //obtener todos los usuarios registrados o un array vacio si no hay
 function obtenerUsuariosRegistrados() {
     const usuariosTexto = localStorage.getItem('registeredUsers');
-    try {//try pq convertir textJSON a un objeto puede fallar
-        return usuariosTexto ? JSON.parse(usuariosTexto) : [];
+    try {//try pq convertir textJSON a un objeto puede fallar, lo convertimos a objeto xq viene en texto
+        return usuariosTexto ? JSON.parse(usuariosTexto) : [];//usamos parse porque viene en texto y lo convertimos a objeto
     } catch (e) {
        return [];//array vacio
     }
@@ -17,6 +17,7 @@ function obtenerUsuariosRegistrados() {
 function guardarUsuariosRegistrados(usuarios) {
     localStorage.setItem('registeredUsers', JSON.stringify(usuarios));
 }
+
 
 export function iniciarRegistro(redirectUrl) {
     const form = document.getElementById('registro-form');
@@ -42,7 +43,7 @@ export function iniciarRegistro(redirectUrl) {
 
 
         //VALIDACION DE CONTRASEÑA
-        if (!CONTRASEÑA_VERIF.test(password)) {
+        if (!CONTRASEÑA_VERIF.test(password)) {//llamamos a la expresion regular
             mostrarPopup(
                 'Error de Contraseña',
                 'La contraseña debe tener al menos 6 caracteres, incluir al menos una mayúscula y un número.'
@@ -83,11 +84,11 @@ export function iniciarRegistro(redirectUrl) {
         };
         
         //AÑADIR NUEVO USUARIO Y GUARDAR LA LISTA COMPLETA
-        usuarios.push(userData);
-        guardarUsuariosRegistrados(usuarios);
+        usuarios.push(userData);//push para agregar al array
+        guardarUsuariosRegistrados(usuarios);//llama a la funcion que guarda en localstorage
 
         //establece como el usuario como logueado
-        localStorage.setItem('currentUser', JSON.stringify(userData)); 
+        localStorage.setItem('currentUser', JSON.stringify(userData)); //json stringify para convertir a texto para guardar en localstorage
 
         //muestra popup y ejecuta la redireccion al hacer clic en ok
         mostrarPopup('Éxito', '¡Registro exitoso! Ahora puedes iniciar sesión con tu cuenta.', 'alert', () => {

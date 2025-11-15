@@ -11,7 +11,7 @@ import { formularioDeContacto } from "./Javascript/contactoFormulario.js";
 import { inicializarCarrito } from './Javascript/carritoDeCompras.js';
 import {GiftCard} from './Javascript/giftCardEventos.js';
 import { iniciarFormularioDePago } from "./Javascript/formularioPago.js";
-import { iniciarLogicaInscripcion } from "./Javascript/inscripcionCurso.js"; // NUEVA IMPORTACIÓN
+import { iniciarLogicaInscripcion } from "./Javascript/inscripcionCurso.js";
 
 const BUSCADOR = new BuscadorElementos();
 

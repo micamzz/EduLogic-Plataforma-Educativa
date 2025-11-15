@@ -35,16 +35,16 @@ export function iniciarLogicaPerfil() {
     const inputPais  = buscador.buscarUnElementoPorId('perfil-pais');
 
     // Rellenar campos con los datos del usuario
-    if (inputNombre)    inputNombre.value    = usuario.nombre        || '';
-    if (inputApellido)  inputApellido.value  = usuario.apellido      || '';
-    if (inputDni)       inputDni.value       = usuario.dni           || '';
-    if (inputEmail)     inputEmail.value     = usuario.email         || '';
-    if (inputTelefono)  inputTelefono.value  = usuario.telefono      || '';
-    if (inputDireccion) inputDireccion.value = usuario.direccion     || '';
-    if (inputLocalidad) inputLocalidad.value = usuario.localidad     || '';
-    if (inputProvincia) inputProvincia.value = usuario.provincia     || '';
-    if (inputPostal)    inputPostal.value    = usuario.codigo_postal || '';
-    if (inputPais)      inputPais.value      = usuario.pais          || '';
+    if (inputNombre)  inputNombre.value  = usuario.nombre || '';
+    if (inputApellido)  inputApellido.value = usuario.apellido || '';
+    if (inputDni) inputDni.value  = usuario.dni  || '';
+    if (inputEmail) inputEmail.value = usuario.email || '';
+    if (inputTelefono)  inputTelefono.value  = usuario.telefono|| '';
+    if (inputDireccion) inputDireccion.value = usuario.direccion|| '';
+    if (inputLocalidad) inputLocalidad.value = usuario.localidad || '';
+    if (inputProvincia) inputProvincia.value = usuario.provincia || '';
+    if (inputPostal)  inputPostal.value  = usuario.codigo_postal || '';
+    if (inputPais)  inputPais.value  = usuario.pais || '';
 
     // Mostrar nombre en el encabezado
     const textoNombreUsuario = buscador.buscarUnElementoPorId('nombre-usuario');
@@ -60,15 +60,15 @@ export function iniciarLogicaPerfil() {
         evento.preventDefault();
 
         //Actualiza datos del usuario con lo que esta en los inputs
-        if (inputNombre)    usuario.nombre        = inputNombre.value;
-        if (inputApellido)  usuario.apellido      = inputApellido.value;
-        if (inputEmail)     usuario.email         = inputEmail.value;
-        if (inputTelefono)  usuario.telefono      = inputTelefono.value;
-        if (inputDireccion) usuario.direccion     = inputDireccion.value;
-        if (inputLocalidad) usuario.localidad     = inputLocalidad.value;
-        if (inputProvincia) usuario.provincia     = inputProvincia.value;
-        if (inputPostal)    usuario.codigo_postal = inputPostal.value;
-        if (inputPais)      usuario.pais          = inputPais.value;
+        if (inputNombre) usuario.nombre   = inputNombre.value;
+        if (inputApellido) usuario.apellido= inputApellido.value;
+        if (inputEmail) usuario.email  = inputEmail.value;
+        if (inputTelefono)  usuario.telefono = inputTelefono.value;
+        if (inputDireccion) usuario.direccion  = inputDireccion.value;
+        if (inputLocalidad) usuario.localidad  = inputLocalidad.value;
+        if (inputProvincia) usuario.provincia = inputProvincia.value;
+        if (inputPostal) usuario.codigo_postal = inputPostal.value;
+        if (inputPais)  usuario.pais = inputPais.value;
 
         localStorage.setItem('currentUser', JSON.stringify(usuario));
         

@@ -4,7 +4,7 @@ import { BuscadorElementos } from "./buscadorElementos.js";
 const BUSCADOR = new BuscadorElementos();
 
 export class DetalleCursos {
-  render() {
+  MostrarModulos() {
 
     //extrae el nombre del curso de la URL
     const params = new URLSearchParams(window.location.search);
@@ -31,10 +31,10 @@ export class DetalleCursos {
     const modulos = curso.modulos;
 
     // RECORRER LOS MODULOS (CONTENIDOS X CLASES) acordeon
-    let modulosHTML = "";
+    let modulosHTML = "";//variable para ir guardando los modulos
 
-    for (let j = 0; j < modulos.length; j++) {
-      const mod = modulos[j];
+    for (let i = 0; i < modulos.length; i++) {
+      const mod = modulos[i];
 
       modulosHTML += `<details ${j === 0 ? "open" : ""}>`;//widget desplegable=details
       modulosHTML += `<summary>${mod.nombre}</summary>`;//titulo del widget
@@ -127,6 +127,7 @@ const sugerencias = cursosRelacionados.slice(0, 5);
 // PARA CONSTRUIR EL TEMPLATE DE CURSOS SUGERIDOS DEL HTML.S
 let sugeridosHTML = "";
 
+//ciclo q recorre los cursos sugeridos y los agrega al HTML
 for (const sugerido of sugerencias) {
   sugeridosHTML += `
     <a href="./detalleCurso.html?curso=${encodeURIComponent(sugerido.titulo)}" class="course-card">
@@ -140,13 +141,14 @@ for (const sugerido of sugerencias) {
     </a>
   `;
 }
-// INSERTA EL CONTENIDO EN EL CAROUSEL DE CURSOS EN EL DIV.
+
+// INSERTÁ EL CONTENIDO EN EL CAROUSEL DE CURSOS EN EL DIV.
 contenedorRelacionados.innerHTML = sugeridosHTML;
   }
   // PARA LLAMAR AL CURSO DESDE EL JS PRINCIPAL
   static mostrarDetalleDeCurso() {
     const detalle = new DetalleCursos();
-    detalle.render();
+    detalle.MostrarModulos();
   }
   
 }

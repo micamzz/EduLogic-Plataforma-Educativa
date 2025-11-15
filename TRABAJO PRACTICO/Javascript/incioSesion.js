@@ -65,7 +65,7 @@ export function iniciarLogin(urlRedireccion) {
       //traer carrito si habia backup
       restaurarCarritoUsuario(usuario.email);
 
-     const redireccionGuardada = localStorage.getItem("redirectAfterLogin");
+     const redireccionGuardada = localStorage.getItem("redirectAfterLogin");//guardamos en la variable la url guardada
      const destino = redireccionGuardada || urlRedireccion || '../index.html';
           
       mostrarPopup(

@@ -17,12 +17,12 @@ let contadorPersonas = 1;
 function mostrarErrorInscripcion(input, mensaje) {
   if (!input) return;
 
-  let error = input.nextElementSibling;
+  let error = input.nextElementSibling;// busca el siguiente hermano del input
 
-  if (!error || !error.classList.contains("error-mensaje")) {
-    error = document.createElement("div");
+  if (!error || !error.classList.contains("error-mensaje")) {//si no existe o no tiene la clase
+    error = document.createElement("div");//crea un div para el error
     error.classList.add("error-mensaje");
-    input.insertAdjacentElement("afterend", error);
+    input.insertAdjacentElement("afterend", error);// lo inserta despues del input
   }
 
   error.textContent = mensaje;
@@ -33,8 +33,8 @@ function mostrarErrorInscripcion(input, mensaje) {
 // VALIDACION DE INICIO DE SESION PARA Q SI NO ESTA LOGUEADO NO PUEDA INSCRIBIRSE 
 
 function validarSesionAntesDeInscribirse() {
-  const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
-  const currentUser = JSON.parse(localStorage.getItem("currentUser") || "null");
+  const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";//verifica si el user esta logueado
+  const currentUser = JSON.parse(localStorage.getItem("currentUser") || "null");//obtiene el user del local storage
 
   // Si no está logueado redirigimos al inicio de sesión igual que en el carrito
   if (!isLoggedIn || !currentUser?.email) {
@@ -46,7 +46,7 @@ function validarSesionAntesDeInscribirse() {
       ? "./inicioSesion.html"
       : "./paginas/inicioSesion.html";
 
-    window.location.href = hrefLogin;
+    window.location.href = hrefLogin;//redirecciona al inicio de sesion
     return false;
   }
 
@@ -56,10 +56,11 @@ function validarSesionAntesDeInscribirse() {
 // Crea un bloque de campos para persona
 function crearBloquePersona(id, esPrimeraPersona = false) {
     const div = CREADOR.crearUnElemento('div');
-    div.classList.add('persona-campos', 'persona-empresa', `persona-data-${id}`);
-    div.dataset.id = id;
+    div.classList.add('persona-campos', 'persona-empresa', `persona-data-${id}`);//añade clases
+    div.dataset.id = id;//almacena el id en data set xq es string
 
-    div.innerHTML = `
+    //plantilla de los campos  del html inner pq son varios
+    div.innerHTML = ` 
         <h4 class="persona-titulo">Persona ${id}</h4>
         <label>Nombre y Apellido:</label>
         <input type="text" name="nombre_${id}" placeholder="Nombre y Apellido" minlength="5">
@@ -89,15 +90,16 @@ function crearBloquePersona(id, esPrimeraPersona = false) {
 
 //renumera las personas despues de agregar o eliminar para sea en orden
 function actualizarNumeracionPersonas() {
-    const personas = BUSCADOR.buscarVariosElementos('#personas-container .persona-empresa');
-    let indice = 1;
+    const personas = BUSCADOR.buscarVariosElementos('#personas-container .persona-empresa');//busca todos los bloques de personas
+    let indice = 1;//contador para la numeracion
     
-    personas.forEach(bloque => {
-        const titulo = bloque.querySelector('.persona-titulo');
+    personas.forEach(bloque => {//recorre cada bloque
+        const titulo = bloque.querySelector('.persona-titulo');//busca el h4 del bloque
         if (titulo) {
-            titulo.textContent = `Persona ${indice}`;
+            titulo.textContent = `Persona ${indice}`;//actualiza el texto del h4, $ sirve para insertar variables en cadenas
+                                                        //en este caso $ se usa para poner el numero de persona
         }
-        indice++;
+        indice++;//incrementa el contador y x lo tanto la numeracion
     });
 }
 
@@ -112,7 +114,7 @@ function recalcularTotal() {
     const precioBaseIndividualARS = parseFloat(cursoSeleccionado.dataset.precio) || 0;//extrae el p del curso del data set
     const numPersonas = BUSCADOR.buscarVariosElementos('.persona-empresa').length;//cant personas 
     
-    const costoFijoIndividualARS = COSTO_ADMINISTRATIVO_ARS; 
+    const costoFijoIndividualARS = COSTO_ADMINISTRATIVO_ARS; //aditivo por persona
     
     const costoFijoTotalARS = costoFijoIndividualARS * numPersonas; //aditivo 
     const totalCursoBaseARS = precioBaseIndividualARS * numPersonas;//costo curso
@@ -134,7 +136,7 @@ function recalcularTotal() {
     `;
 
     //se alamcenan los valores en data  para usarlo en carrito
-    totalDiv.dataset.totalPagar = totalPagarARS.toFixed(2);
+    totalDiv.dataset.totalPagar = totalPagarARS.toFixed(2); //data set se usa porque es string
     totalDiv.dataset.costoEmpresa = costoFijoTotalARS.toFixed(2);
     totalDiv.dataset.numPersonas = numPersonas; 
 }

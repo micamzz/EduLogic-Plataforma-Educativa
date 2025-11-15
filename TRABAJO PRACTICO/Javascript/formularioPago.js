@@ -10,8 +10,8 @@ export function iniciarFormularioDePago() {
   
 
   //trae user loggeado ysu email para buscar su carrito
-  const user = JSON.parse(localStorage.getItem("currentUser"));
-  const carritoActual = JSON.parse(localStorage.getItem(`carrito_${user?.email}`)) || [];
+  const user = JSON.parse(localStorage.getItem("currentUser"));//convierte el texto a objeto
+  const carritoActual = JSON.parse(localStorage.getItem(`carrito_${user?.email}`)) || [];//carrito del user loggeado o array vacio si no hay
 
   //resumen de compra 
   let total = 0;
@@ -20,7 +20,7 @@ export function iniciarFormularioDePago() {
   
 
   if (carritoActual.length === 0) {
-    infoCurso.innerHTML = `<p>No hay cursos en el carrito.</p>`;
+    infoCurso.innerHTML = `<p>No hay cursos en el carrito.</p>`;//mensaje si el carrito esta vacio
   } else {
     //Inicia el resumen
     infoCurso.innerHTML = `<h3>Resumen de compra:</h3>`;
@@ -75,7 +75,7 @@ export function iniciarFormularioDePago() {
       infoCurso.innerHTML += `<ul class="detalle-costos-empresa">${detalleAdministrativo}</ul>`;
     }
     
-    //muestra total
+    //muestra total a pagar
     infoCurso.innerHTML += `<p><strong>Total Final a Pagar: ${total.toLocaleString("es-AR", { style: "currency", currency: "ARS" })}</strong></p>`;
   }
 
@@ -113,20 +113,20 @@ export function iniciarFormularioDePago() {
   numeroTarjeta.addEventListener("input", (e) => {
     let valor = e.target.value.replace(/\D/g, "");
      
-    const grupos = [];
+    const grupos = [];//aaray para ir guardando los grupos de 4 numeros
     for (let i = 0; i < valor.length; i += 4) {
-      grupos.push(valor.slice(i, i + 4));
+      grupos.push(valor.slice(i, i + 4));//agrega al array grupos de 4 numeros. slice no da error si no hay 4 numeros
     }
     // LE AGREGA EL ESPACIO A LOS NUMEROS
-    e.target.value = grupos.join(" ");
+    e.target.value = grupos.join(" ");//join une los grupos con espacio
   });
 
   //VALIDACION AL ENVIAR EL FORMULARIO
   form.addEventListener("submit", (e) => {
-    e.preventDefault();
+    e.preventDefault();//evita el envio por defecto. e es el evento submit
     limpiarErrores();
 
-    let esValido = true;
+    let esValido = true;//variable para controlar si todo es valido
 
     // NOMBRE
     if (!ValidadorFormulario.campoVacio(nombre.value)) {
@@ -194,14 +194,15 @@ export function iniciarFormularioDePago() {
 
   //PARA ERRORES
   function mostrarError(input, mensaje) {
-    let error = input.nextElementSibling; // para buscar un error
+    let error = input.nextElementSibling; // para buscar un error nextSibling es el siguiente hermano en el DOM,
+    //                                       en este caso el div de error
 
-    if (!error || !error.classList.contains("error-mensaje")) {
-      error = document.createElement("div");
-      error.classList.add("error-mensaje");
+    if (!error || !error.classList.contains("error-mensaje")) {//si no existe el error o no tiene la clase de error
+      error = document.createElement("div");//crea un div para el error
+      error.classList.add("error-mensaje");// agrega la clase de error
 
       // SE INSERTA EL MSJ DE ERROR DESPUES DEL INPUT
-      input.insertAdjacentElement("afterend", error);
+      input.insertAdjacentElement("afterend", error);// lo inserta despues del input
     }
     
     error.textContent = mensaje;
@@ -209,7 +210,7 @@ export function iniciarFormularioDePago() {
   }
 
   function limpiarErrores() {
-    BUSCADOR.buscarVariosElementos(".error-mensaje").forEach(e => e.remove());
-    BUSCADOR.buscarVariosElementos(".input-error").forEach(i => i.classList.remove("input-error"));
+    BUSCADOR.buscarVariosElementos(".error-mensaje").forEach(e => e.remove());//elimina todos los mensajes de error
+    BUSCADOR.buscarVariosElementos(".input-error").forEach(i => i.classList.remove("input-error"));//elimina la clase de error de los inputs
   }
 }

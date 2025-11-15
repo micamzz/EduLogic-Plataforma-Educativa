@@ -22,6 +22,7 @@ function obtenerReferenciasDOM() {
   };
 }
 
+//exporta referencias
 export function GiftCard() {
   const {
     radiosColor,
@@ -42,7 +43,7 @@ export function GiftCard() {
     formularioGift
   } = obtenerReferenciasDOM();
 
-  // ====== FUNCIONES DE ESTILO ======
+  //FUNCIONES DE ESTILO
   function aplicarColor(radio) {
     if (radio.checked) {
       mensaje.style.color = radio.value;
@@ -77,7 +78,7 @@ export function GiftCard() {
     desti2.style.fontSize = size;
   }
 
-  // ====== EVENTOS ======
+  //  EVENTOS 
   radiosColor.forEach((radio) => radio.addEventListener('change', () => aplicarColor(radio)));
   listaFondos.forEach((fondo) => fondo.addEventListener('change', () => aplicarFondo(fondo)));
   montoUbis.forEach((ubi) => ubi.addEventListener('change', () => aplicarUbicacion(ubi)));
@@ -94,13 +95,13 @@ export function GiftCard() {
   estilos.addEventListener('change', () => { cajaPreview.style.fontFamily = estilos.value; });
   tamaño.addEventListener('change', aplicarTamaño);
 
-  // ====== INICIALIZACIÓN ======
+  //INICIALIZACION
   if (colorSeleccionado) aplicarColor(colorSeleccionado);
   if (fondoSeleccionado) aplicarFondo(fondoSeleccionado);
   if (ubiSeleccionada) aplicarUbicacion(ubiSeleccionada);
   aplicarTamaño();
 
-  // ====== FUNCIONALIDAD CARRITO ======
+  //FUNCIONALIDAD CARRITO
   if (!formularioGift) return;
 
  formularioGift.addEventListener("submit", (e) => {
@@ -121,21 +122,20 @@ export function GiftCard() {
     return;
   }
 
-  // ✅ OBTENER EL FONDO ACTUAL EN EL MOMENTO DEL SUBMIT
+  //OBTENER EL FONDO ACTUAL EN EL MOMENTO DEL SUBMIT
   const fondoActual = document.querySelector('input[name="Fondo"]:checked');
-  console.log('🎨 Fondo seleccionado:', fondoActual?.value); // Para debug
-
+  
   const giftCard = {
     id: "gift-" + Date.now(),
     titulo: `Gift Card para ${destinatario.value || "Destinatario"}`,
     precio,
-    imagen: fondoActual?.value || "../imagenes/giftcard.png", // ← Usar fondoActual
+    imagen: fondoActual?.value || "../imagenes/giftcard.png", //Usa fondoActual
     cantidad: 1,
     tipo: "giftcard",
     mensaje: mensaje.textContent || ""
   };
 
-  console.log('📦 GiftCard creada:', giftCard); // Para debug
+ 
 
   agregarGiftCardAlCarrito(giftCard);
 
