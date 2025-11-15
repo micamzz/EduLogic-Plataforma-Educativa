@@ -1,12 +1,12 @@
 # Trabajo Práctico Grupal - Programación Web 1  
-###  [EduLogic] (https://edulogic-cursosonline.netlify.app/)
+### [Ir al sitio](https://cursosenlinea-edulogic.netlify.app)
 ### 👩‍💻 Colaboradores  
 
-- **COLLADO, Camila Sol**  
+
 - **MARTELLI GUIMIL, Rocio Belén**  
 - **MAZZA, Micaela Montserrat**  
 - **MOYANO VIVAS, Matías Ernesto**  
-- **VIANA, Sol Belén**  
+
 
 ---
 

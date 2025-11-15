@@ -212,6 +212,30 @@ section {
     margin-top: -1em;
     font-size: 0.9rem;
 }
+/* MJS DE ERROR JS -VALIDACION FORM */
+
+.form-iniciarSesion .error-mensaje {
+  color: #b71c1c;
+  font-size: 0.8em;
+  margin-top: 0.3em;
+  margin-bottom: 0.8em;
+  text-align: left;
+  display: block;
+}
+
+/* REQUISITOS CONTRASEÑA */
+.requisitos-password {
+  font-size: 0.7em;
+  color: #555;
+  margin-top: 0.3em;
+  line-height: 1.4em;
+  transition: all 0.2s ease;
+}
+
+.requisitos-password span {
+  display: block;
+}
+
 
 /* Responsive - Media querys */
 @media screen and (max-width: 480px) {

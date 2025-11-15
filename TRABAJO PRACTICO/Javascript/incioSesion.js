@@ -1,6 +1,9 @@
 import { BuscadorElementos } from "./buscadorElementos.js";
 import { mostrarPopup } from './popupManager.js'; 
 import { restaurarCarritoUsuario } from './carritoDeCompras.js';
+import { ValidadorFormulario } from "./validarFormulario.js";
+
+
 
 const buscador = new BuscadorElementos();
 
@@ -28,65 +31,81 @@ export function iniciarLogin(urlRedireccion) {
   }
 
   //cuando clickea en iniciar sesion
-  formularioLogin.addEventListener('submit', (evento) => {
-    evento.preventDefault();//detiene el comportamiento por defecto
+   formularioLogin.addEventListener('submit', (evento) => {
+  evento.preventDefault();
 
-    //busco los campos de email y contraseña
-    const campoEmail = formularioLogin.querySelector('input[name="mail"]');
-    const campoContrasena = formularioLogin.querySelector('input[name="password"]');
+  // Limpiar errores previos
+  formularioLogin.querySelectorAll(".error-mensaje").forEach(el => el.remove());
+  formularioLogin.querySelectorAll(".input-error").forEach(el => el.classList.remove("input-error"));
 
-    if (!campoEmail || !campoContrasena) {
-      console.error("Error: No se encontraron los campos de email o contraseña en el formulario.");
-      return;
-    }
+  const campoEmail = formularioLogin.querySelector('input[name="mail"]');
+  const campoContrasena = formularioLogin.querySelector('input[name="password"]');
 
-    const emailIngresado = campoEmail.value;
-    const contrasenaIngresada = campoContrasena.value;
+  if (!campoEmail || !campoContrasena) {
+    console.error("No se encontraron los campos de email o contraseña.");
+    return;
+  }
 
-    //Busca en el array de todos los usuarios registrados
-    const usuariosRegistrados = obtenerUsuariosRegistrados();
+  const emailIngresado = campoEmail.value.trim();
+  const contrasenaIngresada = campoContrasena.value.trim();
 
-    if (usuariosRegistrados.length === 0) {
-      mostrarPopup('Error de Login', 'No hay cuentas registradas. Por favor, regístrate.');
-      return;
-    }
+  let formularioValido = true;
 
-    //Busca el usuario que coincide con los ingresos
-    const usuario = usuariosRegistrados.find(
-        user => user.email === emailIngresado && user.password === contrasenaIngresada
-    );
+  // === VALIDAR EMAIL ===
+  if (!ValidadorFormulario.campoVacio(emailIngresado)) {
+    mostrarError(campoEmail, "El email no puede estar vacío.");
+    formularioValido = false;
+  } else if (!ValidadorFormulario.emailValido(emailIngresado)) {
+    mostrarError(campoEmail, ValidadorFormulario.MENSAJES.emailInvalido);
+    formularioValido = false;
+  }
 
-    if (usuario) { // Login exitoso
+  // === VALIDAR CONTRASEÑA ===
+  if (!ValidadorFormulario.campoVacio(contrasenaIngresada)) {
+    mostrarError(campoContrasena, "La contraseña no puede estar vacía.");
+    formularioValido = false;
+  }
 
-      //Guardar el usuario logueado en currentUser
-      localStorage.setItem('isLoggedIn', 'true');
-      localStorage.setItem('currentUser', JSON.stringify(usuario));
+  if (!formularioValido) return; 
 
-      //traer carrito si habia backup
-      restaurarCarritoUsuario(usuario.email);
+  // === SI TODO ESTÁ OK ===
+  const usuariosRegistrados = obtenerUsuariosRegistrados();
 
-     const redireccionGuardada = localStorage.getItem("redirectAfterLogin");//guardamos en la variable la url guardada
-     const destino = redireccionGuardada || urlRedireccion || '../index.html';
-          
-      mostrarPopup(
-        'Éxito',
-        'Inicio de sesión exitoso. ¡Bienvenido, ' + (usuario.nombre || '') + '!',
-        'alert',
-        () => {
-          if (redireccionGuardada) {
-            localStorage.removeItem("redirectAfterLogin");
-          }
-          window.location.href = destino;//index.html o la guardada arriba
-        }
-      );
-    } else { //Credenciales incorrectas o usuario no encontrado
-      mostrarPopup('Error de Credenciales', 'Credenciales incorrectas. Verifica tu correo y contraseña.');
-    }
-  });
+  if (usuariosRegistrados.length === 0) {
+    mostrarError(campoEmail, "No hay cuentas registradas. Por favor, registrate.");
+    return;
+  }
+
+  const usuario = usuariosRegistrados.find(
+    user => user.email === emailIngresado && user.password === contrasenaIngresada
+  );
+
+  if (usuario) {
+    localStorage.setItem('isLoggedIn', 'true');
+    localStorage.setItem('currentUser', JSON.stringify(usuario));
+    restaurarCarritoUsuario(usuario.email);
+
+    const redireccionGuardada = localStorage.getItem("redirectAfterLogin");
+    const destino = redireccionGuardada || urlRedireccion || '../index.html';
+    
+    window.location.href = destino;
+  } else {
+    // mostrarError(campoEmail, "Correo o contraseña incorrectos.");
+    mostrarError(campoContrasena, "Correo o contraseña incorrectos.");
+  }
+});
+
+function mostrarError(input, mensaje) {
+  input.classList.add("input-error");
+  const error = document.createElement("p");
+  error.className = "error-mensaje";
+  error.textContent = mensaje;
+  input.insertAdjacentElement("afterend", error);
 }
-
+}
 export function iniciarLoginNormal() {
   iniciarLogin('../index.html'); 
 }
+
 
 

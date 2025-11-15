@@ -11,56 +11,53 @@ const CREADOR = new CreadorElementos();
 const COSTO_ADMINISTRATIVO_ARS = 50000;
 let contadorPersonas = 1;
 
-
-
 //función para mostrar errores específicos en la inscripción
 function mostrarErrorInscripcion(input, mensaje) {
-  if (!input) return;
+    if (!input) return;
 
-  let error = input.nextElementSibling;// busca el siguiente hermano del input
+    let error = input.nextElementSibling;
 
-  if (!error || !error.classList.contains("error-mensaje")) {//si no existe o no tiene la clase
-    error = document.createElement("div");//crea un div para el error
-    error.classList.add("error-mensaje");
-    input.insertAdjacentElement("afterend", error);// lo inserta despues del input
-  }
+    if (!error || !error.classList.contains("error-mensaje")) {
+        error = document.createElement("div");
+        error.classList.add("error-mensaje");
+        input.insertAdjacentElement("afterend", error);
+    }
 
-  error.textContent = mensaje;
-  input.classList.add("input-error");
+    error.textContent = mensaje;
+    input.classList.add("input-error");
 }
 
 // ESTO AGREGUE PARA EL INICIO DE SESION
 // VALIDACION DE INICIO DE SESION PARA Q SI NO ESTA LOGUEADO NO PUEDA INSCRIBIRSE 
 
 function validarSesionAntesDeInscribirse() {
-  const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";//verifica si el user esta logueado
-  const currentUser = JSON.parse(localStorage.getItem("currentUser") || "null");//obtiene el user del local storage
+    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+    const currentUser = JSON.parse(localStorage.getItem("currentUser") || "null");
 
-  // Si no está logueado redirigimos al inicio de sesión igual que en el carrito
-  if (!isLoggedIn || !currentUser?.email) {
-    // Guardamos a dónde tiene que volver después de iniciar 
-    localStorage.setItem("redirectAfterLogin", location.pathname + location.search);
+    // Si no está logueado redirigimos al inicio de sesión igual que en el carrito
+    if (!isLoggedIn || !currentUser?.email) {
+        // Guardamos a dónde tiene que volver después de iniciar 
+        localStorage.setItem("redirectAfterLogin", location.pathname + location.search);
 
         // Determina la ruta correcta según la ubi actual
-    const hrefLogin = window.location.pathname.includes("/paginas/")
-      ? "./inicioSesion.html"
-      : "./paginas/inicioSesion.html";
+        const hrefLogin = window.location.pathname.includes("/paginas/")
+            ? "./inicioSesion.html"
+            : "./paginas/inicioSesion.html";
 
-    window.location.href = hrefLogin;//redirecciona al inicio de sesion
-    return false;
-  }
+        window.location.href = hrefLogin;
+        return false;
+    }
 
-  return true;
+    return true;
 }
 
 // Crea un bloque de campos para persona
 function crearBloquePersona(id, esPrimeraPersona = false) {
     const div = CREADOR.crearUnElemento('div');
-    div.classList.add('persona-campos', 'persona-empresa', `persona-data-${id}`);//añade clases
-    div.dataset.id = id;//almacena el id en data set xq es string
+    div.classList.add('persona-campos', 'persona-empresa', `persona-data-${id}`);
+    div.dataset.id = id;
 
-    //plantilla de los campos  del html inner pq son varios
-    div.innerHTML = ` 
+    div.innerHTML = `
         <h4 class="persona-titulo">Persona ${id}</h4>
         <label>Nombre y Apellido:</label>
         <input type="text" name="nombre_${id}" placeholder="Nombre y Apellido" minlength="5">
@@ -70,8 +67,8 @@ function crearBloquePersona(id, esPrimeraPersona = false) {
         <input type="email" name="email_${id}" placeholder="Email@example.com">
         <label>Teléfono:</label>
         <input type="tel" name="telefono_${id}" placeholder="Teléfono" minlength="8" maxlength="15">
-        ${esPrimeraPersona ? 
-            `<div class="placeholder-boton-quitar"></div>` : 
+        ${esPrimeraPersona ?
+            `<div class="placeholder-boton-quitar"></div>` :
             `<button type="button" class="boton-quitar-persona" data-id="${id}">&times;</button>`
         }
     `;
@@ -80,7 +77,7 @@ function crearBloquePersona(id, esPrimeraPersona = false) {
         const btnQuitar = div.querySelector('.boton-quitar-persona');
         btnQuitar.addEventListener('click', () => eliminarPersona(id, div));
     }
-    
+
     div.querySelectorAll('input').forEach(input => {
         input.addEventListener('input', recalcularTotal);//escucha cambio a cadda input
     });                                                  //rec total= calcula cuanto va a pagar si es empresa   
@@ -90,16 +87,15 @@ function crearBloquePersona(id, esPrimeraPersona = false) {
 
 //renumera las personas despues de agregar o eliminar para sea en orden
 function actualizarNumeracionPersonas() {
-    const personas = BUSCADOR.buscarVariosElementos('#personas-container .persona-empresa');//busca todos los bloques de personas
-    let indice = 1;//contador para la numeracion
-    
-    personas.forEach(bloque => {//recorre cada bloque
-        const titulo = bloque.querySelector('.persona-titulo');//busca el h4 del bloque
+    const personas = BUSCADOR.buscarVariosElementos('#personas-container .persona-empresa');
+    let indice = 1;
+
+    personas.forEach(bloque => {
+        const titulo = bloque.querySelector('.persona-titulo');
         if (titulo) {
-            titulo.textContent = `Persona ${indice}`;//actualiza el texto del h4, $ sirve para insertar variables en cadenas
-                                                        //en este caso $ se usa para poner el numero de persona
+            titulo.textContent = `Persona ${indice}`;
         }
-        indice++;//incrementa el contador y x lo tanto la numeracion
+        indice++;
     });
 }
 
@@ -110,12 +106,12 @@ function recalcularTotal() {
 
     const selectCurso = BUSCADOR.buscarUnElementoPorId('curso-empresa');// obtiene el select de curso
     const cursoSeleccionado = selectCurso.options[selectCurso.selectedIndex];// la op seleccionada
-    
+
     const precioBaseIndividualARS = parseFloat(cursoSeleccionado.dataset.precio) || 0;//extrae el p del curso del data set
     const numPersonas = BUSCADOR.buscarVariosElementos('.persona-empresa').length;//cant personas 
-    
-    const costoFijoIndividualARS = COSTO_ADMINISTRATIVO_ARS; //aditivo por persona
-    
+
+    const costoFijoIndividualARS = COSTO_ADMINISTRATIVO_ARS;
+
     const costoFijoTotalARS = costoFijoIndividualARS * numPersonas; //aditivo 
     const totalCursoBaseARS = precioBaseIndividualARS * numPersonas;//costo curso
     const totalPagarARS = totalCursoBaseARS + costoFijoTotalARS;//subtotal
@@ -136,47 +132,47 @@ function recalcularTotal() {
     `;
 
     //se alamcenan los valores en data  para usarlo en carrito
-    totalDiv.dataset.totalPagar = totalPagarARS.toFixed(2); //data set se usa porque es string
+    totalDiv.dataset.totalPagar = totalPagarARS.toFixed(2);
     totalDiv.dataset.costoEmpresa = costoFijoTotalARS.toFixed(2);
-    totalDiv.dataset.numPersonas = numPersonas; 
+    totalDiv.dataset.numPersonas = numPersonas;
 }
 
 
 //agrega un nuevo bloque para una persona
 function agregarPersona() {
-    contadorPersonas++; 
+    contadorPersonas++;
 
     //busca al cont padre donde se van a agregar los bloques
     const personasContainer = BUSCADOR.buscarUnElementoPorId('personas-container');
-    
+
     const nuevoBloque = crearBloquePersona(contadorPersonas); //llama f aux, devuelve un nuevo div con todos los inputs + btn quitar
     personasContainer.appendChild(nuevoBloque); //inserta el nuevo elemnto
-    
+
 
     //llama funcuones para ctualizar total perso y numeracion
     recalcularTotal();
-    actualizarNumeracionPersonas(); 
+    actualizarNumeracionPersonas();
 }
 
 //Elimina un bloque de campos de persona
 function eliminarPersona(id, elemento) {
-    if (id !== 1 || !elemento.classList.contains('persona-1')) { 
+    if (id !== 1 || !elemento.classList.contains('persona-1')) {
         elemento.remove();
-        recalcularTotal(); 
-        actualizarNumeracionPersonas(); 
+        recalcularTotal();
+        actualizarNumeracionPersonas();
     }
 }
 
 //limpia los datos de la primera persona
- 
+
 function limpiarPrimeraPersona(primerBloque) {
     if (primerBloque) {
         primerBloque.querySelectorAll('input').forEach(input => {
-            input.value = ''; 
+            input.value = '';
         });
     }
     recalcularTotal();
-    actualizarNumeracionPersonas(); 
+    actualizarNumeracionPersonas();
 }
 
 
@@ -191,40 +187,40 @@ export function iniciarLogicaInscripcion() {
     const cursoSeleccionadoContainer = BUSCADOR.buscarUnElementoPorId('curso-seleccionado-container');
     const agregarPersonaBtn = BUSCADOR.buscarUnElementoPorId('agregar-persona-btn');
     const personasContainer = BUSCADOR.buscarUnElementoPorId('personas-container');
-    const totalAPagarDiv = BUSCADOR.buscarUnElementoPorId('total-a-pagar'); 
-    
+    const totalAPagarDiv = BUSCADOR.buscarUnElementoPorId('total-a-pagar');
+
     const popup = BUSCADOR.buscarUnElementoPorId('popup');
     const popupPersonal = BUSCADOR.buscarUnElementoPorId('popup-contenido-personal');
     const popupEmpresa = BUSCADOR.buscarUnElementoPorId('popup-contenido-empresa');
-    
+
     // Referencia al checkbox del carrito
-    const carritoCheckbox = BUSCADOR.buscarUnElemento('#Carro'); 
+    const carritoCheckbox = BUSCADOR.buscarUnElemento('#Carro');
 
     //si falta se detiene y da error
     if (!selectorTipo || !form || !camposPersonal || !camposEmpresa || !agregarPersonaBtn || !personasContainer || !popup || !totalAPagarDiv) {
         console.error("Faltan elementos DOM para inicializar la lógica de inscripción.");
         return;
     }
-    
+
 
     //asegura que el primer bloque de persona tenga el estilo 
     const primerH4 = personasContainer.querySelector('.persona-1 h4');
     if (primerH4) {
         primerH4.classList.add('persona-titulo');
     }
-    
+
     //si da click se agrega otra persona
-    agregarPersonaBtn.addEventListener('click', agregarPersona); 
-    
+    agregarPersonaBtn.addEventListener('click', agregarPersona);
+
     const selectCursoCambio = BUSCADOR.buscarUnElementoPorId('curso-empresa');
-    
+
 
     //si cambia el curso seleccionado se limpia y actualiza todo
     if (selectCursoCambio) {
         selectCursoCambio.addEventListener('change', () => {
             const primeraPersona = personasContainer.querySelector('.persona-1');
             if (primeraPersona) limpiarPrimeraPersona(primeraPersona);
-            
+
             BUSCADOR.buscarVariosElementos('.persona-empresa').forEach(p => {
                 if (p.dataset.id !== '1') p.remove();
             });
@@ -233,7 +229,7 @@ export function iniciarLogicaInscripcion() {
             actualizarNumeracionPersonas(); //se reinicio
         });
     }
-    
+
     if (BUSCADOR.buscarUnElementoPorId('curso-empresa')?.value) {
         recalcularTotal();
     }
@@ -241,7 +237,7 @@ export function iniciarLogicaInscripcion() {
 
 
     // Muestra/Oculta campos y el botón de agregar persona
-     
+
     function manejarCambioTipoInscripcion() {
         const tipo = selectorTipo.value;
 
@@ -250,43 +246,42 @@ export function iniciarLogicaInscripcion() {
             camposPersonal.style.display = 'block';
             camposEmpresa.style.display = 'none';
             cursoSeleccionadoContainer.style.display = 'block';
-            
-            // Ocultar el botón para la modalidad Personal
-            agregarPersonaBtn.style.display = 'none'; 
-            // OCULTAR EL BLOQUE DE RESUMEN DE PRECIOS
-            totalAPagarDiv.style.display = 'none'; 
 
-            
+            // Ocultar el botón para la modalidad Personal
+            agregarPersonaBtn.style.display = 'none';
+            // OCULTAR EL BLOQUE DE RESUMEN DE PRECIOS
+            totalAPagarDiv.style.display = 'none';
+
+
             //SI ES DE EMORESA
         } else if (tipo === 'empresa') {
             camposPersonal.style.display = 'none';
             camposEmpresa.style.display = 'block';
             cursoSeleccionadoContainer.style.display = 'block';
-            
+
             // Mostrar el botón para la modalidad Empresa
-            agregarPersonaBtn.style.display = 'inline-block'; 
+            agregarPersonaBtn.style.display = 'inline-block';
             // MOSTRAR EL BLOQUE DE RESUMEN DE PRECIOS
-            totalAPagarDiv.style.display = 'block'; 
+            totalAPagarDiv.style.display = 'block';
 
             recalcularTotal();
             actualizarNumeracionPersonas();
         }
     }
 
-       //segun el tipo perso o emp nuestra det campos 
+    //segun el tipo perso o emp nuestra det campos 
     manejarCambioTipoInscripcion();
     selectorTipo.addEventListener('change', manejarCambioTipoInscripcion);
-    
-    
+
+
     // LÓGICA DE SUBMIT
 
     form.addEventListener('submit', (e) => {
         e.preventDefault();//detiene comportamiento por defecto del form, js toma control
 
-
         //elimina todos los errores visibles antes de validar
         BUSCADOR.buscarVariosElementos('.error-mensaje').forEach(el => el.remove());
-        BUSCADOR.buscarVariosElementos('.input-error').forEach(i => i.classList.remove('input-error')); // ESTO AGREGUE
+        BUSCADOR.buscarVariosElementos('.input-error').forEach(i => i.classList.remove('input-error')); 
 
         //obtiene datos
         const tipo = selectorTipo.value;
@@ -305,7 +300,6 @@ export function iniciarLogicaInscripcion() {
 
 
         if (tipo === 'personal') {
-            
             //validaciones con ValidadorFormulario para modo personal
             let esValido = true;
 
@@ -350,21 +344,21 @@ export function iniciarLogicaInscripcion() {
             }
 
             // CERRAR CARRITO ANTES DE MOSTRAR EL POPUP 
-            if (carritoCheckbox) { 
+            if (carritoCheckbox) {
                 carritoCheckbox.checked = false;
             }
-            
-            const totalPagarPersonal = precioBase; 
+
+            const totalPagarPersonal = precioBase;
 
             if (cursoBase) {
-                 const itemPersonal = {
-                     ...cursoBase, 
-                     tipo: 'curso', 
-                     precio: totalPagarPersonal, // Precio original sin adicional.
-                     cantidad: 1 
-                 };
-                 agregarCustomAlCarrito(itemPersonal); 
-                
+                const itemPersonal = {
+                    ...cursoBase,
+                    tipo: 'curso',
+                    precio: totalPagarPersonal, // Precio original sin adicional.
+                    cantidad: 1
+                };
+                agregarCustomAlCarrito(itemPersonal);
+
             }
             // Muestra el resumen  en el popup 
             const nombre = nombreInputPersonal.value;
@@ -380,19 +374,19 @@ export function iniciarLogicaInscripcion() {
                     <li><strong>Teléfono:</strong> ${telefono}</li>
                 </ul>
             `;
-            
-            popupEmpresa.style.display = 'none';
-            popupPersonal.style.display = 'block';
-            
 
-            //TIPO EMRPESA
-        } else if (tipo === 'empresa') {
-            
+            popupEmpresa.style.display = 'none';
+            popupPersonal.style.display = 'block'; 
+    } 
+             
+            //VALIDACIONES TIPO EMPRESA 
+             else if (tipo === 'empresa') {
+
             let esValido = true;
             let resumenHTML = '<ul>';
-            
-            const dnisEncontrados = new Set(); 
-            let dniDuplicado = false; 
+
+            const dnisEncontrados = new Set();
+            let dniDuplicado = false;
 
             BUSCADOR.buscarVariosElementos('.persona-empresa').forEach(bloque => {
                 const id = bloque.dataset.id;
@@ -429,18 +423,24 @@ export function iniciarLogicaInscripcion() {
                     mostrarErrorInscripcion(telefonoInput, ValidadorFormulario.MENSAJES.telefonoInvalido);
                     esValido = false;
                 }
-                
+
                 // DNI 
                 const dni = dniInput.value.trim();
                 if (!dni) {
+                    mostrarErrorInscripcion(dniInput, "El DNI es obligatorio."); 
                     esValido = false;
+                } else if (!/^\d{8,12}$/.test(dni)) { // ESTO AGREGUE
+                    mostrarErrorInscripcion(dniInput, "El DNI debe tener entre 8 y 12 números."); 
+                    esValido = false; // ESTO AGREGUE
                 }
 
                 if (dnisEncontrados.has(dni)) {
-                    dniDuplicado = true;
+                    mostrarErrorInscripcion(dniInput, "Este DNI está repetido."); 
+                    dniDuplicado = true; 
+                    esValido = false;
                 }
                 dnisEncontrados.add(dni);
-                
+
                 const tituloVisible = bloque.querySelector('.persona-titulo')?.textContent || `Persona ${id}`;
 
                 resumenHTML += `
@@ -448,7 +448,11 @@ export function iniciarLogicaInscripcion() {
                 `;
             });
             resumenHTML += '</ul>';
-        
+
+            //  SI HAY ERRORES NO SIGUE
+            if (!esValido || dniDuplicado) {
+                return; 
+            }
 
             // valida sesión recién cuando el formulario es válido
             if (!validarSesionAntesDeInscribirse()) {
@@ -456,27 +460,27 @@ export function iniciarLogicaInscripcion() {
             }
 
             // CERRAR CARRITO ANTES DE MOSTRAR EL POPUP 
-            if (carritoCheckbox) { 
+            if (carritoCheckbox) {
                 carritoCheckbox.checked = false;
             }
 
             const totalDiv = BUSCADOR.buscarUnElementoPorId('total-a-pagar');
             const total = totalDiv.dataset.totalPagar;
             const numPersonas = parseInt(totalDiv.dataset.numPersonas);
-            
+
             //  Agregar el curso al carrito con precio modificado y cantidad
             if (cursoBase) {
-                const precioUnitarioEmpresa = precioBase + COSTO_ADMINISTRATIVO_ARS; 
-                
+                const precioUnitarioEmpresa = precioBase + COSTO_ADMINISTRATIVO_ARS;
+
                 const itemEmpresa = {
-                    ...cursoBase, 
-                    tipo: 'empresa', 
-                    precio: precioUnitarioEmpresa, 
-                    cantidad: numPersonas 
+                    ...cursoBase,
+                    tipo: 'empresa',
+                    precio: precioUnitarioEmpresa,
+                    cantidad: numPersonas
                 };
 
-                agregarCustomAlCarrito(itemEmpresa); 
-                
+                agregarCustomAlCarrito(itemEmpresa);
+
                 console.log(` Curso ${nombreCurso} (${numPersonas} unidades) agregado al carrito para pago empresa. Precio Unitario (c/adicional): ${precioUnitarioEmpresa}`);
             }
 
@@ -487,29 +491,29 @@ export function iniciarLogicaInscripcion() {
 
             popupPersonal.style.display = 'none';
             popupEmpresa.style.display = 'block';
-            
+
         }
 
         popup.classList.add('visible');
 
     });
-    
+
     //cerrar el modal y limpiar el formulario al clickar boton
     popup.querySelectorAll('.boton-enlace').forEach(enlace => {
         enlace.addEventListener('click', () => {
-        
+
             form.reset();//resetea form
 
             //limpia 1er persona y elimina las demas
             const primeraPersona = personasContainer.querySelector('.persona-1');
             limpiarPrimeraPersona(primeraPersona);
             BUSCADOR.buscarVariosElementos('.persona-empresa').forEach(p => {
-                if (p.dataset.id !== '1') p.remove(); 
+                if (p.dataset.id !== '1') p.remove();
             });
 
             //reinicia ocntador y numeracion
             contadorPersonas = 1;
-            actualizarNumeracionPersonas(); 
+            actualizarNumeracionPersonas();
         });
     });
 }

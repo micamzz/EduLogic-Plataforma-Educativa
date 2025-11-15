@@ -3,6 +3,7 @@ export class ValidadorFormulario {
   //alamcena msg de error
   static MENSAJES = {
     nombreVacio: "El nombre y apellido no puede estar vacío.",
+    nombreVacio2: "El nombre no puede estar vacio",
     nombreCorto: "El nombre debe tener al menos 3 letras.",
     emailInvalido: "El email es inválido.",
     telefonoInvalido: "El teléfono debe tener mínimo 8 números.",

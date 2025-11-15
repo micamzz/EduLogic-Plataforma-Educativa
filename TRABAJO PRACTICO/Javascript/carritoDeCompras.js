@@ -43,7 +43,7 @@ export function actualizarContador() {
   contador.textContent = total;
 }
 
-function renderCarrito() {
+function MostrarCarrito() {
   const contenedor = BUSCADOR.buscarUnElemento("#js-caja-carrito");
   //no hay cursos en el carrito
   if (!PRODUCTOS_EN_CARRITO.length) {
@@ -142,7 +142,7 @@ cursos</p></div>`;
       
       guardarCarrito();
       actualizarContador();
-      renderCarrito();
+      MostrarCarrito();
     });
   });
 
@@ -152,7 +152,7 @@ cursos</p></div>`;
     PRODUCTOS_EN_CARRITO = [];
     guardarCarrito();
     actualizarContador();
-    renderCarrito();
+    MostrarCarrito();
   });
 }
 
@@ -174,7 +174,7 @@ export function agregarCustomAlCarrito(item) {
     
     guardarCarrito();
     actualizarContador();
-    if (carritoAbierto()) renderCarrito();
+    if (carritoAbierto()) MostrarCarrito();
 }
 
 // Agrega un curso normal (sin modificar el precio) al carrito.
@@ -207,7 +207,7 @@ export function vaciarCarrito() {
     
     const carritoCheckbox = document.querySelector('#Carro');
     if (carritoCheckbox?.checked) {
-      renderCarrito();
+      MostrarCarrito();
     }
     
   } 
@@ -226,7 +226,7 @@ export function inicializarCarrito() {
         actualizarContador();
     }
   const checkbox = BUSCADOR.buscarUnElemento("#Carro");
-  if (checkbox) checkbox.addEventListener("change", () => { if (checkbox.checked) renderCarrito(); });
+  if (checkbox) checkbox.addEventListener("change", () => { if (checkbox.checked) MostrarCarrito(); });
 
   document.addEventListener("click", e => {
     const btn = e.target.closest(".js-producto-agregar");

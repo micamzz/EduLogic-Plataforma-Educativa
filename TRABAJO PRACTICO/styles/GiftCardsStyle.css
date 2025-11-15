@@ -104,7 +104,6 @@ el  ~  permite aplicar los estilos  a .imagen_monto que sean hermanos del input 
   width: 100%;
   background-color: white;
   color: #9575CD;
-  font-weight: bold;
   font-size: 1.7em;
   display: flex;
   flex-direction: column;
@@ -112,6 +111,10 @@ el  ~  permite aplicar los estilos  a .imagen_monto que sean hermanos del input 
   gap: 1em;
 }
 
+/* MANTIENE EN "NEGRITA" LA DESCRIPCION DE LOS LABEL */
+.subtitulo-estilo{
+ font-weight: bold;
+}
 .Box_form form .confirmacion {
   display: flex;
   width: 100%;
@@ -336,6 +339,15 @@ el  ~  permite aplicar los estilos  a fondo que sean hermanos del input marcado*
   border: solid 0.2em white;
 }
 
+/* MENSAJE DE ERROR DEL JS  - VALIDACION FORM*/
+.error-mensaje {
+    color: #b71c1c; 
+    font-size: 0.65em;
+  margin-top: -0.5em;
+  margin-bottom: 1em;
+  text-align: left;
+  display: block;
+}
 
 /* RESPONSIVE  */
 
