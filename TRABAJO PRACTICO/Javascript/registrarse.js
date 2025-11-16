@@ -1,15 +1,15 @@
 import { mostrarPopup } from './popupManager.js';
 import { ValidadorFormulario } from "./validarFormulario.js";
 
-const CONTRASEÑA_VERIF = /^(?=.*[A-Z])(?=.*\d).{6,}$/; //Debe tener al menos 6 caracteres, una mayus y un num
+const CONTRASEÑA_VERIF = /^(?=.*[A-Z])(?=.*\d).{6,}$/; 
 
 //obtener todos los usuarios registrados o un array vacio si no hay
 function obtenerUsuariosRegistrados() {
   const usuariosTexto = localStorage.getItem('registeredUsers');
-  try {//try pq convertir textJSON a un objeto puede fallar
+  try {
     return usuariosTexto ? JSON.parse(usuariosTexto) : [];
   } catch (e) {
-    return [];//array vacio
+    return [];
   }
 }
 
@@ -21,7 +21,7 @@ function guardarUsuariosRegistrados(usuarios) {
 export function iniciarRegistro(redirectUrl) {
     const form = document.getElementById('registro-form');
     if (!form) {
-        return;//si no se encuentra el form
+        return;
     }
 
     const nombreInput = form.querySelector('input[name="nombre"]');
@@ -175,7 +175,7 @@ export function iniciarRegistro(redirectUrl) {
           const userData = {
               nombre, apellido, dni, email, password,
               telefono: '', direccion: '', localidad: '',
-              provincia: '', codigo_postal: '', pais: ''
+              provincia: '', codigo_postal: '', pais: '', cursosObtenidos: []
           };
 
         usuarios.push(userData);

@@ -13,14 +13,13 @@ export function formularioDeContacto() {
     const MENSAJE = BUSCADOR.buscarUnElementoPorId("mensaje");
 
       if (!FORM || !NOMBRE || !MAIL || !TELEFONO || !MENSAJE) {
-    return;//si no encuentra el formulario o algun campo, sale de la funcion
-  }
+    return;
+ }
 
     // CONTADOR DE CARACTERES
     const CONTADOR = CREADOR.crearUnElemento("p");
     CONTADOR.classList.add("contador");
-    MENSAJE.insertAdjacentElement("afterend", CONTADOR);  //LO INSERTA DESPUES DEL TEXTAREA MSJ
-
+    MENSAJE.insertAdjacentElement("afterend", CONTADOR); 
     const MAXIMO_CARACTERES = 1000;
     MENSAJE.addEventListener("input", () => {
         const usados = MENSAJE.value.length;
@@ -31,7 +30,7 @@ export function formularioDeContacto() {
         }
     });
 
-    // SI HAY UN ERROR SE CREA UN ELEMENTO PARA PONER EL TEXTO
+ 
     function mostrarError(input, mensaje) {
         // Busca si ya existe un elemento justo después del input
         let error = input.nextElementSibling;

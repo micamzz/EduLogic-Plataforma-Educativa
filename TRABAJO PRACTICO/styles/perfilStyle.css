@@ -10,21 +10,23 @@ body {
 }
 
 /* CONTENEDOR GENERAL */
+/* MODIFICADO: Establece la dirección vertical para apilar el perfil y el historial */
 .container-perfil {
   width: 100%;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center; /* Centra el contenido horizontalmente */
   padding: 3em 0;
 }
 
-/* PERFIL */
+/* PERFIL (Caja del formulario) */
 .section-perfil {
   background-color: #ffffff;
   border-top: 6px solid #9575CD;
   border-radius: 1em;
   padding: 2em 4em;
   width: 90%;
-  max-width: 1100px;
+  max-width: 1100px; /* Mantiene el ancho máximo de la caja del formulario */
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
 }
 
@@ -76,9 +78,115 @@ h1 {
   cursor: not-allowed;
 }
 
+/* hisotrial*/
+.historial-cursos-container {
+    /* Eliminado grid-column: span 2; ya que no está en el grid del formulario */
+    margin: 3em auto; /* Centra el bloque de historial horizontalmente */
+    padding: 2em;
+    background-color: #f8f1ff; 
+    border: 1px solid #dcd0e8;
+    border-radius: 0.8em;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    width: 90%; /* Ajuste de ancho */
+    max-width: 1100px; /* Mantiene el ancho máximo */
+}
 
+.historial-cursos-titulo {
+    color: #5e35b1;
+    margin-bottom: 1.5em;
+    text-align: center;
+    font-size: 1.6em;
+    border-bottom: 2px solid #9575CD;
+    padding-bottom: 0.5em;
+}
 
-/* pop up*/
+.historial-cursos-lista {
+    list-style: none;
+    padding: 0;
+}
+
+.historial-cursos-lista ul {
+    list-style: none;
+    padding: 0;
+}
+
+.historial-curso-item {
+    padding: 1em 0;
+    border-bottom: 1px dashed #ccc;
+    margin-bottom: 1em;
+    /* AÑADIDO: Estilos para contener los detalles y el botón */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.historial-curso-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+}
+
+.historial-curso-titulo {
+    font-size: 1.1em;
+    color: #7E57C2;
+    margin: 0.2em 0;
+}
+
+.historial-curso-detalle {
+    font-size: 0.95em;
+    color: #4a4a4a;
+    margin-left: 0.5em;
+}
+
+.historial-curso-fecha {
+    font-style: italic;
+    font-size: 0.85em;
+    color: #888;
+    margin-top: 0.5em;
+    /* AÑADIDO: Alinea la fecha a la derecha del item */
+    align-self: flex-end; 
+}
+
+.historial-vacio {
+    text-align: center;
+    color: #999;
+    padding: 1em;
+}
+
+/* AÑADIDO: Estilo para el botón/enlace de detalle del curso */
+.boton-ver-detalle {
+    display: block;
+    width: 200px;
+    text-align: center;
+    background-color: #7E57C2;
+    color: white;
+    padding: 0.5em 1em;
+    border-radius: 5px;
+    text-decoration: none;
+    margin-top: 1em;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.boton-ver-detalle:hover {
+    background-color: #5e35b1;
+}
+
+/* RESPONSIVE  */
+@media (max-width: 700px) {
+    .historial-cursos-container {
+        padding: 1em;
+        margin-top: 2em;
+    }
+
+    .historial-cursos-titulo {
+        font-size: 1.4em;
+    }
+
+    /* Resto de estilos responsive omitidos por brevedad */
+}
+
+/*... (Resto de estilos de popup y botones) ...*/
+
 .popup-fondo {
   position: fixed;
   top: 0;
@@ -262,4 +370,3 @@ h1 {
     text-align: center;
   }
 }
-

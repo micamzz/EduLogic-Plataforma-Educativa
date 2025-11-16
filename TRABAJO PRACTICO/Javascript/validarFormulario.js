@@ -17,7 +17,6 @@ export class ValidadorFormulario {
   };
 
   //expresiones para validaciones
-  //metodo estatico para no instanciar la clase
   static expresionesRegulares = {
     email: /^[0-9a-zA-Z._.-]+@[0-9a-zA-Z._.-]+\.[0-9a-zA-Z]+$/,//valores permitidos en email
     telefono: /^\d{8,15}$|^\d{4}-\d{4,11}$/,
@@ -26,33 +25,33 @@ export class ValidadorFormulario {
     cvv: /^\d{3}$/  // Entre 8 y 15 numeros con o sin guion
   };
 
-  static campoVacio(valor) {//valida si el campo esta vacio
-    return valor.trim() !== "";//true si no esta vacio,
+  static campoVacio(valor) {
+    return valor.trim() !== "";
   }
 
-  static longitudMinima(valor, minimo) {//hace la validacion de longitud minima
-    return valor.trim().length >= minimo;//true si cumple la longitud minima
-  }
+  static longitudMinima(valor, minimo) {
+     return valor.trim().length >= minimo;
+    }
 
-  static emailValido(email) {//valida el formato del email
-    return ValidadorFormulario.expresionesRegulares.email.test(email.trim());//true si es valido
+  static emailValido(email) {
+    return ValidadorFormulario.expresionesRegulares.email.test(email.trim());
   }
 
   static telefonoValido(tel) {
-    if (tel.trim() === "") return true; // SI EL TELEFONO ESTA VACIO NO SE HACE VALIDACION 
+    if (tel.trim() === "") return true; 
     return ValidadorFormulario.expresionesRegulares.telefono.test(tel.trim());
   }
 
-  static longitudTextoValida(texto, maximo) {//valida longitud maxima
+  static longitudTextoValida(texto, maximo) {
     return texto.trim().length <= maximo;
   }
- static numeroTarjetaValido(numeroTarjeta) {//valida numero tarjeta
-    const limpio = numeroTarjeta.replace(/\s/g, ""); // saca espacios
-    return ValidadorFormulario.expresionesRegulares.tarjeta.test(limpio);//devuelve true si es valido
+ static numeroTarjetaValido(numeroTarjeta) {
+    const limpio = numeroTarjeta.replace(/\s/g, "");
+    return ValidadorFormulario.expresionesRegulares.tarjeta.test(limpio);
   }
 
-  static vencimientoValido(vencimiento) {//valida fecha vencimiento
-    const soloNumeros = vencimiento.replace(/\D/g, ""); // saca barra y demás
+  static vencimientoValido(vencimiento) {
+    const soloNumeros = vencimiento.replace(/\D/g, ""); 
     return ValidadorFormulario.expresionesRegulares.vencimiento.test(soloNumeros);
   }
 

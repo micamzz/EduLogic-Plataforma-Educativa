@@ -10,13 +10,19 @@ export class DetalleCursos {
     const params = new URLSearchParams(window.location.search);
     const nombreCurso = params.get("curso");
 
-    // PARA BUSCAR EL CURSO DENTRO DEL ARRAY, EL FIND TRAE AL OBJETO.
-    // SE PASA A MINUSCULA PARA QUE NO HAYA CONFLICTOS SI EL NOMBRE DEL CURSO ESTA ESCRITO DIFERENTE.
     const curso = LISTA_CURSOS.find(cursoActual => cursoActual.titulo.toLowerCase() === nombreCurso.toLowerCase());
 
-    //  BUSCAR EL CONTENEDOR DEL HTML PARA MOSTRAR EL CURSO
+    
     const contenedor = BUSCADOR.buscarUnElementoPorId("js-curso-detalle");
 
+   
+    if (!curso) {
+        if (contenedor) {
+             contenedor.innerHTML = '<section class="block-informacion-curso"><h1>Curso no encontrado</h1><p>Por favor, asegúrate de que el curso exista o intenta buscarlo en el catálogo.</p></section>';
+        }
+        return; 
+    }
+    
     // GUARDAR LAS PROPIEDADES DE LOS CURSOS EN VARIABLES.
     const id = curso.id;
     const titulo = curso.titulo;
@@ -36,7 +42,7 @@ export class DetalleCursos {
     for (let i = 0; i < modulos.length; i++) {
       const mod = modulos[i];
 
-      modulosHTML += `<details ${j === 0 ? "open" : ""}>`;//widget desplegable=details
+      modulosHTML += `<details ${i === 0 ? "open" : ""}>`;//widget desplegable=details
       modulosHTML += `<summary>${mod.nombre}</summary>`;//titulo del widget
       modulosHTML += `<article class="summary-contenidos_desplegable"><ul>`;//contenido del widget
 
@@ -152,7 +158,4 @@ contenedorRelacionados.innerHTML = sugeridosHTML;
   }
   
 }
-
-
-
 

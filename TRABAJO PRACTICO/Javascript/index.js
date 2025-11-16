@@ -1,54 +1,51 @@
 
 export function iniciarPaginaPrincipal() {
-    const sliderContainer = document.querySelector('.slider'); //trae el contenedor de las diapos y es el elemento q se mueve en horizontal
+    const sliderContainer = document.querySelector('.slider'); 
     
-    // Solo inicializar si el contenedor del carrusel existe
     if (!sliderContainer) return; 
     
-    const dots = document.querySelectorAll('.dot');//puntos de posicion
-    const prevBtn = document.querySelector('.prev-btn'); //boton anterior
-    const nextBtn = document.querySelector('.next-btn'); //siguiente
-    const slides = document.querySelectorAll('.slide');//img dentro del carrusel
-    const totalSlides = slides.length;//cant de diapos
-    let currentSlide = 0;//en que diapo empieza
-    let autoSlideInterval; //almacena temporizador
-    const intervalTime = 4000; //tiempo entre cada cambio automatico 4 seg
-    let resumeTimeout; //temporizador para reanudar el auto deslizamiento despues de la interaccion del usuario
+    const dots = document.querySelectorAll('.dot');
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    let currentSlide = 0;
+    let autoSlideInterval; 
+    const intervalTime = 4000; 
+    let resumeTimeout; 
     const resumeDelay = 5000;
-    const slideWidthPercentage = 100 / totalSlides; //calcula el ancho de cada diapo en porcentaje
-
+    const slideWidthPercentage = 100 / totalSlides;
 
     //muestra la diapo 
     function showSlide(index) {
-        currentSlide = (index + totalSlides) % totalSlides;//% asegura que el indice este dentro del rango
-        const offset = -currentSlide * slideWidthPercentage; //cuanto se desplaza 
+        currentSlide = (index + totalSlides) % totalSlides;
+        const offset = -currentSlide * slideWidthPercentage; 
         sliderContainer.style.transform = `translateX(${offset}%)`;
 
         dots.forEach((dot, i) => {
             dot.classList.toggle('active', i === currentSlide);
-        });///recorre los puntos
+        });
     }
 
-    function startAutoSlide() { //repro automatica
+    function startAutoSlide() { 
         clearInterval(autoSlideInterval);
         autoSlideInterval = setInterval(() => {
             showSlide(currentSlide + 1);
         }, intervalTime);
     }
 
-    function handleUserInteraction(indexToMoveTo) { //q pasa cuando el user interactua
-        clearInterval(autoSlideInterval); //detiene
-        clearTimeout(resumeTimeout); //reinicia tempo
-        showSlide(indexToMoveTo);//pasa a la diapo elegida
+    function handleUserInteraction(indexToMoveTo) { 
+        clearInterval(autoSlideInterval); 
+        clearTimeout(resumeTimeout); 
+        showSlide(indexToMoveTo);
         resumeTimeout = setTimeout(() => {
             startAutoSlide();
-        }, resumeDelay);//reaunda despues de 5 seg
+        }, resumeDelay);
     }
 
     showSlide(0);
 
-    //ESCUCHADORES DE EVENTOS
-
+ 
     dots.forEach(dot => {
         dot.addEventListener('click', (e) => {
             const index = parseInt(e.target.getAttribute('data-slide-index'));
@@ -59,10 +56,10 @@ export function iniciarPaginaPrincipal() {
     prevBtn.addEventListener('click', () => {
         handleUserInteraction(currentSlide - 1)
     });
-                                                //mueven una pos atra o adelante
+                                                
     nextBtn.addEventListener('click', () => {
         handleUserInteraction(currentSlide + 1);
     });
     
-    startAutoSlide();//inicia reprod automatica
+    startAutoSlide();
 }

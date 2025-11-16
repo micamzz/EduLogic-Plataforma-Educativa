@@ -25,7 +25,6 @@ const formularioGift = buscador.buscarUnElementoPorId('formGiftCard');
 
 export function GiftCard() {
 
-  // ====== FUNCIONES DE ESTILO ======
   function aplicarColor(radio) {
     if (radio.checked) {
       mensaje.style.color = radio.value;
@@ -98,7 +97,7 @@ export function GiftCard() {
 
     const nombre = nombreInput.value.trim();
     const email = emailInput.value.trim();
-    const montoValor = montoInput.value.trim(); // ✅ Renombrado
+    const montoValor = montoInput.value.trim(); 
 
     let formularioValido = true;
 

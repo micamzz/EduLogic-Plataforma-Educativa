@@ -4,16 +4,16 @@ export class BuscadorElementos{
         
     };
 
-    buscarUnElemento(selectorCss){//retorna el primer elemento que coincide con el selector CSS
-        return document.querySelector(selectorCss)
+    buscarUnElemento(selectorCss){
+          return document.querySelector(selectorCss)
     };
 
-    buscarVariosElementos(selectorCss){//retorna todos los elementos que coinciden con el selector CSS
-        return document.querySelectorAll(selectorCss)
+    buscarVariosElementos(selectorCss){
+         return document.querySelectorAll(selectorCss)
     };
 
-    buscarUnElementoPorId(selectorCss){//retorna el elemento que coincide con el id
-        return document.getElementById(selectorCss);
+    buscarUnElementoPorId(selectorCss){
+         return document.getElementById(selectorCss);
     }
 
 } 
