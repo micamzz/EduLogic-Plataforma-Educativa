@@ -22,10 +22,8 @@ const estilos = buscador.buscarUnElementoPorId('styleSelect');
 const tamaño = buscador.buscarUnElementoPorId('style_size');
 const formularioGift = buscador.buscarUnElementoPorId('formGiftCard');
 
-
 export function GiftCard() {
 
-  // ====== FUNCIONES DE ESTILO ======
   function aplicarColor(radio) {
     if (radio.checked) {
       mensaje.style.color = radio.value;
@@ -60,7 +58,6 @@ export function GiftCard() {
     desti2.style.fontSize = size;
   }
 
-  // ====== EVENTOS ======
   radiosColor.forEach((radio) => radio.addEventListener('change', () => aplicarColor(radio)));
   listaFondos.forEach((fondo) => fondo.addEventListener('change', () => aplicarFondo(fondo)));
   montoUbis.forEach((ubi) => ubi.addEventListener('change', () => aplicarUbicacion(ubi)));
@@ -77,17 +74,17 @@ export function GiftCard() {
   estilos.addEventListener('change', () => { cajaPreview.style.fontFamily = estilos.value; });
   tamaño.addEventListener('change', aplicarTamaño);
 
-  // ====== INICIALIZACIÓN ======
+
   if (colorSeleccionado) aplicarColor(colorSeleccionado);
   if (fondoSeleccionado) aplicarFondo(fondoSeleccionado);
   if (ubiSeleccionada) aplicarUbicacion(ubiSeleccionada);
   aplicarTamaño();
 
-  // ====== FUNCIONALIDAD CARRITO ======
   if (!formularioGift) return;
 
   formularioGift.addEventListener("submit", (e) => {
     e.preventDefault();
+
 
     formularioGift.querySelectorAll(".error-mensaje").forEach(el => el.remove());
     formularioGift.querySelectorAll(".input-error").forEach(el => el.classList.remove("input-error"));
@@ -98,11 +95,12 @@ export function GiftCard() {
 
     const nombre = nombreInput.value.trim();
     const email = emailInput.value.trim();
-    const montoValor = montoInput.value.trim(); // ✅ Renombrado
+    const montoValor = montoInput.value.trim();
 
     let formularioValido = true;
 
-    // === VALIDAR NOMBRE ===
+    // validaciones del formulario 
+   
     if (!ValidadorFormulario.campoVacio(nombre)) {
       mostrarError(nombreInput, ValidadorFormulario.MENSAJES.nombreVacio2);
       formularioValido = false;
@@ -111,24 +109,37 @@ export function GiftCard() {
       formularioValido = false;
     }
 
-    // === VALIDAR EMAIL ===
+    
     if (!ValidadorFormulario.campoVacio(email)) {
-      mostrarError(emailInput, "El campo email no puede estar vacío."); // ✅ Cambiado
+      mostrarError(emailInput, "El campo email no puede estar vacío.");
       formularioValido = false;
     } else if (!ValidadorFormulario.emailValido(email)) {
       mostrarError(emailInput, ValidadorFormulario.MENSAJES.emailInvalido);
       formularioValido = false;
     }
 
-    // === VALIDAR MONTO ===
+   
     const precio = parseFloat(montoValor);
     if (isNaN(precio) || precio <= 0) {
       mostrarError(montoInput, "Por favor, ingresá un monto válido.");
       formularioValido = false;
     }
 
+
     if (!formularioValido) return;
 
+    // INICIAR SESION
+    const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+    const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+
+    if (!isLoggedIn || !currentUser?.email) {
+
+      localStorage.setItem("redirectAfterLogin", "../paginas/giftCard.html");
+      window.location.href = "../paginas/inicioSesion.html";
+      return;
+    }
+
+   
     const fondoActual = document.querySelector('input[name="Fondo"]:checked');
 
     const giftCard = {
@@ -143,8 +154,16 @@ export function GiftCard() {
 
     agregarGiftCardAlCarrito(giftCard);
 
-    formularioGift.reset();
-    window.location.href = "../index.html"; 
+      
+    mostrarPopup(
+      "Éxito",
+      "🎁 Gift Card agregada al carrito!",
+      "alert",
+      () => {
+        formularioGift.reset();
+        window.location.href = "../index.html";
+      }
+    );
   });
 
   function mostrarError(input, mensaje) {
