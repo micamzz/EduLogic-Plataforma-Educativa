@@ -7,7 +7,6 @@ a {
   color: black;
 }
 
-/* PAGINA CALENDARIO */
 body {
   background-color: #f5f5f5;
 }
@@ -18,6 +17,76 @@ body {
   color: #7E57C2;
   animation-name: bounceInLeft;
   animation-duration: 1.5s;
+}
+
+/* Estilos base para el botón de cursos en el celular*/
+.boton-cursos-mobile {
+  background-color: #7E57C2;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 0.3em 0.5em;
+  font-size: 0.7em;
+  cursor: pointer;
+  margin-top: 0.2em;
+  width: 90%;
+  display: none; 
+}
+
+.boton-cursos-mobile:hover {
+  background-color: #6a4a9c;
+}
+
+.numero-dia {
+  font-weight: bold;
+  text-align: center;
+  width: 100%;
+}
+
+/* Contenedor de cursos en celular */
+.contenedor-cursos-mobile {
+  display: none;
+  flex-direction: column;
+  gap: 0.2em;
+  margin-top: 0.3em;
+  width: 100%;
+}
+
+.contenedor-cursos-mobile.mostrar {
+  display: flex;
+}
+
+/* PARA LOS LINKS DE LOS CURSOS */
+.dia-curso {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.3em;
+  padding-top: 0.5em;
+  position: relative;
+  text-align: center;
+}
+
+.curso-en-calendario {
+  display: block;
+  font-size: 0.8em;
+  color: #333;
+  text-decoration: none;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 0.05em;
+  padding: 0.2em;
+  background-color: #EDE7F6;
+  border-radius: 3px;
+  width: 90%;
+  cursor: pointer;
+}
+
+.curso-en-calendario:hover {
+  background-color: #D1C4E9;
+  color: #7E57C2;
+  text-decoration: none;
 }
 
 .calendar-container {
@@ -38,20 +107,18 @@ body {
   align-items: center;
   padding: 0.123em 0em;
   border-radius: 6px;
-  
 }
+
 .boton-link {
   width: 3em;
   height: 3em;
-  /* line-height: 3em; */
-  background-color:inherit;
+  background-color: inherit;
   border-radius: 24px;
   text-decoration: none;
   color: white;
-  font-size:1.2em;
-  font-weight:900;
-  border:none;
-
+  font-size: 1.2em;
+  font-weight: 900;
+  border: none;
 }
 
 .boton-link:hover {
@@ -74,14 +141,19 @@ body {
 .dia {
   background-color: #EDE7F6;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
   border-radius: 4px;
   font-weight: bold;
-  height: 4em;
+  height: 7.5em;
+  text-align: center;
+  padding: 0.5em 0.2em;
+  position: relative;
 }
 
-.dia,.dia-curso {
+.dia-curso {
+  background-color: #EDE7F6;
   height: 7.5em;
 }
 
@@ -92,7 +164,7 @@ body {
 
 .dia-curso-ocultar:hover {
   background-color: #7E57C2;
-  border:#7E57C2;
+  border: #7E57C2;
   border-radius: 0.5em;
   color: white;
   cursor: pointer;
@@ -113,33 +185,6 @@ body {
   color: #7E57C2;
   font-weight: bold;
 }
-
-/* PARA LOS LINKS DE LOS CURSOS */
-.dia-curso {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 0.3em;
-}
-
-/* FORMATO DE LAS CLASES REALIZADAS CN JS */
-
-.curso-en-calendario {
-  display: block;
-  font-size: 0.8em;
-  color: #333;
-  text-decoration: none;
-  font-weight: bold;
-  text-align: center;
-  margin-top: 0.05em;
-}
-
-.curso-en-calendario:hover {
-  color: #7E57C2;
-  text-decoration: underline;
-}
-
 
 /* POPUP */
 .popup-fondo {
@@ -188,11 +233,9 @@ body {
   background-color: #888;
 }
 
-
 /* RESPONSIVE */
 @media screen and (max-width: 320px) {
-  h1,
-  h2 {
+  h1, h2 {
     font-size: 1em;
   }
 
@@ -229,29 +272,19 @@ body {
     font-size: 0.9em;
   }
 
-  .botones {
-    width: 3em;
-    background-color: #A58AD9;
-  }
-
   .dia {
-    width: 100%;
-    height: 2.5em;
-    font-size: 0.8em;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    height: 5em;
+    padding: 0.3em 0.1em;
   }
 
-  .dia-actual {
-    width: 1em;
-    height: 1.5em;
+  .dia-curso {
+    height: 5em;
   }
 }
 
+/* MÓVILES (hasta 480px) */
 @media screen and (max-width: 480px) {
-  h1,
-  h2 {
+  h1, h2 {
     font-size: 1.2em;
   }
 
@@ -275,48 +308,125 @@ body {
     font-size: 0.7em;
   }
 
-  .botones {
-    width: 3em;
-    background-color: #A58AD9;
-  }
-
+  /* ESTILOS ESPECÍFICOS PARA MÓVILES */
   .calendar-numbers .dia,
   .calendar-numbers .dia-curso {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: flex-start;
     align-items: center;
-    height: 4.5em;
+    height: 5em;
     font-weight: 300;
     position: relative;
+    padding: 0.3em 0.1em;
+    text-align: center;
   }
 
   .calendar-numbers .dia-curso {
     background-color: #D1C4E9;
+    padding-bottom: 1.8em; /* Espacio para el botón */
   }
 
   .dia-curso-ocultar {
     display: none;
   }
 
-  .calendar-numbers .dia-curso .link-ACurso {
+  /* Botón de cursos en móviles */
+  .boton-cursos-mobile {
+    display: block;
     position: absolute;
-    top: 0;
-    left: 0;
+    bottom: 2.3em;
+    left: 5%;
+    right: 5%;
+    width: 90%;
+    z-index: 5;
+    font-size: 0.6em;
+    padding: 0.2em 0.3em;
+  }
+  
+  /* Contenedor de cursos desplegable */
+  .contenedor-cursos-mobile {
+    position: absolute;
+    top: 1.5em;
+    left: 0.2em;
+    right: 0.2em;
+    background: white;
+    border: 1px solid #D1C4E9;
+    border-radius: 4px;
+    padding: 0.3em;
+    z-index: 10;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+  
+  .contenedor-cursos-mobile.mostrar {
+    max-height: 150px;
+    overflow-y: auto;
+  }
+  
+  .curso-en-calendario {
+    display: block;
     width: 100%;
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none;
+    text-align: center;
+    padding: 0.3em 0;
+    font-size: 0.6em;
+    background-color: #EDE7F6;
+    border-radius: 3px;
+    margin-bottom: 0.1em;
+    cursor: pointer;
+  }
+  
+  .curso-en-calendario:hover {
+    background-color: #D1C4E9;
   }
 
-  .boton-link {
-    text-align: center;
-    color: black;
-    background-color: #A58AD9;
+  .numero-dia {
+    font-size: 0.9em;
+    margin-bottom: 0.2em;
   }
 }
 
+/* TABLETS y ESCRITORIO (481px en adelante) */
+@media screen and (min-width: 481px) {
+  .boton-cursos-mobile {
+    display: none !important;
+  }
+  
+  .contenedor-cursos-mobile {
+    display: flex !important;
+    position: static;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    max-height: none !important;
+    overflow: visible !important;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.2em;
+  }
+  
+  .curso-en-calendario {
+    font-size: 0.7em;
+    margin-top: 0.1em;
+    padding: 0.2em;
+    text-align: center;
+    background-color: #EDE7F6;
+    border-radius: 3px;
+    cursor: pointer;
+    width: 95%;
+  }
+  
+  .curso-en-calendario:hover {
+    background-color: #D1C4E9;
+  }
+
+  .numero-dia {
+    margin-bottom: 0.3em;
+  }
+}
 
 @media screen and (min-width: 481px) and (max-width: 768px) {
   .calendar-container {
@@ -328,18 +438,17 @@ body {
     height: 3em;
   }
 
-  .dia,
-  .dia-curso {
+  .dia, .dia-curso {
     height: 6.5em;
   }
 
   .boton-link {
     width: 2.5em;
     height: 2.5em;
-    line-height: 2.5em;
   }
- 
 
-
-
+  .curso-en-calendario {
+    font-size: 0.65em;
+    padding: 0.15em;
+  }
 }

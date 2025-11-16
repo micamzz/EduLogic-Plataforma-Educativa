@@ -394,6 +394,9 @@ font-weight: 600;
 /*CELUS*/
 
 @media (max-width: 480px) {
+  #curso-input {
+    width: 160px;
+  }
   .main-header {
     flex-direction: row;
     justify-content: space-between;
@@ -457,6 +460,7 @@ font-weight: 600;
   .search-bar {
     width: 100%;
     margin: 0.5em 0;
+  
   }
 
   .search-bar input {
@@ -676,7 +680,7 @@ font-weight: 600;
 /* Responsive */
 @media (max-width: 480px) {
   .search-bar {
-    max-width: 90%;
+    max-width: 50%;
   }
 
   .search-bar input {

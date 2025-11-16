@@ -85,7 +85,7 @@ cursos</p></div>`;
             `;
         
     } else if (tipo === 'giftcard') { //si es giftcard
-        titulo = `${curso.titulo} (Gift Card)`;
+        titulo = `${curso.titulo} `;
         detallePrecio = `<p class="js-precio-carrito-curso">Monto: ${precioUnitario.toLocaleString("es-AR",{style:"currency",currency:"ARS"})}</p>`;
     } else {
         //curso normal

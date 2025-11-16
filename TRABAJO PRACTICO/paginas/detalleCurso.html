@@ -83,20 +83,29 @@
     </section>
   </header>
 
+ <main>
+        <!-- SE RELLENA CON JS -->
+        <section id="js-curso-detalle"></section>
 
-   <main>
-   <!--  SE RELLENA CON JS -->
- <section id="js-curso-detalle"></section>
-
-    <!-- Links a otros cursos -->
-    <aside class="carousel">
-        <h2 class="carousel-titulo">También te puede interesar</h2>
-       
-        <!--  SE RELLENA CON EL JS -->
-        <div id="js-cursos-relacionados" class="courses-carousel"></div>
-    </aside>
-
- </main>
+        <!-- Links a otros cursos -->
+        <aside class="carousel">
+            <h2 class="carousel-titulo">También te puede interesar</h2>
+           
+            <!-- SLIDER  -->
+            <div class="slider-container">
+                <button class="slider-arrow slider-prev">‹</button>
+                
+                <div class="slider-viewport">
+                    <div id="js-cursos-relacionados" class="slider-track"></div>
+                </div>
+                
+                <button class="slider-arrow slider-next">›</button>
+                
+                <!-- Indicadores de paginación -->
+                <div class="slider-pagination"></div>
+            </div>
+        </aside>
+    </main>
 
      <!-- Footer -->
     <footer class="container-footer">

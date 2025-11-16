@@ -13,7 +13,6 @@ export class Calendario {
     const BOTON_ATRAS = BUSCADOR.buscarUnElemento('.js-boton-link-atras');
     const BOTON_SIGUENTE = BUSCADOR.buscarUnElemento('.js-boton-link-siguiente');
 
-
     // eventos para cambiar de mes
     if (BOTON_ATRAS && BOTON_SIGUENTE) {
       BOTON_ATRAS.addEventListener('click', () => {
@@ -30,6 +29,27 @@ export class Calendario {
     // elementos del calendario
     const TITULO_MES_ANIO = BUSCADOR.buscarUnElemento('.js-titulo');
     const DIAS = BUSCADOR.buscarUnElemento('.js-calendar-numbers');
+
+    // Función para manejar la visualización según el tamaño de pantalla
+    function manejarVisualizacionCursos() {
+      const esMovil = window.matchMedia("(max-width: 480px)").matches;
+      const botonesCursos = document.querySelectorAll('.boton-cursos-mobile');
+      const contenedoresCursos = document.querySelectorAll('.contenedor-cursos-mobile');
+      
+      botonesCursos.forEach(boton => {
+        boton.style.display = esMovil ? 'block' : 'none';
+      });
+      
+      contenedoresCursos.forEach(contenedor => {
+        if (esMovil) {
+          contenedor.classList.remove('mostrar');
+          contenedor.classList.remove('cursos-desktop');
+        } else {
+          contenedor.classList.add('mostrar');
+          contenedor.classList.add('cursos-desktop');
+        }
+      });
+    }
 
     //MOTOR DEL CALENDARIO
     function calendario(fecha) {
@@ -60,7 +80,12 @@ export class Calendario {
       for (let i = 1; i <= TOTAL_DIAS; i++) {
         const DIA_VALIDO = CREADOR.crearUnElemento('article');
         DIA_VALIDO.classList.add('dia', 'diaValido');
-        DIA_VALIDO.textContent = i;
+        
+        // Número del día
+        const numeroDia = CREADOR.crearUnElemento('span');
+        numeroDia.textContent = i;
+        numeroDia.classList.add('numero-dia');
+        DIA_VALIDO.appendChild(numeroDia);
 
         // Fecha formateada para buscar en el array
         const fechaISO = `${ANIO}-${String(MES + 1).padStart(2, "0")}-${String(i).padStart(2, "0")}`;
@@ -73,6 +98,18 @@ export class Calendario {
 
         // mostrar cursos del día
         if (cursosDelDia) {
+          DIA_VALIDO.classList.add("dia-curso");
+          
+          // Crear botón para móviles
+          const botonCursos = CREADOR.crearUnElemento("button");
+          botonCursos.classList.add("boton-cursos-mobile");
+          botonCursos.textContent = `${cursosDelDia.cursos.length} curso(s)`;
+          
+          // Crear contenedor para los cursos
+          const contenedorCursos = CREADOR.crearUnElemento("div");
+          contenedorCursos.classList.add("contenedor-cursos-mobile");
+          
+          // Crear los enlaces de cursos
           cursosDelDia.cursos.forEach(curso => {
             const enlace = CREADOR.crearUnElemento("span");
             enlace.textContent = curso.nombre;
@@ -84,10 +121,18 @@ export class Calendario {
               mostrarPopup(curso);
             });
 
-            DIA_VALIDO.appendChild(enlace);
+            contenedorCursos.appendChild(enlace);
           });
-
-          DIA_VALIDO.classList.add("dia-curso");
+          
+          // Evento para mostrar/ocultar cursos en móviles
+          botonCursos.addEventListener("click", (e) => {
+            e.stopPropagation();
+            contenedorCursos.classList.toggle("mostrar");
+          });
+          
+          // Agregar elementos al día
+          DIA_VALIDO.appendChild(botonCursos);
+          DIA_VALIDO.appendChild(contenedorCursos);
         }
 
         DIAS.appendChild(DIA_VALIDO);
@@ -103,9 +148,15 @@ export class Calendario {
 
       // Actualizar el título
       TITULO_MES_ANIO.textContent = `${NOMBRE_MES.toUpperCase()} ${ANIO}`;
+      
+      // Aplicar visualización correcta según tamaño de pantalla
+      setTimeout(manejarVisualizacionCursos, 0);
     }
 
     calendario(fechaActual);
+
+    // Event listener para cambios de tamaño de pantalla
+    window.addEventListener('resize', manejarVisualizacionCursos);
 
     //pop ups de los cursos al hacer click
     function mostrarPopup(curso) {
@@ -130,7 +181,6 @@ export class Calendario {
       fondoPopup.appendChild(ventanaPopup);
       document.body.appendChild(fondoPopup);
 
-  
       const botonCerrar = ventanaPopup.querySelector(".popup-cerrar");
       const botonAgregar = ventanaPopup.querySelector(".popup-agregarCarrito");
 
@@ -139,11 +189,10 @@ export class Calendario {
         fondoPopup.remove();
       });
 
-      
       // para mostrar otro popup cuando se agrega al carrito el curso
       botonAgregar.addEventListener("click", () => {
         fondoPopup.remove();
-        mostrarPopupAgregadoAlCarrito(curso); //llamada al nuevo popup
+        mostrarPopupAgregadoAlCarrito(curso);
       });
     }
 
