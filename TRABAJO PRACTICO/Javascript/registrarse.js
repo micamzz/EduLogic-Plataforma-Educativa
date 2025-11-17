@@ -30,7 +30,8 @@ export function iniciarRegistro(redirectUrl) {
     const emailInput = form.querySelector('input[name="email"]');
     const contraseniaInput = form.querySelector('input[name="password"]');
     const confirmarContraseniaInput = form.querySelector('input[name="confirm_password"]');
-
+    console.log('🔍 Inputs globales encontrados:');
+    console.log('- email:', emailInput);
 
     // REQUISITOS DE LA CONTRASEÑA - PARA MOSTRARLOS
     let contenedorRequisitos = form.querySelector(".requisitos-password");
@@ -46,7 +47,6 @@ export function iniciarRegistro(redirectUrl) {
     }
     contenedorRequisitos.style.display = "none";
 
- 
     const actualizarRequisitos = () => {
         const valor = contraseniaInput.value;
         if (valor === "") {
@@ -66,7 +66,6 @@ export function iniciarRegistro(redirectUrl) {
     contraseniaInput.addEventListener("input", actualizarRequisitos);
     contraseniaInput.addEventListener("focus", actualizarRequisitos); // por si entra directo con tab
 
-
     form.querySelectorAll("input").forEach(input => {
         input.addEventListener("input", () => {
             input.classList.remove("input-error");
@@ -77,119 +76,6 @@ export function iniciarRegistro(redirectUrl) {
         });
     });
 
-
-      function registrarUsuario(form) {
-          form.querySelectorAll(".error-mensaje").forEach(el => el.remove());
-          form.querySelectorAll(".input-error").forEach(el => el.classList.remove("input-error"));
-
-          const nombre = nombreInput.value.trim();
-          const apellido = apellidoInput.value.trim();
-          const dni = dniInput.value.trim();
-          const email = emailInput.value.trim();
-          const password = contraseniaInput.value.trim();
-          const confirmPassword = confirmarContraseniaInput.value.trim();
-
-          let formularioValido = true;
-
-          // VALIDAR NOMBRE
-          if (!ValidadorFormulario.campoVacio(nombre)) {
-              mostrarError(nombreInput, ValidadorFormulario.MENSAJES.nombreVacio2);
-              formularioValido = false;
-          } else if (!ValidadorFormulario.longitudMinima(nombre, 3)) {
-              mostrarError(nombreInput, ValidadorFormulario.MENSAJES.nombreCorto);
-              formularioValido = false;
-          }
-
-          // VALIDAR APELLIDO 
-          if (!ValidadorFormulario.campoVacio(apellido)) {
-              mostrarError(apellidoInput, "El apellido no puede estar vacío.");
-              formularioValido = false;
-          } else if (!ValidadorFormulario.longitudMinima(apellido, 3)) {
-              mostrarError(apellidoInput, "El apellido debe tener al menos 3 letras.");
-              formularioValido = false;
-          }
-
-          // VALIDAR DNI
-          if (!ValidadorFormulario.campoVacio(dni)) {
-              mostrarError(dniInput, "El DNI no puede estar vacío.");
-              formularioValido = false;
-          } else if (dni.length < 7 || dni.length > 9) {
-              mostrarError(dniInput, "El DNI debe tener entre 7 y 9 números.");
-              formularioValido = false;
-          }
-
-          // VALIDAR EMAIL
-          if (!ValidadorFormulario.campoVacio(email)) {
-              mostrarError(emailInput, "El email no puede estar vacío.");
-              formularioValido = false;
-          } else if (!ValidadorFormulario.emailValido(email)) {
-              mostrarError(emailInput, ValidadorFormulario.MENSAJES.emailInvalido);
-              formularioValido = false;
-          }
-
-          // VALIDAR CONTRA
-          if (!ValidadorFormulario.campoVacio(password)) {
-              mostrarError(contraseniaInput, "La contraseña no puede estar vacía.");
-              formularioValido = false;
-          } else if (!CONTRASEÑA_VERIF.test(password)) {
-              mostrarError(contraseniaInput, "Debe tener al menos 6 caracteres, una mayúscula y un número.");
-              formularioValido = false;
-          }
-
-          // VALIDAR CONFIRMACION DE CONTRASEÑA
-          if (!ValidadorFormulario.campoVacio(confirmPassword)) {
-              mostrarError(confirmarContraseniaInput, "La confirmación de contraseña no puede estar vacía.");
-              formularioValido = false;
-          } else if (password !== confirmPassword) {
-            
-              mostrarError(confirmarContraseniaInput, "Las contraseñas no coinciden.");
-              formularioValido = false;
-          }
-
-          
-          contenedorRequisitos.style.display = formularioValido ? "none" : "block";
-
-          if (!formularioValido || contraseniaInput.value.trim() === "") {
-              contenedorRequisitos.style.display = "none";
-          }
-
-
-          if (!formularioValido) return;
-
-          //  VALIDAR CUENTAS EXISTENTES O DNI
-          const usuarios = obtenerUsuariosRegistrados();
-          const emailExiste = usuarios.some(user => user.email === email);
-          const dniExiste = usuarios.some(user => user.dni === dni);
-
-          if (emailExiste) {
-              mostrarError(emailInput, "Ya existe una cuenta registrada con este email.");
-              return;
-          }
-
-          if (dniExiste) {
-              mostrarError(dniInput, "Ya existe una cuenta registrada con este DNI.");
-              return;
-          }
-
-          //  DATOS CREAR USUARIO
-          const userData = {
-              nombre, apellido, dni, email, password,
-              telefono: '', direccion: '', localidad: '',
-              provincia: '', codigo_postal: '', pais: '', cursosObtenidos: []
-          };
-
-        usuarios.push(userData);
-        guardarUsuariosRegistrados(usuarios);
-        localStorage.setItem('currentUser', JSON.stringify(userData));
-
-        contenedorRequisitos.style.display = "none"; 
-
-        mostrarPopup('Éxito', '¡Registro exitoso! Ahora puedes iniciar sesión.', 'alert', () => {
-            window.location.href = './inicioSesion.html';
-        });
-    }
-
-
     function mostrarError(input, mensaje) {
         input.classList.add("input-error");
         const error = document.createElement("p");
@@ -198,13 +84,186 @@ export function iniciarRegistro(redirectUrl) {
         input.insertAdjacentElement("afterend", error);
     }
 
-    //al registrarse guarda en localstorage
-    form.addEventListener('submit', function (e) {
-        e.preventDefault();
-        registrarUsuario(form);
+    // Funciones de validación separadas
+    function validarNombre(nombre) {
+        if (!ValidadorFormulario.campoVacio(nombre)) {
+            mostrarError(nombreInput, ValidadorFormulario.MENSAJES.nombreVacio2);
+            return false;
+        }
+        if (!ValidadorFormulario.longitudMinima(nombre, 3)) {
+            mostrarError(nombreInput, ValidadorFormulario.MENSAJES.nombreCorto);
+            return false;
+        }
+        return true;
+    }
+
+    function validarApellido(apellido) {
+        if (!ValidadorFormulario.campoVacio(apellido)) {
+            mostrarError(apellidoInput, "El apellido no puede estar vacío.");
+            return false;
+        }
+        if (!ValidadorFormulario.longitudMinima(apellido, 3)) {
+            mostrarError(apellidoInput, "El apellido debe tener al menos 3 letras.");
+            return false;
+        }
+        return true;
+    }
+
+    function validarDNI(dni) {
+        if (!ValidadorFormulario.campoVacio(dni)) {
+            mostrarError(dniInput, "El DNI no puede estar vacío.");
+            return false;
+        }
+        if (dni.length < 7 || dni.length > 9) {
+            mostrarError(dniInput, "El DNI debe tener entre 7 y 9 números.");
+            return false;
+        }
+        return true;
+    }
+
+    function validarEmail(email) {
+    console.log('📧 Validando email:', email);
+    
+    if (!ValidadorFormulario.campoVacio(email)) {
+        console.log('❌ Email vacío');
+        mostrarError(emailInput, "El email no puede estar vacío.");
+        return false;
+    }
+    if (!ValidadorFormulario.emailValido(email)) {
+        console.log('❌ Email inválido');
+        mostrarError(emailInput, ValidadorFormulario.MENSAJES.emailInvalido);
+        return false;
+    }
+    console.log('✅ Email válido');
+    return true;
+}
+
+    function validarPassword(password) {
+        if (!ValidadorFormulario.campoVacio(password)) {
+            mostrarError(contraseniaInput, "La contraseña no puede estar vacía.");
+            return false;
+        }
+        if (!CONTRASEÑA_VERIF.test(password)) {
+            mostrarError(contraseniaInput, "Debe tener al menos 6 caracteres, una mayúscula y un número.");
+            return false;
+        }
+        return true;
+    }
+
+    function validarConfirmacion(password, confirmPassword) {
+        if (!ValidadorFormulario.campoVacio(confirmPassword)) {
+            mostrarError(confirmarContraseniaInput, "La confirmación de contraseña no puede estar vacía.");
+            return false;
+        }
+        if (password !== confirmPassword) {
+            mostrarError(confirmarContraseniaInput, "Las contraseñas no coinciden.");
+            return false;
+        }
+        return true;
+    }
+
+  function registrarUsuario(form) {
+    form.querySelectorAll(".error-mensaje").forEach(el => el.remove());
+    form.querySelectorAll(".input-error").forEach(el => el.classList.remove("input-error"));
+
+    const nombre = nombreInput.value.trim();
+    const apellido = apellidoInput.value.trim();
+    const dni = dniInput.value.trim();
+    const email = emailInput.value.trim();
+    const password = contraseniaInput.value.trim();
+    const confirmPassword = confirmarContraseniaInput.value.trim();
+
+    let formularioValido = true;
+
+    console.log('🔍 Iniciando validaciones...');
+
+    // Validar cada campo individualmente - FORMA CORRECTA
+    const valNombre = validarNombre(nombre);
+    const valApellido = validarApellido(apellido);
+    const valDNI = validarDNI(dni);
+    const valEmail = validarEmail(email);
+    const valPassword = validarPassword(password);
+    const valConfirmacion = validarConfirmacion(password, confirmPassword);
+
+    console.log('📊 Resultados de validación:');
+    console.log('- Nombre:', valNombre);
+    console.log('- Apellido:', valApellido);
+    console.log('- DNI:', valDNI);
+    console.log('- Email:', valEmail);
+    console.log('- Password:', valPassword);
+    console.log('- Confirmación:', valConfirmacion);
+
+    // Verificar si TODOS son verdaderos
+    formularioValido = valNombre && valApellido && valDNI && valEmail && valPassword && valConfirmacion;
+
+    console.log('✅ Formulario válido?:', formularioValido);
+
+    // Controlar visibilidad de requisitos
+    if (!formularioValido || contraseniaInput.value.trim() === "") {
+        contenedorRequisitos.style.display = "none";
+    } else {
+        contenedorRequisitos.style.display = "block";
+    }
+
+    // Solo si hay errores de validación, detenerse aquí
+    if (!formularioValido) {
+        console.log("❌ Formulario inválido - Mostrando todos los errores");
+        return;
+    }
+
+    // VALIDAR CUENTAS EXISTENTES O DNI
+    const usuarios = obtenerUsuariosRegistrados();
+    const emailExiste = usuarios.some(user => user.email === email);
+    const dniExiste = usuarios.some(user => user.dni === dni);
+
+    if (emailExiste) {
+        mostrarError(emailInput, "Ya existe una cuenta registrada con este email.");
+        return;
+    }
+
+    if (dniExiste) {
+        mostrarError(dniInput, "Ya existe una cuenta registrada con este DNI.");
+        return;
+    }
+
+    // DATOS CREAR USUARIO
+    const userData = {
+        nombre, apellido, dni, email, password,
+        telefono: '', direccion: '', localidad: '',
+        provincia: '', codigo_postal: '', pais: '', cursosObtenidos: []
+    };
+
+    usuarios.push(userData);
+    guardarUsuariosRegistrados(usuarios);
+    localStorage.setItem('currentUser', JSON.stringify(userData));
+
+    contenedorRequisitos.style.display = "none";
+
+    mostrarPopup('Éxito', '¡Registro exitoso! Ahora puedes iniciar sesión.', 'alert', () => {
+        window.location.href = './inicioSesion.html';
     });
+}
+
+    console.log('🔍 Configurando event listener para el formulario...');
+console.log('Formulario:', form);
+console.log('¿Formulario existe?:', form !== null);
+
+// DEBUG del event listener
+form.addEventListener('submit', function (e) {
+    console.log('🎯 EVENTO SUBMIT CAPTURADO!');
+    console.log('Tipo de evento:', e.type);
+    
+    e.preventDefault();
+    e.stopPropagation();
+    
+    console.log('✅ Default prevenido - ejecutando validación');
+    registrarUsuario(form);
+});
+
+console.log('✅ Event listener configurado');
 }
 
 export function iniciarRegistroNormal() {
     iniciarRegistro('./inicioSesion.html'); //redirige a inicioSesion despues de registrar
 }
+
