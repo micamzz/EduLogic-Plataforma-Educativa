@@ -3,18 +3,17 @@ import { LISTA_CURSOS } from "./constantes/ArrayDeCursos.js";
 
 const BUSCADOR = new BuscadorElementos();
 const currentUser = JSON.parse(localStorage.getItem("currentUser"));//obtiene el usuario logueado
-const email = currentUser?.email;//extrae el email del usuario logueado
-let PRODUCTOS_EN_CARRITO = [];//array global de productos en el carrito
+const email = currentUser?.email;
+let PRODUCTOS_EN_CARRITO = [];
 
 // Definimos el costo administrativo aquí para el cálculo detallado
 const COSTO_ADMINISTRATIVO_ARS = 50000;
 
-// Carga el carrito del usuario logueado desde localStorage si el email tiene valor
 if (email) {
   PRODUCTOS_EN_CARRITO = JSON.parse(localStorage.getItem(`carrito_${email}`)) || [];
 }
 
-// Guardar carrito del usuario actual
+
 function guardarCarrito() {
   const user = JSON.parse(localStorage.getItem("currentUser"));
   if (!user?.email) return;
@@ -24,7 +23,7 @@ function guardarCarrito() {
 //controla apertura del carrito
 function carritoAbierto() {
   const checkbox = BUSCADOR.buscarUnElemento("#Carro");
-  return checkbox && checkbox.checked;//devuelve true si el checkbox fue encontrado y si esta checked
+  return checkbox && checkbox.checked;
 }
 
 
@@ -36,16 +35,16 @@ export function actualizarContador() {
     return;
   }
 
-  const total = PRODUCTOS_EN_CARRITO.reduce(//reduce para recorrer el array y sumar las cantidades
-    (acum, curso) => acum + (curso.cantidad || 1),//acum suma total + cantidad del curso o 1 si no tiene cantidad
-    0
+  const total = PRODUCTOS_EN_CARRITO.reduce(
+    (acum, curso) => acum + (curso.cantidad || 1),
+     0
   );
   contador.textContent = total;
 }
 
 function MostrarCarrito() {
   const contenedor = BUSCADOR.buscarUnElemento("#js-caja-carrito");
-  //no hay cursos en el carrito
+
   if (!PRODUCTOS_EN_CARRITO.length) {
     contenedor.innerHTML = `<div class="carrito-vacio"><p>Todavía no se obtuvieron
 cursos</p></div>`;
@@ -56,13 +55,13 @@ cursos</p></div>`;
   const estoyEnPaginas = window.location.pathname.includes("/paginas/");//ve la ruta actual para insetar img o enlcaes correctos
   let html = `<div class="carrito-contenido"><h3 class="js-titulo-carrito">Carrito</h3>`;
 
-  PRODUCTOS_EN_CARRITO.forEach(curso => {//recorre el array de productos en el carrito
-    const cantidad = curso.cantidad || 1; //cant para item
+  PRODUCTOS_EN_CARRITO.forEach(curso => {
+     const cantidad = curso.cantidad || 1; 
     const precioUnitario = curso.precio;
     subtotal += precioUnitario * cantidad;
-    let imagenSrc = curso.imagen;//ruta de la imagen del curso
-    if (!estoyEnPaginas) imagenSrc = imagenSrc.replace("../", "./");//verfico donde stoy parado
-    
+    let imagenSrc = curso.imagen;
+    if (!estoyEnPaginas) imagenSrc = imagenSrc.replace("../", "./");
+
     //modifica título y detalle de precio para reflejar el tipo
     let titulo = curso.titulo;
     const tipo = curso.tipo || 'curso'; 
@@ -156,20 +155,20 @@ cursos</p></div>`;
   });
 }
 
-//agrega un producto estándar o un producto personalizado al carrito
+
  
 export function agregarCustomAlCarrito(item) {
-    if (!item || !item.id) return;//verifica que el item no sea nulo
+    if (!item || !item.id) return;
     
-    const tipo = item.tipo || 'curso';//tipo de item 
+    const tipo = item.tipo || 'curso';
 
     const existe = PRODUCTOS_EN_CARRITO.find(p => p.id === item.id && (p.tipo || 'curso') === tipo);//busca en el carrito un item que tenga el mismo id del q se quiere agregar
     
     if (existe) {
         existe.cantidad += item.cantidad || 1;//se incrementa la cantidad
     } else {
-      //si no existe se agrega al array e item copia el obj y le asigna tipo y cantidad
-        PRODUCTOS_EN_CARRITO.push({ ...item, tipo: tipo, cantidad: item.cantidad || 1 });//se agrega un nuevo obj al array
+     
+      PRODUCTOS_EN_CARRITO.push({ ...item, tipo: tipo, cantidad: item.cantidad || 1 });//se agrega un nuevo obj al array
     }
     
     guardarCarrito();
@@ -177,7 +176,7 @@ export function agregarCustomAlCarrito(item) {
     if (carritoAbierto()) MostrarCarrito();
 }
 
-// Agrega un curso normal (sin modificar el precio) al carrito.
+
  
 export function agregarAlCarrito(idCurso) {
   if (!idCurso) return;
@@ -248,11 +247,11 @@ export function inicializarCarrito() {
 export function restaurarCarritoUsuario(email) {
     if (!email) return;
     
-    setTimeout(() => {//espera 100ms para asegurar que todo este cargado
-        try {
+    setTimeout(() => {
+      try {
             const carritoBackup = JSON.parse(localStorage.getItem(`carrito_backup_${email}`)) || [];//construye la clave del backup
-            if (carritoBackup.length > 0) {//si tiene items
-                //trae el backup al carrito actual
+            if (carritoBackup.length > 0) {
+                
                 PRODUCTOS_EN_CARRITO = carritoBackup;
                 guardarCarrito();
                 actualizarContador();
@@ -260,7 +259,7 @@ export function restaurarCarritoUsuario(email) {
             }
         } catch (error) {
         }
-    }, 100);//100ms
+    }, 100);
 }
 
 export { PRODUCTOS_EN_CARRITO };

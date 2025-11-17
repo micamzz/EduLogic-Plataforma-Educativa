@@ -35,16 +35,59 @@ export function iniciarLogicaPerfil() {
     const inputPais  = buscador.buscarUnElementoPorId('perfil-pais');
 
     // Rellenar campos con los datos del usuario
-    if (inputNombre)    inputNombre.value    = usuario.nombre        || '';
-    if (inputApellido)  inputApellido.value  = usuario.apellido      || '';
-    if (inputDni)       inputDni.value       = usuario.dni           || '';
-    if (inputEmail)     inputEmail.value     = usuario.email         || '';
-    if (inputTelefono)  inputTelefono.value  = usuario.telefono      || '';
-    if (inputDireccion) inputDireccion.value = usuario.direccion     || '';
-    if (inputLocalidad) inputLocalidad.value = usuario.localidad     || '';
-    if (inputProvincia) inputProvincia.value = usuario.provincia     || '';
-    if (inputPostal)    inputPostal.value    = usuario.codigo_postal || '';
-    if (inputPais)      inputPais.value      = usuario.pais          || '';
+    if (inputNombre)  inputNombre.value  = usuario.nombre || '';
+    if (inputApellido)  inputApellido.value = usuario.apellido || '';
+    if (inputDni) inputDni.value  = usuario.dni  || '';
+    if (inputEmail) inputEmail.value = usuario.email || '';
+    if (inputTelefono)  inputTelefono.value  = usuario.telefono|| '';
+    if (inputDireccion) inputDireccion.value = usuario.direccion|| '';
+    if (inputLocalidad) inputLocalidad.value = usuario.localidad || '';
+    if (inputProvincia) inputProvincia.value = usuario.provincia || '';
+    if (inputPostal)  inputPostal.value  = usuario.codigo_postal || '';
+    if (inputPais)  inputPais.value  = usuario.pais || '';
+
+
+    const historialContainer = buscador.buscarUnElementoPorId('historial-cursos-lista');
+    if (historialContainer && usuario.cursosObtenidos && usuario.cursosObtenidos.length > 0) {
+        let historialHTML = '<ul>';
+        const cursosRecientes = [...usuario.cursosObtenidos].reverse(); 
+        
+        cursosRecientes.forEach(curso => {
+            const esEmpresa = curso.tipo === 'empresa';
+            const esGiftcard = curso.tipo === 'giftcard';
+            
+            let detallePrecio = curso.precio ?
+                `Monto: ${curso.precio.toLocaleString('es-AR', { style: 'currency', currency: 'ARS', minimumFractionDigits: 2 })}` 
+                : 'Precio no disponible';
+            
+            let detalleCantidad = esEmpresa 
+                ? `Total de Inscripciones: ${curso.cantidad} personas` 
+                : (esGiftcard ? `Cantidad: ${curso.cantidad}` : `Unidades: ${curso.cantidad}`);
+            
+            let tipoInscripcion = esEmpresa ? 'Empresa' : (esGiftcard ? 'Gift Card' : 'Individual');
+
+            
+            const cursoTituloURL = encodeURIComponent(curso.titulo);
+            const detalleURL = `../paginas/detalleCurso.html?curso=${cursoTituloURL}`;
+
+            historialHTML += `
+                <li class="historial-curso-item">
+                    <p class="historial-curso-titulo"><strong>${curso.titulo}</strong> (${tipoInscripcion})</p>
+                    <p class="historial-curso-detalle">${detalleCantidad}</p>
+                    <p class="historial-curso-detalle">${detallePrecio}</p>
+                    <p class="historial-curso-fecha">Fecha de adquisición: ${curso.fechaCompra || 'N/A'}</p>
+                    
+                    <a href="${detalleURL}" class="boton-ver-detalle">Ver Detalle del Curso</a>
+                </li>
+            `;
+        });
+        
+        historialHTML += '</ul>';
+        historialContainer.innerHTML = historialHTML;
+        
+    } else if (historialContainer) {
+        historialContainer.innerHTML = '<p class="historial-vacio">Aún no has obtenido ningún curso.</p>';
+    }
 
     // Mostrar nombre en el encabezado
     const textoNombreUsuario = buscador.buscarUnElementoPorId('nombre-usuario');
@@ -60,15 +103,15 @@ export function iniciarLogicaPerfil() {
         evento.preventDefault();
 
         //Actualiza datos del usuario con lo que esta en los inputs
-        if (inputNombre)    usuario.nombre        = inputNombre.value;
-        if (inputApellido)  usuario.apellido      = inputApellido.value;
-        if (inputEmail)     usuario.email         = inputEmail.value;
-        if (inputTelefono)  usuario.telefono      = inputTelefono.value;
-        if (inputDireccion) usuario.direccion     = inputDireccion.value;
-        if (inputLocalidad) usuario.localidad     = inputLocalidad.value;
-        if (inputProvincia) usuario.provincia     = inputProvincia.value;
-        if (inputPostal)    usuario.codigo_postal = inputPostal.value;
-        if (inputPais)      usuario.pais          = inputPais.value;
+        if (inputNombre) usuario.nombre   = inputNombre.value;
+        if (inputApellido) usuario.apellido= inputApellido.value;
+        if (inputEmail) usuario.email  = inputEmail.value;
+        if (inputTelefono)  usuario.telefono = inputTelefono.value;
+        if (inputDireccion) usuario.direccion  = inputDireccion.value;
+        if (inputLocalidad) usuario.localidad  = inputLocalidad.value;
+        if (inputProvincia) usuario.provincia = inputProvincia.value;
+        if (inputPostal) usuario.codigo_postal = inputPostal.value;
+        if (inputPais)  usuario.pais = inputPais.value;
 
         localStorage.setItem('currentUser', JSON.stringify(usuario));
         

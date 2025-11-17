@@ -12,31 +12,30 @@ export function iniciarFormularioDePago() {
   //trae user loggeado ysu email para buscar su carrito
   const user = JSON.parse(localStorage.getItem("currentUser"));
   const carritoActual = JSON.parse(localStorage.getItem(`carrito_${user?.email}`)) || [];
-
   //resumen de compra 
   let total = 0;
-  const infoCurso = document.createElement("div");//crea el contenedor donde se poen el resumen
+  const infoCurso = document.createElement("div");
   infoCurso.classList.add("info-curso");
-  
 
   if (carritoActual.length === 0) {
     infoCurso.innerHTML = `<p>No hay cursos en el carrito.</p>`;
   } else {
+
     //Inicia el resumen
     infoCurso.innerHTML = `<h3>Resumen de compra:</h3>`;
     const lista = document.createElement("ul");
-    let detalleAdministrativo = "";//cadena para los costos
+    let detalleAdministrativo = "";
     let hayDetalleAdmin = false;
 
     // Recorre los items del carrito para mostrarlos en el resumen
     carritoActual.forEach(item => {
       const precioUnitario = item.precio || 0;
-      const cantidad = item.cantidad || 1;
+      const cantidad = item.cantidad || 1; 
       const subtotalItem = precioUnitario * cantidad;
       total += subtotalItem;
       
       let nombreItem = item.titulo;//nombre del curso o giftcard 
-      const li = document.createElement("li");//crea y muestra cada item en el resumen
+      const li = document.createElement("li");
 
       //si es empresa o giftcard hace el desglose especial
       if (item.tipo === "empresa") {
@@ -46,7 +45,7 @@ export function iniciarFormularioDePago() {
 
         hayDetalleAdmin = true;
         
-        nombreItem = `${item.titulo} (Empresa: ${cantidad} pers.)`;
+        nombreItem = `${item.titulo} (Empresa: ${cantidad} pers.)`;// esto hace que en el resumen se vea que es inscripcion de empresa
         
         //presentación del desglose
         detalleAdministrativo += `
@@ -64,18 +63,18 @@ export function iniciarFormularioDePago() {
         li.textContent = `${nombreItem} - ${precioUnitario.toLocaleString("es-AR", { style: "currency", currency: "ARS", minimumFractionDigits: 2 })} x ${cantidad}`;
       }
       
-      lista.appendChild(li);//inserta al li como ultimo hijo del ul(lista)
+      lista.appendChild(li);
     });
 
-    infoCurso.appendChild(lista);//inserta la lista en el contenedor del resumen
-    
+    infoCurso.appendChild(lista);
+
     //muestra el desglose administrativo separado
     if (hayDetalleAdmin) {
       infoCurso.innerHTML += `<p><strong>Desglose por Inscripción de Empresa:</strong></p>`;
       infoCurso.innerHTML += `<ul class="detalle-costos-empresa">${detalleAdministrativo}</ul>`;
     }
     
-    //muestra total
+    //muestra total a pagar
     infoCurso.innerHTML += `<p><strong>Total Final a Pagar: ${total.toLocaleString("es-AR", { style: "currency", currency: "ARS" })}</strong></p>`;
   }
 
@@ -113,13 +112,13 @@ export function iniciarFormularioDePago() {
   numeroTarjeta.addEventListener("input", (e) => {
     let valor = e.target.value.replace(/\D/g, "");
      
-    const grupos = [];
+    const grupos = [];//aaray para ir guardando los grupos de 4 numeros
     for (let i = 0; i < valor.length; i += 4) {
       grupos.push(valor.slice(i, i + 4));
     }
     // LE AGREGA EL ESPACIO A LOS NUMEROS
     e.target.value = grupos.join(" ");
-  });
+   });
 
   //VALIDACION AL ENVIAR EL FORMULARIO
   form.addEventListener("submit", (e) => {
@@ -176,31 +175,53 @@ export function iniciarFormularioDePago() {
 
 
     //TODOS LOS CAMPOS PASARON LA VALIDACION
-    if (esValido) {
+   if (esValido) {
+      
+      const user = JSON.parse(localStorage.getItem("currentUser"));
+      const carritoActual = JSON.parse(localStorage.getItem(`carrito_${user?.email}`)) || [];
+
+      if (user && carritoActual.length > 0) {
+          user.cursosObtenidos = user.cursosObtenidos || [];
+          
+          carritoActual.forEach(item => {
+              const cursoExistente = user.cursosObtenidos.find(c => c.titulo === item.titulo && c.tipo === item.tipo);
+              if (cursoExistente) {
+                  cursoExistente.cantidad += item.cantidad;
+              } else {
+              
+                  user.cursosObtenidos.push({
+                      titulo: item.titulo,
+                      precio: item.precio,
+                      cantidad: item.cantidad,
+                      tipo: item.tipo, 
+                      fechaCompra: new Date().toLocaleDateString('es-AR')
+                  });
+              }
+          });
+
+         
+          localStorage.setItem('currentUser', JSON.stringify(user));
+      }
+    
       popup.style.display = "flex";
 
       if (infoCurso && infoCurso.parentNode) {
-        infoCurso.parentNode.removeChild(infoCurso);//elimina el resumen de compra
-      }
-      vaciarCarrito();//resetea el carrito
-    }
-  });
+        infoCurso.parentNode.removeChild(infoCurso) }
+      vaciarCarrito();
+    }}); 
 
-  cerrarPopup?.addEventListener("click", () => {
-    popup.style.display = "none";
-    form.reset();
-  });
+  cerrarPopup?.addEventListener("click", (e) => {
+    e.preventDefault();  window.location.href = './perfil.html'; });
 
 
   //PARA ERRORES
   function mostrarError(input, mensaje) {
-    let error = input.nextElementSibling; // para buscar un error
+    let error = input.nextElementSibling; 
 
     if (!error || !error.classList.contains("error-mensaje")) {
       error = document.createElement("div");
       error.classList.add("error-mensaje");
 
-      // SE INSERTA EL MSJ DE ERROR DESPUES DEL INPUT
       input.insertAdjacentElement("afterend", error);
     }
     
@@ -209,7 +230,7 @@ export function iniciarFormularioDePago() {
   }
 
   function limpiarErrores() {
-    BUSCADOR.buscarVariosElementos(".error-mensaje").forEach(e => e.remove());
-    BUSCADOR.buscarVariosElementos(".input-error").forEach(i => i.classList.remove("input-error"));
+    BUSCADOR.buscarVariosElementos(".error-mensaje").forEach(e => e.remove());//elimina todos los mensajes de error
+    BUSCADOR.buscarVariosElementos(".input-error").forEach(i => i.classList.remove("input-error"));//elimina la clase de error de los inputs
   }
 }

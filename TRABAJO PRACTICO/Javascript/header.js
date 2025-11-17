@@ -28,7 +28,7 @@ export function manejarBusqueda() {
   });
 }
 
-//logica para visualizar u ocultar los enlaces del heder como Mi perfil si el user esta en el localStorage
+
 export function manejarVisualizacionHeader() {
     const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
     const perfilLink = document.querySelector('.perfil-link');

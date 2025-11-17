@@ -18,7 +18,7 @@ export class ValidadorFormulario {
 
   //expresiones para validaciones
   static expresionesRegulares = {
-    email: /^[0-9a-zA-Z._.-]+@[0-9a-zA-Z._.-]+\.[0-9a-zA-Z]+$/,
+    email: /^[0-9a-zA-Z._.-]+@[0-9a-zA-Z._.-]+\.[0-9a-zA-Z]+$/,//valores permitidos en email
     telefono: /^\d{8,15}$|^\d{4}-\d{4,11}$/,
     tarjeta: /^\d{13,19}$/,                  // 13 a 19 dígitos
     vencimiento: /^(0[1-9]|1[0-2])[0-9]{2}$/, // MMYY
@@ -26,19 +26,19 @@ export class ValidadorFormulario {
   };
 
   static campoVacio(valor) {
-    return valor.trim() !== "";//true si no esta vacio
+    return valor.trim() !== "";
   }
 
   static longitudMinima(valor, minimo) {
-    return valor.trim().length >= minimo;//true si cumple la longitud minima
-  }
+     return valor.trim().length >= minimo;
+    }
 
   static emailValido(email) {
-    return ValidadorFormulario.expresionesRegulares.email.test(email.trim());//true si es valido
+    return ValidadorFormulario.expresionesRegulares.email.test(email.trim());
   }
 
   static telefonoValido(tel) {
-    if (tel.trim() === "") return true; // SI EL TELEFONO ESTA VACIO NO SE HACE VALIDACION 
+    if (tel.trim() === "") return true; 
     return ValidadorFormulario.expresionesRegulares.telefono.test(tel.trim());
   }
 
@@ -46,12 +46,12 @@ export class ValidadorFormulario {
     return texto.trim().length <= maximo;
   }
  static numeroTarjetaValido(numeroTarjeta) {
-    const limpio = numeroTarjeta.replace(/\s/g, ""); // saca espacios
+    const limpio = numeroTarjeta.replace(/\s/g, "");
     return ValidadorFormulario.expresionesRegulares.tarjeta.test(limpio);
   }
 
   static vencimientoValido(vencimiento) {
-    const soloNumeros = vencimiento.replace(/\D/g, ""); // saca barra y demás
+    const soloNumeros = vencimiento.replace(/\D/g, ""); 
     return ValidadorFormulario.expresionesRegulares.vencimiento.test(soloNumeros);
   }
 

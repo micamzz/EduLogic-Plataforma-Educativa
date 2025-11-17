@@ -63,31 +63,24 @@ export class Calendario {
       const PRIMER_DIA_DEL_MES = new Date(ANIO, MES, 1);
       const ULTIMO_DIA_DEL_MES = new Date(ANIO, MES + 1, 0);
 
-      //obtiene el de la semana del primer dia del mes (0=Domingo, 1=Lunes, ..., 6=Sábado)
       const PRIMER_DIA_SEMANA = PRIMER_DIA_DEL_MES.getDay();
       const TOTAL_DIAS = ULTIMO_DIA_DEL_MES.getDate();
 
-      //dibuja las celdas vacias antes del primer dia
-      for (let i = 0; i < PRIMER_DIA_SEMANA; i++) {
+     for (let i = 0; i < PRIMER_DIA_SEMANA; i++) {
         const DIA_VACIO = CREADOR.crearUnElemento('article');
         DIA_VACIO.classList.add('dia');
         DIAS.appendChild(DIA_VACIO);
       }
 
-      const HOY = new Date();//crea la fecha actual para marcar el dia actual
+      const HOY = new Date();
 
       // Días del mes
       for (let i = 1; i <= TOTAL_DIAS; i++) {
         const DIA_VALIDO = CREADOR.crearUnElemento('article');
         DIA_VALIDO.classList.add('dia', 'diaValido');
-        
-        // Número del día
-        const numeroDia = CREADOR.crearUnElemento('span');
-        numeroDia.textContent = i;
-        numeroDia.classList.add('numero-dia');
-        DIA_VALIDO.appendChild(numeroDia);
+        DIA_VALIDO.textContent = i;
 
-        // Fecha formateada para buscar en el array
+        
         const fechaISO = `${ANIO}-${String(MES + 1).padStart(2, "0")}-${String(i).padStart(2, "0")}`;
         const cursosDelDia = CURSOS_CALENDARIO.find(c => c.fecha === fechaISO);
 
@@ -138,7 +131,7 @@ export class Calendario {
         DIAS.appendChild(DIA_VALIDO);
       }
 
-      // Rellenar hasta 35 celdas
+      
       const TOTAL_CELDAS = DIAS.childElementCount;
       for (let i = TOTAL_CELDAS; i < 35; i++) {
         const DIA_VACIO = CREADOR.crearUnElemento('article');
@@ -146,7 +139,7 @@ export class Calendario {
         DIAS.appendChild(DIA_VACIO);
       }
 
-      // Actualizar el título
+      
       TITULO_MES_ANIO.textContent = `${NOMBRE_MES.toUpperCase()} ${ANIO}`;
       
       // Aplicar visualización correcta según tamaño de pantalla
@@ -155,10 +148,7 @@ export class Calendario {
 
     calendario(fechaActual);
 
-    // Event listener para cambios de tamaño de pantalla
-    window.addEventListener('resize', manejarVisualizacionCursos);
-
-    //pop ups de los cursos al hacer click
+    
     function mostrarPopup(curso) {
       const fondoPopup = CREADOR.crearUnElemento("div");
       fondoPopup.classList.add("popup-fondo");
@@ -184,19 +174,19 @@ export class Calendario {
       const botonCerrar = ventanaPopup.querySelector(".popup-cerrar");
       const botonAgregar = ventanaPopup.querySelector(".popup-agregarCarrito");
 
-      // Cerrar popup al hacer click en cerrar
+      
       botonCerrar.addEventListener("click", () => {
         fondoPopup.remove();
       });
 
-      // para mostrar otro popup cuando se agrega al carrito el curso
+      
       botonAgregar.addEventListener("click", () => {
         fondoPopup.remove();
-        mostrarPopupAgregadoAlCarrito(curso);
+        mostrarPopupAgregadoAlCarrito(curso); 
       });
     }
 
-    // popup de confirmacion de agregado al carrito
+    
     function mostrarPopupAgregadoAlCarrito(curso) {
       const fondoPopup = CREADOR.crearUnElemento("div");
       fondoPopup.classList.add("popup-fondo");
