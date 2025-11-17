@@ -209,7 +209,7 @@ export function iniciarLogicaInscripcion() {
     const selectCursoCambio = BUSCADOR.buscarUnElementoPorId('curso-empresa');
 
 
-o
+
     if (selectCursoCambio) {
         selectCursoCambio.addEventListener('change', () => {
             const primeraPersona = personasContainer.querySelector('.persona-1');
