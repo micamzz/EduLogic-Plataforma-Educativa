@@ -30,8 +30,8 @@ export function iniciarRegistro(redirectUrl) {
     const emailInput = form.querySelector('input[name="email"]');
     const contraseniaInput = form.querySelector('input[name="password"]');
     const confirmarContraseniaInput = form.querySelector('input[name="confirm_password"]');
-    console.log('🔍 Inputs globales encontrados:');
-    console.log('- email:', emailInput);
+ 
+  
 
     // REQUISITOS DE LA CONTRASEÑA - PARA MOSTRARLOS
     let contenedorRequisitos = form.querySelector(".requisitos-password");
@@ -122,19 +122,19 @@ export function iniciarRegistro(redirectUrl) {
     }
 
     function validarEmail(email) {
-    console.log('📧 Validando email:', email);
+ 
     
     if (!ValidadorFormulario.campoVacio(email)) {
-        console.log('❌ Email vacío');
+      
         mostrarError(emailInput, "El email no puede estar vacío.");
         return false;
     }
     if (!ValidadorFormulario.emailValido(email)) {
-        console.log('❌ Email inválido');
+       
         mostrarError(emailInput, ValidadorFormulario.MENSAJES.emailInvalido);
         return false;
     }
-    console.log('✅ Email válido');
+    
     return true;
 }
 
@@ -175,7 +175,7 @@ export function iniciarRegistro(redirectUrl) {
 
     let formularioValido = true;
 
-    console.log('🔍 Iniciando validaciones...');
+    
 
     // Validar cada campo individualmente - FORMA CORRECTA
     const valNombre = validarNombre(nombre);
@@ -185,18 +185,12 @@ export function iniciarRegistro(redirectUrl) {
     const valPassword = validarPassword(password);
     const valConfirmacion = validarConfirmacion(password, confirmPassword);
 
-    console.log('📊 Resultados de validación:');
-    console.log('- Nombre:', valNombre);
-    console.log('- Apellido:', valApellido);
-    console.log('- DNI:', valDNI);
-    console.log('- Email:', valEmail);
-    console.log('- Password:', valPassword);
-    console.log('- Confirmación:', valConfirmacion);
+ 
 
     // Verificar si TODOS son verdaderos
     formularioValido = valNombre && valApellido && valDNI && valEmail && valPassword && valConfirmacion;
 
-    console.log('✅ Formulario válido?:', formularioValido);
+    
 
     // Controlar visibilidad de requisitos
     if (!formularioValido || contraseniaInput.value.trim() === "") {
@@ -207,7 +201,7 @@ export function iniciarRegistro(redirectUrl) {
 
     // Solo si hay errores de validación, detenerse aquí
     if (!formularioValido) {
-        console.log("❌ Formulario inválido - Mostrando todos los errores");
+  
         return;
     }
 
@@ -244,23 +238,20 @@ export function iniciarRegistro(redirectUrl) {
     });
 }
 
-    console.log('🔍 Configurando event listener para el formulario...');
-console.log('Formulario:', form);
-console.log('¿Formulario existe?:', form !== null);
+
 
 // DEBUG del event listener
 form.addEventListener('submit', function (e) {
-    console.log('🎯 EVENTO SUBMIT CAPTURADO!');
-    console.log('Tipo de evento:', e.type);
+ 
     
     e.preventDefault();
     e.stopPropagation();
     
-    console.log('✅ Default prevenido - ejecutando validación');
+    
     registrarUsuario(form);
 });
 
-console.log('✅ Event listener configurado');
+
 }
 
 export function iniciarRegistroNormal() {
