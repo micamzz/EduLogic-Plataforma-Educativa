@@ -111,7 +111,7 @@ export function GiftCard() {
 
     
     if (!ValidadorFormulario.campoVacio(email)) {
-      mostrarError(emailInput, "El campo email no puede estar vacío.");
+      mostrarError(emailInput, "El email no puede estar vacío.");
       formularioValido = false;
     } else if (!ValidadorFormulario.emailValido(email)) {
       mostrarError(emailInput, ValidadorFormulario.MENSAJES.emailInvalido);
