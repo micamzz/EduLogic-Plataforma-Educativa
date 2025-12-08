@@ -245,36 +245,27 @@ h1, .titulo-crearCuenta {
 
 /* RESPONSIVE */
 
-/* @media (min-width: 769px) and (max-width: 1204px) {
+@media (min-width: 769px) and (max-width: 1204px) {
     .container-iniciarSesion {
         width: 50%; 
         max-width: 600px; 
     }
-} */
+}
 
 @media (max-width: 768px) {
-   .container-iniciarSesion {
-        width: 50%; 
-        max-width: 600px; 
+    .container-iniciarSesion {
+        width: 80%; 
+        margin-top: 2rem; 
     }
 
     .popup-contenido2 {
         width: 90%; 
     }
-
-      h1, .titulo-crearCuenta{
-        font-size: 1em;
-    }
-
-     .container-nav img {
-        width: 80%; 
-    }
 }
 
 @media (max-width: 480px) {
- .container-iniciarSesion {
-        width: 83%; 
-        max-width: 600px; 
+    .container-iniciarSesion {
+        width: 100%;
     }
 
     .card-crearCuenta,
@@ -282,19 +273,15 @@ h1, .titulo-crearCuenta {
         padding: 1.2rem; 
     }
 
-    h1, .titulo-crearCuenta{
-        font-size: 0.95em;
+    .titulo-crearCuenta {
+        font-size: 1.4rem; 
     }
-  
+
     .boton-enviar {
         padding: 12px; 
     
-    }
     .container-nav img {
-        width: 80%; 
+        width: 45%; 
     }
-
-    .parrafo-recuperar-contra{
-        font-size: 0.65em;
-    }
+}
 }

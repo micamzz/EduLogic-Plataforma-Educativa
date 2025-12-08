@@ -1,5 +1,5 @@
-body{
-  background-color: var(--color-fondo);   
+body {
+  background-color: var(--color-fondo);
 }
 
 
@@ -8,10 +8,10 @@ body{
   max-width: 43.75em;
   margin: 2em auto;
   padding: 4em;
-  background-color: var(--color-fondo);
-  border-radius: 0.625em;
-  box-shadow: 0 0 0.625em rgba(0, 0, 0, 0.1);
-  border-top: 6px solid #9575CD;
+   background-color: var(--color-blanco);
+  border-radius: var(--radio-borde);
+  box-shadow: var(--sombra-card);
+  border-top: 6px solid var(--color-header);
 }
 
 .formulario-inscripcion h2,
@@ -77,22 +77,26 @@ body{
   margin-top: 0.5em;
 }
 
-
 /*MENSAJE CONFIRM*/
 .boton-enlace {
-  display: inline-block;
-  margin: 2em auto; 
-  background-color: var(--color-violeta-link);
+  border: none;
+  border-radius: 0.6em;
   color: var(--color-blanco);
-  padding: 0.8em 2em;
-  border-radius: 0.3125em;
-  text-decoration: none;
-  text-align: center;
   font-weight: bold;
+  cursor: pointer;
+  padding: 0.8em 1.4em;
+  text-align: center;
+  text-decoration: none;
+  font-size: 1em;
+  transition: background-color 0.3s ease, transform 0.2s;
+  display: inline-block;
+   background-color: #9575CD;
+   margin-top: 0.5em;
 }
 
 .boton-enlace:hover {
-  background-color: var(--color-header-hoover);
+  background-color: var(--color-violeta-link);
+  transform: scale(1.05);
 }
 
 .popup-confirmacion {
