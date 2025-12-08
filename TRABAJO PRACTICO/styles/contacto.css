@@ -1,0 +1,256 @@
+body{
+  background-color: var(--color-fondo);   
+}
+
+
+.container-main {
+    width: 80%;
+    margin: 0 auto;
+    
+}
+
+.container-contacto {
+    margin: 2em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 3em;
+
+}
+
+.container-contacto h2 {
+    text-align: left;
+    margin-bottom: 0.5em;
+    color: var(--color-header);
+
+}
+
+.container-contacto form {
+    padding: 2em;
+    /* gap: 0.8em; */
+    width: 50%;
+     text-align: center; 
+  max-width: 43.75em;
+  margin: 2em auto;
+  padding: 2em;
+  background-color: var(--color-blanco);
+  border-radius: 12px;
+  border-top: 6px solid var(--color-header);
+}
+
+.container-contacto form,
+.container-contacto h2 {
+    display: flex;
+    flex-direction: column;
+
+}
+
+/* Cajas del input */
+.caja-form {
+    /* width: 21em; */
+  margin: 0.3em 0 1em 0;
+  padding: 0.6em;
+  width: 100%;
+  border: 0.0625em solid #ccc;
+  border-radius: 0.3125em;
+}
+   
+
+.caja-form:hover,.caja-textarea:hover {
+    border: 2px solid var(--color-violeta-link);
+}
+
+.caja-textarea {
+    width: 100%;
+    height: 6em;
+     border: 0.0625em solid #ccc;
+   
+}
+
+.label-form {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.2em;
+    margin-bottom: 0.4em;
+}
+
+.label-email input {
+    margin-left: 1.3em;
+}
+
+.boton-enviar {
+    margin-top: 1em;
+    height: 3em;
+    background-color: var(--color-header);
+    border: none;
+    border-radius: 5px;
+       background-color: #9575CD;
+       font-size: bold;
+       color: white;
+}
+
+.boton-enviar:hover {
+  background-color: var(--color-violeta-link);
+  transform: scale(1.05);
+}
+
+.container-dondeEstamos {
+    /* /* background-color: #EDE7F6; */
+    /* width: 50%; */
+    /* padding: 2em; */
+    border-radius: 23px; 
+     /* text-align: center; */
+  max-width: 43.75em;
+  margin: 2em auto;
+  padding: 2em;
+  background-color: var(--color-blanco);
+  border-radius: 0.625em;
+  border-top: 6px solid var(--color-header);
+}
+
+.datos-dondeEstamos {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1em;
+    gap: 2.5em;
+}
+
+.section-ubicacion {
+    color: var(--color-header);
+    text-align: center;
+    padding-bottom: 1em;
+
+}
+.popup-confirmacion {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-violeta-dark);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.popup-confirmacion:target {
+  display: flex;
+}
+
+.popup-contenido {
+  background-color: var(--color-blanco);
+  padding: 2rem;
+  border-radius: 10px;
+  text-align: center;
+  max-width: 400px;
+  box-shadow: 0 0 10px var(--color-violeta-dark);
+}
+
+.popup-contenido h3 {
+  color: var(--color-violeta-link);
+  margin-bottom: 1rem;
+}
+
+.cerrar-popup {
+  display: inline-block;
+  margin-top: 1rem;
+  background-color: var(--color-violeta-dark);
+  color: var(--color-blanco);
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+/* Mensaje de error */
+.error-mensaje {
+  color: #b71c1c;
+  font-size: 0.85em;
+  margin-top: -0.5em;
+  margin-bottom: 1em;
+  text-align: left;
+  display: block;
+}
+
+/* Contador caracteres JS */
+.contador {
+  font-size: 0.9em;
+  color: #555;
+  margin-top: 5px;
+  text-align: right;
+  font-style: italic;
+}
+
+/* RESPONSIVE MEDIA QUERYS */
+
+/* 0 A 480 TELEFONO
+480 A 960 TABLET
+960 A 1238 ESCRITORIO  */
+
+/* Teléfonos: 0 a 480px */
+@media screen and (max-width: 320px) {
+ .container-main{
+    width: 100%;
+ }
+    .label-form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .label-email input {
+        margin-left: 0em;
+    }
+
+    .boton-enviar {
+        align-self: flex-end;
+        width: 4em;
+        height: 2em;
+    }
+
+}
+
+@media screen and (max-width: 480px) {
+    .container-contacto {
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+        font-size: 0.8em;
+        align-items: center;
+
+    }
+
+    .datos-dondeEstamos {
+        gap: 1em;
+    }
+
+    .container-dondeEstamos,
+    .container-contacto form {
+        width: 90%;
+        gap: 0.8em;
+
+    }
+
+    .section-ubicacion h2 {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 960px) {
+    .container-contacto {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1em
+    }
+
+    .container-dondeEstamos,
+    .container-contacto form {
+        gap: 0.8em;
+        width: 90%;
+    }
+
+    .section-ubicacion h2 {
+        display: none;
+    }
+
+}

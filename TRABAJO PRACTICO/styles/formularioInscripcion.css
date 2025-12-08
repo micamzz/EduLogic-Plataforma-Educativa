@@ -14,7 +14,7 @@ body {
 
 .formulario-inscripcion h2,
 .formulario-inscripcion h3 {
-  color: #5e35b1;
+  color:var(--color-header-hoover);
   margin-bottom: 0.5em
 }
 .formulario-inscripcion p {
@@ -72,8 +72,8 @@ body {
 }
 
 .persona-campos h4 {
-    color: #7E57C2;
-    margin-top: -0.5em;
+    color: var(--color-violeta-link);
+      margin-top: -0.5em;
     margin-bottom: 1em;
     text-align: center;
 }
@@ -82,7 +82,7 @@ body {
 }
 .nota-importe {
     font-size: 0.9em;
-    color: #7E57C2;
+    color: var(--color-violeta-link);
     margin-bottom: 1em;
     text-align: center;
 }
@@ -92,7 +92,7 @@ body {
     top: 10px;
     right: 10px;
     background-color: #dc3545;
-    color: white;
+    color: var(--color-blanco);
     border: none;
     border-radius: 50%;
     width: 30px;
@@ -112,8 +112,8 @@ body {
 
 #agregar-persona-btn {
     display: inline-block;
-    background-color: #7E57C2; /* Púrpura más oscuro para el botón de acción */
-    color: white; 
+    background-color: var(--color-violeta-link); /* botón de acción */
+    color: var(--color-blanco);
     padding: 0.8em 1.8em; 
     border: none;
     border-radius: 0.5em; 
@@ -132,7 +132,7 @@ body {
 
 #agregar-persona-btn {
     display: inline-block;
-    background-color: #7E57C2; /* Púrpura más oscuro para el botón de acción */
+    background-color:var(--color-violeta-link); /* Púrpura más oscuro para el botón de acción */
     color: white; 
     padding: 0.8em 1.8em; 
     border: none;
@@ -151,61 +151,60 @@ body {
 
 
 #total-a-pagar {
-    font-size: 1.1em; /* Ajustar tamaño de fuente */
-    font-weight: normal; /* No tan bold */
-    color: #5e35b1; /* Color principal más armónico */
-    margin: 2.5em auto 2em auto; /* Más margen vertical */
-    padding: 1.5em 2em; /* Padding interno */
+    font-size: 1.1em; 
+    font-weight: normal; 
+    color: #5e35b1; 
+    margin: 2.5em auto 2em auto; 
+    padding: 1.5em 2em;
     text-align: center;
-    background-color: #f8f1ff; /* Fondo muy claro */
-    border: 1px solid #dcd0e8; /* Borde suave */
-    border-radius: 0.8em; /* Bordes redondeados */
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); /* Sombra más pronunciada */
-    max-width: 80%; /* Para que no ocupe todo el ancho en desktop */
-    line-height: 1.6; /* Espaciado entre líneas */
+    background-color: #f8f1ff; 
+    border: 1px solid #dcd0e8; 
+    border-radius: 0.8em; 
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); 
+    max-width: 80%; 
+    line-height: 1.6; 
 }
 
 #total-a-pagar p {
     margin: 0.5em 0;
-    color: #4a4a4a; /* Color de texto más suave */
+    color: #4a4a4a; 
 }
 
 #total-a-pagar strong {
-    color: #9575CD; /* Resaltar el resumen en púrpura */
+    color: #9575CD; 
     font-size: 1.1em;
 }
 
 #total-a-pagar .resumen-final-total {
-    font-size: 1.5em; /* Total más grande */
+    font-size: 1.5em;
     font-weight: bold;
-    color: #dc3545; /* Rojo para el total final */
+    color: #dc3545; 
     margin-top: 1em;
     padding-top: 1em;
-    border-top: 1px dashed #cfcfcf; /* Separador */
+    border-top: 1px dashed #cfcfcf; 
 }
 
 
 .boton-enlace {
     display: inline-block;
-    background-color: #9575CD; /* Morado para el botón principal */
+    background-color:var(--color-violeta-link);
     color: white;
-    padding: 1em 2.5em; /* Más padding */
+    padding: 1em 2.5em; 
     border: none;
-    border-radius: 0.6em; /* Bordes redondeados */
-    font-size: 1.2em; /* Texto más grande */
+    border-radius: 0.6em;
+    font-size: 1.2em;
     font-weight: bold;
     text-decoration: none;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); /* Sombra más intensa */
-    margin-top: 2.5em; /* Más margen superior */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15); 
+    margin-top: 2.5em;
 }
 
 .boton-enlace:hover {
-    background-color: #7E57C2; /* Morado más oscuro al pasar el mouse */
+    background-color: #7E57C2; 
     transform: translateY(-3px);
 }
-
 
 /* MODAL DE RESUMEN (POPUP) */
 .popup-confirmacion {
@@ -227,7 +226,7 @@ body {
 
 .popup-contenido-personal,
 .popup-contenido-empresa {
-  background-color: #fff;
+  background-color: var(--color-blanco);
   padding: 2em;
   border-radius: 0.625em;
   text-align: center;

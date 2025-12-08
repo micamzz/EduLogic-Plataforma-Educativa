@@ -2,51 +2,65 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Registrarse</title>
-    <link rel="stylesheet" href="../styles/iniciarSesionstyle.css">
-     <link rel="icon" type="image/png" href="../img/favicon.ico">
+    <link rel="stylesheet" href="../styles/iniciarSesionstyle.css" />
+    <link rel="icon" type="image/png" href="../img/favicon.ico" />
 </head>
 
 <body class="body-crearCuenta">
 
-    <main>
-        <section >
-             <nav class="container-nav">
-                <a href="../index.html"> <img src="../img/logoPagVioleta.png" alt="Logo de la plataforma" class="logo-desktop"></a> 
-                
+    <main class="container-iniciarSesion">
+        <section class="card-crearCuenta">
+            <nav class="container-nav">
+                <a href="../index.html">
+                    <img src="../img/logoPagVioleta.png" alt="Logo de la plataforma" class="logo-desktop" />
+                </a>
             </nav>
+
             <h1 class="titulo-crearCuenta">Crear una cuenta</h1>
 
-            <form id="registro-form" action="#"  class="form-iniciarSesion" novalidate>
+            <form id="registro-form" action="#" class="form-iniciarSesion form-grid" novalidate>
 
-                <label>
-                    <input type="text" name="nombre" placeholder="Nombre" class="caja-input-CC" >
-                </label>
+                <div class="input-group">
+                    <label>
+                        <input type="text" name="nombre" placeholder="Nombre" class="caja-input caja-input-CC" />
+                    </label>
+                </div>
 
-                
-                <label>
-                    <input type="text" name="apellido" placeholder="Apellido" class="caja-input-CC" >
-                </label>
+                <div class="input-group">
+                    <label>
+                        <input type="text" name="apellido" placeholder="Apellido" class="caja-input caja-input-CC" />
+                    </label>
+                </div>
 
-                 <label>
-                    <input type="number" name="dni" placeholder="DNI" class="caja-input-CC" >
-                </label>
+                <div class="input-group">
+                    <label>
+                        <input type="text" inputmode="numeric" name="dni" placeholder="DNI" class="caja-input caja-input-CC" />
+                    </label>
+                </div>
 
-                <label>
-                    <input type="email" name="email" placeholder="Correo electrónico" class="caja-input-CC"  >
-                </label>
+                <div class="input-group full-width">
+                    <label>
+                        <input type="email" name="email" placeholder="Correo electrónico" class="caja-input caja-input-CC" />
+                    </label>
+                </div>
 
-                <label>
-                    <input type="password" name="password" placeholder="Contraseña" class="caja-input-CC"  minlength="6">
-                </label>
+                <div class="input-group">
+                    <label>
+                        <input type="password" name="password" placeholder="Contraseña" class="caja-input caja-input-CC" minlength="6" />
+                    </label>
+                </div>
 
-                <label>
-                    <input type="password" name="confirm_password" placeholder="Confirmar contraseña" class="caja-input-CC">
-                </label>
+                <div class="input-group">
+                    <label>
+                        <input type="password" name="confirm_password" placeholder="Confirmar contraseña" class="caja-input caja-input-CC" />
+                    </label>
+                </div>
 
-                   <button type="submit" class="boton-enviar">Registrarme</button>
+                <button type="submit" class="boton-enviar">Registrarme</button>
+
                 <article class="olvide-contrasenia">
                     <a href="./inicioSesion.html">¿Ya tienes una cuenta? Inicia sesión</a>
                 </article>
@@ -59,15 +73,15 @@
         <div class="popup-contenido2">
             <h3 id="popup-title"></h3>
             <p id="popup-message"></p>
-            
+
             <div id="popup-buttons-container">
-                <button type="button" class="popup-cerrar" id="btn-cancelar">Cancelar</button> 
+                <button type="button" class="popup-cerrar" id="btn-cancelar">Cancelar</button>
                 <button type="button" class="boton-enviar" id="btn-aceptar">OK</button>
             </div>
         </div>
     </div>
 
-<script type="module" src="../JavaScript.js"></script>
+     <!-- JS  PRINCIPAL-->
+     <script type="module" src="../javaScript.js"></script>
 </body>
-
 </html>

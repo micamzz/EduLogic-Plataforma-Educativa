@@ -1,273 +1,287 @@
+
+:root {
+  --color-fondo :#f4f4f9;   
+--color-violeta-link: #7E57C2;
+--color-violeta-dark:#6a0dad; 
+--color-blanco: #ffffff;
+--color-header:#A58AD9;
+--color-header-hoover:#d1c4e9;
+    --radio-borde: 16px;
+    --sombra-card: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
 }
 
 body {
+    background-color: var(--color-fondo);
     font-family: Arial, sans-serif;
-    background-color: #EDE7F6;
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
+    padding: 1.5rem; /* Espacio para que no pegue a los bordes en móvil */
 }
 
-h1 {
-    color: #7E57C2;
-    text-align: center;
-    margin-bottom: 1.5em;
+.container-iniciarSesion {
+    width: 30%;
+    max-width: 300%; /* Ancho ideal para formularios elegantes */
+    margin: auto;
 }
 
-a {
-    text-decoration: none;
-    color: #6a0dad;
+
+.card-crearCuenta,
+.container-iniciarSesion > section {
+    background-color: var(--color-blanco);
+    padding: 1.5rem;
+    border-radius: var(--radio-borde);
+    box-shadow: var(--sombra-card);
+    border: none;
+    width: 100%;
+      border-top: 6px solid var(--color-header);
 }
+
 
 .container-nav {
-    text-align: center;
-}
-
-.container-nav img {
-    width: 9em;
-}
-
-section {
-    border: 4px solid #9575CD;
-    border-radius: 40px;
-    padding: 2em;
-    width: 100%;
-    max-width: 25em;
-    background-color: #ffffff;
-}
-
-
-.form-iniciarSesion {
     display: flex;
-    flex-direction: column;
-    gap: 1.5em;
-
+    justify-content: center;
 }
 
-.form-iniciarSesion p {
-    margin: -0.5em 0 0.5em 0;
-    color: #555;
-    font-size: 0.95em;
-    text-align: center; /* Centrar el texto descriptivo */
+/* Imagen del logo */
+.container-nav img, 
+.logo-desktop {
+    width: 55%;
+    display: block;
+    margin: 0 auto;
 }
 
-.form-iniciarSesion .boton-enviar {
-    align-self: center; /* Centrar el botón */
-    width: 10em;
-    margin-top: 0.5em; 
+
+/* Títulos */
+h1, .titulo-crearCuenta {
+    color: var(--color-violeta-dark);
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 1rem;
+    line-height: 1.2;
 }
 
-.caja-input {
-    border: 2px solid #9575CD;
-    border-radius: 6px;
+/*  Estructura del Formulario (Columna Vertical Estricta) */
+.form-iniciarSesion,
+.form-grid {
+    display: flex;
+    flex-direction: column; 
+    gap: 1em; 
+}
+
+/* Asegura que los contenedores de inputs ocupen todo el ancho */
+.input-group,
+.form-iniciarSesion label {
     width: 100%;
-    height: 3em;
-
+    margin: 0;
+    display: block;
 }
 
-.olvide-contrasenia {
-    text-align: right;
+/* Inputs (Diseño limpio y unificado) */
+.caja-input,
+.caja-input-CC {
+    width: 100%;
+    padding: 0.85em 1em;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 0.85em;
+    color: #444;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+/* Estado Focus */
+.caja-input:focus,
+.caja-input-CC:focus {
+    border-color: var(--color-header);
+    background-color: var(--color-blanco);
+}
+
+.caja-input::placeholder {
+    color: #aaa;
+    font-weight: 400;
+}
+
+/* Links (Olvidé contraseña / Registrarse) */
+.olvide-contrasenia,
+.link-registrarse {
+    width: 100%;
+    text-align: right; 
+    margin-top: -0.5rem; 
     font-size: 0.9rem;
 }
 
+.olvide-contrasenia:last-child {
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.olvide-contrasenia a,
+.link-registrarse a {
+    color: var(--color-violeta-link);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.olvide-contrasenia a:hover,
+.link-registrarse a:hover {
+    color: var(--color-violeta-dark);
+    text-decoration: underline;
+}
+
+/* Botón Principal */
 .boton-enviar {
-    align-self: center;
-    width: 7em;
-    height: 3em;
-    background-color: #9575CD;
+    width: 100%;
+    padding: 14px;
+    background-color: var(--color-violeta-link);
+    color: var(--color-blanco);
     border: none;
-    border-radius: 5px;
-    justify-content: center;
-    color: white; 
-    font-weight: bold; 
+    border-radius: 8px;
+    font-size: 1.05rem;
+    font-weight: 600;
     cursor: pointer;
-    transition: background-color 0.3s, border-bottom 0.3s;
+    transition: background-color 0.3s ease, transform 0.2s;
+    margin-top: 0.5rem;
+    box-shadow: 0 4px 12px rgba(106, 13, 173, 0.15);
 }
 
 .boton-enviar:hover {
-    border-bottom: 2px solid #7E57C2;
-    background-color: #AB7DEB;
+    background-color: var(--color-header);
+    transform: translateY(-2px);
 }
 
-
-/*  CREAR CUENTA */
-
-.titulo-crearCuenta {
-    margin-bottom: 0.5em;
+.boton-enviar:active {
+    transform: translateY(0);
 }
 
-.section-CrearCuenta {
-    border: 4px solid #9575CD;
-    border-radius: 40px;
-    padding: 2em;
-    width: 100%;
-    max-width: 25em;
-    background-color: #ffffff;
-}
-
-.caja-input-CC {
-    border: 2px solid #9575CD;
-    border-radius: 6px;
-    width: 100%;
-    height: 2em;
-    font-size: 1em;
-}
-
-/* POPUP  */
-
+/* POPUP */
 .popup-fondo {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(5px); 
-  display: none; 
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Fondo oscuro */
+    backdrop-filter: blur(3px); /* Efecto borroso elegante */
+    display: none; /* Se activa con JS */
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    padding: 20px;
 }
-
 
 .popup-contenido2 {
-  background-color: #fff;
-  border-radius: 10px;
-  padding: 1.5em 2em;
-  max-width: 400px;
-  text-align: center;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
-  width: 80%;
-  max-width: 280px; 
+    background: var(--color-blanco);
+    padding: 2rem;
+    border-radius: 12px;
+    text-align: center;
+    width: 100%;
+    max-width: 380px;
+    box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+    border: none;
 }
-
 
 .popup-contenido2 h3 {
- color: #7E57C2;
-  margin-bottom: 0.8em;
-  font-size: 1.3em; 
+    color: var(--color-violeta-dark);
+    margin-bottom: 0.8rem;
+    font-size: 1.3rem;
 }
 
+.popup-contenido2 p {
+    margin-bottom: 1.5rem;
+    color: #555;
+    line-height: 1.5;
+}
 
 #popup-buttons-container {
     display: flex;
+    gap: 10px;
     justify-content: center;
-    align-items: center;
-    margin-top: 1.5em; 
-    width: 100%;
 }
 
-
-
-
-.boton-enviar {
-  background-color: #9575CD;
-  width: auto;
-  border: none;
-  border-radius: 0.6em;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-  padding: 0.8em 1.4em;
-  text-align: center;
-  text-decoration: none;
-  font-size: 1em;
-  transition: background-color 0.3s ease, transform 0.2s;
-  display: inline-block;
-}
-
-
-.popup-cerrar {
-  background-color: #888;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 0.6em 1em;
-  cursor: pointer;
-  margin-right: 10px; 
-  transition: background-color 0.3s;
+/* Botones dentro del popup */
+.popup-cerrar,
+#btn-cancelar {
+    background-color: #f0f0f0;
+    color: #333;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.2s;
 }
 
 .popup-cerrar:hover {
-  background-color: #666;
+    background-color: #e0e0e0;
 }
 
-
-
-.full-width-btn {
-    flex-grow: 1;
-    width: 100% !important; 
-    margin: 0 !important; 
+/* El botón OK del popup reutiliza la clase .boton-enviar pero ajustamos márgenes */
+#btn-aceptar {
+    margin-top: 0;
+    width: auto;
+    padding: 10px 25px;
 }
 
-
-.link-registrarse {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: -1em;
-    font-size: 0.9rem;
-}
-/* MJS DE ERROR JS -VALIDACION FORM */
-
-.form-iniciarSesion .error-mensaje {
+/* Mensaje de error input */
+.error-mensaje {
   color: #b71c1c;
-  font-size: 0.8em;
-  margin-top: 0.3em;
-  margin-bottom: 0.8em;
+  font-size: 0.85em;
+  margin-top: 0.5em;
   text-align: left;
   display: block;
 }
 
-/* REQUISITOS CONTRASEÑA */
-.requisitos-password {
-  font-size: 0.7em;
-  color: #555;
-  margin-top: 0.3em;
-  line-height: 1.4em;
-  transition: all 0.2s ease;
+/* RESPONSIVE */
+
+@media (min-width: 769px) and (max-width: 1204px) {
+    .container-iniciarSesion {
+        width: 50%; 
+        max-width: 600px; 
+    }
 }
 
-.requisitos-password span {
-  display: block;
-}
-
-
-/* Responsive - Media querys */
-@media screen and (max-width: 480px) {
-    section {
-        padding: 1.5em;
-        border-radius: 20px;
+@media (max-width: 768px) {
+    .container-iniciarSesion {
+        width: 80%; 
+        margin-top: 2rem; 
     }
 
-    .caja-input {
+    .popup-contenido2 {
+        width: 90%; 
+    }
+}
+
+@media (max-width: 480px) {
+    .container-iniciarSesion {
         width: 100%;
-        height: 3.5em;
-        font-size: 0.9em;
+    }
+
+    .card-crearCuenta,
+    .container-iniciarSesion > section {
+        padding: 1.2rem; 
+    }
+
+    .titulo-crearCuenta {
+        font-size: 1.4rem; 
     }
 
     .boton-enviar {
-        width: 100%;
-        height: 3em;
-        font-size: 1em;
+        padding: 12px; 
+    
+    .container-nav img {
+        width: 45%; 
     }
 }
-
-/* Tablets */
-@media screen and (max-width: 768px) {
-    section {
-        max-width: 20em;
-    }
-
-    .caja-input {
-        width: 100%;
-    }
-
-    .boton-enviar {
-        width: 100%;
-    }
 }

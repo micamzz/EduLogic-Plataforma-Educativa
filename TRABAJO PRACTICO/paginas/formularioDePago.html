@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="../styles/formularioDePagoStyle.css">
     <link rel="stylesheet" href="../styles/header_footer.css">
      <link rel="icon" type="image/png" href="../img/favicon.ico">
+              <!-- Libreria de Iconos bootstrap  -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 </head>
 
 <body>
@@ -33,13 +35,12 @@
         </label>
         <nav class="navbar">
             <ul class="nav-list">
-                <li><a href="../index.html" class="nav-link">Inicio</a></li>
-                <li><a href="../paginas/giftCard.html" class="nav-link">GiftCard</a></li>
+               <li><a href="../index.html" class="nav-link">Inicio</a></li>
                 <li><a href="../paginas/cursos.html" class="nav-link">Cursos</a></li>
                 <li><a href="../paginas/inscripcionCurso.html" class="nav-link">Inscripción</a></li>
-                <li><a href="../paginas/calendario.html" class="nav-link"> Proximos </a></li>
-                <li><a href="../paginas/perfil.html" class="nav-link perfil-link" style="display: none;">Mi Perfil</a></li>
-
+                <li><a href="../paginas/calendario.html" class="nav-link"> Próximos </a></li>
+                <li><a href="../paginas/giftCard.html" class="nav-link">GiftCard</a></li>
+                <li><a href="../paginas/perfil.html" class="nav-link" style="display: none;">Mi Perfil</a></li>
             </ul>
         </nav>
 
@@ -77,8 +78,8 @@
   <!--  CARRITO -->
      <input type="checkbox" name="Carro" id="Carro" value="Carro"  />
             <article class="carrito">
-                <label for="Carro">
-                    <img src="../img/carrito.png" alt="Carrito de compra" class="carrito_icono">
+                   <label for="Carro">
+                     <i class="bi bi-cart-fill carrito_icono"></i>
                 </label>
                 <span id="cart-count" class="cart-count">0</span>
             </article>
@@ -159,14 +160,16 @@
 
     <!-- Footer -->
     <footer class="container-footer">
-        <section class="datos-equipo">
+       <section class="datos-equipo">
             <ul>
                 <li class="nombre-equipo"> EQUIPO: UNDEFINED </li>
-                <li>Martelli, Rocio Belen DNI: 44.161.046</li>
-                <li>Mazza, Micaela Montserrat DNI: 38.662.441</li>
-                <li>Moyano Vivas, Matias Ernesto DNI: 40.240.664</li>
+                <li>Martelli, Rocio Belen</li>
+                <li>Mazza, Micaela Montserrat </li>
+                <li>Moyano Vivas, Matias Ernesto </li>
+
             </ul>
         </section>
+
 
 
         <section class="menu-inferior">
@@ -193,9 +196,7 @@
             </nav>
         </section>
     </footer>
-<script type="module" src="../JavaScript.js"></script>
-
-    
+    <!-- JS  PRINCIPAL-->
+     <script type="module" src="../javaScript.js"></script>
 </body>
-
 </html>

@@ -1,3 +1,4 @@
+
 * {
   margin: 0;
   padding: 0;
@@ -6,38 +7,34 @@
 
 body {
   font-family: Arial, sans-serif;
-  background-color: #EDE7F6;
+  background-color: var(--color-blanco);
 }
 
-/* CONTENEDOR GENERAL */
-/* MODIFICADO: Establece la dirección vertical para apilar el perfil y el historial */
+/*contenedor general */
 .container-perfil {
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centra el contenido horizontalmente */
+  align-items: center;
   padding: 3em 0;
 }
 
-/* PERFIL (Caja del formulario) */
 .section-perfil {
-  background-color: #ffffff;
+  background-color: var(--color-blanco);
   border-top: 6px solid #9575CD;
   border-radius: 1em;
   padding: 2em 4em;
   width: 90%;
-  max-width: 1100px; /* Mantiene el ancho máximo de la caja del formulario */
+  max-width: 1100px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
 }
 
-
-
 h1 {
-  color: #7E57C2;
+  color: var(--color-violeta-link);
   font-size: 1.8em;
 }
 
-/* Form */
+/* formulario Perfil */
 .form-perfil {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -50,19 +47,19 @@ h1 {
 }
 
 .form-perfil label span {
-  font-weight: 600;
-  color: #7E57C2;
+  font-weight: 400;
+  color: var(--color-violeta-link);
   margin-bottom: 0.4em;
 }
 
-/* info */
+/* Inputs */
 .caja-input {
-  border: 2px solid #9575CD;
+  border: 1px solid #9575CD;
   border-radius: 0.6em;
   padding: 0.6em 1em;
-  font-size: 1em;
+  font-size: 0.85em;
   color: #333;
-  background-color: #f9f6ff;
+  background-color: var(--color-fondo);
 }
 
 .caja-input:focus {
@@ -78,115 +75,148 @@ h1 {
   cursor: not-allowed;
 }
 
-/* hisotrial*/
+/* Historial de cursos*/
 .historial-cursos-container {
-    /* Eliminado grid-column: span 2; ya que no está en el grid del formulario */
-    margin: 3em auto; /* Centra el bloque de historial horizontalmente */
-    padding: 2em;
-    background-color: #f8f1ff; 
-    border: 1px solid #dcd0e8;
-    border-radius: 0.8em;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    width: 90%; /* Ajuste de ancho */
-    max-width: 1100px; /* Mantiene el ancho máximo */
+  margin: 3em auto;
+  padding: 2em;
+  background-color: var(--color-blanco);
+  border: 1px solid #dcd0e8;
+  border-radius: 0.8em;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  width: 90%;
+  max-width: 1100px;
 }
 
 .historial-cursos-titulo {
-    color: #5e35b1;
-    margin-bottom: 1.5em;
-    text-align: center;
-    font-size: 1.6em;
-    border-bottom: 2px solid #9575CD;
-    padding-bottom: 0.5em;
+  color: var(--color-header-hoover);
+  margin-bottom: 1.5em;
+  text-align: center;
+  font-size: 1.6em;
+  border-bottom: 2px solid #9575CD;
+  padding-bottom: 0.5em;
 }
 
 .historial-cursos-lista {
-    list-style: none;
-    padding: 0;
+  list-style: none;
+  padding: 0;
 }
 
 .historial-cursos-lista ul {
-    list-style: none;
-    padding: 0;
+  list-style: none;
+  padding: 0;
 }
 
 .historial-curso-item {
-    padding: 1em 0;
-    border-bottom: 1px dashed #ccc;
-    margin-bottom: 1em;
-    /* AÑADIDO: Estilos para contener los detalles y el botón */
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+  padding: 1em 0;
+  border-bottom: 1px dashed #ccc;
+  margin-bottom: 1em;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .historial-curso-item:last-child {
-    border-bottom: none;
-    margin-bottom: 0;
+  border-bottom: none;
+  margin-bottom: 0;
 }
 
 .historial-curso-titulo {
-    font-size: 1.1em;
-    color: #7E57C2;
-    margin: 0.2em 0;
+  font-size: 1.1em;
+  color: var(--color-violeta-link);
+  margin: 0.2em 0;
 }
 
 .historial-curso-detalle {
-    font-size: 0.95em;
-    color: #4a4a4a;
-    margin-left: 0.5em;
+  font-size: 0.95em;
+  color: #4a4a4a;
+  margin-left: 0.5em;
 }
 
 .historial-curso-fecha {
-    font-style: italic;
-    font-size: 0.85em;
-    color: #888;
-    margin-top: 0.5em;
-    /* AÑADIDO: Alinea la fecha a la derecha del item */
-    align-self: flex-end; 
+  font-style: italic;
+  font-size: 0.85em;
+  color: #888;
+  margin-top: 0.5em;
+  align-self: flex-end;
 }
 
 .historial-vacio {
-    text-align: center;
-    color: #999;
-    padding: 1em;
+  text-align: center;
+  color: #999;
+  padding: 1em;
 }
 
-/* AÑADIDO: Estilo para el botón/enlace de detalle del curso */
+
+/* Boton Ver Detalle */
 .boton-ver-detalle {
-    display: block;
-    width: 200px;
-    text-align: center;
-    background-color: #7E57C2;
-    color: white;
-    padding: 0.5em 1em;
-    border-radius: 5px;
-    text-decoration: none;
-    margin-top: 1em;
-    font-weight: bold;
-    transition: background-color 0.3s;
+  display: block;
+  width: 200px;
+  text-align: center;
+  background-color: var(--color-violeta-link);
+  color: white;
+  padding: 0.5em 1em;
+  border-radius: 5px;
+  text-decoration: none;
+  margin-top: 1em;
+  font-weight: bold;
+  transition: background-color 0.3s;
 }
 
 .boton-ver-detalle:hover {
-    background-color: #5e35b1;
+  background-color: var(--color-header-hoover);
 }
 
-/* RESPONSIVE  */
-@media (max-width: 700px) {
-    .historial-cursos-container {
-        padding: 1em;
-        margin-top: 2em;
-    }
-
-    .historial-cursos-titulo {
-        font-size: 1.4em;
-    }
-
-    /* Resto de estilos responsive omitidos por brevedad */
+/* Contenedor Botones Formulario */
+.botones-container {
+  grid-column: span 2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.5em;
 }
 
-/*... (Resto de estilos de popup y botones) ...*/
+.botones-container .boton-enviar {
+  width: 48%;
+  text-align: center;
+}
 
+/* Propiedades Generales Botón */
+.boton-css {
+  border: none;
+  border-radius: 0.6em;
+  color: var(--color-blanco);
+  font-weight: bold;
+  cursor: pointer;
+  padding: 0.8em 1.4em;
+  text-align: center;
+  text-decoration: none;
+  font-size: 1em;
+  transition: background-color 0.3s ease, transform 0.2s;
+  display: inline-block;
+}
+
+/* Botón Enviar */
+.boton-enviar {
+  background-color: #9575CD;
+}
+
+.boton-enviar:hover {
+  background-color: var(--color-violeta-link);
+  transform: scale(1.05);
+}
+
+/* Botón Eliminar Cuenta */
+.eliminar-cuenta-btn {
+  background-color: #F59090;
+  grid-column: 2;
+}
+
+.eliminar-cuenta-btn:hover {
+  background-color: #cc0000;
+  transform: scale(1.02);
+}
+
+/* Popup / Modal */
 .popup-fondo {
   position: fixed;
   top: 0;
@@ -194,15 +224,14 @@ h1 {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
-  display: none; /* Oculto por defecto, JS lo muestra */
+  display: none;
   justify-content: center;
   align-items: center;
   z-index: 1000;
 }
 
-
 .popup {
-  background-color: #fff;
+  background-color: var(--color-blanco);
   border-radius: 10px;
   padding: 1.5em 2em;
   max-width: 400px;
@@ -210,23 +239,20 @@ h1 {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
 }
 
-
 .popup h3 {
-  color: #7E57C2; 
+  color: var(--color-violeta-link);
   margin-bottom: 0.5em;
-  font-size: 1.5em; 
+  font-size: 1.5em;
 }
-
 
 .popup p {
   margin-bottom: 1em;
   color: #333;
 }
 
-
 .popup-boton {
-  background-color: #7E57C2;
-  color: white;
+  background-color: var(--color-violeta-link);
+  color: var(--color-blanco);
   border: none;
   border-radius: 5px;
   padding: 0.6em 1em;
@@ -241,7 +267,7 @@ h1 {
 
 .popup-cerrar {
   background-color: #888;
-  color: white;
+  color: var(--color-blanco);
   border: none;
   border-radius: 5px;
   padding: 0.6em 1em;
@@ -254,119 +280,71 @@ h1 {
   background-color: #666;
 }
 
-
 #popup-buttons-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 10px; 
-}
-
-
-.full-width-btn {
-    width: 100%; 
-    margin: 0 !important; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
 }
 
 #popup-buttons-container #btn-cancelar {
-    margin-right: 10px; 
-    margin-left: 0;
+  margin-right: 10px;
+  margin-left: 0;
 }
 
-/* Botones */
-.botones-container {
-  grid-column: span 2; 
-  display: flex;
-  justify-content: space-between; 
-  align-items: center;
-  margin-top: 1.5em;
+.full-width-btn {
+  width: 100%;
+  margin: 0 !important;
 }
-
-.botones-container .boton-enviar {
-  width: 48%;
-  text-align: center;
-}
-
-.boton-enviar {
-  background-color: #9575CD;
-  border: none;
-  border-radius: 0.6em;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-  padding: 0.8em 1.4em;
-  text-align: center;
-  text-decoration: none;
-  font-size: 1em;
-  transition: background-color 0.3s ease, transform 0.2s;
-  display: inline-block;
-}
-
-.boton-enviar:hover
- {
-  background-color: #7E57C2;
-  transform: scale(1.05);
-}
-
-.eliminar-cuenta-btn {
-    background-color: darkred; 
-    border-color: #990000; 
-    grid-column: span 2;
-}
-
-.eliminar-cuenta-btn:hover {
-    background-color: #cc0000; /* Color más claro al pasar el ratón */
-    transform: scale(1.02);
-}
-
-
 
 /* RESPONSIVE */
-@media (max-width: 700px) {
-  .section-perfil .form-perfil {
-    display: grid;
-    grid-template-columns: 1fr ;
-    gap: 1rem;
-    align-items: start;
+
+@media (max-width: 701px) {
+
+  .section-perfil {
+    padding: 1.5em 1em; 
+    width: 95%; 
   }
 
-  .section-perfil .form-perfil label {
-    width: 100%;
-    margin: 0;
+ 
+  .form-perfil {
+    grid-template-columns: 1fr;
+    gap: 1em;
   }
-
-
-  .section-perfil .form-perfil .caja-input {
-    width: 100% ;
-    box-sizing: border-box;
-    font-size: 0.95rem;
-    padding: 0.6rem 0.9rem;
-  }
-
-  .perfil-encabezado {
-    flex-direction: column;
-    align-items: center;
-    gap: 0.8rem;
-  }
-  .foto-perfil { 
-    width: 80px; height: 80px;
-   }
-
 
   .botones-container {
+    grid-column: 1 / -1; 
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 0.8rem;
-    margin-top: 1rem;
-    grid-column: 1 / -1;
+    gap: 10px;
+    width: 100%;
   }
 
   .botones-container .boton-enviar {
-    width: 80%;
-    max-width: 320px;
-    padding: 0.6rem 1rem;
-    font-size: 0.95rem;
-    text-align: center;
+    width: 100%;
   }
+
+  .eliminar-cuenta-btn {
+    width: auto;      
+    justify-self: end;
+    margin-top: 1em;
+  }
+
+  .caja-input {
+    width: 100%;
+  }
+  
+  .historial-cursos-container {
+    padding: 1em;
+    margin-top: 2em;
+    width: 95%;
+  }
+}
+
+@media (max-width: 420px) {
+  .form-perfil {
+    display: flex;
+    flex-direction: column;
+  }
+
 }

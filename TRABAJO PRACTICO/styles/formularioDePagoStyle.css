@@ -1,9 +1,14 @@
+body{
+  background-color: var(--color-fondo);   
+}
+
+
 .formulario-inscripcion {
   text-align: center;
   max-width: 43.75em;
   margin: 2em auto;
   padding: 4em;
-  background-color: #fdfdfd;
+  background-color: var(--color-fondo);
   border-radius: 0.625em;
   box-shadow: 0 0 0.625em rgba(0, 0, 0, 0.1);
   border-top: 6px solid #9575CD;
@@ -27,7 +32,6 @@
 }
 
 .formulario-inscripcion input {
-  
   margin: 0.3em 0 1em 0;
   padding: 0.6em;
   width: 100%;
@@ -60,8 +64,8 @@
 .toggle-label {
   display: inline-block;
   margin: 0.5em 0;
-  background-color: #7E57C2;
-  color: white;
+  background-color: var(--color-violeta-link);
+  color: var(--color-blanco);
   padding: 0.4em 0.8em;
   border-radius: 0.3125em;
   cursor: pointer;
@@ -78,8 +82,8 @@
 .boton-enlace {
   display: inline-block;
   margin: 2em auto; 
-  background-color: #7E57C2;
-  color: white;
+  background-color: var(--color-violeta-link);
+  color: var(--color-blanco);
   padding: 0.8em 2em;
   border-radius: 0.3125em;
   text-decoration: none;
@@ -88,7 +92,7 @@
 }
 
 .boton-enlace:hover {
-  background-color: #5e35b1;
+  background-color: var(--color-header-hoover);
 }
 
 .popup-confirmacion {
@@ -110,7 +114,7 @@
 }
 
 .popup-contenido {
-  background-color: #fff;
+  background-color: var(--color-blanco);
   padding: 2em;
   border-radius: 0.625em;
   text-align: center;

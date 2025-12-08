@@ -12,8 +12,9 @@
   <link rel="stylesheet" href="../styles/header_footer.css">
   <link rel="stylesheet" href="../styles/GiftCardsStyle.css">
   <link rel="icon" type="image/png" href="../img/favicon.ico">
+           <!-- Libreria de Iconos bootstrap  -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 
-  <!-- <link rel="icon" href="" /> -->
 </head>
 
 <body>
@@ -73,13 +74,13 @@
             class="logo-iniciarSesion-Responsive">
           Iniciar Sesión </button></a>
 
-      <a href="../paginas/registrarse.html"><button class="signup-button">Registrarse</button></a>
+     <a href="./paginas/registrarse.html" class="ocultar-enlace"><button class="signup-button">Registrarse</button></a>
 
   <!--  CARRITO -->
      <input type="checkbox" name="Carro" id="Carro" value="Carro"  />
             <article class="carrito">
-                <label for="Carro">
-                    <img src="../img/carrito.png" alt="Carrito de compra" class="carrito_icono">
+                  <label for="Carro">
+                     <i class="bi bi-cart-fill carrito_icono"></i>
                 </label>
                 <span id="cart-count" class="cart-count">0</span>
             </article>
@@ -89,11 +90,14 @@
         </section>
     </section>
   </header>
-  
+     
+   <section class="container-tittle">
+         <h1>Regalá una GiftCard</h1>
+    </section>
+
 
   <!-- MAIN -->
   <main class="Box_main">
-
     <section class="Box_form">
       <form class="formulario_giftCards" id="formGiftCard" novalidate>
         <section class="data">
@@ -105,9 +109,7 @@
 
           <input type="email" id="email" name="email" placeholder="Ingrese su email...." />
           <label for="monto" class="subtitulo-estilo">Ingrese cuanto desea regalar : </label>
-          <input type="number" id="monto" name="monto" pattern="[0-9]+" placeholder="Ingrese el monto...">
-
-
+          <input type="text" inputmode="numeric" id="monto" name="monto" pattern="[0-9]+" placeholder="Ingrese el monto...">
         </section>
 
         <section class="form_style">
@@ -125,7 +127,6 @@
               <option value="Times New Roman">Times New Roman</option>
             </select>
           </div>
-
 
           <div class="Formulario_estilo_tamaño">
             <label for="tamaño_estilo" class="subtitulo-estilo">Tamaño:</label>
@@ -186,34 +187,37 @@
         <div class="Formulario_fondo">
           <label for="Fondo1">
 
-            <input type="radio" name="Fondo" id="Fondo1" value="../Imagenes/gc_fondo1.jpeg" checked />
+            <input type="radio" name="Fondo" id="Fondo1" value="../img/giftcard-img/gc_fondo1.jpeg" checked />
 
-            <img src="../Imagenes/gc_fondo1.jpeg" class="fondo"></label>
+            <img src="../img/giftcard-img/gc_fondo1.jpeg" class="fondo"></label>
 
           <label for="Fondo2">
 
-            <input type="radio" name="Fondo" id="Fondo2" value="../Imagenes/gc_fondo2.jpg" />
+            <input type="radio" name="Fondo" id="Fondo2" value="../img/giftcard-img/gc_fondo2.jpg" />
 
-            <img src="../Imagenes/gc_fondo2.jpg" class="fondo"></label>
+            <img src="../img/giftcard-img/gc_fondo2.jpg" class="fondo"></label>
 
           <label for="Fondo3">
 
-            <input type="radio" name="Fondo" id="Fondo3" value="../Imagenes/gc_fondo3.jpg" />
+            <input type="radio" name="Fondo" id="Fondo3" value="../img/giftcard-img/gc_fondo3.jpg"/>
 
-            <img src="../Imagenes/gc_fondo3.jpg" class="fondo"></label>
+            <img src="../img/giftcard-img/gc_fondo3.jpg" class="fondo"></label>
 
+            </div>
+
+            <div class="Formulario_fondo">
           <label for="Fondo4">
 
-            <input type="radio" name="Fondo" id="Fondo4" value="../Imagenes/gc_fondo4.jpg" />
+            <input type="radio" name="Fondo" id="Fondo4" value="../img/giftcard-img/gc_fondo4.jpg" />
 
-            <img src="../Imagenes/gc_fondo4.jpg" class="fondo"></label>
+            <img src="../img/giftcard-img/gc_fondo4.jpg" class="fondo"></label>
 
           <label for="Fondo5">
 
-            <input type="radio" name="Fondo" id="Fondo5" value="../Imagenes/gc_fondo5.jpg" />
+            <input type="radio" name="Fondo" id="Fondo5" value="../img/giftcard-img/gc_fondo5.jpg" />
 
-            <img src="../Imagenes/gc_fondo5.jpg" class="fondo"></label>
-
+            <img src="../img/giftcard-img/gc_fondo5.jpg" class="fondo"></label>
+</div>
 
 
         </div>
@@ -235,7 +239,7 @@
       <section class="Cuadro_Preview">
 
         <div class="Destinatario">
-          <h3>¡Felicidades! :</h3>
+          <h3>¡Felicidades! </h3>
           <h3 class="Destinatario2"></h3>
         </div>
 
@@ -256,15 +260,15 @@
 
           <label>
             <input type="radio" name="Ubicacion" id="ubi_monto" value="ubi_monto" data-columna="1" data-fila="3" data-hori="start" data-verti="end">
-            <img class="imagen_monto" src="../Imagenes/monto_abajo_izquierda.JPG">
+            <img class="imagen_monto" src="../img/giftcard-img/monto_abajo_izquierda.JPG">
           </label>
           <label>
             <input type="radio" name="Ubicacion" id="ubi_monto2" value="ubi_monto2" checked data-columna="3" data-fila="3" data-hori="end" data-verti="end">
-            <img class="imagen_monto" src="../Imagenes/monto_abajo_derecha.JPG">
+            <img class="imagen_monto" src="../img/giftcard-img/monto_abajo_derecha.JPG">
           </label>
           <label>
             <input type="radio" name="Ubicacion" id="ubi_monto3" value="ubi_monto3" data-columna="3" data-fila="1" data-hori="end" data-verti="start">
-            <img class="imagen_monto" src="../Imagenes/monto_arriba_izquierda.JPG">
+            <img class="imagen_monto" src="../img/giftcard-img/monto_arriba_izquierda.JPG">
           </label>
 
         </section>
@@ -276,14 +280,15 @@
   <!-- Footer -->
   <footer class="container-footer">
     <section class="datos-equipo">
-      <ul>
-        <li class="nombre-equipo"> EQUIPO: UNDEFINED </li>
-        <li>Martelli, Rocio Belen DNI: 44.161.046</li>
-        <li>Mazza, Micaela Montserrat DNI: 38.662.441</li>
-        <li>Moyano Vivas, Matias Ernesto DNI:40.240.664</li>
+            <ul>
+                <li class="nombre-equipo"> EQUIPO: UNDEFINED </li>
+                <li>Martelli, Rocio Belen</li>
+                <li>Mazza, Micaela Montserrat </li>
+                <li>Moyano Vivas, Matias Ernesto </li>
 
-      </ul>
-    </section>
+            </ul>
+        </section>
+
 
 
     <section class="menu-inferior">
@@ -321,8 +326,7 @@
     </div>
   </div>
 </div>
-
-    <script type="module" src="../JavaScript.js"></script>
+     <!-- JS  PRINCIPAL-->
+     <script type="module" src="../javaScript.js"></script>
 </body>
-
 </html>

@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="../styles/cursos.css">
     <link rel="stylesheet" href="../styles/header_footer.css">
     <link rel="icon" type="image/png" href="../img/favicon.ico">
+             <!-- Libreria de Iconos bootstrap  -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 
 </head>
 
@@ -32,12 +34,11 @@
         <nav class="navbar">
             <ul class="nav-list">
                 <li><a href="../index.html" class="nav-link">Inicio</a></li>
-                <li><a href="../paginas/giftCard.html" class="nav-link">GiftCard</a></li>
-                <li><a href="../paginas/cursos.html" class="nav-link">Cursos</a></li>
+                <!-- <li><a href="../paginas/cursos.html" class="nav-link">Cursos</a></li> -->
                 <li><a href="../paginas/inscripcionCurso.html" class="nav-link">Inscripción</a></li>
-                <li><a href="../paginas/calendario.html" class="nav-link"> Proximos </a></li>
-                <li><a href="../paginas/perfil.html" class="nav-link perfil-link" style="display: none;">Mi Perfil</a></li>
-
+                <li><a href="../paginas/calendario.html" class="nav-link"> Próximos </a></li>
+                <li><a href="../paginas/giftCard.html" class="nav-link">GiftCard</a></li>
+                <li><a href="../paginas/perfil.html" class="nav-link" style="display: none;">Mi Perfil</a></li>
             </ul>
         </nav>
 
@@ -69,14 +70,14 @@
                         class="logo-iniciarSesion-Responsive">
                     Iniciar Sesión </button></a>
 
-            <a href="../paginas/registrarse.html"><button class="signup-button">Registrarse</button></a>
+             <a href="./paginas/registrarse.html" class="ocultar-enlace"><button class="signup-button">Registrarse</button></a>
 
             
   <!--  CARRITO -->
      <input type="checkbox" name="Carro" id="Carro" value="Carro"/>
             <article class="carrito">
                 <label for="Carro">
-                    <img src="../img/carrito.png" alt="Carrito de compra" class="carrito_icono">
+                     <i class="bi bi-cart-fill carrito_icono"></i>
                 </label>
                 <span id="cart-count" class="cart-count">0</span>
             </article>
@@ -95,7 +96,7 @@
         <!-- CURSO DE FRONT-END  -->
        <a href="./detalleCurso.html?curso=Programación+Front-End">
             <section class="block-informacion-curso">
-                <img class="block-informacion-curso_imagen" src="../img/frontend.jpg" alt="">
+                <img class="block-informacion-curso_imagen" src="../img/cursos/frontend.jpg" alt="Imagen de curso FrontEnd">
 
                 <article>
                     <article class="block-informacion-curso_titulo-y-precio">
@@ -128,7 +129,7 @@
         <!-- CURSO DE BACK-END -->
         <a href="./detalleCurso.html?curso=Programación+Back-End">
             <section class="block-informacion-curso">
-                <img class="block-informacion-curso_imagen" src="../img/backend.jpg" alt="">
+                <img class="block-informacion-curso_imagen" src="../img/cursos/backend.jpg" alt="Imagen de curso BackEnd">
 
                 <article>
                     <article class="block-informacion-curso_titulo-y-precio">
@@ -159,7 +160,7 @@
         <!-- CURSO DE CIBERSEGURIDAD -->
         <a href="./detalleCurso.html?curso=Ciberseguridad">
             <section class="block-informacion-curso">
-                <img class="block-informacion-curso_imagen" src="../img/ciberseguridad.jpg" alt="">
+                <img class="block-informacion-curso_imagen" src="../img/cursos/ciberseguridad.jpg" alt="Imagen de curso ciberseguridad">
                 <article>
                     <article class="block-informacion-curso_titulo-y-precio">
                         <span>
@@ -191,7 +192,7 @@
         <!-- CURSO DE INGLÉS AVANZADO -->
         <a href="./detalleCurso.html?curso=Inglés+Avanzado">
                         <section class="block-informacion-curso">
-                <img class="block-informacion-curso_imagen" src="../img/ingles.jpg" alt="">
+                <img class="block-informacion-curso_imagen" src="../img/cursos/ingles.jpg" alt="Imagen de curso Inglés">
                 <article>
                     <article class="block-informacion-curso_titulo-y-precio">
                         <span>
@@ -224,7 +225,7 @@
         <!-- CURSO DE MARKETING DIGITAL  -->
       <a href="./detalleCurso.html?curso=Marketing+Digital">
             <section class="block-informacion-curso">
-                <img class="block-informacion-curso_imagen" src="../img/marketing.jpg" alt="">
+                <img class="block-informacion-curso_imagen" src="../img/cursos/marketing.jpg" alt="imagen de curso marketing digital">
 
                 <article>
                     <article class="block-informacion-curso_titulo-y-precio">
@@ -255,7 +256,7 @@
         <!-- FINANZAS PERSONALES -->
         <a href="./detalleCurso.html?curso=Finanzas+Personales">
             <section class="block-informacion-curso">
-                <img class="block-informacion-curso_imagen" src="../img/finanzasperso.jpg" alt="">
+                <img class="block-informacion-curso_imagen" src="../img/cursos/finanzasperso.jpg" alt="imagen de curso finanzas personales">
                 <article>
                     <article class="block-informacion-curso_titulo-y-precio">
                         <span>
@@ -301,11 +302,13 @@
         <section class="datos-equipo">
             <ul>
                 <li class="nombre-equipo"> EQUIPO: UNDEFINED </li>
-                <li>Martelli, Rocio Belen DNI: 44.161.046</li>
-                <li>Mazza, Micaela Montserrat DNI: 38.662.441</li>
-                <li>Moyano Vivas, Matias Ernesto DNI:40.240.664</li>
+                <li>Martelli, Rocio Belen</li>
+                <li>Mazza, Micaela Montserrat </li>
+                <li>Moyano Vivas, Matias Ernesto </li>
+
             </ul>
         </section>
+
 
 
         <section class="menu-inferior">
@@ -332,7 +335,7 @@
         </section>
 
     </footer>
-        <!--  JS PRINCIPAL -->
-    <script type="module" src="../JavaScript.js"></script>
+    <!-- JS  PRINCIPAL-->
+     <script type="module" src="../javaScript.js"></script>
 </body>
 </html>

@@ -1,209 +1,294 @@
+
 * {
   margin: 0;
   box-sizing: border-box;
   font-family: Arial, Helvetica, sans-serif;
 }
 
+body {
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+}
+
+.container-tittle {
+  margin-top: 1em;
+  text-align: center;
+  color: var(--color-violeta-dark);
+}
+
+
 .Box_main {
   width: 100%;
   padding: 2.5em;
   display: grid;
+  grid-template-columns: 1fr 1fr; 
   gap: 4.5em;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr;
+  overflow-x: hidden;
 }
-.Cuadro_Preview * {
-  font-family: inherit;
+
+.Box_main > * {
+  min-width: 0;
 }
+
+/* VISTA PREVIA */
+.Box_Preview {
+  display: grid;
+}
+
 .Cuadro_Preview {
+  width: 100%;
   height: 30em;
-  width: 60em;
   align-self: center;
-  border: 0.5em solid black;
-  border-radius: 0.3em;
+  border-radius: 0.6em;
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
   grid-template-rows: repeat(3, 1fr);
+  box-shadow: 0 6px 20px rgba(95, 66, 146, 0.12), 0 3px 8px rgba(15, 15, 15, 0.06);
+  overflow: hidden;
+}
+
+.Cuadro_Preview * {
+  font-family: inherit;
 }
 
 .Cuadro_Preview .Destinatario {
-  
   grid-column: 1;
   grid-row: 1;
-}
-
-.Cuadro_Preview .Monto {
-  
-  grid-column: 3;
-  grid-row: 3;
-  align-self: end;
-  justify-self: end;
+  padding: 1em;
 }
 
 .Cuadro_Preview .Mensaje {
- 
   grid-column: 2;
   grid-row: 2;
   align-self: center;
   justify-self: center;
+  padding: 1em;
 }
 
-.Box_Preview {
-  display: grid;
-  grid-template-rows: 1fr 1fr;
+.Cuadro_Preview .Monto {
+  grid-column: 3;
+  grid-row: 3;
+  align-self: end;
+  justify-self: end;
+  padding: 1em;
+}
+
+.Cuadro_Preview img,
+.Formulario_fondo .fondo,
+.Mensaje-Monto .imagen_monto {
+  max-width: 90%;
+  height: auto;
+  display: block;
+  object-fit: cover;
 }
 
 .Mensaje-Monto {
   display: grid;
-  grid-template-rows: 0.5fr 0.5fr 2fr 1fr;
 }
 
 .Mensaje-Monto h2 {
-  
-  color: #9575CD;
-  display: flex;
-  justify-content: center;
+  color: var(--color-violeta-link);
+  text-align: center;
+  font-weight: 600;
+  margin-top: 1em;
 }
 
 .Mensaje-Monto h3 {
- 
-  display: flex;
-  justify-content: center;
+  text-align: center;
+  color: #444;
+  font-weight: 600;
 }
 
 .Mensaje-Monto .ubicacion_monto {
   display: flex;
   justify-content: center;
-  gap: 3em;
+  gap: 0.5em;
+  padding: 1em;
 }
 
-/* Para que los circulitos del type=radio se oculten */
 .Mensaje-Monto .ubicacion_monto input {
   display: none;
 }
 
 .Mensaje-Monto .ubicacion_monto .imagen_monto {
-  width: 10em;
-  height: 10em;
+  border-radius: 12px;
+  border: 1px solid rgba(149, 117, 205, 0.12);
 }
 
-/* Selecciona un elemento de ubicacion monto y solo afecta a los inputs de tipo
-radio que esten marcados.
-el  ~  permite aplicar los estilos  a .imagen_monto que sean hermanos del input marcado*/
-.Mensaje-Monto .ubicacion_monto input:checked~.imagen_monto {
-  box-shadow: 0 0 0.7em rgba(12, 200, 68, 0.8);
+.Mensaje-Monto .ubicacion_monto input:checked ~ .imagen_monto {
+  box-shadow: 0 0 0.7em rgba(180, 95, 250, 0.8);
+  transform: translateY(-4px);
 }
 
-.Box_form {
-  display: flex;
-  flex-basis: 80em;
-  min-height: 50em;
-}
-
+/* Formulario de opciones */
 .Box_form form {
-  width: 100%;
-  background-color: white;
-  color: #9575CD;
-  font-size: 1.7em;
+  background-color: var(--color-blanco);
+  color: var(--color-violeta-link);
   display: flex;
   flex-direction: column;
   align-items: start;
   gap: 1em;
-}
-
-/* MANTIENE EN "NEGRITA" LA DESCRIPCION DE LOS LABEL */
-.subtitulo-estilo{
- font-weight: bold;
-}
-.Box_form form .confirmacion {
-  display: flex;
-  width: 100%;
-  height: 2.5em;
-  margin-top: -3em;
-  justify-content: center;
-  gap: 2em;
-}
-
-.Box_form form .confirmacion button {
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-  width: 12em;
-  height: 3em;
-}
-
-.Box_form form .confirmacion .confirmar_carrito button {
-  background-color: #9575CD;
-  border-radius: 5px;
-  color: black;
-}
-
-.Box_form form .confirmacion .reset_form {
-  margin-top: 0.1em;
-}
-
-.Box_form form .confirmacion .reset_form button {
-  background-color: #F59090;
-  border-radius: 0.5em;
-  color: black;
+  padding: 1.2em;
+  border-radius: 12px;
+  border: 1px solid rgba(149, 117, 205, 0.06);
+  box-shadow: 0 3px 8px rgba(15, 15, 15, 0.06);
+  border-top: 6px solid var(--color-header);
 }
 
 .Box_form .form_style {
   display: flex;
   gap: 1em;
-}
-
-.Box_form .form_style .Formulario_estilo select {
-  width: 15em;
-  height: 2em;
-}
-
-.Box_form .form_style .Formulario_estilo_tamaño select {
-  width: 3em;
-  height: 2em;
+  align-items: center;
 }
 
 .Box_form .data {
   display: flex;
   gap: 0.5em;
   flex-direction: column;
-  width: 100%;
+  width: 58%;
 }
 
-.Box_form .data label {
+.Box_form .data label,
+.subtitulo-estilo {
+  font-weight: 400;
+  color: var(--color-violeta-link);
   display: flex;
   align-self: flex-start;
   gap: 0.5rem;
 }
 
-.Box_form .data input {
-  width: 90%;
-  height: 2em;
-  border-radius: 0.5em;
+/* Estilos unificados para Inputs y Selects */
+.Box_form .data input,
+.Box_form .data textarea,
+.Box_form select {
+  height: 2.6em;
+  border-radius: 8px;
+  padding: 0.5em 0.75em;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  transition: all 0.2s ease;
 }
 
+/* Selects específicos */
+.Formulario_estilo select {
+  width: 15em;
+  height: 2.2em;
+  padding: 0.3em;
+}
+
+.Formulario_estilo_tamaño select {
+  width: 4em;
+  height: 2.2em;
+  padding: 0.2em;
+}
+
+/* Input Focus */
+.Box_form .data input:focus,
+.Box_form select:focus {
+  border-color: var(--color-violeta-link);
+  box-shadow: 0 8px 20px rgba(149, 117, 205, 0.10);
+  transform: translateY(-1px);
+}
+
+/* Input específico de monto */
 #monto {
-  width: 30%;
+  width: 50%;
 }
 
-.Box_form .colores {
+/* Ciruclos colores */
+.colores {
   display: flex;
   justify-content: center;
+  gap: 1.2em;
 }
 
+.colores input[type=radio],.Formulario_fondo input[type="radio"] {
+  display: none;
+}
+
+.colores .color {
+  cursor: pointer;
+  width: 2em;
+  height: 2em;
+  border-radius: 50%;
+}
+
+.circuloRojo { background-color: red; }
+.circuloAmarillo { background-color: yellow; }
+.circuloAzul { background-color: blue; }
+.circuloVerde { background-color: green; }
+.circuloLila { background-color: purple; }
+.circuloNaranja { background-color: orange; }
+
+.colores input[type=radio]:checked ~ .color {
+  box-shadow: 0 0 0.7em rgba(180, 95, 250, 0.8);
+  border: solid 0.2em var(--color-blanco);
+}
+
+/* Seleccion de imagenes */
 .Formulario_fondo {
-  width: 100%;
-  height: 23em;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
+  gap: 1em;
+  padding: 0.5em 0;
+  align-self: center;
 }
 
 .Formulario_fondo .fondo {
   width: 8em;
   height: 8em;
+  border-radius: 12px;
+  border: 3px solid transparent;
+  transition: transform .12s, box-shadow .12s, border-color .12s;
 }
-/* POPUP */
 
+.Formulario_fondo input[type="radio"]:checked ~ .fondo {
+  box-shadow: 0 0 0.7em rgba(180, 95, 250, 0.8);
+  transform: translateY(-4px);
+  border-color: rgba(149, 117, 205, 0.22);
+}
+
+/* Botones */
+.Box_form form .confirmacion {
+  display: flex;
+  width: 100%;
+  margin-top: 0.5em;
+  justify-content: center;
+  gap: 2em;
+}
+
+.Box_form form .confirmacion button {
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.12s;
+  width: 12em;
+  height: 3.2em;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  color: var(--color-blanco);
+}
+
+/* Boton Agregar */
+.Box_form form .confirmacion .confirmar_carrito button {
+  background-color: #9575CD; 
+}
+
+.Box_form form .confirmacion .confirmar_carrito button:hover {
+  background-color: var(--color-violeta-link);
+  transform: scale(1.05);
+}
+
+/* Boton Cancelar */
+.Box_form form .confirmacion .reset_form button {
+  background-color: #F59090;
+}
+
+.Box_form form .confirmacion .reset_form button:hover {
+  background-color: #cc0000;
+  transform: scale(1.02);
+}
+
+/* popup */
 .popup-container {
   position: fixed;
   top: 0;
@@ -212,59 +297,48 @@ el  ~  permite aplicar los estilos  a .imagen_monto que sean hermanos del input 
   height: 100%;
   background-color: rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(5px);
-  display: none; /* oculto por defecto */
+  display: none; 
   justify-content: center;
   align-items: center;
   z-index: 1000;
 }
 
 .popup-box {
-  background-color: #ffffff;
+  background-color: var(--color-blanco);
   border: 4px solid #9575CD;
-  border-radius: 20px;
+  border-radius: 1em;
   padding: 2em;
-  max-width: 25em;
-  width: 80%;
+  max-width: 28em;
+  width: 90%;
   text-align: center;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 6px 20px rgba(95, 66, 146, 0.12);
 }
 
 .popup-box h2 {
-  color: #7E57C2;
+  color: var(--color-violeta-link);
   margin-bottom: 0.8em;
-  font-size: 1.4em;
 }
 
 .popup-box p {
   color: #555;
-  font-size: 1em;
   margin-bottom: 1.5em;
 }
 
-/* BOTONES DEL POPUP */
-.popup-buttons {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1em;
-}
-
 .full-width-btn {
-  background-color: #9575CD;
+  background: linear-gradient(180deg, #9575CD, var(--color-violeta-link));
   border: none;
   border-radius: 0.6em;
   color: white;
   font-weight: bold;
   cursor: pointer;
   padding: 0.8em 1.4em;
-  font-size: 1em;
-  transition: background-color 0.3s ease, transform 0.2s;
+  transition: background-color 0.3s ease, transform 0.12s;
   flex-grow: 1;
 }
 
 .full-width-btn:hover {
-  background-color: #AB7DEB;
-  transform: scale(1.03);
+  background: linear-gradient(180deg, var(--color-violeta-link), #AB7DEB);
+  transform: translateY(-3px);
 }
 
 #btn-volver {
@@ -274,281 +348,61 @@ el  ~  permite aplicar los estilos  a .imagen_monto que sean hermanos del input 
   color: white;
   cursor: pointer;
   padding: 0.8em 1.4em;
-  font-size: 1em;
   transition: background-color 0.3s;
 }
 
-#btn-volver:hover {
-  background-color: #666;
-}
+#btn-volver:hover { background-color: #666; }
 
-/* Selecciona un elemento de formulario fondo y solo afecta a los inputs de tipo
-radio que esten marcados.
-el  ~  permite aplicar los estilos  a fondo que sean hermanos del input marcado*/
-.Formulario_fondo input[type="radio"]:checked~.fondo {
-  box-shadow: 0 0 0.5em rgba(212, 8, 168, 0.8);
-}
-
-.Formulario_fondo input[type="radio"] {
-  display: none;
-}
-
-/* Radio de los colores oculto */
-.colores input[type=radio] {
-  display: none;
-}
-/* Tamaño general de los colores */
-.colores .color {
-  width: 3em;
-  height: 3em;
-  border-radius: 50%;
-}
-
-.colores {
-  gap: 1.2em;
-  align-self: center;
-}
-
-.colores .circuloRojo {
-  background-color: red;
-}
-
-.colores .circuloAmarillo {
-  background-color: yellow;
-}
-
-.colores .circuloAzul {
-  background-color: blue;
-}
-
-.colores .circuloVerde {
-  background-color: green;
-}
-
-.colores .circuloLila {
-  background-color: purple;
-}
-
-.colores .circuloNaranja {
-  background-color: orange;
-}
-
-
-.colores input[type=radio]:checked~.color {
-  box-shadow: 0 0 0.5em rgba(212, 8, 168, 0.8);
-  border: solid 0.2em white;
-}
-
-/* MENSAJE DE ERROR DEL JS  - VALIDACION FORM*/
 .error-mensaje {
-    color: #b71c1c; 
-    font-size: 0.65em;
+  color: #b71c1c;
+  font-size: 0.85em;
   margin-top: -0.5em;
   margin-bottom: 1em;
   text-align: left;
   display: block;
 }
 
-/* RESPONSIVE  */
+/* RESPONSIVE */
 
-@media screen and (max-width: 1780px) {
+@media (max-width: 960px) {
   .Box_main {
-    font-size: 15px;
-  }
-}
-
-@media screen and (max-width: 1620px) {
-  .Box_main {
-    padding: 6.5em;
-    font-size: 12px;
-  }
-}
-@media screen and (max-width: 1301px) {
-  .Box_main {
-    gap: 0.5em;
-  }
-}
-
-@media screen and (max-width: 1290px) {
-  .Formulario_fondo {
-    height: 21em;
-  }
-
-  .Formulario_fondo .fondo {
-    width: 6em;
-    height: 6em;
-  }
-}
-
-
-@media (min-width: 481px) and (max-width: 960px) {
-  .Box_main {
-    font-size: 6px;
     grid-template-columns: 1fr;
     gap: 2em;
-
+    padding: 2em;
   }
 
   .Cuadro_Preview {
-    width: 100%;
     height: auto;
-    aspect-ratio: 4/3;
+    aspect-ratio: 4 / 3;
+    width: 100%;
   }
 
+  .Box_form {
+    min-width: 0;
+    margin-top: 1em;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 960px) {
   .Mensaje-Monto .imagen_monto {
     width: 12em;
     height: 12em;
   }
 
-  .Box_form {
-    margin-top: 1em;
-  }
-
   .Box_form form {
-    font-size: 1rem;
-  }
-
-  .Box_form form .confirmacion {
-    margin-top: 0em;
-  }
-
-  .Box_form form .confirmacion .confirmar_carrito button {
-    width: 12em;
-    height: 3em;
-  }
-
-  .Box_form form .confirmacion .reset_form button {
-    width: 12em;
-  }
-
-  .Box_Preview {
-    grid-row: 1;
-  }
-
-  .Box_Preview .Cuadro_Preview {
-    width: 100%;
-    height: 35em;
-  }
-
-  .Box_Preview .Cuadro_Preview h3 {
-    font-size: 2em;
-  }
-
-  .Mensaje-Monto h2 {
-    font-size: 2em;
-  }
-
-  .Mensaje-Monto h3 {
-    font-size: 2em;
-  }
-
-  .Mensaje-Monto .ubicacion_monto {
-    gap: 9em;
-  }
-
-  .Mensaje-Monto .ubicacion_monto .imagen_monto {
-    width: 16em;
-    height: 16em;
-  }
-
-  .Formulario_fondo .fondo {
-    width: 10em;
-    height: 10em;
-    margin-top: 2em;
-  }
-
-  .colores {
-    gap: 3.2em;
-  }
-
-  .colores .color {
-    width: 4em;
-    height: 4em;
-  }
-
-  .Box_form .form_style .Formulario_estilo select {
-    width: 18em;
-    height: 2em;
-    font-size: 1em;
-  }
-
-  .Box_form .form_style .Formulario_estilo_tamaño select {
-    height: 1.5em;
-    font-size: 1em;
-  }
-
-
-}
-
-@media (max-width: 500px) {
-  .Box_main {
-    font-size: 5px;
-  }
-}
-
-/* CELULARES */
-@media (max-width: 480px) {
-  .Box_main {
-    display: flex;
-    flex-direction: column;
-   padding: 0.5em;
-    gap: 18.5em;
-    margin-top: 0;
-  }
-  .Box_form .data label {
-  font-size: 2em;
-}
-.Cuadro_Preview .Destinatario {
-  font-size: 2.5em;
-}
-.Cuadro_Preview .Mensaje{
-  font-size: 2.5em;
-}
-.Cuadro_Preview .Monto{
-  font-size: 2.5em;
-}
-.Cuadro_Preview .m .Box_form {
-    width: 100%;
-    margin: 0;
-  }
-
-  .Box_form input,
-  .Box_form select {
-    width: 100%;
-    padding: 0.6rem;
-    font-size: 1rem;
-  }
-
-   .Box_form form .confirmacion{
-    gap: 1.8rem;
-    margin-left: -5em;
-    margin-top: 4em;
-
-    /* margin-top: 1rem; */
+    padding: 1rem;
   }
 
   .Box_form form .confirmacion button {
-    width: 9em;
+    width: 12em;
     height: 3em;
   }
 
-  .Box_form form .confirmacion .reset_form {
-    width: 9em;
-    height: 3em;
+  .Box_Preview .Cuadro_Preview {
+    height: 35em;
   }
 
-  .Mensaje-Monto h3 {
-    font-size: 3em;
-  }
-
-  .Mensaje-Monto .ubicacion_monto {
-    gap: 9em;
-  }
-
-  .Mensaje-Monto .ubicacion_monto .imagen_monto {
-    width: 16em;
-    height: 16em;
-  }
+  .Mensaje-Monto .ubicacion_monto { gap: 2.5em; }
 
   .Formulario_fondo .fondo {
     width: 10em;
@@ -556,89 +410,65 @@ el  ~  permite aplicar los estilos  a fondo que sean hermanos del input marcado*
     margin-top: 2em;
   }
 
-  .colores {
-    gap: 2.2em;
-  }
-
-  .colores .color {
-    width: 2em;
-    height: 2em;
-  }
-
-  .Box_form .form_style .Formulario_estilo select {
-    width: 19em;
-    height: 3em;
-    font-size: 1.5em;
-  }
-
-  .Box_form .form_style .Formulario_estilo_tamaño select {
-   height: 2.5em;
-    font-size: 1.5em;
-    width: 5em;
-  }
-
-.Cuadro_Preview{
-  height: 28em;
-    width: auto;
-}
-.Box_form form .confirmacion button{
-  width: 12em;
-  height: 2em;
-  }
-.Mensaje-Monto h2{
-  font-size: 4em;
-}
-.Mensaje-Monto{
-gap: 3em;
-}
-#monto{
-  width: 48%;
-}
- 
 }
 
-
-@media (max-width: 347px) {
-    .colores {
-    gap: 1em;
-  }
-.Box_form form .confirmacion{
-    gap: 0.8rem;
-    margin-left: -4em;
-    margin-top: 4em;
-}
-.Box_form form .confirmacion button{
-    width: 10em;
-    height: 2em;
-  }
-.Formulario_estilo{
-margin-right: -2.7em;
-margin-left: -1em;
-}
-  .Box_form .form_style .Formulario_estilo select {
-    width: 17em;
-    height: 3em;
-    font-size: 1.3em;
+@media (max-width: 480px) {
+  .Box_form {
+    min-width: 0;
+    margin-top: -1em;
   }
 
-  .Box_form .form_style .Formulario_estilo_tamaño select {
-    width: 4em;
+  .subtitulo-estilo{
+    font-size: 0.93em;
   }
+
+
+  .Box_form form .confirmacion {
+    gap: 1.2rem;
+    margin-top: 1.5em;
+  }
+
   .Box_form .data {
-  margin-left: -1em;
-}
+    width: 100%;
+  }
+
+  .Box_form .form_style {
+    display: flex;
+    gap: 1em;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+
+  .Cuadro_Preview {
+    height: auto;
+    width: 100%;
+  }
+
+  .Mensaje-Monto {
+    gap: 1.2em;
+  }
+
   #monto {
-    width: 68%;
+    width: 48%;
   }
-    .Cuadro_Preview {
-    width: 110%;
-    margin-top: 25em;
-    margin-left: -3em;
+
+  /* Seleccion de imagenes */
+.Formulario_fondo {
+  flex-wrap: nowrap;
+  gap:0;
+}
+}
+
+@media (max-width: 375px) {
+
+ .colores .color {
+    width: 1em;
+    height: 1em;
   }
-  
-    .Mensaje-Monto .ubicacion_monto .imagen_monto {
-    width: 14em;
-    height: 14em;
-    margin-left: -2em;
+
+  .Box_form form .confirmacion button {
+    width: 6em;
+    height: 3em;
   }
 }

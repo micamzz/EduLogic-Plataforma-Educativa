@@ -7,21 +7,27 @@
 }
 
 body {
-  background-color: #f4f4f9;
+  background-color: var(--color-fondo);
   height: 100vh;
   position: relative;
-  color: #333333;
   font-family: Arial, sans-serif;
 }
 
 a{
-  color:#7E57C2;
+  color: var(--color-header);
 }
 
 /* Estilos de los Cursos */
 .block-informacion-curso {
   margin: 2% 10% 2% 10%;
   width: 80%;
+  }
+  
+  .titulo-nombre-curso{
+  margin: auto;
+  margin-top: 1em;
+   color: var(--color-violeta-dark);
+   font-size: 2.1em;
 }
 
 .block-informacion-curso__descripcion {
@@ -51,9 +57,7 @@ a{
   padding: 0.25em;
   background-color: rgb(225, 213, 238);
   display: flex;
-
 }
-
 
 .block-informacion-contenidos_temas {
   width: 49%;
@@ -75,6 +79,7 @@ a{
   height: 300px;
   border-radius: 0.40em;
 }
+
 
 details {
   width: 90%;
@@ -122,12 +127,18 @@ summary {
 }
 .block-informacion-contenidos__boton {
   padding: 10px 20px;
-  background-color: #694d99;
-  color: white;
+  background-color: #9575CD;
+  color: var(--color-blanco);
   border: none;
   border-radius: 5px;
   cursor: pointer;
   margin: 1em;
+
+}
+
+.block-informacion-contenidos__boton:hover{
+    background-color: var(--color-violeta-link);
+  transform: scale(1.05);
 }
 
 .block-informacion-contenidos__precio {
@@ -140,6 +151,7 @@ summary {
   width: 80%;
   margin: auto;
   margin-top: 1em;
+   color: var(--color-violeta-dark);
 
 }
 
@@ -192,7 +204,7 @@ h4 {
   /* Para ocultar el cotenido que sobresalga del contenedor */
   overflow: hidden;
   width: 80%;
-  margin: 4em auto;
+  margin: 2.5em auto;
   text-align: start;
 }
 
@@ -205,13 +217,10 @@ h4 {
 
 .carousel-titulo {
   width: 80%;
+  color: var(--color-violeta-dark);
+  font-size: 1.5em;
 }
 
-.featured-courses {
-  text-align: center;
-  margin: 2em 0 1em;
-  color: #7E57C2;
-}
 
 .courses-grid {
   display: grid;
@@ -225,13 +234,12 @@ h4 {
 .course-card {
   border: 1px solid #ddd;
   border-radius: 12px;
-  background: #fff;
+  background:  var(--color-blanco);
   text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   flex: 0 0 300px;
   margin: .50em auto;
-  /* Para que el scroll se enganche al inicio de cada tarjeta */
   scroll-snap-align: start;
   gap: 1em auto;
 }
@@ -251,19 +259,19 @@ h4 {
 }
 
 .course-card h3 {
-  color: #6a0dad;
+  color:var(--color-violeta-dark);
   margin: 0.5em 0;
 }
 
 .course-card .price {
     font-weight: bold;
-    color: #7E57C2;
+    color: var(--color-violeta-link);
     margin: 0.25em 0;
 }
 
 
 .course-card a {
-  color: #6a0dad;
+  color: var(--color-violeta-dark);
   font-weight: bold;
 }
 
@@ -370,8 +378,8 @@ h4 {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: #7E57C2;
-    color: white;
+    background: var(--color-violeta-link);
+    color: var(--color-blanco);
     border: none;
     width: 40px;
     height: 40px;
@@ -386,7 +394,7 @@ h4 {
 }
 
 .slider-arrow:hover {
-    background: #6a4a9c;
+    background: var(--color-violeta-dark);
 }
 
 .slider-prev {
@@ -446,7 +454,7 @@ h4 {
 }
 
 .course-card h3 {
-    color: #7E57C2;
+    color: var(--color-violeta-link);
     margin: 10px 0;
     font-size: 1.1em;
 }
@@ -458,12 +466,12 @@ h4 {
 
 .course-card .price {
     font-weight: bold;
-    color: #7E57C2;
+    color: var(--color-violeta-link);
     font-size: 1.2em;
 }
 
 .course-card h4 {
-    color: #7E57C2;
+    color: var(--color-violeta-link);
     margin-top: 10px;
     text-decoration: underline;
 }
