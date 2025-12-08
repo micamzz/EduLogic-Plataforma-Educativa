@@ -34,46 +34,44 @@
     <nav class="navbar">
       <ul class="nav-list">
         <li><a href="../index.html" class="nav-link">Inicio</a></li>
-         <li><a href="./cursos.html" class="nav-link">Cursos</a></li>
+        <li><a href="./cursos.html" class="nav-link">Cursos</a></li>
         <li><a href="./inscripcionCurso.html" class="nav-link">Inscripción</a></li>
         <li><a href="./calendario.html" class="nav-link"> Próximos </a></li>
-          <li><a href="./giftCard.html" class="nav-link">GiftCard</a></li>
+        <li><a href="./giftCard.html" class="nav-link">GiftCard</a></li>
       </ul>
     </nav>
-    
-     <section class="search-bar">
-  <form id="search-form">
-    <input list="cursos-list" name="curso-buscado" id="curso-input" placeholder="Buscar curso..."> 
-    
-    <!-- ACTUALIZADO PARA JS -->
-    <datalist id="cursos-list">
-        <option value="Programación Front-End" data-url="./detalleCurso.html?curso=Programación+Front-End"></option>
-        <option value="Programación Back-End" data-url="./detalleCurso.html?curso=Programación+Back-End"></option>
-        <option value="Ciberseguridad" data-url="./detalleCurso.html?curso=Ciberseguridad"></option>
-        <option value="Inglés Avanzado" data-url="./detalleCurso.html?curso=Inglés+Avanzado"></option>
-        <option value="Marketing Digital" data-url="./detalleCurso.html?curso=Marketing+Digital"></option>
-        <option value="Finanzas Personales" data-url="./detalleCurso.html?curso=Finanzas+Personales"></option>
-    </datalist>
 
-    
-    <button type="submit" class="search-button">
-      <img src="../img/lupa.png" alt="Buscar">
-    </button>
-  </form>
+    <section class="search-bar">
+      <form id="search-form">
+        <input list="cursos-list" name="curso-buscado" id="curso-input" placeholder="Buscar curso...">
 
-    <!--  CARRITO -->
-     <input type="checkbox" name="Carro" id="Carro" value="Carro" />
-            <article class="carrito">
-                 <label for="Carro">
-                     <i class="bi bi-cart-fill carrito_icono"></i>
-                </label>
-                <span id="cart-count" class="cart-count">0</span>
-            </article>
-            <!-- Menu Desplegable Carrito -->
-            <section class="caja_carrito" id="js-caja-carrito">
-            </section>
-        </section>
+        <datalist id="cursos-list">
+          <option value="Programación Front-End" data-url="./detalleCurso.html?curso=Programación+Front-End"></option>
+          <option value="Programación Back-End" data-url="./detalleCurso.html?curso=Programación+Back-End"></option>
+          <option value="Ciberseguridad" data-url="./detalleCurso.html?curso=Ciberseguridad"></option>
+          <option value="Inglés Avanzado" data-url="./detalleCurso.html?curso=Inglés+Avanzado"></option>
+          <option value="Marketing Digital" data-url="./detalleCurso.html?curso=Marketing+Digital"></option>
+          <option value="Finanzas Personales" data-url="./detalleCurso.html?curso=Finanzas+Personales"></option>
+        </datalist>
+
+        <button type="submit" class="search-button">
+          <img src="../img/lupa.png" alt="Buscar">
+        </button>
+      </form>
     </section>
+
+    <section class="user-actions">
+      <input type="checkbox" name="Carro" id="Carro" value="Carro" />
+      <article class="carrito">
+        <label for="Carro">
+          <i class="bi bi-cart-fill carrito_icono"></i>
+        </label>
+        <span id="cart-count" class="cart-count">0</span>
+      </article>
+      <section class="caja_carrito" id="js-caja-carrito">
+      </section>
+    </section>
+    
   </header>
 
   <!--perfil-->

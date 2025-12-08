@@ -16,9 +16,9 @@ export const LISTA_CURSOS = [
       profesion: "Ingeniero en Sistemas y Analista de Datos",
       descripcion:
         "Soy Ingeniero en Sistemas y Analista de Datos, y en este curso de Back-End te voy a enseñar a construir la lógica que da vida a las aplicaciones web. Vamos a trabajar con bases de datos, servidores y APIs, para que aprendas a gestionar la información de forma segura y eficiente. Mi objetivo es que desarrolles una base sólida en programación del lado del servidor y adquieras las competencias necesarias para integrarte en proyectos profesionales de desarrollo de software.",
-      imagen: "../Imagenes/istockphoto-2160473960-612x612.jpg"
+      imagen: "../img/cursos/istockphoto-2160473960-612x612.jpg"
     },
-    imagen: "../img/backend.jpg",
+    imagen: "../img/cursos/backend.jpg",
     modulos: [
       {
         nombre: "MÓDULO 1 - Fundamentos Avanzados",
@@ -94,9 +94,9 @@ export const LISTA_CURSOS = [
       profesion: "Ingeniero de Software",
       descripcion:
         "Hola, soy Ana García, profesora de Frontend. Me dedico a enseñar a mis estudiantes a crear interfaces web modernas y funcionales, combinando HTML, CSS y JavaScript con buenas prácticas de diseño. Mis clases son prácticas y orientadas a proyectos reales para que cada alumno pueda desarrollar sus propias aplicaciones.",
-      imagen: "../img/frontprof.jpg"
+      imagen: "../img/cursos/frontprof.jpg"
     },
-    imagen: "../img/frontend.jpg",
+    imagen: "../img/cursos/frontend.jpg",
     modulos: [
       {
         nombre: "MÓDULO 1 - Curso desarrollo web",
@@ -172,9 +172,9 @@ export const LISTA_CURSOS = [
       profesion: "Profesor de Ciberseguridad",
       descripcion:
         "Soy Adolfo profesor de ciberseguridad. Me apasiona enseñar a proteger la información y los sistemas frente a amenazas digitales, desde el manejo seguro de contraseñas hasta la prevención de ataques más complejos. Mi objetivo es que cada persona que participe en mis clases adquiera conocimientos prácticos para navegar y trabajar en el mundo digital de manera segura y confiable.",
-      imagen: "../img/ciberseguridadprof.jpg"
+      imagen: "../img/cursos/ciberseguridadprof.jpg"
     },
-    imagen: "../img/ciberseguridad.jpg",
+    imagen: "../img/cursos/ciberseguridad.jpg",
     modulos: [
       {
         nombre: "MÓDULO 1 - Introducción al ciberdelito y ciberamenazas",
@@ -251,9 +251,9 @@ export const LISTA_CURSOS = [
       profesion: "Profesora de finanzas personales",
       descripcion:
         "Hola, soy Claudia, profesora de finanzas personales. Me apasiona enseñar a las personas a manejar su dinero de manera inteligente, desde ahorrar y presupuestar hasta invertir y planificar para el futuro. Mi objetivo es que cada persona que pase por mis clases adquiera herramientas prácticas para tomar decisiones financieras seguras y alcanzar sus metas económicas con confianza.la, soy Claudia, profesora de finanzas personales...",
-      imagen: "../img/profefinanzas.jpg"
+      imagen: "../img/cursos/profefinanzas.jpg"
     },
-    imagen: "../img/finanzasperso.jpg",
+    imagen: "../img/cursos/finanzasperso.jpg",
     modulos: [
       {
         nombre: "MÓDULO 1 - Introducción de finanzas personales",
@@ -329,9 +329,9 @@ export const LISTA_CURSOS = [
       profesion: "Profesora de inglés y traductora",
       descripcion:
         "Soy profesora y traductora de inglés. Me apasiona enseñar idiomas y ayudar a mis estudiantes a mejorar su nivel de inglés mediante métodos prácticos y personalizados. También trabajo como traductora profesional, facilitando la comunicación entre distintas culturas.",
-      imagen: "../img/profeingles.jpg"
+      imagen: "../img/cursos/profeingles.jpg"
     },
-    imagen: "../img/ingles.jpg",
+    imagen: "../img/cursos/ingles.jpg",
     modulos: [
       {
         nombre: "MÓDULO 1 - Expresiones y fluidez avanzada",
@@ -407,9 +407,9 @@ export const LISTA_CURSOS = [
       profesion: "Profesor de Marketing Digital",
       descripcion:
         "Soy Mariano, profesor de Marketing Digital. Disfruto enseñar estrategias digitales efectivas y ayudar a mis estudiantes a desarrollar habilidades prácticas para el mundo online. Combino teoría con ejercicios reales para que cada clase sea aplicada y dinámica.",
-      imagen: "../img/profemark.jpg"
+      imagen: "../img/cursos/profemark.jpg"
     },
-    imagen: "../img/marketing.jpg",
+    imagen: "../img/cursos/marketing.jpg",
     modulos: [
       {
         nombre: "MÓDULO 1 - Plan de marketing",

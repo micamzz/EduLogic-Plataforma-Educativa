@@ -2,7 +2,7 @@ import { BuscadorElementos } from "./buscadorElementos.js";
 import { CreadorElementos } from "./creadorElementos.js";
 import { LISTA_CURSOS } from "./constantes/ArrayDeCursos.js";
 import { agregarCustomAlCarrito } from './carritoDeCompras.js';
-import { ValidadorFormulario } from "./validarFormulario.js";
+import { validadorFormulario } from "./validarFormulario.js";
 
 const BUSCADOR = new BuscadorElementos();
 const CREADOR = new CreadorElementos();
@@ -264,15 +264,12 @@ export function iniciarLogicaInscripcion() {
     selectorTipo.addEventListener('change', manejarCambioTipoInscripcion);
 
 
- 
 
     form.addEventListener('submit', (e) => {
         e.preventDefault();
 
-
         BUSCADOR.buscarVariosElementos('.error-mensaje').forEach(el => el.remove());
         BUSCADOR.buscarVariosElementos('.input-error').forEach(i => i.classList.remove('input-error')); 
-
   
         const tipo = selectorTipo.value;
         const selectCurso = BUSCADOR.buscarUnElementoPorId('curso-empresa');
@@ -297,29 +294,29 @@ export function iniciarLogicaInscripcion() {
             const telInputPersonal = BUSCADOR.buscarUnElemento('input[name="telefono_personal"]');
 
 
-            if (!ValidadorFormulario.campoVacio(nombreInputPersonal.value)) {
+            if (!validadorFormulario.campoVacio(nombreInputPersonal.value)) {
                 mostrarErrorInscripcion(nombreInputPersonal, "El nombre es obligatorio.");
                 esValido = false;
-            } else if (!ValidadorFormulario.longitudMinima(nombreInputPersonal.value, 5)) {
-                mostrarErrorInscripcion(nombreInputPersonal, ValidadorFormulario.MENSAJES.nombreCorto);
+            } else if (!validadorFormulario.longitudMinima(nombreInputPersonal.value, 5)) {
+                mostrarErrorInscripcion(nombreInputPersonal, validadorFormulario.MENSAJES.nombreCorto);
                 esValido = false;
             }
 
             // Email
-            if (!ValidadorFormulario.campoVacio(emailInputPersonal.value)) {
+            if (!validadorFormulario.campoVacio(emailInputPersonal.value)) {
                 mostrarErrorInscripcion(emailInputPersonal, "El email es obligatorio.");
                 esValido = false;
-            } else if (!ValidadorFormulario.emailValido(emailInputPersonal.value)) {
-                mostrarErrorInscripcion(emailInputPersonal, ValidadorFormulario.MENSAJES.emailInvalido);
+            } else if (!validadorFormulario.emailValido(emailInputPersonal.value)) {
+                mostrarErrorInscripcion(emailInputPersonal, validadorFormulario.MENSAJES.emailInvalido);
                 esValido = false;
             }
 
             // Teléfono
-            if (!ValidadorFormulario.campoVacio(telInputPersonal.value)) {
+            if (!validadorFormulario.campoVacio(telInputPersonal.value)) {
                 mostrarErrorInscripcion(telInputPersonal, "El teléfono es obligatorio.");
                 esValido = false;
-            } else if (!ValidadorFormulario.telefonoValido(telInputPersonal.value)) {
-                mostrarErrorInscripcion(telInputPersonal, ValidadorFormulario.MENSAJES.telefonoInvalido);
+            } else if (!validadorFormulario.telefonoValido(telInputPersonal.value)) {
+                mostrarErrorInscripcion(telInputPersonal, validadorFormulario.MENSAJES.telefonoInvalido);
                 esValido = false;
             }
 
@@ -387,29 +384,29 @@ export function iniciarLogicaInscripcion() {
               
 
                 // Nombre
-                if (!ValidadorFormulario.campoVacio(nombreInput.value)) {
+                if (!validadorFormulario.campoVacio(nombreInput.value)) {
                     mostrarErrorInscripcion(nombreInput, "El nombre es obligatorio.");
                     esValido = false;
-                } else if (!ValidadorFormulario.longitudMinima(nombreInput.value, 5)) {
-                    mostrarErrorInscripcion(nombreInput, ValidadorFormulario.MENSAJES.nombreCorto);
+                } else if (!validadorFormulario.longitudMinima(nombreInput.value, 5)) {
+                    mostrarErrorInscripcion(nombreInput, validadorFormulario.MENSAJES.nombreCorto);
                     esValido = false;
                 }
 
                 // Email
-                if (!ValidadorFormulario.campoVacio(emailInput.value)) {
+                if (!validadorFormulario.campoVacio(emailInput.value)) {
                     mostrarErrorInscripcion(emailInput, "El email es obligatorio.");
                     esValido = false;
-                } else if (!ValidadorFormulario.emailValido(emailInput.value)) {
-                    mostrarErrorInscripcion(emailInput, ValidadorFormulario.MENSAJES.emailInvalido);
+                } else if (!validadorFormulario.emailValido(emailInput.value)) {
+                    mostrarErrorInscripcion(emailInput, validadorFormulario.MENSAJES.emailInvalido);
                     esValido = false;
                 }
 
                 // Teléfono
-                if (!ValidadorFormulario.campoVacio(telefonoInput.value)) {
+                if (!validadorFormulario.campoVacio(telefonoInput.value)) {
                     mostrarErrorInscripcion(telefonoInput, "El teléfono es obligatorio.");
                     esValido = false;
-                } else if (!ValidadorFormulario.telefonoValido(telefonoInput.value)) {
-                    mostrarErrorInscripcion(telefonoInput, ValidadorFormulario.MENSAJES.telefonoInvalido);
+                } else if (!validadorFormulario.telefonoValido(telefonoInput.value)) {
+                    mostrarErrorInscripcion(telefonoInput, validadorFormulario.MENSAJES.telefonoInvalido);
                     esValido = false;
                 }
 
@@ -418,9 +415,9 @@ export function iniciarLogicaInscripcion() {
                 if (!dni) {
                     mostrarErrorInscripcion(dniInput, "El DNI es obligatorio."); 
                     esValido = false;
-                } else if (!/^\d{8,12}$/.test(dni)) { // ESTO AGREGUE
+                } else if (!/^\d{8,12}$/.test(dni)) {
                     mostrarErrorInscripcion(dniInput, "El DNI debe tener entre 8 y 12 números."); 
-                    esValido = false; // ESTO AGREGUE
+                    esValido = false; 
                 }
 
                 if (dnisEncontrados.has(dni)) {
@@ -467,7 +464,6 @@ export function iniciarLogicaInscripcion() {
 
                 agregarCustomAlCarrito(itemEmpresa);
 
-                console.log(` Curso ${nombreCurso} (${numPersonas} unidades) agregado al carrito para pago empresa. Precio Unitario (c/adicional): ${precioUnitarioEmpresa}`);
             }
 
             // Actualizar popup de empresa

@@ -1,5 +1,5 @@
 import { BuscadorElementos } from "./buscadorElementos.js";
-import { CURSOS_CALENDARIO } from "../Javascript/constantes/cursosDelMesCalendario.js";
+import { CURSOS_CALENDARIO } from "./constantes/cursosDelMesCalendario.js";
 import { CreadorElementos } from "./creadorElementos.js";
 
 export class Calendario {

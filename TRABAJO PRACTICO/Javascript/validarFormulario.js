@@ -1,6 +1,5 @@
-export class ValidadorFormulario {
+export class validadorFormulario {
 
-  //alamcena msg de error
   static MENSAJES = {
     nombreVacio: "El nombre y apellido no puede estar vacío.",
     nombreVacio2: "El nombre no puede estar vacio",
@@ -16,9 +15,9 @@ export class ValidadorFormulario {
     cvvInvalido: "Debe tener 3 dígitos numéricos."
   };
 
-  //expresiones para validaciones
+  //expresiones regulares  para validaciones
   static expresionesRegulares = {
-    email: /^[0-9a-zA-Z._.-]+@[0-9a-zA-Z._.-]+\.[0-9a-zA-Z]+$/,//valores permitidos en email
+    email: /^[0-9a-zA-Z._.-]+@[0-9a-zA-Z._.-]+\.[0-9a-zA-Z]+$/, //valores permitidos en email
     telefono: /^\d{8,15}$|^\d{4}-\d{4,11}$/,
     tarjeta: /^\d{13,19}$/,                  // 13 a 19 dígitos
     vencimiento: /^(0[1-9]|1[0-2])[0-9]{2}$/, // MMYY
@@ -34,12 +33,12 @@ export class ValidadorFormulario {
     }
 
   static emailValido(email) {
-    return ValidadorFormulario.expresionesRegulares.email.test(email.trim());
+    return validadorFormulario.expresionesRegulares.email.test(email.trim());
   }
 
   static telefonoValido(tel) {
     if (tel.trim() === "") return true; 
-    return ValidadorFormulario.expresionesRegulares.telefono.test(tel.trim());
+    return validadorFormulario.expresionesRegulares.telefono.test(tel.trim());
   }
 
   static longitudTextoValida(texto, maximo) {
@@ -47,15 +46,15 @@ export class ValidadorFormulario {
   }
  static numeroTarjetaValido(numeroTarjeta) {
     const limpio = numeroTarjeta.replace(/\s/g, "");
-    return ValidadorFormulario.expresionesRegulares.tarjeta.test(limpio);
+    return validadorFormulario.expresionesRegulares.tarjeta.test(limpio);
   }
 
   static vencimientoValido(vencimiento) {
     const soloNumeros = vencimiento.replace(/\D/g, ""); 
-    return ValidadorFormulario.expresionesRegulares.vencimiento.test(soloNumeros);
+    return validadorFormulario.expresionesRegulares.vencimiento.test(soloNumeros);
   }
 
   static cvvValido(cvv) {
-    return ValidadorFormulario.expresionesRegulares.cvv.test(cvv.trim());
+    return validadorFormulario.expresionesRegulares.cvv.test(cvv.trim());
   }
 }

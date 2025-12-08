@@ -39,9 +39,9 @@ export class DetalleCursos {
     for (let i = 0; i < modulos.length; i++) {
       const mod = modulos[i];
 
-      modulosHTML += `<details ${i === 0 ? "open" : ""}>`;//widget desplegable=details
-      modulosHTML += `<summary>${mod.nombre}</summary>`;//titulo del widget
-      modulosHTML += `<article class="summary-contenidos_desplegable"><ul>`;//contenido del widget
+      modulosHTML += `<details ${i === 0 ? "open" : ""}>`;
+      modulosHTML += `<summary>${mod.nombre}</summary>`;
+      modulosHTML += `<article class="summary-contenidos_desplegable"><ul>`;
 
       // RECORRER LAS CLASES DENTRO DE CADA MODULO
       for (let k = 0; k < mod.clases.length; k++) {
@@ -58,7 +58,7 @@ export class DetalleCursos {
     // CREAR EL TEMPLATE CON TODA LA INFORMACION DE LOS CURSOS DEL HTML Y LAS CLASES
     const template = `
   <section class="block-informacion-curso">
-    <h1>${titulo}</h1>
+    <h1 class='titulo-nombre-curso'>${titulo}</h1>
       <div class="rating-container">
           <span class="star-checked">&#9733;</span>
           <span class="star-checked">&#9733;</span> 
@@ -125,27 +125,17 @@ export class DetalleCursos {
 
   // MÉTODO PARA MOSTRAR CURSOS RELACIONADOS
   mostrarCursosRelacionados(cursoActual) {
-    console.log('🎯 Buscando contenedor para cursos relacionados...');
-    
-    // Buscar el contenedor correcto según tu HTML
     let contenedorRelacionados = BUSCADOR.buscarUnElementoPorId("js-cursos-relacionados");
     
-    console.log('🔍 Contenedor js-cursos-relacionados:', contenedorRelacionados);
-
     if (!contenedorRelacionados) {
-        console.log('⚠️ No se encontró el contenedor js-cursos-relacionados');
-        return; // No hacer nada si no existe
+        return; 
     }
-
-    console.log('📚 Mostrando cursos relacionados para:', cursoActual.titulo);
 
     // FILTRA POR LOS CURSOS QUE SEA DIFERENTE AL QUE ESTA SELECCIONADO
     const cursosRelacionados = LISTA_CURSOS.filter(cursoItem => cursoItem.titulo !== cursoActual.titulo);
 
     // MUESTRA EL SLICE -- EL 5 ES EL MAXIMO DE CURSOS QUE MUESTRA.
     const sugerencias = cursosRelacionados.slice(0, 5);
-
-    console.log('📚 Cursos relacionados encontrados:', sugerencias.length);
 
     // PARA CONSTRUIR EL TEMPLATE DE CURSOS SUGERIDOS DEL HTML.
     let sugeridosHTML = "";
@@ -167,15 +157,11 @@ export class DetalleCursos {
       `;
     }
 
-    // INSERTÁ EL CONTENIDO EN EL SLIDER
     if (sugeridosHTML) {
         contenedorRelacionados.innerHTML = sugeridosHTML;
-        console.log('✅ Cursos relacionados insertados correctamente en el slider');
         
-        // Inicializar el slider después de agregar los cursos
         this.inicializarSlider();
     } else {
-        console.log('⚠️ No hay cursos relacionados para mostrar');
         contenedorRelacionados.innerHTML = '<p>No hay cursos relacionados disponibles en este momento.</p>';
     }
   }
@@ -268,12 +254,9 @@ export class DetalleCursos {
     this.updateSlider();
   }
 
-  // PARA LLAMAR AL CURSO DESDE EL JS PRINCIPAL
   static mostrarDetalleDeCurso() {
     const detalle = new DetalleCursos();
     detalle.MostrarModulos();
   }
 }
-
-// Variables globales para el slider
 let currentIndex = 0;

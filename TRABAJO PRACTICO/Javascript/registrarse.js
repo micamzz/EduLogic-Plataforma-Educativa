@@ -1,5 +1,5 @@
 import { mostrarPopup } from './popupManager.js';
-import { ValidadorFormulario } from "./validarFormulario.js";
+import { validadorFormulario } from "./validarFormulario.js";
 
 const CONTRASEÑA_VERIF = /^(?=.*[A-Z])(?=.*\d).{6,}$/; 
 
@@ -86,23 +86,23 @@ export function iniciarRegistro(redirectUrl) {
 
     // Funciones de validación separadas
     function validarNombre(nombre) {
-        if (!ValidadorFormulario.campoVacio(nombre)) {
-            mostrarError(nombreInput, ValidadorFormulario.MENSAJES.nombreVacio2);
+        if (!validadorFormulario.campoVacio(nombre)) {
+            mostrarError(nombreInput, validadorFormulario.MENSAJES.nombreVacio2);
             return false;
         }
-        if (!ValidadorFormulario.longitudMinima(nombre, 3)) {
-            mostrarError(nombreInput, ValidadorFormulario.MENSAJES.nombreCorto);
+        if (!validadorFormulario.longitudMinima(nombre, 3)) {
+            mostrarError(nombreInput, validadorFormulario.MENSAJES.nombreCorto);
             return false;
         }
         return true;
     }
 
     function validarApellido(apellido) {
-        if (!ValidadorFormulario.campoVacio(apellido)) {
+        if (!validadorFormulario.campoVacio(apellido)) {
             mostrarError(apellidoInput, "El apellido no puede estar vacío.");
             return false;
         }
-        if (!ValidadorFormulario.longitudMinima(apellido, 3)) {
+        if (!validadorFormulario.longitudMinima(apellido, 3)) {
             mostrarError(apellidoInput, "El apellido debe tener al menos 3 letras.");
             return false;
         }
@@ -110,7 +110,7 @@ export function iniciarRegistro(redirectUrl) {
     }
 
     function validarDNI(dni) {
-        if (!ValidadorFormulario.campoVacio(dni)) {
+        if (!validadorFormulario.campoVacio(dni)) {
             mostrarError(dniInput, "El DNI no puede estar vacío.");
             return false;
         }
@@ -124,14 +124,14 @@ export function iniciarRegistro(redirectUrl) {
     function validarEmail(email) {
  
     
-    if (!ValidadorFormulario.campoVacio(email)) {
+    if (!validadorFormulario.campoVacio(email)) {
       
         mostrarError(emailInput, "El email no puede estar vacío.");
         return false;
     }
-    if (!ValidadorFormulario.emailValido(email)) {
+    if (!validadorFormulario.emailValido(email)) {
        
-        mostrarError(emailInput, ValidadorFormulario.MENSAJES.emailInvalido);
+        mostrarError(emailInput, validadorFormulario.MENSAJES.emailInvalido);
         return false;
     }
     
@@ -139,7 +139,7 @@ export function iniciarRegistro(redirectUrl) {
 }
 
     function validarPassword(password) {
-        if (!ValidadorFormulario.campoVacio(password)) {
+        if (!validadorFormulario.campoVacio(password)) {
             mostrarError(contraseniaInput, "La contraseña no puede estar vacía.");
             return false;
         }
@@ -151,7 +151,7 @@ export function iniciarRegistro(redirectUrl) {
     }
 
     function validarConfirmacion(password, confirmPassword) {
-        if (!ValidadorFormulario.campoVacio(confirmPassword)) {
+        if (!validadorFormulario.campoVacio(confirmPassword)) {
             mostrarError(confirmarContraseniaInput, "La confirmación de contraseña no puede estar vacía.");
             return false;
         }

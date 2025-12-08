@@ -1,6 +1,6 @@
 import { BuscadorElementos } from "./buscadorElementos.js";
 import { mostrarPopup } from './popupManager.js';
-import { ValidadorFormulario } from "./validarFormulario.js"; 
+import { validadorFormulario } from "./validarFormulario.js";
 
 const buscador = new BuscadorElementos();
 
@@ -24,12 +24,12 @@ export function iniciarLogicaRecuperacion() {
     campoEmail.classList.remove("input-error");
 
     // VALIDAR MAIL
-    if (!ValidadorFormulario.campoVacio(emailIngresado)) {
+    if (!validadorFormulario.campoVacio(emailIngresado)) {
       mostrarError(campoEmail, "El email no puede estar vacío.");
       return;
     }
-    if (!ValidadorFormulario.emailValido(emailIngresado)) {
-      mostrarError(campoEmail, ValidadorFormulario.MENSAJES.emailInvalido);
+    if (!validadorFormulario.emailValido(emailIngresado)) {
+      mostrarError(campoEmail, validadorFormulario.MENSAJES.emailInvalido);
       return;
     }
 

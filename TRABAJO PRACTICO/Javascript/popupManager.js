@@ -1,18 +1,12 @@
 import { BuscadorElementos } from "./buscadorElementos.js";  
-
 const BUSCADOR = new BuscadorElementos();
-
-
 const popup = BUSCADOR.buscarUnElementoPorId('custom-popup');
 const popupTitle = BUSCADOR.buscarUnElementoPorId('popup-title');
 const popupMessage = BUSCADOR.buscarUnElementoPorId('popup-message');
 const btnAceptar = BUSCADOR.buscarUnElementoPorId('btn-aceptar');
 const btnCancelar = BUSCADOR.buscarUnElementoPorId('btn-cancelar'); 
 
-
 let currentOnConfirmAction = null;
-
-
 
 function inicializarPopupListeners() {
     if (!popup || !btnAceptar) return;
@@ -25,7 +19,6 @@ function inicializarPopupListeners() {
         }
     });
 
-  
     if (btnCancelar) {
         btnCancelar.addEventListener('click', () => {
             popup.style.display = 'none';
@@ -33,7 +26,6 @@ function inicializarPopupListeners() {
         });
     }
 
-    
     popup.addEventListener("click", e => { 
         if (e.target === popup) popup.style.display = 'none'; 
     });
@@ -42,13 +34,11 @@ function inicializarPopupListeners() {
 
 inicializarPopupListeners();
 
-
 export function mostrarPopup(title, message, type = 'alert', onConfirm = () => {}) {
     if (!popup || !btnAceptar) {
         return;
     }
 
-   
     popupTitle.textContent = title;
     popupMessage.textContent = message;
     currentOnConfirmAction = onConfirm; 
@@ -67,6 +57,5 @@ export function mostrarPopup(title, message, type = 'alert', onConfirm = () => {
         btnAceptar.classList.add('full-width-btn');
     }
 
-    //Muestra pop-up
     popup.style.display = 'flex';
 }

@@ -63,3 +63,7 @@ export function iniciarPaginaPrincipal() {
     
     startAutoSlide();
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    iniciarPaginaPrincipal();
+});

@@ -1,7 +1,6 @@
 import { BuscadorElementos } from "./buscadorElementos.js";
 import { vaciarCarrito } from "./carritoDeCompras.js";
-import { ValidadorFormulario } from "./validarFormulario.js";
-
+import { validadorFormulario } from "./validarFormulario.js";
 //costo administrativo para calculo detallado en el resumen
 const COSTO_ADMINISTRATIVO_ARS = 50000;
 
@@ -128,48 +127,48 @@ export function iniciarFormularioDePago() {
     let esValido = true;
 
     // NOMBRE
-    if (!ValidadorFormulario.campoVacio(nombre.value)) {
+    if (!validadorFormulario.campoVacio(nombre.value)) {
       mostrarError(nombre, "El nombre es obligatorio.");
       esValido = false;
-    } else if (!ValidadorFormulario.longitudMinima(nombre.value, 3)) {
-      mostrarError(nombre, ValidadorFormulario.MENSAJES.nombreCorto);
+    } else if (!validadorFormulario.longitudMinima(nombre.value, 3)) {
+      mostrarError(nombre, validadorFormulario.MENSAJES.nombreCorto);
       esValido = false;
     }
 
     // EMAIL
-    if (!ValidadorFormulario.campoVacio(email.value)) {
+    if (!validadorFormulario.campoVacio(email.value)) {
       mostrarError(email, "El email es obligatorio.");
       esValido = false;
-    } else if (!ValidadorFormulario.emailValido(email.value)) {
-      mostrarError(email, ValidadorFormulario.MENSAJES.emailInvalido);
+    } else if (!validadorFormulario.emailValido(email.value)) {
+      mostrarError(email, validadorFormulario.MENSAJES.emailInvalido);
       esValido = false;
     }
 
     // NÚMERO DE TARJETA
     const numeroSinEspacios = numeroTarjeta.value.replace(/\s/g, "");
-    if (!ValidadorFormulario.campoVacio(numeroSinEspacios)) {
-      mostrarError(numeroTarjeta, ValidadorFormulario.MENSAJES.tarjetaVacia);
+    if (!validadorFormulario.campoVacio(numeroSinEspacios)) {
+      mostrarError(numeroTarjeta, validadorFormulario.MENSAJES.tarjetaVacia);
       esValido = false;
-    } else if (!ValidadorFormulario.numeroTarjetaValido(numeroTarjeta.value)) {
-      mostrarError(numeroTarjeta, ValidadorFormulario.MENSAJES.tarjetaInvalida);
+    } else if (!validadorFormulario.numeroTarjetaValido(numeroTarjeta.value)) {
+      mostrarError(numeroTarjeta, validadorFormulario.MENSAJES.tarjetaInvalida);
       esValido = false;
     }
 
     // FECHA DE VENCIMIENTO
-    if (!ValidadorFormulario.campoVacio(vencimiento.value)) {
-      mostrarError(vencimiento, ValidadorFormulario.MENSAJES.vencimientoVacio);
+    if (!validadorFormulario.campoVacio(vencimiento.value)) {
+      mostrarError(vencimiento, validadorFormulario.MENSAJES.vencimientoVacio);
       esValido = false;
-    } else if (!ValidadorFormulario.vencimientoValido(vencimiento.value)) {
-      mostrarError(vencimiento, ValidadorFormulario.MENSAJES.vencimientoInvalido);
+    } else if (!validadorFormulario.vencimientoValido(vencimiento.value)) {
+      mostrarError(vencimiento, validadorFormulario.MENSAJES.vencimientoInvalido);
       esValido = false;
     }
 
     // CÓDIGO DE SEGURIDAD 
-    if (!ValidadorFormulario.campoVacio(codigoSeguridad.value)) {
-      mostrarError(codigoSeguridad, ValidadorFormulario.MENSAJES.cvvVacio);
+    if (!validadorFormulario.campoVacio(codigoSeguridad.value)) {
+      mostrarError(codigoSeguridad, validadorFormulario.MENSAJES.cvvVacio);
       esValido = false;
-    } else if (!ValidadorFormulario.cvvValido(codigoSeguridad.value)) {
-      mostrarError(codigoSeguridad, ValidadorFormulario.MENSAJES.cvvInvalido);
+    } else if (!validadorFormulario.cvvValido(codigoSeguridad.value)) {
+      mostrarError(codigoSeguridad, validadorFormulario.MENSAJES.cvvInvalido);
       esValido = false;
     }
 

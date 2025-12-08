@@ -1,6 +1,6 @@
 import { mostrarPopup } from './popupManager.js'; 
 import { agregarGiftCardAlCarrito } from './carritoDeCompras.js';
-import { ValidadorFormulario } from "./validarFormulario.js";
+import { validadorFormulario } from "./validarFormulario.js";
 import { BuscadorElementos } from "./buscadorElementos.js";
 
 const buscador = new BuscadorElementos();
@@ -101,20 +101,20 @@ export function GiftCard() {
 
     // validaciones del formulario 
    
-    if (!ValidadorFormulario.campoVacio(nombre)) {
-      mostrarError(nombreInput, ValidadorFormulario.MENSAJES.nombreVacio2);
+    if (!validadorFormulario.campoVacio(nombre)) {
+      mostrarError(nombreInput, validadorFormulario.MENSAJES.nombreVacio2);
       formularioValido = false;
-    } else if (!ValidadorFormulario.longitudMinima(nombre, 3)) {
-      mostrarError(nombreInput, ValidadorFormulario.MENSAJES.nombreCorto);
+    } else if (!validadorFormulario.longitudMinima(nombre, 3)) {
+      mostrarError(nombreInput, validadorFormulario.MENSAJES.nombreCorto);
       formularioValido = false;
     }
 
     
-    if (!ValidadorFormulario.campoVacio(email)) {
+    if (!validadorFormulario.campoVacio(email)) {
       mostrarError(emailInput, "El email no puede estar vacío.");
       formularioValido = false;
-    } else if (!ValidadorFormulario.emailValido(email)) {
-      mostrarError(emailInput, ValidadorFormulario.MENSAJES.emailInvalido);
+    } else if (!validadorFormulario.emailValido(email)) {
+      mostrarError(emailInput, validadorFormulario.MENSAJES.emailInvalido);
       formularioValido = false;
     }
 
